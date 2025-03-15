@@ -46,7 +46,7 @@ class EntrepriseController extends Controller
      */
     public function edit(Entreprise $entreprise)
     {
-        return view('bbbb.edit' ,compact("entreprise"));
+        return view('entreprise.edit');
     }
 
     /**
