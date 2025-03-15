@@ -62,14 +62,14 @@
                 <span class="nav-link">Navigation</span>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href={{ route('entreprise.create') }}>
                     <span class="menu-icon">
                         <i class="mdi mdi-speedometer"></i>
                     </span>
                     <span class="menu-title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
+            {{-- <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                     aria-controls="ui-basic">
                     <span class="menu-icon">
@@ -91,13 +91,13 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item menu-items">
                 <a class="nav-link" href="pages/forms/basic_elements.html">
                     <span class="menu-icon">
                         <i class="mdi mdi-playlist-play"></i>
                     </span>
-                    <span class="menu-title">Form Elements</span>
+                    <span class="menu-title">Entreprise</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
@@ -105,26 +105,26 @@
                     <span class="menu-icon">
                         <i class="mdi mdi-table-large"></i>
                     </span>
-                    <span class="menu-title">Tables</span>
+                    <span class="menu-title">Services</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/charts/chartjs.html">
+                <a class="nav-link" href="{{ route('entreprise.create')}}">
                     <span class="menu-icon">
                         <i class="mdi mdi-chart-bar"></i>
                     </span>
-                    <span class="menu-title">Charts</span>
+                    <span class="menu-title">Dossier</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="pages/icons/mdi.html">
+                <a class="nav-link" href="{{ route('entreprise.create') }}">
                     <span class="menu-icon">
                         <i class="mdi mdi-contacts"></i>
                     </span>
-                    <span class="menu-title">Icons</span>
+                    <span class="menu-title">Documents</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
+            {{-- <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
                     aria-controls="auth">
                     <span class="menu-icon">
@@ -147,14 +147,14 @@
                             </a></li>
                     </ul>
                 </div>
-            </li>
+            </li> --}}
             <li class="nav-item menu-items">
                 <a class="nav-link"
                     href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
                     <span class="menu-icon">
                         <i class="mdi mdi-file-document-box"></i>
                     </span>
-                    <span class="menu-title">Documentation</span>
+                    <span class="menu-title">Rubrique</span>
                 </a>
             </li>
         </ul>

@@ -19,7 +19,7 @@
             </nav>
             <div class="main-panel">
                 <div class="content-wrapper">
-                    @yield('main')
+                    @yield('content')
                 </div>
 
             </div>

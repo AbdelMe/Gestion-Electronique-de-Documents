@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entreprise;
 use App\Http\Requests\StoreEntrepriseRequest;
 use App\Http\Requests\UpdateEntrepriseRequest;
+use PhpParser\Node\Stmt\Return_;
 
 class EntrepriseController extends Controller
 {
@@ -13,7 +14,7 @@ class EntrepriseController extends Controller
      */
     public function index()
     {
-        //
+        return view('entreprise.index');
     }
 
     /**
@@ -45,7 +46,7 @@ class EntrepriseController extends Controller
      */
     public function edit(Entreprise $entreprise)
     {
-        //
+        return view('bbbb.edit' ,compact("entreprise"));
     }
 
     /**
