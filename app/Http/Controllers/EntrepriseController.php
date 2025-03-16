@@ -14,7 +14,8 @@ class EntrepriseController extends Controller
      */
     public function index()
     {
-        return view('entreprise.index');
+        $entreprises = Entreprise::paginate(3);
+        return view('entreprise.index',compact('entreprises'));
     }
 
     /**

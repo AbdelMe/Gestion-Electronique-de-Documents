@@ -93,7 +93,7 @@
                 </div>
             </li> --}}
             <li class="nav-item menu-items">
-                <a class="nav-link" href=>
+                <a class="nav-link" href="{{ route('entreprise.index') }}">
                     <span class="menu-icon">
                         <i class="mdi mdi-playlist-play"></i>
                     </span>
@@ -109,7 +109,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('entreprise.index') }}">
+                <a class="nav-link" href=>
                     <span class="menu-icon">
                         <i class="mdi mdi-chart-bar"></i>
                     </span>

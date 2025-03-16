@@ -22,3 +22,5 @@
 <link rel="stylesheet" href={{ asset("assets/css/style.css") }}>
 <!-- End layout styles -->
 <link rel="shortcut icon" href={{ asset("assets/images/favicon.png") }} />
+{{-- Bootstrap icons --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
