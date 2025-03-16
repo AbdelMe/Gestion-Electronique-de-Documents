@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+@if(session('updated'))
+    
+@endif
     <div class="container mt-4">
         <h2 class="mb-4">Modifier Entreprise</h2>
 

@@ -17,7 +17,11 @@
                 </div>
                 @include('layouts.header')
             </nav>
+
+
+
             <div class="main-panel">
+                    @yield('alert')
                 <div class="content-wrapper">
                     @yield('content')
                 </div>
