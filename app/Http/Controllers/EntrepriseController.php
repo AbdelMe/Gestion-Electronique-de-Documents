@@ -45,7 +45,7 @@ class EntrepriseController extends Controller
      */
     public function show(Entreprise $entreprise)
     {
-        //
+        return view('entreprise.show',compact('entreprise'));
     }
 
     /**
@@ -69,6 +69,8 @@ class EntrepriseController extends Controller
      */
     public function destroy(Entreprise $entreprise)
     {
-        //
+        // dd($entreprise);
+        $entreprise->delete();
+        return redirect()->route('entreprise.index')->with('deleted', 'Entreprise deleted successfully!');
     }
 }

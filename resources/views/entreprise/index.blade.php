@@ -31,15 +31,19 @@ Entreprise
                         <td>{{$entreprise->Email}}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                <a href="" class="btn btn-info btn-sm px-2 py-1 mx-1">
+                                <a href="{{ route('entreprise.show', $entreprise->id) }}" class="btn btn-info btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
                                 <a href="" class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a href="" class="btn btn-danger btn-sm px-2 py-1 mx-1">
-                                    <i class="bi bi-trash3-fill"></i>
-                                </a>
+                                <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm px-2 py-1 mx-1">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                         
