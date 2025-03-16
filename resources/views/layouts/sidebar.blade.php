@@ -102,7 +102,7 @@
             </li>
             <li class="nav-item menu-items">
                 {{-- {{ route('services.index') }} --}}
-                <a class="nav-link" href=>
+                <a class="nav-link" href="{{ route('services.index') }}">
                     <span class="menu-icon">
                         <i class="mdi mdi-table-large"></i>
                     </span>

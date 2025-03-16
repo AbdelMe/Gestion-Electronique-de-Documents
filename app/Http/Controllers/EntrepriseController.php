@@ -37,7 +37,7 @@ class EntrepriseController extends Controller
 
         Entreprise::create($validated);
 
-        return redirect()->route('entreprise.index')->with('success', 'Entreprise added successfully!');
+        return redirect()->route('entreprise.index')->with('Added', 'Entreprise added successfully!');
     }
 
     /**

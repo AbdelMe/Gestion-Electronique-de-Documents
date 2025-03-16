@@ -7,7 +7,13 @@
         {{-- <div class="alert alert-success">
     {{session('updated')}}
 </div> --}}
-        <x-toast-alert message="{{ session('updated') }}" />
+        <x-toast-success-alert message="{{ session('updated') }}" />
+    @endif
+    @if (session('deleted'))
+        <x-toast-delete-alert message="{{ session('deleted') }}" />
+    @endif
+    @if (session('Added'))
+        <x-toast-success-alert message="{{ session('Added') }}" />
     @endif
 @endsection
 @section('content')
