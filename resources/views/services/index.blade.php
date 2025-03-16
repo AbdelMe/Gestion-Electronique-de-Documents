@@ -16,14 +16,15 @@
 @section('content')
     <div class="container mt-1">
         <h2 class="mb-4 text-white">Liste des services</h2>
-        {{-- <a href={{ route('entreprise.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
-            Entreprise</a> --}}
+        <a href={{ route('services.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
+            Service</a>
         <table class="table table-bordered table-striped text-white">
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
                     <th>Client</th>
                     <th>Nom Service</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,17 +33,17 @@
                         <td>{{ $service->id }}</td>
                         <td>{{ $service->Entreprise->NomClient }}</td>
                         <td>{{ $service->Service }}</td>
-                        {{-- <td class="text-center">
+                        <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                <a href="{{ route('entreprise.show', $entreprise->id) }}"
+                                {{-- <a href="{{ route('entreprise.show', $entreprise->id) }}"
                                     class="btn btn-info btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-eye-fill"></i>
-                                </a>
-                                <a href={{ route('entreprise.edit', $entreprise->id) }}
+                                </a> --}}
+                                {{-- <a href={{ route('entreprise.edit', $entreprise->id) }}
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST">
+                                </a> --}}
+                                <form action="{{ route('services.destroy', $service->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm px-2 py-1 mx-1">
@@ -50,7 +51,7 @@
                                     </button>
                                 </form>
                             </div>
-                        </td> --}}
+                        </td>
 
 
                     </tr>
