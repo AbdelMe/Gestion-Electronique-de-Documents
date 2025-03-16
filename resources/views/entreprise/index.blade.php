@@ -34,7 +34,7 @@ Entreprise
                                 <a href="{{ route('entreprise.show', $entreprise->id) }}" class="btn btn-info btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
-                                <a href="" class="btn btn-warning btn-sm px-2 py-1 mx-1">
+                                <a href={{ route('entreprise.edit', $entreprise->id) }} class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST">

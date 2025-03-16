@@ -53,7 +53,7 @@ class EntrepriseController extends Controller
      */
     public function edit(Entreprise $entreprise)
     {
-        return view('entreprise.edit');
+        return view('entreprise.edit',compact('entreprise'));
     }
 
     /**
@@ -61,8 +61,11 @@ class EntrepriseController extends Controller
      */
     public function update(UpdateEntrepriseRequest $request, Entreprise $entreprise)
     {
-        //
+        $validated = $request->validated();
+        $entreprise->update($validated);
+        return redirect()->route('entreprise.index')->with('updated', 'Entreprise updated successfully!');
     }
+
 
     /**
      * Remove the specified resource from storage.

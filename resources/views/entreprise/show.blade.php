@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="card-footer text-center">
-                <a href="{{ route('entreprise.index') }}" class="btn btn-primary btn-sm">
+                <a href="{{ route('entreprise.index') }}" class="btn btn-success btn-sm">
                     <i class="fas fa-arrow-left me-2"></i>Back to List
                 </a>
             </div>
