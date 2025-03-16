@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Entreprise;
+use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -22,15 +24,21 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $entreprises = Entreprise::all();
+        return view('services.create',compact('entreprises'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreServiceRequest $request)
+    public function store(Request $request)
     {
-        //
+        // dd($request);
+        Service::create([
+            'entreprise_id' => $request->entreprise_id,
+            'Service' => $request->Service
+        ]);
+        return redirect()->route('services.index')->with('Added', 'Service added successfully!');
     }
 
     /**
@@ -46,15 +54,22 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        $entreprises = Entreprise::all();
+        return view('services.edit',compact('service',"entreprises"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateServiceRequest $request, Service $service)
+    public function update(Request $request, Service $service)
     {
-        //
+        $service->update(
+            [
+                'entreprise_id' => $request->entreprise_id,
+                'Service' => $request->Service
+            ]
+        );
+        return redirect()->route('services.index')->with('updated', 'Service updated successfully!');
     }
 
     /**

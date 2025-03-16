@@ -39,10 +39,10 @@
                                     class="btn btn-info btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-eye-fill"></i>
                                 </a> --}}
-                                {{-- <a href={{ route('entreprise.edit', $entreprise->id) }}
+                                <a href={{ route('services.edit', $service->id) }}
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
-                                </a> --}}
+                                </a>
                                 <form action="{{ route('services.destroy', $service->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
