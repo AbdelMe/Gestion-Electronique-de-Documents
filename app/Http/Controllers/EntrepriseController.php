@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entreprise;
 use App\Http\Requests\StoreEntrepriseRequest;
 use App\Http\Requests\UpdateEntrepriseRequest;
+use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
 class EntrepriseController extends Controller
@@ -15,7 +16,7 @@ class EntrepriseController extends Controller
     public function index()
     {
         $entreprises = Entreprise::paginate(3);
-        return view('entreprise.index',compact('entreprises'));
+        return view('entreprise.index', compact('entreprises'));
     }
 
     /**
@@ -23,7 +24,7 @@ class EntrepriseController extends Controller
      */
     public function create()
     {
-        //
+        return view('entreprise.create');
     }
 
     /**
@@ -31,7 +32,12 @@ class EntrepriseController extends Controller
      */
     public function store(StoreEntrepriseRequest $request)
     {
-        //
+        // dd($request);
+        $validated = $request->validated();
+
+        Entreprise::create($validated);
+
+        return redirect()->route('entreprise.index')->with('success', 'Entreprise added successfully!');
     }
 
     /**
