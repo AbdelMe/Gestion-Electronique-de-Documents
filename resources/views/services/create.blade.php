@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
-@section('title')
-    Ajouter Service
-@endsection
-
+@section('title','Ajouter Service')
+    
 @section('content')
     <div class="container mt-4">
         <h2 class="mb-4">Ajouter Service</h2>

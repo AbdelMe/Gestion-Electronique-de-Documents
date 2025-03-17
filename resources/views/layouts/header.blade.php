@@ -39,14 +39,14 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
+                <a class="dropdown-item preview-item" href={{ route('documents.create') }}>
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                             <i class="mdi mdi-layers text-danger"></i>
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <p class="preview-subject ellipsis mb-1">Software Testing</p>
+                        <p class="preview-subject ellipsis mb-1">Document</p>
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
