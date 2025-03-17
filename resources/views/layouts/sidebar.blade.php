@@ -15,7 +15,7 @@
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">Adil Khalqi</h5>
+                            <h5 class="mb-0 font-weight-normal">MOHAMMED</h5>
                             <span>Gold Member</span>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                 <span class="nav-link">Navigation</span>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href=>
+                <a class="nav-link" href="#">
                     <span class="menu-icon">
                         <i class="mdi mdi-speedometer"></i>
                     </span>
@@ -110,7 +110,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" >
+                <a class="nav-link" href="#">
                     <span class="menu-icon">
                         <i class="mdi mdi-chart-bar"></i>
                     </span>
@@ -118,7 +118,7 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href=>
+                <a class="nav-link" href="#">
                     <span class="menu-icon">
                         <i class="mdi mdi-contacts"></i>
                     </span>

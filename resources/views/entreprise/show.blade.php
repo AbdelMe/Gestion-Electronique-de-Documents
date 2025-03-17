@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mb-4 text-center">Entreprise Details</h2>
+        <h2 class="mb-4 text-start">Entreprise Details</h2>
 
         <div class="card shadow-lg">
             <div class="card-header bg-success text-white">

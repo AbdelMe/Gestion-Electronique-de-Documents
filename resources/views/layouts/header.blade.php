@@ -12,30 +12,30 @@
     <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item dropdown d-none d-lg-block">
             <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown"
-                aria-expanded="false" href="#">+ Create New Document</a>
+                aria-expanded="false" href="#">+ Create New</a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                 aria-labelledby="createbuttonDropdown">
                 <h6 class="p-3 mb-0">Projects</h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
+                <a class="dropdown-item preview-item" href={{ route('entreprise.create') }}>
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                             <i class="mdi mdi-file-outline text-primary"></i>
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <p class="preview-subject ellipsis mb-1">Software Development</p>
+                        <p class="preview-subject ellipsis mb-1">Entreprise</p>
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
+                <a class="dropdown-item preview-item" href={{ route('services.create') }}>
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                             <i class="mdi mdi-web text-info"></i>
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <p class="preview-subject ellipsis mb-1">UI Development</p>
+                        <p class="preview-subject ellipsis mb-1">Service</p>
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
@@ -50,7 +50,7 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <p class="p-3 mb-0 text-center">See all projects</p>
+                {{-- <p class="p-3 mb-0 text-center">See all projects</p> --}}
             </div>
         </li>
         <li class="nav-item nav-settings d-none d-lg-block">
@@ -155,7 +155,7 @@
             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                 <div class="navbar-profile">
                     <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Adil khalqi</p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">MOHAMMED</p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>
             </a>

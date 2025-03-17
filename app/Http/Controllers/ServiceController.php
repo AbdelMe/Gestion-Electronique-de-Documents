@@ -15,7 +15,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::paginate(5);
         return view('services.index',compact('services'));
     }
 
@@ -31,9 +31,10 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         // dd($request);
+        $request->validated();
         Service::create([
             'entreprise_id' => $request->entreprise_id,
             'Service' => $request->Service
@@ -61,8 +62,9 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
+        $request->validated();
         $service->update(
             [
                 'entreprise_id' => $request->entreprise_id,

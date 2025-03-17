@@ -54,7 +54,7 @@
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST">
+                                <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Entreprise ?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm px-2 py-1 mx-1">
@@ -63,8 +63,6 @@
                                 </form>
                             </div>
                         </td>
-
-
                     </tr>
                 @endforeach
             </tbody>

@@ -11,7 +11,7 @@ class UpdateServiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateServiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'entreprise_id' => 'required|max:255',
+            'Service' => 'required|string|max:255',
         ];
     }
 }
