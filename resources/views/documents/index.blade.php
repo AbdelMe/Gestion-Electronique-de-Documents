@@ -31,26 +31,26 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($documents as $documents)
+                @foreach ($documents as $document)
                     <tr>
                         <td>{{ $document->id }}</td>
                         <td>{{ $document->LibelleDocument }}</td>
                         <td>{{ $document->DocumentNumerique }}</td>
                         <td>{{ $document->CheminDocument }}</td>
                         <td>{{ $document->Date }}</td>
-                        {{-- <td>{{ $document->Dossier }}</td> --}}
-                        {{-- <td>{{ $document->Email }}</td> --}}
-                        {{-- <td class="text-center">
+                        <td>{{ $document->Dossier->Dossier }}</td>
+                        <td>{{ $document->TypeDocument->TypeDocument }}</td>
+                        <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                <a href="{{ route('entreprise.show', $entreprise->id) }}"
+                                <a href="{{ route('documents.show', $document->id) }}"
                                     class="btn btn-info btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
-                                <a href={{ route('entreprise.edit', $entreprise->id) }}
+                                {{-- <a href={{ route('entreprise.edit', $entreprise->id) }}
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Entreprise ?');">
+                                </a> --}}
+                                <form action="{{ route('documents.destroy', $document->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Document ?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm px-2 py-1 mx-1">
@@ -58,11 +58,11 @@
                                     </button>
                                 </form>
                             </div>
-                        </td> --}}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        {{-- <p>{{ $entreprises->links() }}</p> --}}
+        <p>{{ $documents->links() }}</p>
     </div>
 @endsection

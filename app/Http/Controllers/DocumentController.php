@@ -13,7 +13,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $documents = Document::all();
+        $documents = Document::paginate(5);
         return view('documents.index',compact('documents'));
     }
 
@@ -38,7 +38,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        //
+        return view('documents.show',compact('document'));
     }
 
     /**
@@ -62,6 +62,7 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
-        //
+        $document->delete();
+        return redirect()->route('documents.index')->with('deleted', 'Document deleted successfully!');
     }
 }
