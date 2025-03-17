@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
-@section('title')
-    @isset($entreprise)
-        Modifier Entreprise
-    @else
-        Ajouter Entreprise
-    @endisset
+@section('title','Ajouter Entreprise')
+
 @endsection
 
 @section('content')

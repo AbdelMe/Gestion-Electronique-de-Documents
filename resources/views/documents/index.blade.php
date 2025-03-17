@@ -46,10 +46,10 @@
                                     class="btn btn-info btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
-                                {{-- <a href={{ route('entreprise.edit', $entreprise->id) }}
+                                <a href={{ route('documents.edit', $document->id) }}
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
-                                </a> --}}
+                                </a>
                                 <form action="{{ route('documents.destroy', $document->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Document ?');">
                                     @csrf
                                     @method('DELETE')

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
+use App\Models\Dossier;
+use App\Models\TypeDocument;
+use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
@@ -46,15 +49,18 @@ class DocumentController extends Controller
      */
     public function edit(Document $document)
     {
-        //
+        $typeDocuments = TypeDocument::all();
+        $dossiers = Dossier::all();
+        return view('documents.edit',compact('document','typeDocuments','dossiers'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDocumentRequest $request, Document $document)
+    public function update(Request $request, Document $document)
     {
-        //
+        $document->update($request->all());
+        return redirect()->route('documents.index')->with('updated', 'Document updated successfully!');
     }
 
     /**
