@@ -17,7 +17,7 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Document::paginate(5);
-        return view('documents.index',compact('documents'));
+        return view('documents.index', compact('documents'));
     }
 
     /**
@@ -25,15 +25,18 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('documents.create');
+        $typeDocuments = TypeDocument::all();
+        $dossiers = Dossier::all();
+        return view('documents.create', compact('typeDocuments', 'dossiers'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDocumentRequest $request)
+    public function store(Request $request)
     {
-        //
+        Document::create($request->all());
+        return redirect()->route('documents.index')->with('Added', 'Document Added successfully!');
     }
 
     /**
@@ -41,7 +44,7 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        return view('documents.show',compact('document'));
+        return view('documents.show', compact('document'));
     }
 
     /**
@@ -51,7 +54,7 @@ class DocumentController extends Controller
     {
         $typeDocuments = TypeDocument::all();
         $dossiers = Dossier::all();
-        return view('documents.edit',compact('document','typeDocuments','dossiers'));
+        return view('documents.edit', compact('document', 'typeDocuments', 'dossiers'));
     }
 
     /**
@@ -70,5 +73,17 @@ class DocumentController extends Controller
     {
         $document->delete();
         return redirect()->route('documents.index')->with('deleted', 'Document deleted successfully!');
+    }
+
+
+    public function SelectedType(Request $request)
+    {
+        $selectedType = $request->query('type_document_id');
+
+        // dd($selectedType);
+        $typeDocuments = TypeDocument::all();
+        $dossiers = Dossier::all();
+
+        return view('documents.create',compact('selectedType','typeDocuments', 'dossiers'));
     }
 }

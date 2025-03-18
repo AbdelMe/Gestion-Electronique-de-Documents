@@ -15,7 +15,7 @@
 @section('content')
     <div class="container mt-1">
         <h2 class="mb-4 text-white">Liste des Documents</h2>
-        <a href="#" class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
+        <a href={{ route('documents.create')}} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
             Document</a>
         <table class="table table-bordered table-striped text-white">
             <thead class="thead-dark">

@@ -4,9 +4,6 @@
 @endsection
 @section('alert')
     @if (session('updated'))
-        {{-- <div class="alert alert-success">
-    {{session('updated')}}
-</div> --}}
         <x-toast-success-alert message="{{ session('updated') }}" />
     @endif
     @if (session('deleted'))

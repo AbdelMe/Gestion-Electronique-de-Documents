@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('title','Ajouter Entreprise')
-
-@endsection
-
 @section('content')
     <div class="container mt-4">
         <h2 class="mb-4">Ajouter Entreprise</h2>
