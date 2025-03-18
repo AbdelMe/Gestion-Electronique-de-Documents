@@ -141,7 +141,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item menu-items">
+            {{-- <li class="nav-item menu-items">
                 <a class="nav-link"
                     href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
                     <span class="menu-icon">
@@ -149,6 +149,23 @@
                     </span>
                     <span class="menu-title">Rubrique</span>
                 </a>
+            </li> --}}
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
+                    aria-controls="auth">
+                    <span class="menu-icon">
+                        <i class="mdi mdi-security"></i>
+                    </span>
+                    <span class="menu-title">Rubrique</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="auth">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> <a class="nav-link" href={{ route('rubrique.index') }}>All Rubriques</a></li>
+                        <li class="nav-item"> <a class="nav-link" href='#'>Type Rubrique</a></li>
+                        <li class="nav-item"> <a class="nav-link" href='#'>Rubrique Document</a></li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </nav>

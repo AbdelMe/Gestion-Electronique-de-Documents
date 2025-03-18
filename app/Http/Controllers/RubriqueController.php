@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Rubrique;
 use App\Http\Requests\StoreRubriqueRequest;
 use App\Http\Requests\UpdateRubriqueRequest;
+use App\Models\TypeDocument;
+use App\Models\TypeRubrique;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RubriqueController extends Controller
 {
@@ -13,7 +17,8 @@ class RubriqueController extends Controller
      */
     public function index()
     {
-        //
+        $rubriques = Rubrique::all();
+        return view('rubrique.index',compact('rubriques'));
     }
 
     /**
@@ -21,15 +26,27 @@ class RubriqueController extends Controller
      */
     public function create()
     {
-        //
+        $type_documents = TypeDocument::all();
+        $type_rubrique = TypeRubrique::all();
+        return view('rubrique.create',compact('type_documents','type_rubrique'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRubriqueRequest $request)
+    public function store(Request $request)
     {
-        //
+        $type = DB::table('type_rubriques')->find($request->type_rubrique_id);
+        $type1 = $type->TypeRubrique;
+        // dd($type->TypeRubrique);
+        Rubrique::create([
+            'type_rubrique_id' => $request->type_rubrique_id,
+            'type_document_id' => $request->type_document_id,
+            'Rubrique' => $request->Rubrique,
+            'Valeur' => $type1,
+            'Obligatoire' => $request->Obligatoire,
+        ]);
+        return to_route('rubrique.index')->with('Added','Rubrique Added successfully!');
     }
 
     /**
@@ -61,6 +78,7 @@ class RubriqueController extends Controller
      */
     public function destroy(Rubrique $rubrique)
     {
-        //
+        $rubrique->delete();
+        return to_route('rubrique.index')->with('deleted','Rubrique deleted successfully!');
     }
 }

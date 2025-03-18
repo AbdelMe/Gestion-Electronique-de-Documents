@@ -23,3 +23,5 @@
 {{-- Bootstrap icons --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+{{-- <link rel="stylesheet" href={{ asset('assets/vendors/select2/select2.min.css') }}> --}}
+{{-- <link rel="stylesheet" href={{ asset('assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}> --}}
