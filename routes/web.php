@@ -3,6 +3,7 @@
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TypeDocumentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,3 +23,4 @@ Route::delete('/documents/{document}',[DocumentController::class , 'destroy'])->
 
 Route::get('/documents/SelectedType',[DocumentController::class , 'SelectedType'])->name('documents.SelectedType');
 
+Route::resource('/type_documents', TypeDocumentController::class);

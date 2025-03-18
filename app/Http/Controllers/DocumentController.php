@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Dossier;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DocumentController extends Controller
 {
@@ -26,8 +27,8 @@ class DocumentController extends Controller
     public function create()
     {
         $typeDocuments = TypeDocument::all();
-        $dossiers = Dossier::all();
-        return view('documents.create', compact('typeDocuments', 'dossiers'));
+        // $dossiers = Dossier::all();
+        return view('documents.create', compact('typeDocuments'));
     }
 
     /**
@@ -76,11 +77,14 @@ class DocumentController extends Controller
     }
 
 
+
     public function SelectedType(Request $request)
     {
         $selectedType = $request->query('type_document_id');
 
-        // dd($selectedType);
+        $rebrique = DB::table('rubriques')->where('type_document_id', $selectedType)->get();
+
+        // dd($rebrique);
         $typeDocuments = TypeDocument::all();
         $dossiers = Dossier::all();
 

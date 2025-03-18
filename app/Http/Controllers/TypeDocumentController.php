@@ -13,7 +13,8 @@ class TypeDocumentController extends Controller
      */
     public function index()
     {
-        //
+        $type_documents = TypeDocument::paginate(5);
+        return view('type_documents.index',compact('type_documents'));
     }
 
     /**
