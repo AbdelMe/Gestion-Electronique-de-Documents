@@ -2,7 +2,7 @@
     @props(['message'])
     <style>
         .colored-toast.swal2-icon-success {
-            background-color: #c45454 !important;
+            background-color: #fa6161 !important;
         }
         .colored-toast {
             margin-top: 70px !important;

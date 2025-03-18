@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\TypeDocument;
 use App\Http\Requests\StoreTypeDocumentRequest;
 use App\Http\Requests\UpdateTypeDocumentRequest;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class TypeDocumentController extends Controller
 {
@@ -22,15 +24,16 @@ class TypeDocumentController extends Controller
      */
     public function create()
     {
-        //
+        return view('type_documents.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTypeDocumentRequest $request)
+    public function store(Request $request)
     {
-        //
+        TypeDocument::create($request->all());
+        return redirect()->route('type_documents.index')->with('Added', 'Type added successfully!');
     }
 
     /**
@@ -62,6 +65,11 @@ class TypeDocumentController extends Controller
      */
     public function destroy(TypeDocument $typeDocument)
     {
-        //
+        try{
+            $typeDocument->delete();
+            return to_route('type_documents.index')->with('deleted','Type Document deleted successfuly');
+        }catch(QueryException){
+                return to_route('type_documents.index')->with('deleted',"Impossible de supprimer ce Type car il est lié à autres données.");
+        }
     }
 }
