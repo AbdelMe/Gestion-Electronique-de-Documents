@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dossier;
 use App\Http\Requests\StoreDossierRequest;
 use App\Http\Requests\UpdateDossierRequest;
+use Illuminate\Http\Request;
 
 class DossierController extends Controller
 {
@@ -13,7 +14,8 @@ class DossierController extends Controller
      */
     public function index()
     {
-        //
+        $dossiers = Dossier::all();
+        return view('dossiers.index', compact('dossiers'));
     }
 
     /**
@@ -21,7 +23,7 @@ class DossierController extends Controller
      */
     public function create()
     {
-        //
+        return view('dossiers.create');
     }
 
     /**
@@ -29,7 +31,8 @@ class DossierController extends Controller
      */
     public function store(StoreDossierRequest $request)
     {
-        //
+        $dossier = Dossier::create($request->validated());
+        return redirect()->route('dossiers.index')->with('success', 'Dossier created successfully.');
     }
 
     /**
@@ -37,7 +40,7 @@ class DossierController extends Controller
      */
     public function show(Dossier $dossier)
     {
-        //
+        return view('dossiers.show', compact('dossier'));
     }
 
     /**
@@ -45,7 +48,7 @@ class DossierController extends Controller
      */
     public function edit(Dossier $dossier)
     {
-        //
+        return view('dossiers.edit', compact('dossier'));
     }
 
     /**
@@ -53,7 +56,8 @@ class DossierController extends Controller
      */
     public function update(UpdateDossierRequest $request, Dossier $dossier)
     {
-        //
+        $dossier->update($request->validated());
+        return redirect()->route('dossiers.index')->with('success', 'Dossier updated successfully.');
     }
 
     /**
@@ -61,6 +65,7 @@ class DossierController extends Controller
      */
     public function destroy(Dossier $dossier)
     {
-        //
+        $dossier->delete();
+        return redirect()->route('dossiers.index')->with('success', 'Dossier deleted successfully.');
     }
 }

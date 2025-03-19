@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Entreprise extends Model
 {
@@ -23,4 +24,15 @@ class Entreprise extends Model
     // ];
 
     protected $guarded = ['id'];
+
+    public function affiliations(): HasMany
+    {
+        return $this->hasMany(Affiliation::class);
+    }
+
+    public function services(): HasMany
+    {
+        return $this->hasMany(Service::class);
+    }
+
 }
