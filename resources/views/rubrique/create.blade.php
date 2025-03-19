@@ -15,7 +15,7 @@
                     <div class="form-group mb-3">
                         <label for="type_rubrique_id">Type Rubrique</label>
                         <select class="form-control text-white @error('type_rubrique_id') is-invalid @enderror"
-                            id="type_rubrique_id" name="type_rubrique_id" required>
+                            id="type_rubrique_id" name="type_rubrique_id" required style="overflow-y: hidden;">
                             <option value="">Sélectionnez un type de rubrique</option>
                             @foreach ($type_rubrique as $typeRubrique)
                                 <option value="{{ $typeRubrique->id }}"
@@ -35,7 +35,7 @@
                     <div class="form-group mb-3">
                         <label for="type_document_id">Type Document</label>
                         <select class="form-control text-white @error('type_document_id') is-invalid @enderror"
-                            id="type_document_id" name="type_document_id" required>
+                            id="type_document_id" name="type_document_id" required style="overflow-y: hidden;">
                             <option value="">Sélectionnez un type de document</option>
                             @foreach ($type_documents as $typeDocument)
                                 <option value="{{ $typeDocument->id }}"
