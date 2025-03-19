@@ -17,7 +17,7 @@ class RubriqueController extends Controller
      */
     public function index()
     {
-        $rubriques = Rubrique::all();
+        $rubriques = Rubrique::paginate(5);
         return view('rubrique.index',compact('rubriques'));
     }
 
