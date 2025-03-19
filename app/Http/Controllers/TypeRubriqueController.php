@@ -15,7 +15,7 @@ class TypeRubriqueController extends Controller
      */
     public function index()
     {
-        $type_rubrique = TypeRubrique::all();
+        $type_rubrique = TypeRubrique::paginate(5);
         return view('type_rubrique.index',compact('type_rubrique'));
     }
 

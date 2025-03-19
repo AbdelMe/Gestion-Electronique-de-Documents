@@ -58,6 +58,6 @@
             @endforeach
         </tbody>
     </table>
-    {{-- <p>{{ $services->links() }}</p> --}}
+    <p>{{ $type_rubrique->links() }}</p>
 </div>
 @endsection
