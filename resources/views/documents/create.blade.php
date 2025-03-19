@@ -13,7 +13,7 @@
                     <div class="form-group mb-3">
                         <label for="type_document_id">Type Document</label>
                         <select class="form-control @error('type_document_id') is-invalid @enderror text-white"
-                            id="type_document_id" name="type_document_id" required>
+                            id="type_document_id" name="type_document_id" required style="overflow-y: hidden;">
                             <option value="">Sélectionnez un type de document</option>
                             @foreach ($typeDocuments as $typeDocument)
                                 <option value="{{ $typeDocument->id }}"

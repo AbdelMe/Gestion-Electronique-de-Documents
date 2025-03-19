@@ -69,7 +69,7 @@ class TypeDocumentController extends Controller
             $typeDocument->delete();
             return to_route('type_documents.index')->with('deleted','Type Document deleted successfuly');
         }catch(QueryException){
-                return to_route('type_documents.index')->with('deleted',"Impossible de supprimer ce Type car il est lié à autres données.");
+                return to_route('type_documents.index')->with('warning',"Impossible de supprimer ce Type car il est lié à autres données.");
         }
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRubriqueRequest;
 use App\Http\Requests\UpdateRubriqueRequest;
 use App\Models\TypeDocument;
 use App\Models\TypeRubrique;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -62,15 +63,18 @@ class RubriqueController extends Controller
      */
     public function edit(Rubrique $rubrique)
     {
-        //
+        $type_documents = TypeDocument::all();
+        $type_rubrique = TypeRubrique::all();
+        return view('rubrique.edit',compact('rubrique','type_documents','type_rubrique'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRubriqueRequest $request, Rubrique $rubrique)
+    public function update(Request $request, Rubrique $rubrique)
     {
-        //
+        $rubrique->update($request->all());
+        return to_route('rubrique.index')->with('updated','Rubrique updated successfully!');
     }
 
     /**
@@ -78,7 +82,11 @@ class RubriqueController extends Controller
      */
     public function destroy(Rubrique $rubrique)
     {
-        $rubrique->delete();
-        return to_route('rubrique.index')->with('deleted','Rubrique deleted successfully!');
+        try{
+            $rubrique->delete();
+            return to_route('rubrique.index')->with('deleted','Rubrique deleted successfully!');
+        }catch(QueryException){
+            return to_route('rubrique.index')->with('warning','Impossible de supprimer ce Rubrique car il est lié à autres données.');
+        }
     }
 }

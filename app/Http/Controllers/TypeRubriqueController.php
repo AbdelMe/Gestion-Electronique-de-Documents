@@ -49,15 +49,16 @@ class TypeRubriqueController extends Controller
      */
     public function edit(TypeRubrique $typeRubrique)
     {
-        //
+        return view('type_rubrique.edit',compact('typeRubrique'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTypeRubriqueRequest $request, TypeRubrique $typeRubrique)
+    public function update(Request $request, TypeRubrique $typeRubrique)
     {
-        //
+        $typeRubrique->update($request->all());
+        return to_route('type_rubrique.index')->with('updated','Type Rubrique updated successfuly');
     }
 
     /**
@@ -69,7 +70,7 @@ class TypeRubriqueController extends Controller
             $typeRubrique->delete();
             return to_route('type_rubrique.index')->with('deleted','Type Document deleted successfuly');
         }catch(QueryException){
-            return to_route('type_rubrique.index')->with('deleted',"Impossible de supprimer ce Type car il est lié à autres données.");
+            return to_route('type_rubrique.index')->with('warning',"Impossible de supprimer ce Type car il est lié à autres données.");
         }
     }
 }

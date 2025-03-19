@@ -11,6 +11,9 @@
     @if (session('Added'))
         <x-toast-success-alert message="{{ session('Added') }}" />
     @endif
+    @if (session('warning'))
+        <x-toast-warning-alert message="{{ session('warning') }}" />
+    @endif
 @endsection
 
 @section('content')
@@ -38,13 +41,13 @@
                     <td>{{ $type->TailleRubrique }}</td>
                     <td>{{ $type->Date }}</td>
                     <td>{{ $type->Booleane == 1 ? 'OUI' : 'NON' }}</td>
-                    <td>{{ $type->Largeur }}</td>
-                    <td>{{ $type->Hauteur }}</td>
+                    <td>{{ $type->Largeur }} px</td>
+                    <td>{{ $type->Hauteur }} px</td>
                     <td class="text-center">
                         <div class="d-inline-flex gap-2">
-                            {{-- <a href={{ route('services.edit', $service->id) }} class="btn btn-warning btn-sm px-2 py-1 mx-1">
+                            <a href={{ route('type_rubrique.edit', $type->id) }} class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                 <i class="bi bi-pencil-square"></i>
-                            </a> --}}
+                            </a>
                             <form action="{{ route('type_rubrique.destroy', $type->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Type ?');">
                                 @csrf
                                 @method('DELETE')

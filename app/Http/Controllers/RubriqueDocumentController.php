@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\RubriqueDocument;
 use App\Http\Requests\StoreRubriqueDocumentRequest;
 use App\Http\Requests\UpdateRubriqueDocumentRequest;
+use App\Models\Document;
+use App\Models\Rubrique;
 
 class RubriqueDocumentController extends Controller
 {
@@ -13,7 +15,10 @@ class RubriqueDocumentController extends Controller
      */
     public function index()
     {
-        //
+        // $documents = Document::all();
+        // $rubriques = Rubrique::all();
+        $rubs_docs = RubriqueDocument::all();
+        return view('rubrique_document.index',compact('rubs_docs'));
     }
 
     /**

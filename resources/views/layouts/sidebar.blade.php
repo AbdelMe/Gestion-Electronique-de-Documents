@@ -163,7 +163,7 @@
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href={{ route('rubrique.index') }}>All Rubriques</a></li>
                         <li class="nav-item"> <a class="nav-link" href={{ route('type_rubrique.index') }}>Type Rubrique</a></li>
-                        <li class="nav-item"> <a class="nav-link" href='#'>Rubrique Document</a></li>
+                        <li class="nav-item"> <a class="nav-link" href={{ route('rubrique_document.index') }}>Rubrique Document</a></li>
                     </ul>
                 </div>
             </li>

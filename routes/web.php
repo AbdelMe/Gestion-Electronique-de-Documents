@@ -3,6 +3,7 @@
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\RubriqueController;
+use App\Http\Controllers\RubriqueDocumentController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeDocumentController;
 use App\Http\Controllers\TypeRubriqueController;
@@ -32,3 +33,6 @@ Route::resource('/rubrique', RubriqueController::class);
 
 
 Route::resource('/type_rubrique', TypeRubriqueController::class);
+
+Route::resource('/rubrique_document', RubriqueDocumentController::class);
+
