@@ -82,7 +82,8 @@ class DocumentController extends Controller
     {
         $selectedType = $request->query('type_document_id');
 
-        $rebrique = DB::table('rubriques')->where('type_document_id', $selectedType)->get();
+        // $rebrique = DB::table('rubriques')->where('type_document_id', $selectedType)->get();
+        // $rebrique = DB::table('rubriques')->find(9);
 
         // dd($rebrique);
         $typeDocuments = TypeDocument::all();

@@ -62,6 +62,7 @@
                         @enderror
                     </div>
                 </div>
+                {{-- <input type={{$rebrique->Valeur}} name="" id="" {{$rebrique->Obligatoire == 1 ? 'required' : ''}}> --}}
                 @endisset
             </div>
             <div class="form-group text-center">

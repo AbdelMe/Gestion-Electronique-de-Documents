@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\TypeRubrique;
 use App\Http\Requests\StoreTypeRubriqueRequest;
 use App\Http\Requests\UpdateTypeRubriqueRequest;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class TypeRubriqueController extends Controller
 {
@@ -13,7 +15,8 @@ class TypeRubriqueController extends Controller
      */
     public function index()
     {
-        //
+        $type_rubrique = TypeRubrique::all();
+        return view('type_rubrique.index',compact('type_rubrique'));
     }
 
     /**
@@ -21,15 +24,16 @@ class TypeRubriqueController extends Controller
      */
     public function create()
     {
-        //
+        return view('type_rubrique.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTypeRubriqueRequest $request)
+    public function store(Request $request)
     {
-        //
+        TypeRubrique::create($request->all());
+        return to_route('type_rubrique.index')->with('Added','Type Document Added successfuly');
     }
 
     /**
@@ -61,6 +65,11 @@ class TypeRubriqueController extends Controller
      */
     public function destroy(TypeRubrique $typeRubrique)
     {
-        //
+        try{
+            $typeRubrique->delete();
+            return to_route('type_rubrique.index')->with('deleted','Type Document deleted successfuly');
+        }catch(QueryException){
+            return to_route('type_rubrique.index')->with('deleted',"Impossible de supprimer ce Type car il est lié à autres données.");
+        }
     }
 }

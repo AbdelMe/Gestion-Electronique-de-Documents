@@ -5,6 +5,7 @@ use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\RubriqueController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeDocumentController;
+use App\Http\Controllers\TypeRubriqueController;
 use App\Models\Rubrique;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,6 @@ Route::get('/documents/SelectedType',[DocumentController::class , 'SelectedType'
 
 Route::resource('/type_documents', TypeDocumentController::class);
 Route::resource('/rubrique', RubriqueController::class);
+
+
+Route::resource('/type_rubrique', TypeRubriqueController::class);

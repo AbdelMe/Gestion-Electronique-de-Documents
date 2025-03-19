@@ -117,14 +117,14 @@
                     <span class="menu-title">Dossier</span>
                 </a>
             </li>
-            <li class="nav-item menu-items">
+            {{-- <li class="nav-item menu-items">
                 <a class="nav-link" href="#">
                     <span class="menu-icon">
                         <i class="mdi mdi-contacts"></i>
                     </span>
                     <span class="menu-title">Documents</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
                     aria-controls="auth">
@@ -162,7 +162,7 @@
                 <div class="collapse" id="auth">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item"> <a class="nav-link" href={{ route('rubrique.index') }}>All Rubriques</a></li>
-                        <li class="nav-item"> <a class="nav-link" href='#'>Type Rubrique</a></li>
+                        <li class="nav-item"> <a class="nav-link" href={{ route('type_rubrique.index') }}>Type Rubrique</a></li>
                         <li class="nav-item"> <a class="nav-link" href='#'>Rubrique Document</a></li>
                     </ul>
                 </div>
