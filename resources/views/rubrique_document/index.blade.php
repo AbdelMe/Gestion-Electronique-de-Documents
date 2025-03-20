@@ -29,7 +29,7 @@
                     <th>Rubrique</th>
                     <th>Document</th>
                     {{-- <th>Valeur</th> --}}
-                    <th width="25px">Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>

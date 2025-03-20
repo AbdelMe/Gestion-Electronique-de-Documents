@@ -70,9 +70,17 @@ class RubriqueDocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRubriqueDocumentRequest $request, RubriqueDocument $rubriqueDocument)
+    public function update(Request $request, RubriqueDocument $rubriqueDocument)
     {
-        //
+        $rubrique = DB::table('rubriques')->find($request->rubrique_id);
+
+        $rubriqueDocument->update([
+            'rubrique_id' => $request->rubrique_id,
+            'Valeur' => $rubrique->Valeur,
+            'document_id' => $request->document_id
+        ]);
+        // dd($rubriqueDocument);
+        return to_route('rubrique_document.index')->with('updated','Rubrique Document updated successfully!');
     }
 
     /**
@@ -80,6 +88,7 @@ class RubriqueDocumentController extends Controller
      */
     public function destroy(RubriqueDocument $rubriqueDocument)
     {
-        //
+        $rubriqueDocument->delete();
+        return to_route('rubrique_document.index')->with('deleted','Rubrique Document deleted successfully!');
     }
 }

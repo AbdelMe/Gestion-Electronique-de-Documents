@@ -136,7 +136,7 @@
                 </a>
                 <div class="collapse" id="auth">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href={{ route('documents.index') }}>All Documents</a></li>
+                        <li class="nav-item"> <a class="nav-link" href={{ route('documents.index') }}>Documents</a></li>
                         <li class="nav-item"> <a class="nav-link" href={{ route('type_documents.index') }}>Type Document</a></li>
                     </ul>
                 </div>
@@ -156,12 +156,12 @@
                     <span class="menu-icon">
                         <i class="mdi mdi-security"></i>
                     </span>
-                    <span class="menu-title">Rubrique</span>
+                    <span class="menu-title">Rubriques</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="collapse" id="auth">
                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href={{ route('rubrique.index') }}>All Rubriques</a></li>
+                        <li class="nav-item"> <a class="nav-link" href={{ route('rubrique.index') }}>Rubriques</a></li>
                         <li class="nav-item"> <a class="nav-link" href={{ route('type_rubrique.index') }}>Type Rubrique</a></li>
                         <li class="nav-item"> <a class="nav-link" href={{ route('rubrique_document.index') }}>Rubrique Document</a></li>
                     </ul>
