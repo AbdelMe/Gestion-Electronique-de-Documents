@@ -18,25 +18,10 @@
                             </option>
                         @endforeach
                     </select>
-
-                    {{-- <a href="#" onclick="redirectToSelectedType()" class="btn btn-primary mt-2">Generate</a> --}}
-
                     @error('type_document_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
-                {{-- <script>
-                    function redirectToSelectedType() {
-                        let selectedValue = document.getElementById("type_document_id").value;
-                        if (selectedValue) {
-                            window.location.href = "{{ route('documents.SelectedType') }}?type_document_id=" + selectedValue;
-                        } else {
-                            alert("Veuillez sélectionner un type de document.");
-                        }
-                    }
-                </script> --}}
-
             </div>
 
             @isset($dossiers)
@@ -58,38 +43,36 @@
                         @enderror
                     </div>
                 </div>
-                {{-- <input type={{$rebrique->Valeur}} name="" id="" {{$rebrique->Obligatoire == 1 ? 'required' : ''}}> --}}
             @endisset
-
         </div>
-        {{-- <h1 style="width: ;height: ;">selected type = {{ $selected_type }}</h1> --}}
-        <div>
+
+        <div class="row">
             @foreach ($rebrique as $rub)
-                {{-- @if ($rub->typeRubrique->Hauteur > 50)
-                    <div>
-                        <label style="width: 200px" for="">{{ $rub->Rubrique }}</label>
-                        <textarea name="" id="" cols={{$rub->typeRubrique->Hauteur}} rows={{$rub->typeRubrique->Largeur}}></textarea>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="{{ $rub->Rubrique }}">{{ $rub->Rubrique }}</label>
+                        @if ($rub->typeRubrique->Hauteur !== null && $rub->typeRubrique->Largeur !== null)
+                            <input type="{{ $rub->typeRubrique->TypeRubrique }}" 
+                                   class="form-control @error($rub->Rubrique) is-invalid @enderror text-white" 
+                                   id="{{ $rub->Rubrique }}" 
+                                   name="{{ $rub->Rubrique }}" 
+                                   style="width: {{ $rub->typeRubrique->Largeur }}px; height: {{ $rub->typeRubrique->Hauteur }}px;">
+                        @else
+                            <input type="{{ $rub->typeRubrique->TypeRubrique }}" 
+                                   class="form-control @error($rub->Rubrique) is-invalid @enderror text-white" 
+                                   id="{{ $rub->Rubrique }}" 
+                                   name="{{ $rub->Rubrique }}">
+                        @endif
+                        @error($rub->Rubrique)
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-                @endif --}}
-
-
-                @if ($rub->typeRubrique->Hauteur !== null && $rub->typeRubrique->Largeur !== null)
-                    <div>
-                        <label style="width: 200px" for="">{{ $rub->Rubrique }}</label>
-                        <input type="{{ $rub->typeRubrique->TypeRubrique }}" name="" id=""
-                            style="width: {{ $rub->typeRubrique->Largeur }}px; height: {{ $rub->typeRubrique->Hauteur }}px;">
-                    </div>
-                @else
-                    <div>
-                        <label style="width: 200px" for="">{{ $rub->Rubrique }}</label>
-                        <input type="{{ $rub->typeRubrique->TypeRubrique }}" name="" id="">
-                    </div>
-                @endif
+                </div>
             @endforeach
+        </div>
 
-        </div>
-        <div class="form-group text-center">
+        {{-- <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Créer Document</button>
-        </div>
+        </div> --}}
     </form>
 </div>

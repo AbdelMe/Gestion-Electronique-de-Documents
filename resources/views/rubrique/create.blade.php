@@ -6,7 +6,7 @@
     <div class="container mt-4">
         <h2 class="mb-4">Créer Rubrique</h2>
 
-        <form action={{ route('rubrique.store') }} method="POST">
+        <form action="{{ route('rubrique.store') }}" method="POST">
             @csrf
 
             <div class="row">
@@ -63,43 +63,30 @@
                         @enderror
                     </div>
                 </div>
+            </div>
 
-                <!-- Valeur -->
-                {{-- <div class="col-md-6">
+            <div class="row">
+                <!-- Obligatoire -->
+                <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label for="Valeur">Valeur</label>
-                        <input type="text" class="form-control @error('Valeur') is-invalid @enderror text-white"
-                            id="Valeur" name="Valeur" value="{{ old('Valeur') }}" required>
-                        @error('Valeur')
+                        <label for="Obligatoire">Obligatoire</label>
+                        <select class="form-control text-white @error('Obligatoire') is-invalid @enderror" id="Obligatoire"
+                            name="Obligatoire" required>
+                            <option value="">Sélectionnez une option</option>
+                            <option value="1" {{ old('Obligatoire') == 1 ? 'selected' : '' }}>Oui</option>
+                            <option value="0" {{ old('Obligatoire') == 0 ? 'selected' : '' }}>Non</option>
+                        </select>
+                        @error('Obligatoire')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                </div> --}}
+                </div>
             </div>
-    </div>
 
-    <div class="row">
-        <!-- Obligatoire -->
-        <div class="col-md-6">
-            <div class="form-group mb-3">
-                <label for="Obligatoire">Obligatoire</label>
-                <select class="form-control text-white @error('Obligatoire') is-invalid @enderror" id="Obligatoire"
-                    name="Obligatoire" required>
-                    <option value="">Sélectionnez une option</option>
-                    <option value="1" {{ old('Obligatoire') == 1 ? 'selected' : '' }}>Oui</option>
-                    <option value="0" {{ old('Obligatoire') == 0 ? 'selected' : '' }}>Non</option>
-                </select>
-                @error('Obligatoire')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-success">Créer Rubrique</button>
             </div>
-        </div>
-    </div>
-
-    <!-- Submit Button -->
-    <div class="form-group text-center">
-        <button type="submit" class="btn btn-success">Créer Rubrique</button>
-    </div>
-    </form>
+        </form>
     </div>
 @endsection
