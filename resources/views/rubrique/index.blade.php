@@ -26,10 +26,10 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    {{-- <th>Type Rubrique</th> --}}
+                    <th>Type Rubrique</th>
                     <th>Type Document</th>
                     <th>Rubrique Nom</th>
-                    <th>Valeur</th>
+                    {{-- <th>Valeur</th> --}}
                     <th>Obligatoire</th>
                     <th>Actions</th>
                 </tr>
@@ -38,11 +38,11 @@
                 @foreach ($rubriques as $rubrique)
                     <tr>
                         <td>{{ $rubrique->id }}</td>
-                        {{-- <td>{{ $rubrique->TypeRubrique->TypeRubrique }}</td> --}}
+                        <td>{{ $rubrique->TypeRubrique->TypeRubrique }}</td>
                         <td>{{ $rubrique->TypeDocument->TypeDocument }}</td>
                         <td>{{ $rubrique->Rubrique }}</td>
-                        <td>{{ $rubrique->Valeur }}</td>
-                        <td>{{ $rubrique->Obligatoire == 1 ? 'Yes' : 'NO' }}</td>
+                        {{-- <td>{{ $rubrique->Valeur }}</td> --}}
+                        <td>{{ $rubrique->Obligatoire == 1 ? 'OUI' : 'NON' }}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
                                 {{-- <a href="{{ route('documents.show', $document->id) }}"

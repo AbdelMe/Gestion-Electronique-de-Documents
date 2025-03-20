@@ -7,6 +7,8 @@ use App\Http\Requests\StoreRubriqueDocumentRequest;
 use App\Http\Requests\UpdateRubriqueDocumentRequest;
 use App\Models\Document;
 use App\Models\Rubrique;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RubriqueDocumentController extends Controller
 {
@@ -18,7 +20,7 @@ class RubriqueDocumentController extends Controller
         // $documents = Document::all();
         // $rubriques = Rubrique::all();
         $rubs_docs = RubriqueDocument::all();
-        return view('rubrique_document.index',compact('rubs_docs'));
+        return view('rubrique_document.index', compact('rubs_docs'));
     }
 
     /**
@@ -26,15 +28,25 @@ class RubriqueDocumentController extends Controller
      */
     public function create()
     {
-        //
+        $documents = Document::all();
+        $rubriques = Rubrique::all();
+        return view('rubrique_document.create',compact('documents','rubriques'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRubriqueDocumentRequest $request)
+    public function store(Request $request)
     {
-        //
+        $rub = DB::table('rubriques')->find($request->rubrique_id);
+        // $doc = DB::table('documents')->find($request->document_id);
+        // dd($doc);
+        RubriqueDocument::create([
+            'rubrique_id' => $request->rubrique_id,
+            'Valeur' => $rub->Valeur,
+            'document_id' => $request->document_id
+        ]);
+        return to_route('rubrique_document.index')->with('Added','Rubrique Document Added successfully!');
     }
 
     /**
@@ -50,7 +62,9 @@ class RubriqueDocumentController extends Controller
      */
     public function edit(RubriqueDocument $rubriqueDocument)
     {
-        //
+        $documents = Document::all();
+        $rubriques = Rubrique::all();
+        return view('rubrique_document.edit',compact('rubriqueDocument','documents','rubriques'));
     }
 
     /**

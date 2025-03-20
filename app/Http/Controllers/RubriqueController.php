@@ -37,14 +37,15 @@ class RubriqueController extends Controller
      */
     public function store(Request $request)
     {
-        $type = DB::table('type_rubriques')->find($request->type_rubrique_id);
-        $type1 = $type->TypeRubrique;
+        // $type = DB::table('type_rubriques')->find($request->type_rubrique_id);
+        // $type1 = $type->TypeRubrique;
         // dd($type->TypeRubrique);
         Rubrique::create([
             'type_rubrique_id' => $request->type_rubrique_id,
             'type_document_id' => $request->type_document_id,
             'Rubrique' => $request->Rubrique,
-            'Valeur' => $type1,
+            // 'Valeur' => $type1,
+            'Valeur' => "",
             'Obligatoire' => $request->Obligatoire,
         ]);
         return to_route('rubrique.index')->with('Added','Rubrique Added successfully!');

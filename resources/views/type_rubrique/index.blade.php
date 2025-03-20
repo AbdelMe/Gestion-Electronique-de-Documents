@@ -25,7 +25,7 @@
             <tr>
                 <th>#</th>
                 <th>Type Rubrique</th>
-                <th>Taille</th>
+                <th>Taille Rubrique</th>
                 <th>Date</th>
                 <th>Booleane</th>
                 <th>Largeur (Px)</th>

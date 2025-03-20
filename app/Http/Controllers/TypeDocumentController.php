@@ -49,15 +49,16 @@ class TypeDocumentController extends Controller
      */
     public function edit(TypeDocument $typeDocument)
     {
-        //
+        return view('type_documents.edit',compact('typeDocument'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTypeDocumentRequest $request, TypeDocument $typeDocument)
+    public function update(Request $request, TypeDocument $typeDocument)
     {
-        //
+        $typeDocument->update($request->all());
+        return to_route('type_documents.index')->with('updated','Type Document updated successfuly');
     }
 
     /**
