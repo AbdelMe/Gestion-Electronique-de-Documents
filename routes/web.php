@@ -3,13 +3,14 @@
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\DossierController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('/entreprise', EntrepriseController::class);
-
+Route::resource('/dossiers', DossierController::class);
 Route::resource('/services', ServiceController::class);
 // Route::resource('/documents', DocumentController::class);
 Route::get('/documents',[DocumentController::class , 'index'])->name('documents.index');

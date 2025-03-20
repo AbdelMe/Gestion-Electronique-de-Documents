@@ -39,6 +39,17 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item" href={{ route('dossiers.create') }}>
+                    <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                    </div>
+                    <div class="preview-item-content">
+                        <p class="preview-subject ellipsis mb-1">Dossier</p>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item" href={{ route('documents.create') }}>
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">

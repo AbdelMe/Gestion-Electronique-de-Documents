@@ -11,7 +11,7 @@ class StoreDossierRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true; // Changed to true to allow the request
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreDossierRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'service_id' => 'required|exists:services,id',
+            'dossier' => 'required|string|max:255',
+            'annee' => 'required|numeric|min:2000|max:2100',
         ];
     }
 }
+
