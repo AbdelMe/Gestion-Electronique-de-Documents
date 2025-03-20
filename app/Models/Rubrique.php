@@ -14,6 +14,6 @@ class Rubrique extends Model
 
     public function TypeRubrique()
     {
-        return $this->belongsTo(TypeRubrique::class);
+        return $this->belongsTo(TypeRubrique::class , 'type_rubrique_id');
     }
 }

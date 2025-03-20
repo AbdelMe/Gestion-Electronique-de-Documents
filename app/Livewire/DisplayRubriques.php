@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Rubrique;
 use App\Models\TypeDocument;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -17,8 +18,9 @@ class DisplayRubriques extends Component
     public function render()
     {
         $typeDocuments = TypeDocument::all();
-        $rebrique = DB::table('rubriques')->where('type_document_id', $this->selected_type)->get();
-        // dd($this->selected_type);
+        $rebrique = Rubrique::with('typeRubrique')
+            ->where('type_document_id', $this->selected_type)
+            ->get();
         return view('livewire.display-rubriques',compact('typeDocuments','rebrique'));
     }
 }

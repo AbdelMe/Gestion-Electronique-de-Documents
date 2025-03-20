@@ -41,8 +41,8 @@
                     <td>{{ $type->TailleRubrique }}</td>
                     <td>{{ $type->Date }}</td>
                     <td>{{ $type->Booleane == 1 ? 'OUI' : 'NON' }}</td>
-                    <td>{{ $type->Largeur }} px</td>
-                    <td>{{ $type->Hauteur }} px</td>
+                    <td>{{ $type->Largeur == NULL ? 'NULL' : $type->Largeur . ' px' }}</td>
+                    <td>{{ $type->Hauteur == NULL ? 'NULL' : $type->Hauteur . ' px' }}</td>
                     <td class="text-center">
                         <div class="d-inline-flex gap-2">
                             <a href={{ route('type_rubrique.edit', $type->id) }} class="btn btn-warning btn-sm px-2 py-1 mx-1">

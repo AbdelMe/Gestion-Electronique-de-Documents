@@ -62,13 +62,32 @@
             @endisset
 
         </div>
-        <h1>selected type = {{ $selected_type }}</h1>
-        <p>
+        {{-- <h1 style="width: ;height: ;">selected type = {{ $selected_type }}</h1> --}}
+        <div>
             @foreach ($rebrique as $rub)
-                <h1>{{$rub->id}}</h1>
+                {{-- @if ($rub->typeRubrique->Hauteur > 50)
+                    <div>
+                        <label style="width: 200px" for="">{{ $rub->Rubrique }}</label>
+                        <textarea name="" id="" cols={{$rub->typeRubrique->Hauteur}} rows={{$rub->typeRubrique->Largeur}}></textarea>
+                    </div>
+                @endif --}}
+
+
+                @if ($rub->typeRubrique->Hauteur !== null && $rub->typeRubrique->Largeur !== null)
+                    <div>
+                        <label style="width: 200px" for="">{{ $rub->Rubrique }}</label>
+                        <input type="{{ $rub->typeRubrique->TypeRubrique }}" name="" id=""
+                            style="width: {{ $rub->typeRubrique->Largeur }}px; height: {{ $rub->typeRubrique->Hauteur }}px;">
+                    </div>
+                @else
+                    <div>
+                        <label style="width: 200px" for="">{{ $rub->Rubrique }}</label>
+                        <input type="{{ $rub->typeRubrique->TypeRubrique }}" name="" id="">
+                    </div>
+                @endif
             @endforeach
-    
-        </p>
+
+        </div>
         <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Créer Document</button>
         </div>
