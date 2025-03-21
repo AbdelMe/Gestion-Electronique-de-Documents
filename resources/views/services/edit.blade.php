@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-    Modifier Service
-@endsection
+@section('title','Modifier Service')
 
 @section('content')
     <div class="container mt-4">

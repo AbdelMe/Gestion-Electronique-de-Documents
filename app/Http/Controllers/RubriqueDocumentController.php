@@ -19,7 +19,7 @@ class RubriqueDocumentController extends Controller
     {
         // $documents = Document::all();
         // $rubriques = Rubrique::all();
-        $rubs_docs = RubriqueDocument::all();
+        $rubs_docs = RubriqueDocument::paginate(5);
         return view('rubrique_document.index', compact('rubs_docs'));
     }
 

@@ -10,7 +10,6 @@
             @csrf
 
             <div class="row">
-                <!-- Type Rubrique ID -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="type_rubrique_id">Type Rubrique</label>
@@ -30,7 +29,6 @@
                     </div>
                 </div>
 
-                <!-- Type Document ID -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="type_document_id">Type Document</label>
@@ -52,7 +50,6 @@
             </div>
 
             <div class="row">
-                <!-- Rubrique -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Rubrique">Rubrique</label>
@@ -66,7 +63,6 @@
             </div>
 
             <div class="row">
-                <!-- Obligatoire -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Obligatoire">Obligatoire</label>
@@ -83,7 +79,6 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Créer Rubrique</button>
             </div>

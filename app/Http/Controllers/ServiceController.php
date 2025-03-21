@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Entreprise;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -79,7 +80,13 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+
+        try{
         $service->delete();
         return redirect()->route('services.index')->with('deleted', 'Service deleted successfully!');
+    
+            }catch(QueryException){
+                return to_route('services.index')->with('warning',"Impossible de supprimer ce Service car il est lié à autres données.");
+            }
     }
 }

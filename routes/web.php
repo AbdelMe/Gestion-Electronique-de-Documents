@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DossierController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\RubriqueController;
 use App\Http\Controllers\RubriqueDocumentController;

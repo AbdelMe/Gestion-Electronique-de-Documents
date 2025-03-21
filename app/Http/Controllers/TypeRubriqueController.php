@@ -33,7 +33,7 @@ class TypeRubriqueController extends Controller
     public function store(Request $request)
     {
         TypeRubrique::create($request->all());
-        return to_route('type_rubrique.index')->with('Added','Type Document Added successfuly');
+        return to_route('type_rubrique.index')->with('Added','Type Rubrique Added successfuly');
     }
 
     /**
@@ -68,7 +68,7 @@ class TypeRubriqueController extends Controller
     {
         try{
             $typeRubrique->delete();
-            return to_route('type_rubrique.index')->with('deleted','Type Document deleted successfuly');
+            return to_route('type_rubrique.index')->with('deleted','Type Rubrique deleted successfuly');
         }catch(QueryException){
             return to_route('type_rubrique.index')->with('warning',"Impossible de supprimer ce Type car il est lié à autres données.");
         }

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-    Modifier Dossier
-@endsection
+@section('title','Modifier Dossier')
 
 @section('content')
     <div class="container mt-4">
@@ -16,13 +14,13 @@
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="service_id">Service</label>
-                        <select name="service_id" id="service_id" 
-                                class="form-control @error('service_id') is-invalid @enderror">
+                        <select name="service_id" id="service_id"
+                            class="form-control text-white @error('service_id') is-invalid @enderror">
                             <option value="" disabled>Select Service</option>
                             @foreach ($services as $service)
-                                <option value="{{ $service->id }}" 
+                                <option value="{{ $service->id }}"
                                     {{ old('service_id', $dossier->service_id) == $service->id ? 'selected' : '' }}>
-                                    {{ $service->service }}
+                                    {{ $service->Service }}
                                 </option>
                             @endforeach
                         </select>
@@ -34,14 +32,10 @@
 
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="dossier">Nom du Dossier</label>
-                        <input type="text" 
-                               class="form-control @error('dossier') is-invalid @enderror" 
-                               id="dossier" 
-                               name="dossier" 
-                               value="{{ old('dossier', $dossier->dossier) }}"
-                               placeholder="Nom du dossier">
-                        @error('dossier')
+                        <label for="Dossier">Nom du Dossier</label>
+                        <input type="text" class="form-control text-white @error('Dossier') is-invalid @enderror" id="Dossier"
+                            name="Dossier" value="{{ old('Dossier', $dossier->Dossier) }}" placeholder="Nom du Dossier">
+                        @error('Dossier')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -49,15 +43,10 @@
 
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="année">Année</label>
-                        <input type="number" 
-                               class="form-control @error('année') is-invalid @enderror" 
-                               id="année" 
-                               name="année" 
-                               value="{{ old('année', $dossier->année) }}"
-                               min="2000" 
-                               max="2100">
-                        @error('année')
+                        <label for="Annee">Annee</label>
+                        <input type="number" class="form-control text-white @error('Annee') is-invalid @enderror" id="Annee"
+                            name="Annee" value="{{ old('Annee', $dossier->Annee) }}" min="2000" max="2100">
+                        @error('Annee')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

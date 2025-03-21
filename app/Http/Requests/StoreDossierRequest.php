@@ -23,8 +23,8 @@ class StoreDossierRequest extends FormRequest
     {
         return [
             'service_id' => 'required|exists:services,id',
-            'dossier' => 'required|string|max:255',
-            'annee' => 'required|numeric|min:2000|max:2100',
+            'Dossier' => 'required|string|max:255',
+            'Annee' => 'required|numeric|min:2000|max:2100',
         ];
     }
 }

@@ -58,6 +58,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- <p>{{ $services->links() }}</p> --}}
+        <p>{{ $rubs_docs->links() }}</p>
     </div>
 @endsection

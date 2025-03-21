@@ -3,5 +3,10 @@
 @section('title', 'Créer Document')
 
 @section('content')
-    <livewire:display-rubriques />
+    <div class="container ">
+
+        <div class="row">
+            <livewire:display-rubriques />
+        </div>
+    </div>
 @endsection

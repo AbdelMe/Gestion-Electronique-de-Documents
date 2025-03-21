@@ -8,7 +8,6 @@
             @csrf
 
             <div class="row">
-                <!-- Type Rubrique ID -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="rubrique_id">Rubrique</label>
@@ -28,7 +27,6 @@
                     </div>
                 </div>
 
-                <!-- Type Document ID -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="document_id">Document</label>
@@ -49,7 +47,6 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Créer Rubrique Document</button>
             </div>

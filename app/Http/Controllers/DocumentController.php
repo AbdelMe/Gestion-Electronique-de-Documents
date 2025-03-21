@@ -27,8 +27,8 @@ class DocumentController extends Controller
     public function create()
     {
         $typeDocuments = TypeDocument::all();
-        // $dossiers = Dossier::all();
-        return view('documents.create', compact('typeDocuments'));
+        $dossiers = Dossier::all();
+        return view('documents.create', compact('typeDocuments','dossiers'));
     }
 
     /**
@@ -36,7 +36,22 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        Document::create($request->all());
+        // dd(now()->toDateString());
+        dd($request);
+        // Document::create($request->all());
+        // Document::create([
+        //     'type_document_id' =>  ,
+        //     'LibelleDocument' =>  ,
+        //     'DocumentNumerique' =>  ,
+        //     'CheminDocument' =>  ,
+        //     'OCR' =>  ,
+        //     'Date' =>  ,
+        //     'Cote' =>  ,
+        //     'Index' =>  ,
+        //     'dossier_id' =>  ,
+        //     'Supprimer' =>  ,
+        //     'EnCoursSuppression' =>  
+        // ]);
         return redirect()->route('documents.index')->with('Added', 'Document Added successfully!');
     }
 

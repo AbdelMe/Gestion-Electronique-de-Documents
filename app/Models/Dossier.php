@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Dossier extends Model
 {
-    protected $fillable = ['service_id', 'dossier', 'annee'];
+    protected $fillable = ['service_id', 'Dossier', 'Annee'];
 
     public function service(): BelongsTo
     {

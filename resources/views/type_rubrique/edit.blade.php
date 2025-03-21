@@ -8,10 +8,9 @@
 
         <form action="{{ route('type_rubrique.update', $typeRubrique->id) }}" method="POST">
             @csrf
-            @method('PUT') <!-- Use PUT or PATCH for updates -->
+            @method('PUT')
 
             <div class="row">
-                <!-- Type Rubrique Dropdown -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="TypeRubrique">Type Rubrique</label>
@@ -35,7 +34,6 @@
                     </div>
                 </div>
 
-                <!-- TailleRubrique -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="TailleRubrique">Taille Rubrique</label>
@@ -48,7 +46,6 @@
             </div>
 
             <div class="row">
-                <!-- Date -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Date">Date</label>
@@ -99,7 +96,6 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Mettre à jour</button>
             </div>

@@ -45,7 +45,7 @@
                         <td>{{ $rubrique->Obligatoire == 1 ? 'OUI' : 'NON' }}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                {{-- <a href="{{ route('documents.show', $document->id) }}"
+                                {{-- <a href="{{ route('rubrique.show', $document->id) }}"
                                 class="btn btn-info btn-sm px-2 py-1 mx-1">
                                 <i class="bi bi-eye-fill"></i>
                             </a> --}}

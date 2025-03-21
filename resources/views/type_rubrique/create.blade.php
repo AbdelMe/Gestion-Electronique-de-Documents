@@ -9,7 +9,6 @@
         <form action="{{ route('type_rubrique.store') }}" method="POST">
             @csrf
             <div class="row">
-                <!-- Type Rubrique Dropdown -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="TypeRubrique">Type Rubrique</label>
@@ -38,7 +37,6 @@
                     </div>
                 </div>
 
-                <!-- TailleRubrique -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="TailleRubrique">Taille Rubrique</label>
@@ -51,7 +49,6 @@
             </div>
 
             <div class="row">
-                <!-- Date -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Date">Date</label>
@@ -62,7 +59,6 @@
                     </div>
                 </div>
 
-                <!-- Booleane -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Booleane">Booleane</label>
@@ -79,7 +75,6 @@
             </div>
 
             <div class="row">
-                <!-- Largeur -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Largeur">Largeur</label>
@@ -90,7 +85,6 @@
                     </div>
                 </div>
 
-                <!-- Hauteur -->
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Hauteur">Hauteur</label>
@@ -102,7 +96,6 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Ajouter</button>
             </div>
