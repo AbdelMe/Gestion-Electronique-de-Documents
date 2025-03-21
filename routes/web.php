@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('/entreprise', EntrepriseController::class);
-
+Route::resource('/dossiers', DossierController::class);
 Route::resource('/services', ServiceController::class);
 // Route::resource('/documents', DocumentController::class);
 

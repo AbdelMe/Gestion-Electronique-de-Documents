@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Affectation;
-use App\Http\Requests\StoreAffectationRequest;
-use App\Http\Requests\UpdateAffectationRequest;
+use Illuminate\Http\Request;
 
 class AffectationController extends Controller
 {
@@ -13,7 +12,8 @@ class AffectationController extends Controller
      */
     public function index()
     {
-        //
+        $affectations = Affectation::all();
+        return view('affectations.index', compact('affectations'));
     }
 
     /**
@@ -21,15 +21,22 @@ class AffectationController extends Controller
      */
     public function create()
     {
-        //
+        return view('affectations.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAffectationRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        Affectation::create($request->all());
+
+        return redirect()->route('affectations.index')->with('success', 'Affectation created successfully.');
     }
 
     /**
@@ -37,7 +44,7 @@ class AffectationController extends Controller
      */
     public function show(Affectation $affectation)
     {
-        //
+        return view('affectations.show', compact('affectation'));
     }
 
     /**
@@ -45,15 +52,22 @@ class AffectationController extends Controller
      */
     public function edit(Affectation $affectation)
     {
-        //
+        return view('affectations.edit', compact('affectation'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAffectationRequest $request, Affectation $affectation)
+    public function update(Request $request, Affectation $affectation)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $affectation->update($request->all());
+
+        return redirect()->route('affectations.index')->with('success', 'Affectation updated successfully.');
     }
 
     /**
@@ -61,6 +75,7 @@ class AffectationController extends Controller
      */
     public function destroy(Affectation $affectation)
     {
-        //
+        $affectation->delete();
+        return redirect()->route('affectations.index')->with('success', 'Affectation deleted successfully.');
     }
 }

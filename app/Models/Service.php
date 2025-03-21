@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class Service extends Model
 {
@@ -10,5 +13,9 @@ class Service extends Model
     public function Entreprise()
     {
         return $this->belongsTo(Entreprise::class, 'entreprise_id');
+    }
+    public function dossiers()
+    {
+        return $this->hasMany(Dossier::class);
     }
 }
