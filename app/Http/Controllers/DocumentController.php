@@ -9,6 +9,9 @@ use App\Models\Dossier;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 class DocumentController extends Controller
 {
@@ -28,7 +31,7 @@ class DocumentController extends Controller
     {
         $typeDocuments = TypeDocument::all();
         $dossiers = Dossier::all();
-        return view('documents.create', compact('typeDocuments','dossiers'));
+        return view('documents.create', compact('typeDocuments', 'dossiers'));
     }
 
     /**
@@ -36,22 +39,26 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(now()->toDateString());
-        dd($request);
-        // Document::create($request->all());
-        // Document::create([
-        //     'type_document_id' =>  ,
-        //     'LibelleDocument' =>  ,
-        //     'DocumentNumerique' =>  ,
-        //     'CheminDocument' =>  ,
-        //     'OCR' =>  ,
-        //     'Date' =>  ,
-        //     'Cote' =>  ,
-        //     'Index' =>  ,
-        //     'dossier_id' =>  ,
-        //     'Supprimer' =>  ,
-        //     'EnCoursSuppression' =>  
-        // ]);
+        $request->validate([
+            'type_document_id' => 'required|exists:type_documents,id',
+            'dossier_id' => 'required|exists:dossiers,id',
+            'LibelleDocument' => 'required|string|max:255',
+            'OCR' => 'required|string|max:255',
+            'Cote' => 'required|string|max:255',
+            'Index' => 'required|date',
+            'Supprimer' => 'required|boolean',
+            'EnCoursSuppression' => 'required|boolean',
+            'rubriques' => 'required|array',
+        ]);
+    
+        $manager = new ImageManager(new Driver());
+        $image = $manager->create(400, 600)->fill('#ffffff');
+        $yOffset = 50;
+        $fontSize = 20;
+        $maxWidth = 60;
+    
+
+    
         return redirect()->route('documents.index')->with('Added', 'Document Added successfully!');
     }
 
@@ -104,6 +111,6 @@ class DocumentController extends Controller
         $typeDocuments = TypeDocument::all();
         $dossiers = Dossier::all();
 
-        return view('documents.create',compact('selectedType','typeDocuments', 'dossiers'));
+        return view('documents.create', compact('selectedType', 'typeDocuments', 'dossiers'));
     }
 }

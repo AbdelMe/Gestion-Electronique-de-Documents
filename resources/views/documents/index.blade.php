@@ -22,8 +22,8 @@
                 <tr>
                     <th>#</th>
                     <th>LibelleDocument</th>
-                    <th>DocumentNumerique</th>
-                    <th>CheminDocument</th>
+                    {{-- <th>DocumentNumerique</th> --}}
+                    {{-- <th>CheminDocument</th> --}}
                     <th>Date</th>
                     <th>Dossier</th>
                     <th>Type Document</th>
@@ -35,8 +35,8 @@
                     <tr>
                         <td>{{ $document->id }}</td>
                         <td>{{ $document->LibelleDocument }}</td>
-                        <td>{{ $document->DocumentNumerique }}</td>
-                        <td>{{ $document->CheminDocument }}</td>
+                        {{-- <td>{{ $document->DocumentNumerique }}</td> --}}
+                        {{-- <td>{{ $document->CheminDocument }}</td> --}}
                         <td>{{ $document->Date }}</td>
                         <td>{{ $document->Dossier->Dossier }}</td>
                         <td>{{ $document->TypeDocument->TypeDocument }}</td>

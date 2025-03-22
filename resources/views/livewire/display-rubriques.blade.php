@@ -8,12 +8,12 @@
                 <div class="form-group mb-3">
                     <label for="type_document_id">Type Document</label>
                     <select wire:model.live="selected_type"
-                        class="form-control @error('type_document_id') is-invalid @enderror text-white"
-                        id="type_document_id" name="type_document_id" required style="overflow-y: hidden;">
+                            class="form-control @error('type_document_id') is-invalid @enderror text-white"
+                            id="type_document_id" name="type_document_id" required style="overflow-y: hidden;">
                         <option value="">Sélectionnez un type de document</option>
                         @foreach ($typeDocuments as $typeDocument)
                             <option value="{{ $typeDocument->id }}"
-                                {{ old('type_document_id') == $typeDocument->id ? 'selected' : '' }}>
+                                    {{ old('type_document_id') == $typeDocument->id ? 'selected' : '' }}>
                                 {{ $typeDocument->TypeDocument }}
                             </option>
                         @endforeach
@@ -23,27 +23,6 @@
                     @enderror
                 </div>
             </div>
-
-            {{-- @isset($dossiers)
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="dossier_id">Dossier</label>
-                        <select class="form-control @error('dossier_id') is-invalid @enderror text-white" id="dossier_id"
-                            name="dossier_id" required>
-                            <option value="">Sélectionnez un dossier</option>
-                            @foreach ($dossiers as $dossier)
-                                <option value="{{ $dossier->id }}"
-                                    {{ old('dossier_id') == $dossier->id ? 'selected' : '' }}>
-                                    {{ $dossier->Dossier }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('dossier_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            @endisset --}}
         </div>
 
         <div class="row">
@@ -53,15 +32,19 @@
                         <label for="{{ $rub->Rubrique }}">{{ $rub->Rubrique }}</label>
                         @if ($rub->typeRubrique->Hauteur !== null && $rub->typeRubrique->Largeur !== null)
                             <input type="{{ $rub->typeRubrique->TypeRubrique }}"
-                                class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
-                                {{-- id="{{ $rub->Rubrique }}" name="{{ $rub->Rubrique }}" --}}
-                                id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->Rubrique }}]"
-                                style="width: {{ $rub->typeRubrique->Largeur }}px; height: {{ $rub->typeRubrique->Hauteur }}px;">
+                                   class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
+                                   id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]"
+                                   style="width: {{ $rub->typeRubrique->Largeur }}px; height: {{ $rub->typeRubrique->Hauteur }}px;">
                         @else
-                            <input type="{{ $rub->typeRubrique->TypeRubrique }}"
-                                class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
-                                {{-- id="{{ $rub->Rubrique }}" name="{{ $rub->Rubrique }}" --}}
-                                id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->Rubrique }}]">
+                            @if($rub->typeRubrique->TailleRubrique == null)
+                                <textarea class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
+                                          id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]"
+                                          rows="5"></textarea>
+                            @else
+                                <input type="{{ $rub->typeRubrique->TypeRubrique }}"
+                                       class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
+                                       id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]">
+                            @endif
                         @endif
                         @error($rub->Rubrique)
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -73,17 +56,16 @@
 
         <hr class="my-4 border-4 border-white border-dark opacity-75">
 
-
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-3">
                     <label for="dossier_id">Dossier</label>
                     <select class="form-control @error('dossier_id') is-invalid @enderror text-white" id="dossier_id"
-                        name="dossier_id" required>
+                            name="dossier_id" required>
                         <option value="">Sélectionnez un dossier</option>
                         @foreach ($dossiers as $dossier)
                             <option value="{{ $dossier->id }}"
-                                {{ old('dossier_id') == $dossier->id ? 'selected' : '' }}>
+                                    {{ old('dossier_id') == $dossier->id ? 'selected' : '' }}>
                                 {{ $dossier->Dossier }}
                             </option>
                         @endforeach
@@ -98,7 +80,7 @@
                 <div class="form-group mb-3">
                     <label for="LibelleDocument">Libellé Document</label>
                     <input type="text" class="form-control @error('LibelleDocument') is-invalid @enderror text-white"
-                        id="LibelleDocument" name="LibelleDocument" value="{{ old('LibelleDocument') }}" required>
+                           id="LibelleDocument" name="LibelleDocument" value="{{ old('LibelleDocument') }}" required>
                     @error('LibelleDocument')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -111,7 +93,7 @@
                 <div class="form-group mb-3">
                     <label for="OCR">OCR</label>
                     <input type="text" class="form-control @error('OCR') is-invalid @enderror text-white"
-                        id="OCR" name="OCR" value="{{ old('OCR') }}" required>
+                           id="OCR" name="OCR" value="{{ old('OCR') }}" required>
                     @error('OCR')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -122,7 +104,7 @@
                 <div class="form-group mb-3">
                     <label for="Cote">Cote</label>
                     <input type="text" class="form-control @error('Cote') is-invalid @enderror text-white"
-                        id="Cote" name="Cote" value="{{ old('Cote') }}" required>
+                           id="Cote" name="Cote" value="{{ old('Cote') }}" required>
                     @error('Cote')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -135,7 +117,7 @@
                 <div class="form-group mb-3">
                     <label for="Index">Index</label>
                     <input type="date" class="form-control @error('Index') is-invalid @enderror text-white"
-                        id="Index" name="Index" value="{{ old('Index') }}" required>
+                           id="Index" name="Index" value="{{ old('Index') }}" required>
                     @error('Index')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -146,7 +128,7 @@
                 <div class="form-group mb-3">
                     <label for="Supprimer">Supprimer</label>
                     <select class="form-control @error('Supprimer') is-invalid @enderror text-white" id="Supprimer"
-                        name="Supprimer" required>
+                            name="Supprimer" required>
                         <option value="0" {{ old('Supprimer') == 0 ? 'selected' : '' }}>No</option>
                         <option value="1" {{ old('Supprimer') == 1 ? 'selected' : '' }}>Yes</option>
                     </select>
@@ -162,7 +144,7 @@
                 <div class="form-group mb-3">
                     <label for="EnCoursSuppression">En Cours Suppression</label>
                     <select class="form-control @error('EnCoursSuppression') is-invalid @enderror text-white"
-                        id="EnCoursSuppression" name="EnCoursSuppression" required>
+                            id="EnCoursSuppression" name="EnCoursSuppression" required>
                         <option value="0" {{ old('EnCoursSuppression') == 0 ? 'selected' : '' }}>No</option>
                         <option value="1" {{ old('EnCoursSuppression') == 1 ? 'selected' : '' }}>Yes</option>
                     </select>
@@ -176,9 +158,5 @@
         <div class="form-group text-center">
             <button type="submit" class="btn btn-success">Créer Document</button>
         </div>
-
-        {{-- <div class="form-group text-center">
-            <button type="submit" class="btn btn-success">Créer Document</button>
-        </div> --}}
     </form>
 </div>

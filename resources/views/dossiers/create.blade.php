@@ -10,7 +10,7 @@
             <div class="col-md-6">
                 <div class="form-group mb-3">
                     <label for="service_id">Service</label>
-                    <select name="service_id" id="service_id" class="form-control @error('service_id') is-invalid @enderror text-white" required>
+                    <select name="service_id" id="service_id" class="form-control @error('service_id') is-invalid @enderror text-white" >
                         <option value="" disabled selected>Select Service</option>
                         @foreach($services as $service)
                             <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>
@@ -27,7 +27,7 @@
             <div class="col-md-6">
                 <div class="form-group mb-3">
                     <label for="Dossier">Dossier Name</label>
-                    <input type="text" class="form-control @error('Dossier') is-invalid @enderror text-white" id="Dossier" name="Dossier" value="{{ old('Dossier') }}" required>
+                    <input type="text" class="form-control @error('Dossier') is-invalid @enderror text-white" id="Dossier" name="Dossier" value="{{ old('Dossier') }}" >
                     @error('Dossier')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -37,7 +37,7 @@
             <div class="col-md-6">
                 <div class="form-group mb-3">
                     <label for="Annee">Year</label>
-                    <input type="number" class="form-control @error('Annee') is-invalid @enderror text-white" id="Annee" name="Annee" value="{{ old('Annee') }}" min="2000" max="2100" required>
+                    <input type="number" class="form-control @error('Annee') is-invalid @enderror text-white" id="Annee" name="Annee" value="{{ old('Annee') }}" min="2000" max="2100">
                     @error('Annee')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

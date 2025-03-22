@@ -39,7 +39,7 @@ class RubriqueController extends Controller
     {
         // $type = DB::table('type_rubriques')->find($request->type_rubrique_id);
         // $type1 = $type->TypeRubrique;
-        // dd($type->TypeRubrique);
+        // dd($request);
         Rubrique::create([
             'type_rubrique_id' => $request->type_rubrique_id,
             'type_document_id' => $request->type_document_id,

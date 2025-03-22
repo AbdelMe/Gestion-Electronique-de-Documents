@@ -19,6 +19,7 @@
                             <option value="date">Date</option>
                             <option value="datetime-local">Date and Time (Local)</option>
                             <option value="time">Time</option>
+                            <option value="textarea">Long Text</option>
                             <option value="month">Month</option>
                             <option value="week">Week</option>
                             <option value="email">Email</option>
