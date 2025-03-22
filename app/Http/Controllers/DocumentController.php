@@ -50,26 +50,35 @@ class DocumentController extends Controller
             'EnCoursSuppression' => 'required|boolean',
             'rubriques' => 'required|array',
         ]);
-
+    
         $manager = new ImageManager(new Driver());
         $image = $manager->create(400, 600)->fill('#ffffff');
         $yOffset = 50;
         $fontSize = 20;
         $maxWidth = 60;
-
+    
         // Add rubriques to the image
         if ($request->has('rubriques')) {
             foreach ($request->rubriques as $rubrique_id => $value) {
                 // $rubriqueName = DB::table('rubriques')->where('id', $rubrique_id)->value('Rubrique');
                 $text = "$value"; //$rubriqueName: 
-                $wrappedText = wordwrap($text, $maxWidth, "\n", true);
-                explode("\n", $wrappedText);
-
+                    $wrappedText = wordwrap($text, $maxWidth, "\n", true);
+                    $lines = explode("\n", $wrappedText);
+    
+                foreach ($lines as $line) {
+                    $image->text($line, 50, $yOffset, function ($font) use ($fontSize) {
+                        $font->size($fontSize);
+                        $font->color('#000000');
+                        $font->align('left');
+                        $font->valign('top');
+                    });
+                    $yOffset += 20;
+                }
             }
         }
+    
 
-
-
+    
         return redirect()->route('documents.index')->with('Added', 'Document Added successfully!');
     }
 
