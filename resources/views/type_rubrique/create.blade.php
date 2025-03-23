@@ -12,7 +12,7 @@
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="TypeRubrique">Type Rubrique</label>
-                        <select class="form-control text-white @error('TypeRubrique') is-invalid @enderror" id="TypeRubrique" name="TypeRubrique" required style="overflow-y: hidden;">
+                        <select class="form-control text-white @error('TypeRubrique') is-invalid @enderror" id="TypeRubrique" name="TypeRubrique"  style="overflow-y: hidden;">
                             <option value="">Sélectionnez un type</option>
                             <option value="text">Text</option>
                             <option value="number">Number</option>
@@ -63,7 +63,7 @@
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Booleane">Booleane</label>
-                        <select class="form-control @error('Booleane') is-invalid @enderror text-white" id="Booleane" name="Booleane" required>
+                        <select class="form-control @error('Booleane') is-invalid @enderror text-white" id="Booleane" name="Booleane" >
                             <option value="">Sélectionnez une option</option>
                             <option value="1">Oui</option>
                             <option value="0">Non</option>
@@ -98,7 +98,8 @@
             </div>
 
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-success">Ajouter</button>
+                <button type="submit" class="btn btn-success">Créer Type Rubrique</button>
+                <a href="{{ route('type_rubrique.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

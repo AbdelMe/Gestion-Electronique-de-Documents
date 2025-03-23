@@ -38,7 +38,8 @@
             </div>
 
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-success">Ajouter</button>
+                <button type="submit" class="btn btn-success">Créer Service</button>
+                <a href="{{ route('services.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

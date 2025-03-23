@@ -33,8 +33,8 @@
             </div>
 
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                <a href="{{ route('type_documents.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-success">Mettre à jour</button>
+                <a href="{{ route('type_documents.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

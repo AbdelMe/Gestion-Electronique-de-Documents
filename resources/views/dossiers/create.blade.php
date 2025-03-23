@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2 class="mb-4">Create New Dossier</h2>
+    <h2 class="mb-4">Ajouter New Dossier</h2>
     <form action="{{ route('dossiers.store') }}" method="POST">
         @csrf
         <div class="row">
@@ -46,7 +46,8 @@
         </div> 
 
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-success">Create Dossier</button>
+            <button type="submit" class="btn btn-success">Créer Dossier</button>
+            <a href="{{ route('dossiers.index') }}" class="btn btn-primary">Annuler</a>
         </div>
     </form>
 </div>

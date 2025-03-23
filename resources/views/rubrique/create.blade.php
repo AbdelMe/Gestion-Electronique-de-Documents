@@ -81,6 +81,7 @@
 
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Créer Rubrique</button>
+                <a href="{{ route('rubrique.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

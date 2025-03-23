@@ -22,10 +22,9 @@ class StoreRubriqueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type_rubrique_id' => 'required|numeric',
-            'type_document_id' => 'required|numeric',
+            'type_rubrique_id' => 'required|numeric|exists:type_rubriques,id',
+            'type_document_id' => 'required|numeric|exists:type_documents,id',
             'Rubrique' => 'required|string|max:255',
-            'Valeur' => 'required',
         ];
     }
 }

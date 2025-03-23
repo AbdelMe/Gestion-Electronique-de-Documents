@@ -15,7 +15,7 @@
                     <div class="form-group mb-3">
                         <label for="rubrique_id">Rubrique</label>
                         <select class="form-control text-white @error('rubrique_id') is-invalid @enderror"
-                            id="rubrique_id" name="rubrique_id" required style="overflow-y: hidden;">
+                            id="rubrique_id" name="rubrique_id"  style="overflow-y: hidden;">
                             <option value="">Sélectionnez un rubrique</option>
                             @foreach ($rubriques as $rubrique)
                                 <option value="{{ $rubrique->id }}"
@@ -34,7 +34,7 @@
                     <div class="form-group mb-3">
                         <label for="document_id">Document</label>
                         <select class="form-control text-white @error('document_id') is-invalid @enderror"
-                            id="document_id" name="document_id" required style="overflow-y: hidden;">
+                            id="document_id" name="document_id"  style="overflow-y: hidden;">
                             <option value="">Sélectionnez un document</option>
                             @foreach ($documents as $document)
                                 <option value="{{ $document->id }}"
@@ -51,8 +51,8 @@
             </div>
 
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                <a href="{{ route('rubrique_document.index') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-success">Mettre à jour</button>
+                <a href="{{ route('rubrique_document.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

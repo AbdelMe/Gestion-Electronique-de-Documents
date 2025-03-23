@@ -2,7 +2,7 @@
 @section('title', 'Rubrique Document')
 @section('content')
     <div class="container mt-4">
-        <h2 class="mb-4">Créer Rubrique Document</h2>
+        <h2 class="mb-4">Ajouter Rubrique Document</h2>
 
         <form action={{ route('rubrique_document.store') }} method="POST">
             @csrf
@@ -12,7 +12,7 @@
                     <div class="form-group mb-3">
                         <label for="rubrique_id">Rubrique</label>
                         <select class="form-control text-white @error('rubrique_id') is-invalid @enderror"
-                            id="rubrique_id" name="rubrique_id" required style="overflow-y: hidden;">
+                            id="rubrique_id" name="rubrique_id"  style="overflow-y: hidden;">
                             <option value="">Sélectionnez un rubrique</option>
                             @foreach ($rubriques as $rubrique)
                                 <option value="{{ $rubrique->id }}"
@@ -31,7 +31,7 @@
                     <div class="form-group mb-3">
                         <label for="document_id">Document</label>
                         <select class="form-control text-white @error('document_id') is-invalid @enderror"
-                            id="document_id" name="document_id" required style="overflow-y: hidden;">
+                            id="document_id" name="document_id"  style="overflow-y: hidden;">
                             <option value="">Sélectionnez un document</option>
                             @foreach ($documents as $document)
                                 <option value="{{ $document->id }}"
@@ -49,6 +49,7 @@
 
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Créer Rubrique Document</button>
+                <a href="{{ route('rubrique_document.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

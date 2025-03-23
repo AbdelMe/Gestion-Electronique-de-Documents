@@ -36,8 +36,9 @@ class RubriqueDocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRubriqueDocumentRequest $request)
     {
+        $request->validated();
         $rub = DB::table('rubriques')->find($request->rubrique_id);
         // $doc = DB::table('documents')->find($request->document_id);
         // dd($doc);
@@ -70,8 +71,9 @@ class RubriqueDocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RubriqueDocument $rubriqueDocument)
+    public function update(UpdateRubriqueDocumentRequest $request, RubriqueDocument $rubriqueDocument)
     {
+        $request->validated();
         $rubrique = DB::table('rubriques')->find($request->rubrique_id);
 
         $rubriqueDocument->update([

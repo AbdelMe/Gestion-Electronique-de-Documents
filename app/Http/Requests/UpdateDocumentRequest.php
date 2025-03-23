@@ -11,7 +11,7 @@ class UpdateDocumentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class UpdateDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'type_document_id' => 'required|exists:type_documents,id',
+            'dossier_id' => 'required|exists:dossiers,id',
+            'LibelleDocument' => 'required|string|max:255',
+            'CheminDocument' => 'required|string|max:255',
+            'OCR' => 'required|string|max:255',
+            'Cote' => 'required|string|max:255',
+            'Index' => 'required|date',
+            'Supprimer' => 'required|boolean',
+            'EnCoursSuppression' => 'required|boolean',
+            'rubriques' => 'required|array',
         ];
     }
 }

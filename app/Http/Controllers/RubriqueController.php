@@ -35,11 +35,12 @@ class RubriqueController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRubriqueRequest $request)
     {
         // $type = DB::table('type_rubriques')->find($request->type_rubrique_id);
         // $type1 = $type->TypeRubrique;
         // dd($request);
+        $request->validated();
         Rubrique::create([
             'type_rubrique_id' => $request->type_rubrique_id,
             'type_document_id' => $request->type_document_id,
@@ -72,8 +73,9 @@ class RubriqueController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rubrique $rubrique)
+    public function update(UpdateRubriqueRequest $request, Rubrique $rubrique)
     {
+        $request->validated();
         $rubrique->update($request->all());
         return to_route('rubrique.index')->with('updated','Rubrique updated successfully!');
     }

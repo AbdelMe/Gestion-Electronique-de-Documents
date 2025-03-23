@@ -152,7 +152,8 @@
             </div>
 
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-success">Ajouter</button>
+                <button type="submit" class="btn btn-success">Créer Entreprise</button>
+                <a href="{{ route('entreprise.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

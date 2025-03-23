@@ -30,8 +30,9 @@ class TypeRubriqueController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTypeRubriqueRequest $request)
     {
+        $request->validated();
         TypeRubrique::create($request->all());
         return to_route('type_rubrique.index')->with('Added','Type Rubrique Added successfuly');
     }
@@ -55,8 +56,9 @@ class TypeRubriqueController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TypeRubrique $typeRubrique)
+    public function update(UpdateTypeRubriqueRequest $request, TypeRubrique $typeRubrique)
     {
+        $request->validated();
         $typeRubrique->update($request->all());
         return to_route('type_rubrique.index')->with('updated','Type Rubrique updated successfuly');
     }

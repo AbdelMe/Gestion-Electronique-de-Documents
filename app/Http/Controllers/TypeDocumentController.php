@@ -30,8 +30,9 @@ class TypeDocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTypeDocumentRequest $request)
     {
+        $request->validated();
         TypeDocument::create($request->all());
         return redirect()->route('type_documents.index')->with('Added', 'Type added successfully!');
     }
@@ -55,8 +56,9 @@ class TypeDocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TypeDocument $typeDocument)
+    public function update(UpdateTypeDocumentRequest $request, TypeDocument $typeDocument)
     {
+        $request->validated();
         $typeDocument->update($request->all());
         return to_route('type_documents.index')->with('updated','Type Document updated successfuly');
     }

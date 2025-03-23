@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Dossier;
+use App\Models\RubriqueDocument;
 use App\Models\TypeDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,32 +53,68 @@ class DocumentController extends Controller
         ]);
     
         $manager = new ImageManager(new Driver());
-        $image = $manager->create(400, 600)->fill('#ffffff');
-        $yOffset = 50;
-        $fontSize = 20;
-        $maxWidth = 60;
+        $image = $manager->create(893, 1188)->fill('#ffffff');
+        $yPos = 50;
+        $fontSize = 18;
+        $maxWidth = 95;
     
-        // Add rubriques to the image
+        $tempImage = $manager->create(1, 1);
+        $libelleTextWidth = $tempImage->text($request->LibelleDocument, 0, 0, function ($font) {
+            $font->file(public_path('fonts/Roboto-Regular.ttf'));
+            $font->size(25);
+            $font->color('#000000');
+            $font->align('left');
+            $font->valign('top');
+        })->width();
+    
+        $imageWidth = 893;
+        $xPosition = ($imageWidth - $libelleTextWidth) / 2;
+    
+        $image->text($request->LibelleDocument, $xPosition, $yPos, function ($font) {
+            $font->file(public_path('fonts/Roboto-Regular.ttf'));
+            $font->size(25);
+            $font->color('#000000');
+            $font->align('center');
+            $font->valign('top');
+        });
+        $yPos += 50;
+    
         if ($request->has('rubriques')) {
             foreach ($request->rubriques as $rubrique_id => $value) {
                 // $rubriqueName = DB::table('rubriques')->where('id', $rubrique_id)->value('Rubrique');
-                $text = "$value"; //$rubriqueName: 
-                    $wrappedText = wordwrap($text, $maxWidth, "\n", true);
-                    $lines = explode("\n", $wrappedText);
-    
+                $text = "$value"; // $rubriqueName
+                $wrappedText = wordwrap($text, $maxWidth, "\n", true);
+                $lines = explode("\n", $wrappedText);
                 foreach ($lines as $line) {
-                    $image->text($line, 50, $yOffset, function ($font) use ($fontSize) {
+                    $image->text($line, 50, $yPos, function ($font) use ($fontSize) {
+                        $font->file(public_path('fonts/Roboto-Regular.ttf'));
                         $font->size($fontSize);
                         $font->color('#000000');
                         $font->align('left');
                         $font->valign('top');
                     });
-                    $yOffset += 20;
+                    $yPos += 30;
                 }
             }
         }
     
-
+        $path = 'document_images/' . uniqid() . '.png';
+        $ImageToPng = $image->toPng();
+        Storage::disk('public')->put($path, $ImageToPng);
+    
+        Document::create([
+            'type_document_id' => $request->type_document_id,
+            'dossier_id' => $request->dossier_id,
+            'LibelleDocument' => $request->LibelleDocument,
+            'DocumentNumerique' => $path,
+            'CheminDocument' => $path,
+            'OCR' => $request->OCR,
+            'Date' => now(),
+            'Cote' => $request->Cote,
+            'Index' => $request->Index,
+            'Supprimer' => $request->Supprimer,
+            'EnCoursSuppression' => $request->EnCoursSuppression,
+        ]);
     
         return redirect()->route('documents.index')->with('Added', 'Document Added successfully!');
     }
@@ -103,8 +140,9 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Document $document)
+    public function update(UpdateDocumentRequest $request, Document $document)
     {
+        $request->validated();
         $document->update($request->all());
         return redirect()->route('documents.index')->with('updated', 'Document updated successfully!');
     }
@@ -114,6 +152,10 @@ class DocumentController extends Controller
      */
     public function destroy(Document $document)
     {
+
+        if ($document->DocumentNumerique && Storage::disk('public')->exists($document->DocumentNumerique)) {
+            Storage::disk('public')->delete($document->DocumentNumerique);
+        }
         $document->delete();
         return redirect()->route('documents.index')->with('deleted', 'Document deleted successfully!');
     }
