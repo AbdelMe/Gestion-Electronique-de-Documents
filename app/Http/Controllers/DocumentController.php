@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Dossier;
 use App\Models\RubriqueDocument;
 use App\Models\TypeDocument;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -51,13 +52,13 @@ class DocumentController extends Controller
             'EnCoursSuppression' => 'required|boolean',
             'rubriques' => 'required|array',
         ]);
-    
+
         $manager = new ImageManager(new Driver());
         $image = $manager->create(893, 1188)->fill('#ffffff');
         $yPos = 50;
         $fontSize = 18;
         $maxWidth = 95;
-    
+
         $tempImage = $manager->create(1, 1);
         $libelleTextWidth = $tempImage->text($request->LibelleDocument, 0, 0, function ($font) {
             $font->file(public_path('fonts/Roboto-Regular.ttf'));
@@ -66,10 +67,10 @@ class DocumentController extends Controller
             $font->align('left');
             $font->valign('top');
         })->width();
-    
+
         $imageWidth = 893;
         $xPosition = ($imageWidth - $libelleTextWidth) / 2;
-    
+
         $image->text($request->LibelleDocument, $xPosition, $yPos, function ($font) {
             $font->file(public_path('fonts/Roboto-Regular.ttf'));
             $font->size(25);
@@ -78,7 +79,7 @@ class DocumentController extends Controller
             $font->valign('top');
         });
         $yPos += 50;
-    
+
         if ($request->has('rubriques')) {
             foreach ($request->rubriques as $rubrique_id => $value) {
                 // $rubriqueName = DB::table('rubriques')->where('id', $rubrique_id)->value('Rubrique');
@@ -97,11 +98,11 @@ class DocumentController extends Controller
                 }
             }
         }
-    
+
         $path = 'document_images/' . uniqid() . '.png';
         $ImageToPng = $image->toPng();
         Storage::disk('public')->put($path, $ImageToPng);
-    
+
         Document::create([
             'type_document_id' => $request->type_document_id,
             'dossier_id' => $request->dossier_id,
@@ -115,7 +116,7 @@ class DocumentController extends Controller
             'Supprimer' => $request->Supprimer,
             'EnCoursSuppression' => $request->EnCoursSuppression,
         ]);
-    
+
         return redirect()->route('documents.index')->with('Added', 'Document Added successfully!');
     }
 
@@ -142,6 +143,7 @@ class DocumentController extends Controller
      */
     public function update(UpdateDocumentRequest $request, Document $document)
     {
+        // dd($request);
         $request->validated();
         $document->update($request->all());
         return redirect()->route('documents.index')->with('updated', 'Document updated successfully!');
@@ -153,11 +155,15 @@ class DocumentController extends Controller
     public function destroy(Document $document)
     {
 
-        if ($document->DocumentNumerique && Storage::disk('public')->exists($document->DocumentNumerique)) {
-            Storage::disk('public')->delete($document->DocumentNumerique);
+        try {
+            if ($document->DocumentNumerique && Storage::disk('public')->exists($document->DocumentNumerique)) {
+                Storage::disk('public')->delete($document->DocumentNumerique);
+            }
+            $document->delete();
+            return redirect()->route('documents.index')->with('deleted', 'Document deleted successfully!');
+        } catch (QueryException) {
+            return to_route('documents.index')->with('warning', "Impossible de supprimer ce Document car il est lié à autres données.");
         }
-        $document->delete();
-        return redirect()->route('documents.index')->with('deleted', 'Document deleted successfully!');
     }
 
 

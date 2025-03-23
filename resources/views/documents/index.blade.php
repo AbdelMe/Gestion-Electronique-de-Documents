@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Documents')
+@section('title', 'Documents')
 
 @section('alert')
     @if (session('updated'))
@@ -11,11 +11,14 @@
     @if (session('Added'))
         <x-toast-success-alert message="{{ session('Added') }}" />
     @endif
+    @if (session('warning'))
+        <x-toast-warning-alert message="{{ session('warning') }}" />
+    @endif
 @endsection
 @section('content')
     <div class="container mt-1">
         <h2 class="mb-4 text-white">Liste des Documents</h2>
-        <a href={{ route('documents.create')}} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
+        <a href={{ route('documents.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
             Document</a>
         <table class="table table-bordered table-striped text-white">
             <thead class="thead-dark">
@@ -50,7 +53,8 @@
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('documents.destroy', $document->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Document ?');">
+                                <form action="{{ route('documents.destroy', $document->id) }}" method="POST"
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Document ?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm px-2 py-1 mx-1">

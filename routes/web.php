@@ -8,13 +8,21 @@ use App\Http\Controllers\RubriqueDocumentController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeDocumentController;
 use App\Http\Controllers\TypeRubriqueController;
+use App\Models\Document;
+use App\Models\Dossier;
+use App\Models\Entreprise;
 use App\Models\Rubrique;
+use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::resource('/entreprise', EntrepriseController::class);
+Route::get('/dashboard', function () {
+    $entreprises = Entreprise::all();
+    $services = Service::all();
+    $dossiers = Dossier::all();
+    $documents = Document::all();
+    return view('dashboard',compact('entreprises','services','dossiers','documents'));
+})->name('dashboard');
+Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
 Route::resource('/dossiers', DossierController::class);
 Route::resource('/services', ServiceController::class);
 // Route::resource('/documents', DocumentController::class);

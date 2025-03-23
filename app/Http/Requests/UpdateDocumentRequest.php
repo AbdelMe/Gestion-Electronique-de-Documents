@@ -29,9 +29,9 @@ class UpdateDocumentRequest extends FormRequest
             'OCR' => 'required|string|max:255',
             'Cote' => 'required|string|max:255',
             'Index' => 'required|date',
-            'Supprimer' => 'required|boolean',
-            'EnCoursSuppression' => 'required|boolean',
-            'rubriques' => 'required|array',
+            'Supprimer' => 'required|integer',
+            'EnCoursSuppression' => 'required|integer',
+            // 'rubriques' => 'required|array',
         ];
     }
 }
