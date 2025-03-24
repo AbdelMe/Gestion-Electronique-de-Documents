@@ -20,8 +20,29 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+    $entreprises = Entreprise::all();
+    $services = Service::all();
+    $dossiers = Dossier::all();
+    $documents = Document::all();
 
-    return view('dashboard');
+    $recentDocuments = Document::orderBy('created_at', 'desc')->take(5)->get();
+    $recentActivities = [];
+    
+    foreach ($recentDocuments as $document) {
+        $recentActivities[] = [
+            'id' => $document->id,
+            'type' => 'document',
+            'name' => $document->LibelleDocument,
+            'file_path' => $document->CheminDocument,
+            'created_at' => $document->created_at,
+            'is_new' => $document->created_at->isToday(),
+        ];
+    }
+    
+    usort($recentActivities, function ($a, $b) {
+        return $b['created_at'] <=> $a['created_at'];
+    });
+    return view('dashboard', compact('entreprises', 'services', 'dossiers', 'documents', 'recentActivities'));
 })->name('dashboard');
 Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
 Route::resource('/dossiers', DossierController::class);
