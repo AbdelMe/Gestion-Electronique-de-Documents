@@ -50,7 +50,7 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Number Of Entreprises</h6>
+                    <h6 class="text-muted font-weight-normal">Nombre d'entreprises</h6>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Number Of Services</h6>
+                    <h6 class="text-muted font-weight-normal">Nombre de services</h6>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Number Of Dossiers</h6>
+                    <h6 class="text-muted font-weight-normal">Nombre de dossiers</h6>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Number Of Documents</h6>
+                    <h6 class="text-muted font-weight-normal">Nombre de documents</h6>
                 </div>
             </div>
         </div>
