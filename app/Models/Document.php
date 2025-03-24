@@ -16,3 +16,4 @@ class Document extends Model
         return $this->belongsTo(Dossier::class);
     }
 }
+
