@@ -38,7 +38,7 @@
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($entreprises) }}</h3>
                                 <p class="ml-2 mb-0 font-weight-medium text-{{ $entreprisesChange > 0 ? 'success' : ($entreprisesChange < 0 ? 'danger' : 'muted') }}">
-                                    {{ $entreprisesChange > 0 ? "+$entreprisesChange Nouveau" : ($entreprisesChange < 0 ? "$entreprisesChange Supprimé" : "Stable") }}
+                                    {{ $entreprisesChange > 0 ? "+$entreprisesChange Nouveau" : ($entreprisesChange < 0 ? "$entreprisesChange Supprimé" : "Ecurie") }}
                                 </p>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($services) }}</h3>
                                 <p class="ml-2 mb-0 font-weight-medium text-{{ $servicesChange > 0 ? 'success' : ($servicesChange < 0 ? 'danger' : 'muted') }}">
-                                    {{ $servicesChange > 0 ? "+$servicesChange Nouveau" : ($servicesChange < 0 ? "$servicesChange Supprimé" : "Stable") }}
+                                    {{ $servicesChange > 0 ? "+$servicesChange Nouveau" : ($servicesChange < 0 ? "$servicesChange Supprimé" : "Ecurie") }}
                                 </p>
                             </div>
                         </div>
@@ -87,8 +87,8 @@
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($dossiers) }}</h3>
-                                <p class="ml-2 mb-0 font-weight-medium text-{{ $dossiersChange > 0 ? 'success' : ($dossiersChange < 0 ? 'danger' : 'muted') }}">
-                                    {{ $dossiersChange > 0 ? "+$dossiersChange Nouveau" : ($dossiersChange < 0 ? "$dossiersChange Supprimé" : "Stable") }}
+                                <p class="ml-2 mb-0 font-weight-medium text-{{ $dossiersChange > 0 ? 'success' : ($dossiersChange < 0 ? 'danger' : 'primary') }}">
+                                    {{ $dossiersChange > 0 ? "+$dossiersChange Nouveau" : ($dossiersChange < 0 ? "$dossiersChange Supprimé" : "Ecurie") }}
                                 </p>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($documents) }}</h3>
                                 <p class="ml-2 mb-0 font-weight-medium text-{{ $documentsChange > 0 ? 'success' : ($documentsChange < 0 ? 'danger' : 'muted') }}">
-                                    {{ $documentsChange > 0 ? "+$documentsChange Nouveau" : ($documentsChange < 0 ? "$documentsChange Supprimé" : "Stable") }}
+                                    {{ $documentsChange > 0 ? "+$documentsChange Nouveau" : ($documentsChange < 0 ? "$documentsChange Supprimé" : "Ecurie") }}
                                 </p>
                             </div>
                         </div>

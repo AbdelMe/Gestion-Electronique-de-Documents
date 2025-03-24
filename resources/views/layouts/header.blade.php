@@ -5,14 +5,13 @@
     <ul class="navbar-nav w-100">
         <li class="nav-item w-100">
             <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                <input type="text" class="form-control" placeholder="Search document">
             </form>
         </li>
     </ul>
     <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item dropdown d-none d-lg-block">
             <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown"
-                aria-expanded="false" href="#">+ Create New</a>
+                aria-expanded="false" href="#">+ Créer Nouveau</a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                 aria-labelledby="createbuttonDropdown">
                 <h6 class="p-3 mb-0">Projects</h6>
