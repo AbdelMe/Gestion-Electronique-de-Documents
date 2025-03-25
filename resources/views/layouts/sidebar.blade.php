@@ -11,11 +11,11 @@
                 <div class="profile-desc">
                     <div class="profile-pic">
                         <div class="count-indicator">
-                            <img class="img-xs rounded-circle " src="assets/images/faces/face15.jpg" alt="">
+                            <img class="img-xs rounded-circle " src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt="">
                             <span class="count bg-success"></span>
                         </div>
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">MOHAMMED</h5>
+                            <h5 class="mb-0 font-weight-normal">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
                             <span>Gold Member</span>
                         </div>
                     </div>

@@ -70,8 +70,8 @@
             </a>
         </li>
         <li class="nav-item dropdown border-left">
-            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
-                data-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown"
+                aria-expanded="false">
                 <i class="mdi mdi-email"></i>
                 <span class="count bg-success"></span>
             </a>
@@ -165,11 +165,13 @@
         <li class="nav-item dropdown">
             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                 <div class="navbar-profile">
-                    <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">MOHAMMED</p>
+                    <img class="img-xs rounded-circle" src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
+                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                    </p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>
-            </a>
+            </a>            
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
                 aria-labelledby="profileDropdown">
                 <h6 class="p-3 mb-0">Profile</h6>
@@ -185,16 +187,20 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
+                <a class="dropdown-item preview-item" href="javascript:void(0)">
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                             <i class="mdi mdi-logout text-danger"></i>
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <p class="preview-subject mb-1">Log out</p>
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-link p-0 m-0 text-danger" style="cursor: pointer;">Logout</button>
+                        </form>
                     </div>
                 </a>
+                
                 <div class="dropdown-divider"></div>
                 <a href="">
                     <p class="p-3 mb-0 text-center">Advanced settings</p>
