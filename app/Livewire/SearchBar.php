@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Document;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class SearchBar extends Component
@@ -12,7 +11,14 @@ class SearchBar extends Component
 
     public function render()
     {
-        $docs = DB::table('documents')->where('LibelleDocument',$this->search_doc)->get();
-        return view('livewire.search-bar',compact('docs'));
+        $docs = [];
+        
+        if(strlen($this->search_doc) >= 3) {
+            $docs = Document::with(['dossier'])
+                ->where('LibelleDocument', 'LIKE', '%'.$this->search_doc.'%')
+                ->get();
+        }
+
+        return view('livewire.search-bar', compact('docs'));
     }
 }
