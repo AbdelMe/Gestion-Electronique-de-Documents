@@ -12,10 +12,11 @@ return new class extends Migration {
     {
         Schema::create('dossiers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained();
-            $table->string('dossier');
-            $table->year('annee'); // Changed to snake_case without accent
+            $table->unsignedBigInteger('service_id');
+            $table->string('Dossier');
+            $table->integer('Annee');
             $table->timestamps();
+            $table->foreign('service_id')->references('id')->on('services');
         });
     }
 

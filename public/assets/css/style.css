@@ -21132,4 +21132,10 @@ div.tagsinput {
   -webkit-flex-grow: 1;
   flex-grow: 1; }
 
-/*# sourceMappingURL=maps/style.css.map */
+#TypeRubrique , #type_document_id , #type_rubrique_id ,#document_id, #rubrique_id {
+  overflow-y: hidden;
+}
+#TypeRubrique::-webkit-scrollbar ,#type_document_id::-webkit-scrollbar, #type_rubrique_id::-webkit-scrollbar
+#document_id::-webkit-scrollbar, #rubrique_id::-webkit-scrollbar{
+  display: none;
+}

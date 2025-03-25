@@ -11,7 +11,7 @@ class StoreTypeDocumentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreTypeDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'TypeDocument' => 'required|string|max:255',
+            'DureeVie' => 'required|numeric|max:100',
         ];
     }
 }

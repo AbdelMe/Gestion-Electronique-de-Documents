@@ -11,7 +11,7 @@ class UpdateRubriqueRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateRubriqueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'type_rubrique_id' => 'required|numeric|exists:type_rubriques,id',
+            'type_document_id' => 'required|numeric|exists:type_documents,id',
+            'Rubrique' => 'required|string|max:255',
         ];
     }
 }

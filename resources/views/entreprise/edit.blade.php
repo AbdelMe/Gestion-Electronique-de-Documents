@@ -156,6 +156,7 @@
 
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Mettre à jour</button>
+                <a href="{{ route('entreprise.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-    Modifier Service
-@endsection
+@section('title','Modifier Service')
 
 @section('content')
     <div class="container mt-4">
@@ -43,6 +41,7 @@
 
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Mettre à jour</button>
+                <a href="{{ route('services.index') }}" class="btn btn-primary">Annuler</a>
             </div>
         </form>
     </div>

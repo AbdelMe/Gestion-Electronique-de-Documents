@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Rubrique;
 use App\Http\Requests\StoreRubriqueRequest;
 use App\Http\Requests\UpdateRubriqueRequest;
+use App\Models\TypeDocument;
+use App\Models\TypeRubrique;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RubriqueController extends Controller
 {
@@ -13,7 +18,8 @@ class RubriqueController extends Controller
      */
     public function index()
     {
-        //
+        $rubriques = Rubrique::paginate(5);
+        return view('rubrique.index',compact('rubriques'));
     }
 
     /**
@@ -21,7 +27,9 @@ class RubriqueController extends Controller
      */
     public function create()
     {
-        //
+        $type_documents = TypeDocument::all();
+        $type_rubrique = TypeRubrique::all();
+        return view('rubrique.create',compact('type_documents','type_rubrique'));
     }
 
     /**
@@ -29,7 +37,19 @@ class RubriqueController extends Controller
      */
     public function store(StoreRubriqueRequest $request)
     {
-        //
+        // $type = DB::table('type_rubriques')->find($request->type_rubrique_id);
+        // $type1 = $type->TypeRubrique;
+        // dd($request);
+        $request->validated();
+        Rubrique::create([
+            'type_rubrique_id' => $request->type_rubrique_id,
+            'type_document_id' => $request->type_document_id,
+            'Rubrique' => $request->Rubrique,
+            // 'Valeur' => $type1,
+            'Valeur' => "",
+            'Obligatoire' => $request->Obligatoire,
+        ]);
+        return to_route('rubrique.index')->with('Added','Rubrique Added successfully!');
     }
 
     /**
@@ -45,7 +65,9 @@ class RubriqueController extends Controller
      */
     public function edit(Rubrique $rubrique)
     {
-        //
+        $type_documents = TypeDocument::all();
+        $type_rubrique = TypeRubrique::all();
+        return view('rubrique.edit',compact('rubrique','type_documents','type_rubrique'));
     }
 
     /**
@@ -53,7 +75,9 @@ class RubriqueController extends Controller
      */
     public function update(UpdateRubriqueRequest $request, Rubrique $rubrique)
     {
-        //
+        $request->validated();
+        $rubrique->update($request->all());
+        return to_route('rubrique.index')->with('updated','Rubrique updated successfully!');
     }
 
     /**
@@ -61,6 +85,11 @@ class RubriqueController extends Controller
      */
     public function destroy(Rubrique $rubrique)
     {
-        //
+        try{
+            $rubrique->delete();
+            return to_route('rubrique.index')->with('deleted','Rubrique deleted successfully!');
+        }catch(QueryException){
+            return to_route('rubrique.index')->with('warning','Impossible de supprimer ce Rubrique car il est lié à autres données.');
+        }
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\TypeRubrique;
 use App\Http\Requests\StoreTypeRubriqueRequest;
 use App\Http\Requests\UpdateTypeRubriqueRequest;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class TypeRubriqueController extends Controller
 {
@@ -13,7 +15,8 @@ class TypeRubriqueController extends Controller
      */
     public function index()
     {
-        //
+        $type_rubrique = TypeRubrique::paginate(5);
+        return view('type_rubrique.index',compact('type_rubrique'));
     }
 
     /**
@@ -21,7 +24,7 @@ class TypeRubriqueController extends Controller
      */
     public function create()
     {
-        //
+        return view('type_rubrique.create');
     }
 
     /**
@@ -29,7 +32,9 @@ class TypeRubriqueController extends Controller
      */
     public function store(StoreTypeRubriqueRequest $request)
     {
-        //
+        $request->validated();
+        TypeRubrique::create($request->all());
+        return to_route('type_rubrique.index')->with('Added','Type Rubrique Added successfuly');
     }
 
     /**
@@ -45,7 +50,7 @@ class TypeRubriqueController extends Controller
      */
     public function edit(TypeRubrique $typeRubrique)
     {
-        //
+        return view('type_rubrique.edit',compact('typeRubrique'));
     }
 
     /**
@@ -53,7 +58,9 @@ class TypeRubriqueController extends Controller
      */
     public function update(UpdateTypeRubriqueRequest $request, TypeRubrique $typeRubrique)
     {
-        //
+        $request->validated();
+        $typeRubrique->update($request->all());
+        return to_route('type_rubrique.index')->with('updated','Type Rubrique updated successfuly');
     }
 
     /**
@@ -61,6 +68,11 @@ class TypeRubriqueController extends Controller
      */
     public function destroy(TypeRubrique $typeRubrique)
     {
-        //
+        try{
+            $typeRubrique->delete();
+            return to_route('type_rubrique.index')->with('deleted','Type Rubrique deleted successfuly');
+        }catch(QueryException){
+            return to_route('type_rubrique.index')->with('warning',"Impossible de supprimer ce Type car il est lié à autres données.");
+        }
     }
 }

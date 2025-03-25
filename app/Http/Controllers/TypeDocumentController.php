@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\TypeDocument;
 use App\Http\Requests\StoreTypeDocumentRequest;
 use App\Http\Requests\UpdateTypeDocumentRequest;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class TypeDocumentController extends Controller
 {
@@ -13,7 +15,8 @@ class TypeDocumentController extends Controller
      */
     public function index()
     {
-        //
+        $type_documents = TypeDocument::paginate(5);
+        return view('type_documents.index',compact('type_documents'));
     }
 
     /**
@@ -21,7 +24,7 @@ class TypeDocumentController extends Controller
      */
     public function create()
     {
-        //
+        return view('type_documents.create');
     }
 
     /**
@@ -29,7 +32,9 @@ class TypeDocumentController extends Controller
      */
     public function store(StoreTypeDocumentRequest $request)
     {
-        //
+        $request->validated();
+        TypeDocument::create($request->all());
+        return redirect()->route('type_documents.index')->with('Added', 'Type added successfully!');
     }
 
     /**
@@ -45,7 +50,7 @@ class TypeDocumentController extends Controller
      */
     public function edit(TypeDocument $typeDocument)
     {
-        //
+        return view('type_documents.edit',compact('typeDocument'));
     }
 
     /**
@@ -53,7 +58,9 @@ class TypeDocumentController extends Controller
      */
     public function update(UpdateTypeDocumentRequest $request, TypeDocument $typeDocument)
     {
-        //
+        $request->validated();
+        $typeDocument->update($request->all());
+        return to_route('type_documents.index')->with('updated','Type Document updated successfuly');
     }
 
     /**
@@ -61,6 +68,11 @@ class TypeDocumentController extends Controller
      */
     public function destroy(TypeDocument $typeDocument)
     {
-        //
+        try{
+            $typeDocument->delete();
+            return to_route('type_documents.index')->with('deleted','Type Document deleted successfuly');
+        }catch(QueryException){
+                return to_route('type_documents.index')->with('warning',"Impossible de supprimer ce Type car il est lié à autres données.");
+        }
     }
 }

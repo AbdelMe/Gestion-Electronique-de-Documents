@@ -25,14 +25,4 @@ class Entreprise extends Model
 
     protected $guarded = ['id'];
 
-    public function affiliations(): HasMany
-    {
-        return $this->hasMany(Affiliation::class);
-    }
-
-    public function services(): HasMany
-    {
-        return $this->hasMany(Service::class);
-    }
-
 }

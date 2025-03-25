@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDossierRequest;
 use App\Http\Requests\UpdateDossierRequest;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use Illuminate\Database\QueryException;
 
 class DossierController extends Controller
 {
@@ -18,7 +19,7 @@ class DossierController extends Controller
     // DossierController.php
     public function index()
     {
-        $dossiers = Dossier::with('service')->paginate(10); // 10 items per page
+        $dossiers = Dossier::with('service')->paginate(5); 
         return view('dossiers.index', compact('dossiers'));
     }
 
@@ -33,15 +34,16 @@ class DossierController extends Controller
 
     public function store(StoreDossierRequest $request)
     {
-        $request->validated(); // Ensure validation is done
+        // dd($request);
+        $request->validated();
 
         Dossier::create([
             'service_id' => $request->service_id,
-            'dossier' => $request->dossier,
-            'annee' => $request->annee
+            'Dossier' => $request->Dossier,
+            'Annee' => $request->Annee
         ]);
 
-        return redirect()->route('dossiers.index')->with('success', 'Dossier created successfully');
+        return to_route('dossiers.index')->with('Added', 'Dossier created successfully');
     }
 
 
@@ -64,16 +66,13 @@ class DossierController extends Controller
 
     public function update(UpdateDossierRequest $request, Dossier $dossier)
     {
-        $validated = $request->validate([
-            'service_id' => 'required|exists:services,id',
-            'dossier' => 'required|string|max:255',
-            'annee' => 'required|numeric|min:2000|max:2100'
-        ]);
+        // dd($request);
+        $validated = $request->validated();
 
         $dossier->update($validated);
 
         return redirect()->route('dossiers.index')
-            ->with('success', 'Dossier mis à jour avec succès');
+            ->with('updated', 'Dossier mis à jour avec succès');
     }
 
     /**
@@ -81,7 +80,12 @@ class DossierController extends Controller
      */
     public function destroy(Dossier $dossier)
     {
-        $dossier->delete();
-        return redirect()->route('dossiers.index')->with('success', 'Dossier deleted successfully.');
+        try{
+            $dossier->delete();
+            return redirect()->route('dossiers.index')->with('deleted', 'Dossier deleted successfully.');
+    
+            }catch(QueryException){
+                return to_route('dossiers.index')->with('warning',"Impossible de supprimer ce Dossier car il est lié à autres données.");
+            }
     }
 }

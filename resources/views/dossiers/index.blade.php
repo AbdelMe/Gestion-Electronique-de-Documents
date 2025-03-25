@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-    Dossiers
-@endsection
+@section('title','Dossiers')
 
 @section('alert')
     @if (session('updated'))
@@ -13,6 +11,9 @@
     @endif
     @if (session('Added'))
         <x-toast-success-alert message="{{ session('Added') }}" />
+    @endif
+    @if (session('warning'))
+        <x-toast-warning-alert message="{{ session('warning') }}" />
     @endif
 @endsection
 
@@ -37,8 +38,8 @@
                     <tr>
                         <td>{{ $dossier->id }}</td>
                         <td>{{ $dossier->service->Service }}</td>
-                        <td>{{ $dossier->dossier }}</td>
-                        <td>{{ $dossier->annee }}</td>
+                        <td>{{ $dossier->Dossier }}</td>
+                        <td>{{ $dossier->Annee }}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
                                 <a href="{{ route('dossiers.edit', $dossier->id) }}"

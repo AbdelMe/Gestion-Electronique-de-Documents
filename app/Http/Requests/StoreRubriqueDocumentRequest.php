@@ -11,7 +11,7 @@ class StoreRubriqueDocumentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreRubriqueDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'rubrique_id' => 'required|numeric|exists:rubriques,id',
+            'Valeur' => 'required|string|max:255',
+            'document_id' => 'required|numeric|exists:documents,id',
         ];
     }
 }

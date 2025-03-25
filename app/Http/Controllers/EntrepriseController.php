@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entreprise;
 use App\Http\Requests\StoreEntrepriseRequest;
 use App\Http\Requests\UpdateEntrepriseRequest;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -45,7 +46,7 @@ class EntrepriseController extends Controller
      */
     public function show(Entreprise $entreprise)
     {
-        return view('entreprise.show',compact('entreprise'));
+        return view('entreprise.show', compact('entreprise'));
     }
 
     /**
@@ -53,7 +54,7 @@ class EntrepriseController extends Controller
      */
     public function edit(Entreprise $entreprise)
     {
-        return view('entreprise.edit',compact('entreprise'));
+        return view('entreprise.edit', compact('entreprise'));
     }
 
     /**
@@ -73,7 +74,11 @@ class EntrepriseController extends Controller
     public function destroy(Entreprise $entreprise)
     {
         // dd($entreprise);
-        $entreprise->delete();
-        return redirect()->route('entreprise.index')->with('deleted', 'Entreprise deleted successfully!');
+        try {
+            $entreprise->delete();
+            return redirect()->route('entreprise.index')->with('deleted', 'Entreprise deleted successfully!');
+        } catch (QueryException) {
+            return to_route('entreprise.index')->with('warning', "Impossible de supprimer cette Entreprise car il est lié à autres données.");
+        }
     }
 }

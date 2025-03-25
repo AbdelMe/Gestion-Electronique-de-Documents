@@ -11,7 +11,7 @@ class UpdateTypeRubriqueRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateTypeRubriqueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'TypeRubrique' => 'required|string',
+            'Date' => 'required|numeric|min:2025',
         ];
     }
 }

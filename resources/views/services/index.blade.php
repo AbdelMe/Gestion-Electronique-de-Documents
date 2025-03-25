@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-    Services
-@endsection
+@section('title','Services')
 
 @section('alert')
     @if (session('updated'))
@@ -13,6 +11,9 @@
     @endif
     @if (session('Added'))
         <x-toast-success-alert message="{{ session('Added') }}" />
+    @endif
+    @if (session('warning'))
+        <x-toast-warning-alert message="{{ session('warning') }}" />
     @endif
 @endsection
 
@@ -37,10 +38,12 @@
                         <td>{{ $service->Service }}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                <a href={{ route('services.edit', $service->id) }} class="btn btn-warning btn-sm px-2 py-1 mx-1">
+                                <a href={{ route('services.edit', $service->id) }}
+                                    class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('services.destroy', $service->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
+                                <form action="{{ route('services.destroy', $service->id) }}" method="POST"
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm px-2 py-1 mx-1">
