@@ -27,7 +27,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>Service</th>
+                    <th>Entreprise</th>
                     <th>Nom Dossier</th>
                     <th>Année</th>
                     <th>Action</th>
@@ -37,7 +37,7 @@
                 @foreach ($dossiers as $dossier)
                     <tr>
                         <td>{{ $dossier->id }}</td>
-                        <td>{{ $dossier->service->Service }}</td>
+                        <td>{{ $dossier->entreprise->NomClient }}</td>
                         <td>{{ $dossier->Dossier }}</td>
                         <td>{{ $dossier->Annee }}</td>
                         <td class="text-center">

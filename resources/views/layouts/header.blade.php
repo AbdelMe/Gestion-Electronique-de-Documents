@@ -72,7 +72,7 @@
         <li class="nav-item dropdown border-left">
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
                 data-toggle="dropdown" aria-expanded="false">
-                <i class="mdi mdi-email"></i>
+                <img src={{ asset('assets/images/icons/mail.png') }} width="20px" alt="">
                 <span class="count bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -115,7 +115,7 @@
         <li class="nav-item dropdown border-left">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                 data-toggle="dropdown">
-                <i class="mdi mdi-bell"></i>
+                <img src={{ asset('assets/images/icons/notification-bell.png') }} width="20px" alt="">
                 <span class="count bg-danger"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_rubriques', function (Blueprint $table) {
+        Schema::create('etats', function (Blueprint $table) {
             $table->id();
-            $table->string('TypeRubrique');
+            $table->string('etat');
+            $table->string('color');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_rubriques');
+        Schema::dropIfExists('etats');
     }
 };

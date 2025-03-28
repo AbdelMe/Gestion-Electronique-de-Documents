@@ -64,7 +64,7 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" href={{ route('dashboard') }}>
                     <span class="menu-icon">
-                        <i class="mdi mdi-speedometer"></i>
+                        <i class="mdi mdi-view-dashboard"></i>
                     </span>
                     <span class="menu-title">Dashboard</span>
                 </a>
@@ -95,7 +95,7 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ route('entreprise.index') }}">
                     <span class="menu-icon">
-                        <i class="mdi mdi-playlist-play"></i>
+                        <i class="mdi mdi-domain"></i>
                     </span>
                     <span class="menu-title">Entreprise</span>
                 </a>
@@ -128,7 +128,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
                     aria-controls="auth">
                     <span class="menu-icon">
-                        <i class="mdi mdi-security"></i>
+                        <i class="mdi mdi-file-multiple "></i>
                     </span>
                     <span class="menu-title">Documents</span>
                     <i class="menu-arrow"></i>

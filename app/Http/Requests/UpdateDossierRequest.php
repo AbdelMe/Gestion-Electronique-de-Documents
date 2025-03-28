@@ -22,9 +22,10 @@ class UpdateDossierRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'service_id' => 'required|exists:services,id',
             'Dossier' => 'required|string|max:255',
             'Annee' => 'required|numeric|min:2000|max:2100',
+            'description' => 'required|string',
+            'entreprise_id' => 'required|exists:entreprises,id',
         ];
     }
 }

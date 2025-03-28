@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dossier;
 use App\Http\Requests\StoreDossierRequest;
 use App\Http\Requests\UpdateDossierRequest;
-use Illuminate\Http\Request;
-use App\Models\Service;
+use App\Models\Entreprise;
 use Illuminate\Database\QueryException;
 
 class DossierController extends Controller
@@ -17,7 +16,7 @@ class DossierController extends Controller
     // DossierController.php
     public function index()
     {
-        $dossiers = Dossier::with('service')->paginate(5); 
+        $dossiers = Dossier::with('entreprise')->paginate(5); 
         return view('dossiers.index', compact('dossiers'));
     }
 
@@ -26,8 +25,8 @@ class DossierController extends Controller
      */
     public function create()
     {
-        $services = Service::all();
-        return view('dossiers.create', compact('services'));
+        $entreprises = Entreprise::all();
+        return view('dossiers.create', compact('entreprises'));
     }
 
     public function store(StoreDossierRequest $request)
@@ -36,9 +35,10 @@ class DossierController extends Controller
         $request->validated();
 
         Dossier::create([
-            'service_id' => $request->service_id,
+            'entreprise_id' => $request->entreprise_id,
             'Dossier' => $request->Dossier,
-            'Annee' => $request->Annee
+            'Annee' => $request->Annee,
+            'description' => $request->description,
         ]);
 
         return to_route('dossiers.index')->with('Added', 'Dossier created successfully');
@@ -58,8 +58,8 @@ class DossierController extends Controller
      */
     public function edit(Dossier $dossier)
     {
-        $services = Service::all();
-        return view('dossiers.edit', compact('dossier', 'services'));
+        $entreprises = Entreprise::all();
+        return view('dossiers.edit', compact('dossier', 'entreprises'));
     }
 
     public function update(UpdateDossierRequest $request, Dossier $dossier)

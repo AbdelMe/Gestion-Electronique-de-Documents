@@ -45,9 +45,6 @@ class RubriqueController extends Controller
             'type_rubrique_id' => $request->type_rubrique_id,
             'type_document_id' => $request->type_document_id,
             'Rubrique' => $request->Rubrique,
-            // 'Valeur' => $type1,
-            'Valeur' => "",
-            'Obligatoire' => $request->Obligatoire,
         ]);
         return to_route('rubrique.index')->with('Added','Rubrique Added successfully!');
     }

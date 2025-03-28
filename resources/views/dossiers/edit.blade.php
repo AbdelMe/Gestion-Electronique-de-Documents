@@ -11,26 +11,26 @@
             @method('PUT')
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label for="service_id">Service</label>
-                        <select name="service_id" id="service_id"
-                            class="form-control text-white @error('service_id') is-invalid @enderror">
-                            <option value="" disabled>Select Service</option>
-                            @foreach ($services as $service)
-                                <option value="{{ $service->id }}"
-                                    {{ old('service_id', $dossier->service_id) == $service->id ? 'selected' : '' }}>
-                                    {{ $service->Service }}
+                        <label for="entreprise_id">entreprise</label>
+                        <select name="entreprise_id" id="entreprise_id"
+                            class="form-control text-white @error('entreprise_id') is-invalid @enderror">
+                            <option value="" disabled>Select Entreprise</option>
+                            @foreach ($entreprises as $entreprise)
+                                <option value="{{ $entreprise->id }}"
+                                    {{ old('entreprise', $dossier->entreprise_id) == $entreprise->id ? 'selected' : '' }}>
+                                    {{ $entreprise->NomClient }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('service_id')
+                        @error('entreprise_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Dossier">Nom du Dossier</label>
                         <input type="text" class="form-control text-white @error('Dossier') is-invalid @enderror" id="Dossier"
@@ -40,13 +40,25 @@
                         @enderror
                     </div>
                 </div>
-
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Annee">Annee</label>
                         <input type="number" class="form-control text-white @error('Annee') is-invalid @enderror" id="Annee"
                             name="Annee" value="{{ old('Annee', $dossier->Annee) }}" min="2000" max="2100">
                         @error('Annee')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="description">Description</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror text-white"
+                             name="description" rows="5"
+                            >{{ old('description', $dossier->description) }}</textarea>
+                        @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>

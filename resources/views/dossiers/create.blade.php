@@ -9,16 +9,16 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group mb-3">
-                    <label for="service_id">Service</label>
-                    <select name="service_id" id="service_id" class="form-control @error('service_id') is-invalid @enderror text-white" >
-                        <option value="" disabled selected>Select Service</option>
-                        @foreach($services as $service)
-                            <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>
-                                {{ $service->Service }}
+                    <label for="entreprise_id">Entreprise</label>
+                    <select name="entreprise_id" id="entreprise_id" class="form-control @error('entreprise_id') is-invalid @enderror text-white" >
+                        <option value="" disabled selected>Select Entreprise</option>
+                        @foreach($entreprises as $entreprise)
+                            <option value="{{ $entreprise->id }}" {{ old('entreprise_id') == $entreprise->id ? 'selected' : '' }}>
+                                {{ $entreprise->NomClient }}
                             </option>
                         @endforeach
                     </select>
-                    @error('service_id')
+                    @error('entreprise_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -39,6 +39,19 @@
                     <label for="Annee">Year</label>
                     <input type="number" class="form-control @error('Annee') is-invalid @enderror text-white" id="Annee" name="Annee" value="{{ old('Annee') }}" min="2000" max="2100">
                     @error('Annee')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <textarea class="form-control @error('description') is-invalid @enderror text-white"
+                         name="description" rows="5"
+                         value="{{ old('description') }}"
+                        ></textarea>
+                    {{-- <input type="text" class="form-control @error('description') is-invalid @enderror text-white" id="description" name="description" value="{{ old('description') }}" > --}}
+                    @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

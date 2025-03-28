@@ -27,7 +27,6 @@
                 <tr>
                     <th>#</th>
                     <th>Type Document</th>
-                    <th>Dureé (année)</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -36,7 +35,6 @@
                     <tr>
                         <td>{{ $type->id }}</td>
                         <td>{{ $type->TypeDocument }}</td>
-                        <td>{{ $type->DureeVie . " ans"}}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
                                 <a href={{ route('type_documents.edit', $type->id) }} class="btn btn-warning btn-sm px-2 py-1 mx-1">

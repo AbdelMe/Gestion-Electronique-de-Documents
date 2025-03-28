@@ -23,7 +23,6 @@ class StoreTypeRubriqueRequest extends FormRequest
     {
         return [
             'TypeRubrique' => 'required|string',
-            'Date' => 'required|numeric|min:2025',
         ];
     }
 }

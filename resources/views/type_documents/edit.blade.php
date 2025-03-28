@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="DureeVie" class="text-white">Dureé (année)</label>
                         <input type="number" class="form-control text-white @error('DureeVie') is-invalid @enderror" id="DureeVie" name="DureeVie" value="{{ old('DureeVie', $typeDocument->DureeVie) }}" placeholder="Entrez la durée de vie en années" required>
@@ -29,7 +29,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="form-group text-center">

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTypeDocumentRequest extends FormRequest
+class UpdateVersionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,7 +22,7 @@ class UpdateTypeDocumentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'TypeDocument' => 'required|string|max:255',
+            //
         ];
     }
 }

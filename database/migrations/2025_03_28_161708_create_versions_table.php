@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_rubriques', function (Blueprint $table) {
+        Schema::create('versions', function (Blueprint $table) {
             $table->id();
-            $table->string('TypeRubrique');
+            $table->integer('numero');
+            $table->date('date');
+            $table->unsignedBigInteger('document_id');
+            $table->string('description');
+            $table->foreign('document_id')->references('id')->on('documents');
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_rubriques');
+        Schema::dropIfExists('versions');
     }
 };

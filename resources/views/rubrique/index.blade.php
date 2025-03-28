@@ -30,7 +30,7 @@
                     <th>Type Document</th>
                     <th>Rubrique Nom</th>
                     {{-- <th>Valeur</th> --}}
-                    <th>Obligatoire</th>
+                    {{-- <th>Obligatoire</th> --}}
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -42,7 +42,7 @@
                         <td>{{ $rubrique->TypeDocument->TypeDocument }}</td>
                         <td>{{ $rubrique->Rubrique }}</td>
                         {{-- <td>{{ $rubrique->Valeur }}</td> --}}
-                        <td>{{ $rubrique->Obligatoire == 1 ? 'OUI' : 'NON' }}</td>
+                        {{-- <td>{{ $rubrique->Obligatoire == 1 ? 'OUI' : 'NON' }}</td> --}}
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
                                 {{-- <a href="{{ route('rubrique.show', $document->id) }}"

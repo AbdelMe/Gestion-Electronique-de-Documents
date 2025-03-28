@@ -9301,7 +9301,7 @@ textarea.is-invalid.tt-hint {
   .btn.disabled, .fc button.disabled, .ajax-upload-dragdrop .disabled.ajax-file-upload, .swal2-modal .swal2-buttonswrapper .disabled.swal2-styled, .wizard > .actions a.disabled, .btn:disabled, .fc button:disabled, .ajax-upload-dragdrop .ajax-file-upload:disabled, .swal2-modal .swal2-buttonswrapper .swal2-styled:disabled, .wizard > .actions a:disabled {
     opacity: 0.65; }
   .btn:not(:disabled):not(.disabled), .fc button:not(:disabled):not(.disabled), .ajax-upload-dragdrop .ajax-file-upload:not(:disabled):not(.disabled), .swal2-modal .swal2-buttonswrapper .swal2-styled:not(:disabled):not(.disabled), .wizard > .actions a:not(:disabled):not(.disabled) {
-    cursor: pointer; }
+    cursor: pointer; border-radius: 50px;}
 
 a.btn.disabled, .ajax-upload-dragdrop a.disabled.ajax-file-upload, .swal2-modal .swal2-buttonswrapper a.disabled.swal2-styled, .wizard > .actions a.disabled,
 fieldset:disabled a.btn,
@@ -20391,10 +20391,11 @@ div.tagsinput {
     -webkit-box-shadow: 20px 19px 34px -15px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 20px 19px 34px -15px rgba(0, 0, 0, 0.5);
     color: #ffffff;
+    background-color: white;
     padding-left: 15px;
     padding-right: 15px;
     width: 100%;
-    height: 70px; }
+    height: 50px; }
     .rtl .navbar .navbar-menu-wrapper {
       box-shadow: -34px 19px 34px -15px #000000;
       -webkit-box-shadow: -34px 19px 34px -15px #000000;
@@ -20593,6 +20594,7 @@ div.tagsinput {
     .navbar .navbar-menu-wrapper .search input {
       background: #191c24;
       padding: 13px 20px 11px 20px;
+      border-radius: 30px;
       border: 1px solid #2c2e33; }
       .navbar .navbar-menu-wrapper .search input::placeholder {
         color: #6c7293;
@@ -20626,7 +20628,8 @@ div.tagsinput {
   background: #191c24;
   font-weight: normal;
   padding: 0;
-  width: 244px;
+  width: 200px;
+  height: 100vh;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -20638,7 +20641,7 @@ div.tagsinput {
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
     background: #191c24;
-    width: 244px;
+    width: 200px;
     height: 70px; }
     @media (max-width: 991px) {
       .sidebar .sidebar-brand-wrapper {
@@ -20670,6 +20673,7 @@ div.tagsinput {
     flex-wrap: nowrap;
     flex-direction: column;
     margin-bottom: 60px;
+    height: 100vh;
     padding-top: 70px; }
     @media (max-width: 992px) {
       .sidebar .nav {
