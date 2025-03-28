@@ -1,18 +1,17 @@
 <?php
 
+use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DossierController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\RubriqueController;
 use App\Http\Controllers\RubriqueDocumentController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeDocumentController;
 use App\Http\Controllers\TypeRubriqueController;
+use App\Models\Classe;
 use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\Entreprise;
-use App\Models\Rubrique;
-use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     $entreprises = Entreprise::all();
-    $services = Service::all();
+    $classe = Classe::all();
     $dossiers = Dossier::all();
     $documents = Document::all();
 
@@ -42,11 +41,11 @@ Route::get('/dashboard', function () {
     usort($recentActivities, function ($a, $b) {
         return $b['created_at'] <=> $a['created_at'];
     });
-    return view('dashboard', compact('entreprises', 'services', 'dossiers', 'documents', 'recentActivities'));
+    return view('dashboard', compact('entreprises', 'classe', 'dossiers', 'documents', 'recentActivities'));
 })->name('dashboard');
 Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
 Route::resource('/dossiers', DossierController::class);
-Route::resource('/services', ServiceController::class);
+Route::resource('/classe', ClasseController::class);
 // Route::resource('/documents', DocumentController::class);
 
 Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');

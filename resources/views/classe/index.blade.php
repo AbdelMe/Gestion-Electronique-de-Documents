@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Services')
+@section('title','Classe')
 
 @section('alert')
     @if (session('updated'))
@@ -19,31 +19,29 @@
 
 @section('content')
     <div class="container mt-1">
-        <h2 class="mb-4 text-white">Liste des services</h2>
-        <a href={{ route('services.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter Service</a>
+        <h2 class="mb-4 text-white">Liste des Classes</h2>
+        <a href={{ route('classe.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter Classe</a>
         <table class="table table-bordered table-striped text-white">
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>Client</th>
-                    <th>Nom Service</th>
+                    <th>Classe</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($services as $service)
+                @foreach ($classes as $classe)
                     <tr>
-                        <td>{{ $service->id }}</td>
-                        <td>{{ $service->Entreprise->NomClient }}</td>
-                        <td>{{ $service->Service }}</td>
+                        <td>{{ $classe->id }}</td>
+                        <td>{{ $classe->classe }}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                <a href={{ route('services.edit', $service->id) }}
+                                <a href={{ route('classe.edit', $classe->id) }}
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <form action="{{ route('services.destroy', $service->id) }}" method="POST"
-                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce service ?');">
+                                <form action="{{ route('classe.destroy', $classe->id) }}" method="POST"
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Classe ?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm px-2 py-1 mx-1">
@@ -56,6 +54,6 @@
                 @endforeach
             </tbody>
         </table>
-        <p>{{ $services->links() }}</p>
+        <p>{{ $classes->links() }}</p>
     </div>
 @endsection

@@ -28,14 +28,14 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item" href={{ route('services.create') }}>
+                <a class="dropdown-item preview-item" href={{ route('classe.create') }}>
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                             <i class="mdi mdi-web text-info"></i>
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <p class="preview-subject ellipsis mb-1">Service</p>
+                        <p class="preview-subject ellipsis mb-1">Classes</p>
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>

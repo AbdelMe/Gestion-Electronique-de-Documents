@@ -12,11 +12,12 @@ return new class extends Migration {
     {
         Schema::create('dossiers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('entreprise_id');
             $table->string('Dossier');
             $table->integer('Annee');
+            $table->string('description');
             $table->timestamps();
-            $table->foreign('service_id')->references('id')->on('services');
+            $table->foreign('entreprise_id')->references('id')->on('entreprises');
         });
     }
 

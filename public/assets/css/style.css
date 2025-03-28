@@ -21139,3 +21139,7 @@ div.tagsinput {
 #document_id::-webkit-scrollbar, #rubrique_id::-webkit-scrollbar{
   display: none;
 }
+
+body{
+  background-color: white;
+}
