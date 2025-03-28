@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href={{ asset("css/Login_register.css") }}>
+    <link rel="stylesheet" href={{ asset("assets/css/Login_register.css") }}>
 </head>
+
 <body>
     <section class="container">
         <div class="box sign_in">
@@ -24,10 +26,10 @@
                     <input type="password" placeholder="Password">
                     <button class="primary">Login</button>
                     <a href="#">Forgot your Password?</a>
-                    
+
                 </form>
             </div>
-            <div class="form_box sign_up_form">      
+            <div class="form_box sign_up_form">
                 <form action="#" method="post">
                     <h3>Sign up</h3>
                     <input type="text" placeholder="Username">
@@ -39,6 +41,7 @@
             </div>
         </div>
     </section>
-    <script src={{ asset("js/Login_register.js") }}></script>
+    <script src={{ asset('assets/js/Login_register.js') }}></script>
 </body>
+
 </html>

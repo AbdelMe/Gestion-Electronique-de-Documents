@@ -65,3 +65,10 @@ Route::resource('/rubrique', RubriqueController::class);
 Route::resource('/type_rubrique', TypeRubriqueController::class);
 
 Route::resource('/rubrique_document', RubriqueDocumentController::class);
+
+
+Route::get('/login', function (){
+    return view('Login&Register.index');
+});
+
+

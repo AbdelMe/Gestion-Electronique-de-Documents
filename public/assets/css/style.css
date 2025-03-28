@@ -20642,7 +20642,7 @@ div.tagsinput {
     -ms-transition: width 0.25s ease, background 0.25s ease;
     background: #191c24;
     width: 200px;
-    height: 70px; }
+    height: 50px; }
     @media (max-width: 991px) {
       .sidebar .sidebar-brand-wrapper {
         width: 55px; } }
@@ -20651,7 +20651,8 @@ div.tagsinput {
       font-size: 1.5rem;
       line-height: 48px;
       margin-right: 0;
-      padding: 0rem 0rem 0rem 1.3rem;
+      /* padding: 0rem 0rem 0rem 1.3rem; */
+      text-align: center;
       width: 100%; }
       .sidebar .sidebar-brand-wrapper .sidebar-brand:active, .sidebar .sidebar-brand-wrapper .sidebar-brand:focus, .sidebar .sidebar-brand-wrapper .sidebar-brand:hover {
         color: #252b3e; }
@@ -20673,7 +20674,7 @@ div.tagsinput {
     flex-wrap: nowrap;
     flex-direction: column;
     margin-bottom: 60px;
-    height: 100vh;
+    /* height: 100vh; */
     padding-top: 70px; }
     @media (max-width: 992px) {
       .sidebar .nav {
@@ -21130,7 +21131,7 @@ div.tagsinput {
       width: 100%; } }
 
 .content-wrapper {
-  background: #000000;
+  background: white;
   padding: 1.875rem 1.75rem;
   width: 100%;
   -webkit-flex-grow: 1;

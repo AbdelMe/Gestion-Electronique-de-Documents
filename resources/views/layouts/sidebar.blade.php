@@ -16,7 +16,7 @@
                         </div>
                         <div class="profile-name">
                             <h5 class="mb-0 font-weight-normal">MOHAMMED</h5>
-                            <span>Gold Member</span>
+                            <span>Administrator</span>
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i
