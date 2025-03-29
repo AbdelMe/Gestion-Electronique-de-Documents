@@ -44,7 +44,7 @@ class ProfileController extends Controller
         // Update other user information
         $user->update($validated);
 
-        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully!');
+        return redirect()->route('dashboard')->with('updated', 'Profile updated successfully!');
     }
 
 }

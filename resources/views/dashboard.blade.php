@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('title', 'Dashboard')
+@if (session('updated'))
+    <x-toast-success-alert message="{{ session('updated') }}" />
+@endif
 
 @section('content')
     <div class="row mb-4">
@@ -8,10 +11,14 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Actions rapides</h4>
-                    <a href="{{ route('entreprise.create') }}" class="btn btn-warning mb-2"><i class="bi bi-plus-lg"></i> Créer Entreprise</a>
-                    <a href="{{ route('services.create') }}" class="btn btn-info mb-2"><i class="bi bi-plus-lg"></i> Créer Service</a>
-                    <a href="{{ route('dossiers.create') }}" class="btn btn-primary mb-2"><i class="bi bi-plus-lg"></i> Créer Dossier</a>
-                    <a href="{{ route('documents.create') }}" class="btn btn-success mb-2"><i class="bi bi-plus-lg"></i> Créer Document</a>
+                    <a href="{{ route('entreprise.create') }}" class="btn btn-warning mb-2"><i class="bi bi-plus-lg"></i>
+                        Créer Entreprise</a>
+                    <a href="{{ route('services.create') }}" class="btn btn-info mb-2"><i class="bi bi-plus-lg"></i> Créer
+                        Service</a>
+                    <a href="{{ route('dossiers.create') }}" class="btn btn-primary mb-2"><i class="bi bi-plus-lg"></i>
+                        Créer Dossier</a>
+                    <a href="{{ route('documents.create') }}" class="btn btn-success mb-2"><i class="bi bi-plus-lg"></i>
+                        Créer Document</a>
                 </div>
             </div>
         </div>
@@ -37,7 +44,8 @@
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($entreprises) }}</h3>
-                                <p class="ml-2 mb-0 font-weight-medium text-{{ $entreprisesChange > 0 ? 'success' : ($entreprisesChange < 0 ? 'danger' : 'muted') }}">
+                                <p
+                                    class="ml-2 mb-0 font-weight-medium text-{{ $entreprisesChange > 0 ? 'success' : ($entreprisesChange < 0 ? 'danger' : 'muted') }}">
                                     {{ $entreprisesChange > 0 ? "+$entreprisesChange Nouveau" : ($entreprisesChange < 0 ? "$entreprisesChange Supprimé" : "Stable") }}
                                 </p>
                             </div>
@@ -62,7 +70,8 @@
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($services) }}</h3>
-                                <p class="ml-2 mb-0 font-weight-medium text-{{ $servicesChange > 0 ? 'success' : ($servicesChange < 0 ? 'danger' : 'muted') }}">
+                                <p
+                                    class="ml-2 mb-0 font-weight-medium text-{{ $servicesChange > 0 ? 'success' : ($servicesChange < 0 ? 'danger' : 'muted') }}">
                                     {{ $servicesChange > 0 ? "+$servicesChange Nouveau" : ($servicesChange < 0 ? "$servicesChange Supprimé" : "Stable") }}
                                 </p>
                             </div>
@@ -87,7 +96,8 @@
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($dossiers) }}</h3>
-                                <p class="ml-2 mb-0 font-weight-medium text-{{ $dossiersChange > 0 ? 'success' : ($dossiersChange < 0 ? 'danger' : 'muted') }}">
+                                <p
+                                    class="ml-2 mb-0 font-weight-medium text-{{ $dossiersChange > 0 ? 'success' : ($dossiersChange < 0 ? 'danger' : 'muted') }}">
                                     {{ $dossiersChange > 0 ? "+$dossiersChange Nouveau" : ($dossiersChange < 0 ? "$dossiersChange Supprimé" : "Stable") }}
                                 </p>
                             </div>
@@ -112,7 +122,8 @@
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
                                 <h3 class="mb-0">{{ count($documents) }}</h3>
-                                <p class="ml-2 mb-0 font-weight-medium text-{{ $documentsChange > 0 ? 'success' : ($documentsChange < 0 ? 'danger' : 'muted') }}">
+                                <p
+                                    class="ml-2 mb-0 font-weight-medium text-{{ $documentsChange > 0 ? 'success' : ($documentsChange < 0 ? 'danger' : 'muted') }}">
                                     {{ $documentsChange > 0 ? "+$documentsChange Nouveau" : ($documentsChange < 0 ? "$documentsChange Supprimé" : "Stable") }}
                                 </p>
                             </div>
@@ -138,17 +149,20 @@
                     <h4 class="card-title">Activités récentes</h4>
                     <ul class="list-group">
                         @foreach ($recentActivities as $activity)
-                            <li class="list-group-item d-flex justify-content-between text-light align-items-center" style="background-color: #232936">
+                            <li class="list-group-item d-flex justify-content-between text-light align-items-center"
+                                style="background-color: #232936">
                                 <div>
                                     @if ($activity['type'] === 'document')
-                                        <strong>Nouveau Document:</strong> {{ $activity['name'] }} (Created on {{ $activity['created_at']->format('Y-m-d') }})
+                                        <strong>Nouveau Document:</strong> {{ $activity['name'] }} (Created on
+                                        {{ $activity['created_at']->format('Y-m-d') }})
                                     @endif
                                 </div>
                                 <div class="d-flex align-items-center">
                                     @if ($activity['is_new'])
                                         <span class="badge badge-pill badge-success mr-2">Nouveau</span>
                                     @endif
-                                    <a href="{{ asset('storage/' . $activity['file_path']) }}" class="btn btn-primary btn-sm rounded-pill" target="_blank">
+                                    <a href="{{ asset('storage/' . $activity['file_path']) }}"
+                                        class="btn btn-primary btn-sm rounded-pill" target="_blank">
                                         <i class="bi bi-eye"></i> voir
                                     </a>
                                 </div>
