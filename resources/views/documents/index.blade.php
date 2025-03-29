@@ -24,9 +24,8 @@
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>LibelleDocument</th>
-                    {{-- <th>DocumentNumerique</th> --}}
-                    {{-- <th>CheminDocument</th> --}}
+                    <th>Title</th>
+                    <th>CheminDocument</th>
                     <th>Date</th>
                     <th>Dossier</th>
                     <th>Type Document</th>
@@ -39,7 +38,7 @@
                         <td>{{ $document->id }}</td>
                         <td>{{ $document->LibelleDocument }}</td>
                         {{-- <td>{{ $document->DocumentNumerique }}</td> --}}
-                        {{-- <td>{{ $document->CheminDocument }}</td> --}}
+                        <td>{{ $document->CheminDocument }}</td>
                         <td>{{ $document->Date }}</td>
                         <td>{{ $document->Dossier->Dossier }}</td>
                         <td>{{ $document->TypeDocument->TypeDocument }}</td>
@@ -49,10 +48,10 @@
                                     class="btn btn-info btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
-                                <a href={{ route('documents.edit', $document->id) }}
+                                {{-- <a href={{ route('documents.edit', $document->id) }}
                                     class="btn btn-warning btn-sm px-2 py-1 mx-1">
                                     <i class="bi bi-pencil-square"></i>
-                                </a>
+                                </a> --}}
                                 <form action="{{ route('documents.destroy', $document->id) }}" method="POST"
                                     onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Document ?');">
                                     @csrf

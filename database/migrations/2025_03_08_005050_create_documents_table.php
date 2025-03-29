@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->date('Date');
-            $table->string('metadata');
-            $table->string('tag');
-            $table->string('CheminDocument');
+            $table->text('metadata');
+            $table->text('tag');
+            $table->string('CheminDocument')->nullable();
             $table->unsignedBigInteger('etat_id');
             $table->unsignedBigInteger('classe_id');
             $table->unsignedBigInteger('dossier_id');

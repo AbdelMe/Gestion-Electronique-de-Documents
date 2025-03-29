@@ -10,7 +10,7 @@ class RubriqueDocument extends Model
 
     public function Rubrique()
     {
-        return $this->belongsTo(Rubrique::class);
+        return $this->belongsTo(Rubrique::class, 'rubrique_id');
     }
     public function Document()
     {

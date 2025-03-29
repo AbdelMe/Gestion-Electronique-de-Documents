@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="row">
-            @if (count($services) > 0)
+            {{-- @if (count($services) > 0)
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="service_id">Services</label>
@@ -98,7 +98,48 @@
                         @enderror
                     </div>
                 </div>
-            @endif
+            @endif --}}
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="titre">Titre</label>
+                        <input type="text" class="form-control @error('titre') is-invalid @enderror text-white"
+                            id="titre" name="titre" value="{{ old('titre') }}">
+                        @error('titre')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="metadata">Metadata</label>
+                        <input type="text" class="form-control @error('metadata') is-invalid @enderror text-white"
+                            id="metadata" name="metadata" value="{{ old('metadata') }}">
+                        @error('metadata')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="tag">Tag</label>
+                        <input type="text" class="form-control @error('tag') is-invalid @enderror text-white"
+                            id="tag" name="tag" value="{{ old('tag') }}">
+                        @error('tag')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="CheminDocument">CheminDocument</label>
+                        <input type="file" class="form-control @error('CheminDocument') is-invalid @enderror text-white"
+                            id="CheminDocument" name="CheminDocument" value="{{ old('CheminDocument') }}">
+                        @error('CheminDocument')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
             @if (count($dossiers) > 0)
                 <div class="col-md-6">
                     <div class="form-group mb-3">
@@ -119,56 +160,52 @@
                     </div>
                 </div>
 
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="etat_id">Etat</label>
+                        <select class="form-control @error('etat_id') is-invalid @enderror text-white" id="etat_id"
+                            name="etat_id">
+                            <option value="">Sélectionnez une Etat</option>
+                            @foreach ($etats as $etat)
+                                <option value="{{ $etat->id }}"
+                                    {{ old('etat_id') == $etat->id ? 'selected' : '' }}>
+                                    {{ $etat->etat }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('etat_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="classe_id">Classe</label>
+                        <select class="form-control @error('classe_id') is-invalid @enderror text-white"
+                            id="classe_id" name="classe_id">
+                            <option value="">Sélectionnez un Classe</option>
+                            @foreach ($classes as $classe)
+                                <option value="{{ $classe->id }}"
+                                    {{ old('classe_id') == $classe->id ? 'selected' : '' }}>
+                                    {{ $classe->classe }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('classe_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                {{-- <div class="col-md-6">
+                    <button class="btn btn-primary">Ajouter version</button>
+                </div> --}}
 
             @endif
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="LibelleDocument">Libellé Document</label>
-                    <input type="text" class="form-control @error('LibelleDocument') is-invalid @enderror text-white"
-                        id="LibelleDocument" name="LibelleDocument" value="{{ old('LibelleDocument') }}">
-                    @error('LibelleDocument')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="OCR">OCR</label>
-                    <input type="text" class="form-control @error('OCR') is-invalid @enderror text-white"
-                        id="OCR" name="OCR" value="{{ old('OCR') }}">
-                    @error('OCR')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="Cote">Cote</label>
-                    <input type="text" class="form-control @error('Cote') is-invalid @enderror text-white"
-                        id="Cote" name="Cote" value="{{ old('Cote') }}">
-                    @error('Cote')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group mb-3">
-                    <label for="Index">Index</label>
-                    <input type="date" class="form-control @error('Index') is-invalid @enderror text-white"
-                        id="Index" name="Index" value="{{ old('Index') }}">
-                    @error('Index')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
+
+        {{-- <div class="row">
 
 
             <div class="col-md-6">
@@ -197,7 +234,7 @@
                     @enderror
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
         <div class="form-group text-center">
