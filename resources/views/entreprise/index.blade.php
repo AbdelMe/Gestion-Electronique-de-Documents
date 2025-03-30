@@ -21,22 +21,22 @@
         <h2 class="mb-4 text-white">Liste des Entreprises</h2>
         <a href={{ route('entreprise.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
             Entreprise</a>
-        <table class="table table-bordered table-striped text-white">
-            <thead class="thead-dark">
+        <table class="table text-light">
+            <thead style="background: linear-gradient(90deg, #131d27 0%, #496683 100%)">
                 <tr>
-                    <th>#</th>
-                    <th>Raison Sociale</th>
-                    <th>Nom Client</th>
-                    <th>Adresse</th>
-                    <th>Ville</th>
-                    <th>Fax</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th class="text-light">#</th>
+                    <th class="text-light">Raison Sociale</th>
+                    <th class="text-light">Nom Client</th>
+                    <th class="text-light">Adresse</th>
+                    <th class="text-light">Ville</th>
+                    <th class="text-light">Fax</th>
+                    <th class="text-light">Email</th>
+                    <th class="text-light">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($entreprises as $entreprise)
-                    <tr>
+                    <tr style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                         <td>{{ $entreprise->id }}</td>
                         <td>{{ $entreprise->RaisonSocial }}</td>
                         <td>{{ $entreprise->NomClient }}</td>
@@ -47,18 +47,18 @@
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
                                 <a href="{{ route('entreprise.show', $entreprise->id) }}"
-                                    class="btn btn-info btn-sm px-2 py-1 mx-1">
+                                    class="btn">
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
                                 <a href={{ route('entreprise.edit', $entreprise->id) }}
-                                    class="btn btn-warning btn-sm px-2 py-1 mx-1">
+                                    class="btn">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST"
                                     onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Entreprise ?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm px-2 py-1 mx-1">
+                                    <button class="btn">
                                         <i class="bi bi-trash3-fill"></i>
                                     </button>
                                 </form>

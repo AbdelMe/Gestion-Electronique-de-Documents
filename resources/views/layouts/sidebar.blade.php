@@ -1,10 +1,10 @@
 <div>
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+    <nav class="sidebar sidebar-offcanvas" style="background: linear-gradient(180deg, #496683 0%, #131d27 100%)" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style="background: linear-gradient(180deg, #223446 0%, #496683 100%)">
             <a class="sidebar-brand brand-logo" href="index.html"><img src={{ asset('assets/images/Archivi.png') }}
-                    alt="logo" /></a>
+                    alt="logo"  /></a>
             <a class="sidebar-brand brand-logo-mini" href="index.html"><img src={{ asset('assets/images/A.png') }}
-                    alt="logo" /></a>
+                    alt="logo"/></a>
         </div>
         <ul class="nav">
             <li class="nav-item profile">
@@ -13,7 +13,7 @@
                         <div class="count-indicator">
                             <img class="img-xs rounded-circle " src="assets/images/faces/face15.jpg" alt="">
                             <span class="count bg-success"></span>
-                        </div>
+                        </div> 
                         <div class="profile-name">
                             <h5 class="mb-0 font-weight-normal">MOHAMMED</h5>
                             <span>Administrator</span>
@@ -62,9 +62,9 @@
                 <span class="nav-link">Navigation</span>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href={{ route('dashboard') }}>
-                    <span class="menu-icon">
-                        <i class="mdi mdi-view-dashboard"></i>
+                <a class="nav-link d-flex align-items-center" href="{{ route('dashboard') }}">
+                    <span class="d-flex align-items-center">
+                        <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
                     </span>
                     <span class="menu-title">Dashboard</span>
                 </a>
@@ -94,24 +94,24 @@
             </li> --}}
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ route('entreprise.index') }}">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-domain"></i>
+                    <span>
+                        <img src="{{ asset('assets/images/icons/office.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
                     </span>
                     <span class="menu-title">Entreprise</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ route('classe.index') }}">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-table-large"></i>
+                    <span>
+                        <img src="{{ asset('assets/images/icons/menu.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
                     </span>
                     <span class="menu-title">Classes</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ route('dossiers.index') }}">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-chart-bar"></i>
+                    <span>
+                        <img src="{{ asset('assets/images/icons/folder.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
                     </span>
                     <span class="menu-title">Dossier</span>
                 </a>
@@ -127,8 +127,8 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
                     aria-controls="auth">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-file-multiple "></i>
+                    <span>
+                        <img src={{ asset('assets/images/icons/file.png') }} width="24px" style="margin-right: 10px" alt="">
                     </span>
                     <span class="menu-title">Documents</span>
                     <i class="menu-arrow"></i>
@@ -152,8 +152,8 @@
             <li class="nav-item menu-items">
                 <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
                     aria-controls="auth">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-security"></i>
+                    <span>
+                        <img src="{{ asset('assets/images/icons/align.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
                     </span>
                     <span class="menu-title">Rubriques</span>
                     <i class="menu-arrow"></i>
@@ -168,4 +168,5 @@
             </li>
         </ul>
     </nav>
+
 </div>
