@@ -21114,7 +21114,7 @@ div.tagsinput {
 
 .container-scroller {
   display: flex;
-  position: relative; }
+  position: relative;}
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
@@ -21135,7 +21135,8 @@ div.tagsinput {
   padding: 1.875rem 1.75rem;
   width: 100%;
   -webkit-flex-grow: 1;
-  flex-grow: 1; }
+  flex-grow: 1; 
+  background-color: white;}
 
 #TypeRubrique , #type_document_id , #type_rubrique_id ,#document_id, #rubrique_id {
   overflow-y: hidden;
@@ -21147,4 +21148,154 @@ div.tagsinput {
 
 body{
   background-color: white;
+}
+
+
+/* Document Details Page Styles */
+#document-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#document-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: none;
+}
+
+#document-header {
+  padding: 15px 20px;
+  border-bottom: none;
+}
+
+#document-title {
+  color: #2c3e50;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+#document-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #3490dc;
+}
+
+#document-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#document-body {
+  padding: 25px;
+}
+
+#document-info-section {
+  padding-right: 25px;
+}
+
+#document-rubriques-section {
+  padding-left: 25px;
+}
+
+.form-control-plaintext {
+  padding: 0.375rem 0;
+  border-bottom: 1px dashed #dee2e6;
+  min-height: 38px;
+}
+
+#rubriques-table {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#rubriques-table thead {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 10;
+}
+
+#rubriques-table tbody tr:hover {
+  background-color: rgba(52, 144, 220, 0.1);
+}
+
+#view-document-button {
+  transition: all 0.3s ease;
+  border-width: 2px;
+}
+
+#view-document-button:hover {
+  background-color: #3490dc;
+  color: white !important;
+  transform: translateY(-2px);
+}
+
+#back-button, #edit-button {
+  min-width: 120px;
+  transition: all 0.3s ease;
+}
+
+#back-button:hover {
+  transform: translateX(-3px);
+}
+
+#edit-button:hover {
+  transform: translateX(3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #document-info-section, 
+  #document-rubriques-section {
+      padding: 0;
+      border-right: none;
+  }
+  
+  #document-info-section {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+  }
+  
+  #document-body {
+      padding: 20px 15px;
+  }
+  
+  #document-footer .btn {
+      margin-bottom: 10px;
+      width: 100%;
+  }
+  
+  #document-footer .btn:not(:last-child) {
+      margin-right: 0;
+  }
+}
+
+/* Animation for loading */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#document-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Tooltip customization */
+.tooltip-inner {
+  max-width: 300px;
+  padding: 8px 12px;
+  background-color: #2c3e50;
+  font-size: 0.9rem;
+}
+
+.bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before,
+.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: #2c3e50;
 }
