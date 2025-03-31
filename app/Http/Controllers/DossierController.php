@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDossierRequest;
 use App\Http\Requests\UpdateDossierRequest;
 use App\Models\Entreprise;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class DossierController extends Controller
 {
@@ -50,7 +51,9 @@ class DossierController extends Controller
      */
     public function show(Dossier $dossier)
     {
-        return view('dossiers.show', compact('dossier'));
+        $documents = DB::table('documents')->where('dossier_id',$dossier->id)->get();
+        // dd($documents);
+        return view('dossiers.show', compact('dossier','documents'));
     }
 
     /**

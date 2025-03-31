@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Version;
-use App\Http\Requests\StoreVersionRequest;
-use App\Http\Requests\UpdateVersionRequest;
+use App\Models\TypeUser;
+use App\Http\Requests\StoreTypeUserRequest;
+use App\Http\Requests\UpdateTypeUserRequest;
 
-class VersionController extends Controller
+class TypeUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $versions = Version::all();
-        return view('versions.index', compact('versions'));
+        //
     }
 
     /**
@@ -28,7 +27,7 @@ class VersionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreVersionRequest $request)
+    public function store(StoreTypeUserRequest $request)
     {
         //
     }
@@ -36,7 +35,7 @@ class VersionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Version $version)
+    public function show(TypeUser $typeUser)
     {
         //
     }
@@ -44,7 +43,7 @@ class VersionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Version $version)
+    public function edit(TypeUser $typeUser)
     {
         //
     }
@@ -52,7 +51,7 @@ class VersionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVersionRequest $request, Version $version)
+    public function update(UpdateTypeUserRequest $request, TypeUser $typeUser)
     {
         //
     }
@@ -60,7 +59,7 @@ class VersionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Version $version)
+    public function destroy(TypeUser $typeUser)
     {
         //
     }

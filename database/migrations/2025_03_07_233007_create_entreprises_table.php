@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('entreprises', function (Blueprint $table) {
             $table->id();
-            $table->string('RaisonSocial');
+            // $table->string('RaisonSocial');
             $table->string('NomClient');
-            $table->string('Adresse');
-            $table->string('Ville')->nullable();
-            $table->string('Tel')->nullable();
-            $table->string('Fax')->nullable();
-            $table->string('Email')->nullable();
-            $table->string('TP')->nullable();
-            $table->string('RegistreCommerce')->nullable();
-            $table->string('IdentificationFiscale')->nullable();
-            $table->string('CNSS')->nullable();
-            $table->string('ICE')->nullable();
-            $table->string('Observation')->nullable();
+            // $table->string('Adresse');
+            // $table->string('Ville')->nullable();
+            // $table->string('Tel')->nullable();
+            // $table->string('Fax')->nullable();
+            // $table->string('Email')->nullable();
+            // $table->string('TP')->nullable();
+            // $table->string('RegistreCommerce')->nullable();
+            // $table->string('IdentificationFiscale')->nullable();
+            // $table->string('CNSS')->nullable();
+            // $table->string('ICE')->nullable();
+            // $table->string('Observation')->nullable();
             $table->timestamps();
         });
     }
