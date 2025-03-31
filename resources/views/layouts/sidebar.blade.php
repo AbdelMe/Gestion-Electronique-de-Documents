@@ -13,12 +13,17 @@
                 <div class="profile-desc">
                     <div class="profile-pic">
                         <div class="count-indicator">
-                            <img class="img-xs rounded-circle " src="assets/images/faces/face15.jpg" alt="">
+                            <img class="img-xs rounded-circle " src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt="">
                             <span class="count bg-success"></span>
                         </div> 
                         <div class="profile-name">
+<<<<<<< HEAD
                             <h5 class="mb-0 font-weight-normal">MOHAMMED</h5>
                             <span>Administrator</span>
+=======
+                            <h5 class="mb-0 font-weight-normal">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                            <span>Gold Member</span>
+>>>>>>> 0b800275a665b0abd2dec4ca8d31d2b90f4c544f
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i

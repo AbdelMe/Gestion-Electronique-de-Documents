@@ -6,7 +6,7 @@
     <div class="container ">
 
         <div class="row">
-            <livewire:display-rubriques />
+            @livewire(name: 'display-rubriques')
         </div>
     </div>
 @endsection
