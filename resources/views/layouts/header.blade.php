@@ -70,17 +70,10 @@
                 <i class="mdi mdi-view-grid"></i>
             </a>
         </li>
-<<<<<<< HEAD
         <li class="nav-item dropdown border-left" >
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
                 data-toggle="dropdown" aria-expanded="false">
                 <img src={{ asset('assets/images/icons/mail.png') }} width="20px" alt="">
-=======
-        <li class="nav-item dropdown border-left">
-            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown"
-                aria-expanded="false">
-                <i class="mdi mdi-email"></i>
->>>>>>> 0b800275a665b0abd2dec4ca8d31d2b90f4c544f
                 <span class="count bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
@@ -175,40 +168,15 @@
         <li class="nav-item dropdown">
             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                 <div class="navbar-profile">
-<<<<<<< HEAD
                     <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt="">
                     <p class="mb-0 d-none d-sm-block navbar-profile-name text-dark">MOHAMMED</p>
-=======
-                    <img class="img-xs rounded-circle" src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
-                    </p>
->>>>>>> 0b800275a665b0abd2dec4ca8d31d2b90f4c544f
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>
             </a>            
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-<<<<<<< HEAD
                 aria-labelledby="profileDropdown"
                 style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);width: 200px">
                 <h6 class="p-3 mb-0 text-center">Profile</h6>
-=======
-                aria-labelledby="profileDropdown">
-                <h6 class="p-3 mb-0">Profile</h6>
-
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item" href="{{ route('profile.edit') }}">
-                    <div class="preview-thumbnail">
-                        <div class="preview-icon bg-dark rounded-circle">
-                            <i class="mdi mdi-settings text-success"></i>
-                        </div>
-                    </div>
-                    <div class="preview-item-content">
-                        <p class="preview-subject mb-1">Profile</p>
-                    </div>
-                </a>
-
->>>>>>> 0b800275a665b0abd2dec4ca8d31d2b90f4c544f
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
@@ -228,11 +196,11 @@
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        {{-- <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-link p-0 m-0 text-danger" style="cursor: pointer;">Logout</button>
                         </form>
-                    </div>
+                    </div> --}}
                 </a>
                 
                 <div class="dropdown-divider"></div>
