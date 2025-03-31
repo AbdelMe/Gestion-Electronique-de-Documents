@@ -20340,7 +20340,7 @@ div.tagsinput {
 /* Navbar */
 .navbar {
   font-weight: normal;
-  background: #191c24;
+  background: white;
   left: 244px;
   transition: left 0.25s ease;
   -webkit-transition: left 0.25s ease;
@@ -20640,7 +20640,7 @@ div.tagsinput {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background: #191c24;
+    background: white;
     width: 200px;
     height: 50px; }
     @media (max-width: 991px) {
@@ -20651,6 +20651,7 @@ div.tagsinput {
       font-size: 1.5rem;
       line-height: 48px;
       margin-right: 0;
+      background-color: white;
       /* padding: 0rem 0rem 0rem 1.3rem; */
       text-align: center;
       width: 100%; }
@@ -20695,6 +20696,7 @@ div.tagsinput {
         -webkit-align-items: center;
         align-items: center;
         white-space: nowrap;
+        cursor: pointer;
         padding: 0.8rem 10px 0.8rem 1.188rem;
         color: #6c7293;
         -webkit-transition-duration: 0.45s;
@@ -20853,7 +20855,11 @@ div.tagsinput {
             color: #6c7293; }
           .sidebar .nav .nav-item.profile .profile-desc .dropdown-menu {
             padding: 0;
-            margin-top: 1.25rem; }
+            margin-top: 1.25rem; 
+            margin-left: 170px;
+          border: none;
+          outline: none;
+          width: 200px;}
             .sidebar .nav .nav-item.profile .profile-desc .dropdown-menu .dropdown-item {
               padding: 11px 13px; }
               .sidebar .nav .nav-item.profile .profile-desc .dropdown-menu .dropdown-item.preview-item {
