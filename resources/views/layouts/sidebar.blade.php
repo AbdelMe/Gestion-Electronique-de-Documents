@@ -1,11 +1,13 @@
 <div>
     <nav class="sidebar sidebar-offcanvas" style="background: linear-gradient(180deg, #496683 0%, #131d27 100%)" id="sidebar">
-        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top" style="background: linear-gradient(180deg, #223446 0%, #496683 100%)">
-            <a class="sidebar-brand brand-logo" href="index.html"><img src={{ asset('assets/images/Archivi.png') }}
+        <!-- Brand and profile sections remain the same -->
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+            <a class="sidebar-brand brand-logo" href="index.html"><img src={{ asset('assets/images/Untitled-1.png') }}
                     alt="logo"  /></a>
-            <a class="sidebar-brand brand-logo-mini" href="index.html"><img src={{ asset('assets/images/A.png') }}
+            <a class="sidebar-brand brand-logo-mini" href="index.html"><img src={{ asset('assets/images/Untitled-12png.png') }}
                     alt="logo"/></a>
         </div>
+        
         <ul class="nav">
             <li class="nav-item profile">
                 <div class="profile-desc">
@@ -22,6 +24,7 @@
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i
                             class="mdi mdi-dots-vertical"></i></a>
                     <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
+                        style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);"
                         aria-labelledby="profile-dropdown">
                         <a href="#" class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
@@ -58,115 +61,108 @@
                     </div>
                 </div>
             </li>
+            {{-- <li class="nav-item nav-category">
+                <span class="nav-link">Navigation</span>
+            </li> --}}
+        
+        <ul class="nav pt-0">
+            <!-- Profile section remains the same -->
+            
             <li class="nav-item nav-category">
                 <span class="nav-link">Navigation</span>
             </li>
+            
+            <!-- Regular menu items -->
             <li class="nav-item menu-items">
-                <a class="nav-link d-flex align-items-center" href="{{ route('dashboard') }}">
-                    <span class="d-flex align-items-center">
-                        <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
-                    </span>
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Dashboard</span>
                 </a>
             </li>
-            {{-- <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                    aria-controls="ui-basic">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-laptop"></i>
-                    </span>
-                    <span class="menu-title">Entrprise</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> 
-                            <a class="nav-link" href="pages/ui-features/buttons.html">Create Entreprise</a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link"
-                                href="pages/ui-features/dropdowns.html">Dropdowns</a>
-                        </li>
-                        <li class="nav-item"> <a class="nav-link"
-                                href="pages/ui-features/typography.html">Typography</a>
-                        </li>
-                    </ul>
-                </div>
-            </li> --}}
+            
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ route('entreprise.index') }}">
-                    <span>
-                        <img src="{{ asset('assets/images/icons/office.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
-                    </span>
+                    <img src="{{ asset('assets/images/icons/office.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Entreprise</span>
                 </a>
             </li>
+            
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ route('classe.index') }}">
-                    <span>
-                        <img src="{{ asset('assets/images/icons/menu.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
-                    </span>
+                    <img src="{{ asset('assets/images/icons/menu.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Classes</span>
                 </a>
             </li>
+            
             <li class="nav-item menu-items">
                 <a class="nav-link" href="{{ route('dossiers.index') }}">
-                    <span>
-                        <img src="{{ asset('assets/images/icons/folder.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
-                    </span>
+                    <img src="{{ asset('assets/images/icons/folder.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Dossier</span>
                 </a>
             </li>
-            {{-- <li class="nav-item menu-items">
-                <a class="nav-link" href="#">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-contacts"></i>
-                    </span>
-                    <span class="menu-title">Documents</span>
-                </a>
-            </li> --}}
+            
+            <!-- Documents menu with sub-items -->
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
-                    aria-controls="auth">
-                    <span>
-                        <img src={{ asset('assets/images/icons/file.png') }} width="24px" style="margin-right: 10px" alt="">
-                    </span>
+                <a class="nav-link menu-toggle" data-target="#documents-menu">
+                    <img src="{{ asset('assets/images/icons/file.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Documents</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="auth">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href={{ route('documents.index') }}>Documents</a></li>
-                        <li class="nav-item"> <a class="nav-link" href={{ route('type_documents.index') }}>Type Document</a></li>
-                    </ul>
-                </div>
+                <ul class="nav sub-menu" id="documents-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('documents.index') }}">Documents</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('type_documents.index') }}">Type Document</a></li>
+                </ul>
             </li>
-            {{-- <li class="nav-item menu-items">
-                <a class="nav-link"
-                    href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-                    <span class="menu-icon">
-                        <i class="mdi mdi-file-document-box"></i>
-                    </span>
-                    <span class="menu-title">Rubrique</span>
-                </a>
-            </li> --}}
+            
+            <!-- Rubriques menu with sub-items -->
             <li class="nav-item menu-items">
-                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
-                    aria-controls="auth">
-                    <span>
-                        <img src="{{ asset('assets/images/icons/align.png') }}" width="24px" style="margin-right: 8px" alt="Dashboard Icon">
-                    </span>
+                <a class="nav-link menu-toggle" data-target="#rubriques-menu">
+                    <img src="{{ asset('assets/images/icons/align.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Rubriques</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="auth">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href={{ route('rubrique.index') }}>Rubriques</a></li>
-                        <li class="nav-item"> <a class="nav-link" href={{ route('type_rubrique.index') }}>Type Rubrique</a></li>
-                        <li class="nav-item"> <a class="nav-link" href={{ route('rubrique_document.index') }}>Rubrique Document</a></li>
-                    </ul>
-                </div>
+                <ul class="nav sub-menu" id="rubriques-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('rubrique.index') }}">Rubriques</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('type_rubrique.index') }}">Type Rubrique</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('rubrique_document.index') }}">Rubrique Document</a></li>
+                </ul>
             </li>
+
+            {{-- <li class="nav-item menu-items">
+                <a class="nav-link" href="{{ route('versions.index') }}">
+                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
+                    <span class="menu-title">Version</span>
+                </a>
+            </li> --}}
         </ul>
     </nav>
+    <style>
+        /* Submenu styling */
+.sub-menu {
+    display: none;
+    padding-left: 20px;
+    list-style: none;
+}
 
+.sub-menu.show {
+    display: block;
+}
+
+/* Menu arrow rotation */
+.menu-arrow {
+    float: right;
+    transition: transform 0.2s ease;
+    transform: rotate(-90deg);
+}
+
+/* Active state styling */
+.nav-item.active > .nav-link {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #fff;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+    </style>
 </div>

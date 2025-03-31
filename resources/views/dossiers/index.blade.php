@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Dossiers')
+@section('title', 'Dossiers')
 
 @section('alert')
     @if (session('updated'))
@@ -33,17 +33,18 @@
                     <th class="text-light">Action</th>
                 </tr>
             </thead>
-            <tbody >
+            <tbody>
                 @foreach ($dossiers as $dossier)
                     <tr style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                         <td>{{ $dossier->id }}</td>
                         <td>{{ $dossier->entreprise->NomClient }}</td>
-                        <td>{{ $dossier->Dossier }}</td>
+                        <td><a href={{ route('dossiers.show', $dossier->id)}}> <img src="{{ asset('assets/images/icons/folder.png') }}" width="24px"
+                                    style="margin-right: 8px" alt="Dashboard Icon">
+                                {{ $dossier->Dossier }}</a></td>
                         <td>{{ $dossier->Annee }}</td>
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                <a href="{{ route('dossiers.edit', $dossier->id) }}"
-                                    class="btn">
+                                <a href="{{ route('dossiers.edit', $dossier->id) }}" class="btn">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 <form action="{{ route('dossiers.destroy', $dossier->id) }}" method="POST"
@@ -61,5 +62,7 @@
             </tbody>
         </table>
         <p>{{ $dossiers->links() }}</p>
+        
     </div>
+    
 @endsection

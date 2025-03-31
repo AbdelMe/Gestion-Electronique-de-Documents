@@ -8,7 +8,7 @@
         <form action={{ route('entreprise.store') }} method="POST">
             @csrf
             <div class="row">
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="RaisonSocial">Raison Sociale</label>
                         <input type="text" class="form-control @error('RaisonSocial') is-invalid @enderror text-white" id="RaisonSocial" name="RaisonSocial" value="{{ old('RaisonSocial', $entreprise->RaisonSocial ?? '') }}" placeholder="Entrez la raison sociale">
@@ -16,7 +16,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-md-6">
                     <div class="form-group mb-3">
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Adresse">Adresse</label>
@@ -149,7 +149,7 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Créer Entreprise</button>

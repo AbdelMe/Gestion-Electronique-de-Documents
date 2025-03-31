@@ -22,21 +22,21 @@
         <h2 class="mb-4 text-white">Liste des Rubriques</h2>
         <a href={{ route('rubrique.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
             Rubrique</a>
-        <table class="table table-bordered table-striped text-white">
-            <thead class="thead-dark">
+        <table class="table text-white">
+            <thead style="background: linear-gradient(90deg, #131d27 0%, #496683 100%)">
                 <tr>
-                    <th>#</th>
-                    <th>Type Rubrique</th>
-                    <th>Type Document</th>
-                    <th>Rubrique Nom</th>
+                    <th class="text-light">#</th>
+                    <th class="text-light">Type Rubrique</th>
+                    <th class="text-light">Type Document</th>
+                    <th class="text-light">Rubrique Nom</th>
                     {{-- <th>Valeur</th> --}}
                     {{-- <th>Obligatoire</th> --}}
-                    <th>Actions</th>
+                    <th class="text-light">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($rubriques as $rubrique)
-                    <tr>
+                    <tr style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                         <td>{{ $rubrique->id }}</td>
                         <td>{{ $rubrique->TypeRubrique->TypeRubrique }}</td>
                         <td>{{ $rubrique->TypeDocument->TypeDocument }}</td>
@@ -50,14 +50,14 @@
                                 <i class="bi bi-eye-fill"></i>
                             </a> --}}
                                 <a href={{ route('rubrique.edit', $rubrique->id) }}
-                                    class="btn btn-warning btn-sm px-2 py-1 mx-1">
+                                    class="btn">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 <form action="{{ route('rubrique.destroy', $rubrique->id) }}" method="POST"
                                     onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Rubrique ?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm px-2 py-1 mx-1">
+                                    <button class="btn">
                                         <i class="bi bi-trash3-fill"></i>
                                     </button>
                                 </form>

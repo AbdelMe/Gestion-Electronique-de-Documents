@@ -30,23 +30,24 @@
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="{{ $rub->Rubrique }}">{{ $rub->Rubrique }}</label>
-                        @if ($rub->typeRubrique->Hauteur !== null && $rub->typeRubrique->Largeur !== null)
+                        @if ($rub->typeRubrique->TypeRubrique == 'textarea')
+                            <textarea class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
+                                id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]" rows="5"></textarea>
+                        @else
                             <input type="{{ $rub->typeRubrique->TypeRubrique }}"
                                 class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
-                                id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]"
-                                {{ $rub->Obligatoire ? 'required' : '' }}
-                                style="width: {{ $rub->typeRubrique->Largeur }}px; height: {{ $rub->typeRubrique->Hauteur }}px;">
-                        @else
+                                id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]">
+
+                            {{-- style="width: {{ $rub->typeRubrique->Largeur }}px; height: {{ $rub->typeRubrique->Hauteur }}px;" --}}
+                            {{-- 
                             @if ($rub->typeRubrique->TailleRubrique == null)
-                                <textarea class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
-                                    id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]" rows="5"
-                                    {{ $rub->Obligatoire ? 'required' : '' }}></textarea>
+
                             @else
                                 <input type="{{ $rub->typeRubrique->TypeRubrique }}"
                                     class="form-control @error($rub->Rubrique) is-invalid @enderror text-white"
                                     id="rubriques[{{ $rub->Rubrique }}]" name="rubriques[{{ $rub->id }}]"
-                                    {{ $rub->Obligatoire ? 'required' : '' }}>
-                            @endif
+                                    >
+                            @endif --}}
                         @endif
                         @error($rub->Rubrique)
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -99,47 +100,47 @@
                     </div>
                 </div>
             @endif --}}
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="titre">Titre</label>
-                        <input type="text" class="form-control @error('titre') is-invalid @enderror text-white"
-                            id="titre" name="titre" value="{{ old('titre') }}">
-                        @error('titre')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="titre">Titre</label>
+                    <input type="text" class="form-control @error('titre') is-invalid @enderror text-white"
+                        id="titre" name="titre" value="{{ old('titre') }}">
+                    @error('titre')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="metadata">Metadata</label>
-                        <input type="text" class="form-control @error('metadata') is-invalid @enderror text-white"
-                            id="metadata" name="metadata" value="{{ old('metadata') }}">
-                        @error('metadata')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="metadata">Metadata</label>
+                    <input type="text" class="form-control @error('metadata') is-invalid @enderror text-white"
+                        id="metadata" name="metadata" value="{{ old('metadata') }}">
+                    @error('metadata')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="tag">Tag</label>
-                        <input type="text" class="form-control @error('tag') is-invalid @enderror text-white"
-                            id="tag" name="tag" value="{{ old('tag') }}">
-                        @error('tag')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="tag">Tag</label>
+                    <input type="text" class="form-control @error('tag') is-invalid @enderror text-white"
+                        id="tag" name="tag" value="{{ old('tag') }}">
+                    @error('tag')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="CheminDocument">CheminDocument</label>
-                        <input type="file" class="form-control @error('CheminDocument') is-invalid @enderror text-white"
-                            id="CheminDocument" name="CheminDocument" value="{{ old('CheminDocument') }}">
-                        @error('CheminDocument')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="CheminDocument">CheminDocument</label>
+                    <input type="file" class="form-control @error('CheminDocument') is-invalid @enderror text-white"
+                        id="CheminDocument" name="CheminDocument" value="{{ old('CheminDocument') }}">
+                    @error('CheminDocument')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
+            </div>
             @if (count($dossiers) > 0)
                 <div class="col-md-6">
                     <div class="form-group mb-3">

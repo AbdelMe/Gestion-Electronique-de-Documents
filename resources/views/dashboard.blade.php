@@ -3,21 +3,22 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    {{-- <div class="row mb-4">
+    <h1 class="text-dark">Dashboard</h1>
+    <div class="row mb-4">
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+            <div>
+                <div style="outline:none; background: linear-gradient(90deg, #496683 0%, #131d27 100%);padding: 20px">
                     <h4 class="card-title">Actions rapides</h4>
-                    <a href="{{ route('entreprise.create') }}" class="btn btn-warning mb-2"><i class="bi bi-plus-lg"></i> Créer Entreprise</a>
-                    <a href="{{ route('classe.create') }}" class="btn btn-info mb-2"><i class="bi bi-plus-lg"></i> Créer Service</a>
-                    <a href="{{ route('dossiers.create') }}" class="btn btn-primary mb-2"><i class="bi bi-plus-lg"></i> Créer Dossier</a>
-                    <a href="{{ route('documents.create') }}" class="btn btn-success mb-2"><i class="bi bi-plus-lg"></i> Créer Document</a>
+                    <a href="{{ route('entreprise.create') }}" class="btn btn-outline-warning mb-2"><i class="bi bi-plus-lg"></i> Créer Entreprise</a>
+                    <a href="{{ route('classe.create') }}" class="btn btn-outline-info mb-2"><i class="bi bi-plus-lg"></i> Créer Service</a>
+                    <a href="{{ route('dossiers.create') }}" class="btn btn-outline-primary mb-2"><i class="bi bi-plus-lg"></i> Créer Dossier</a>
+                    <a href="{{ route('documents.create') }}" class="btn btn-outline-success mb-2"><i class="bi bi-plus-lg"></i> Créer Document</a>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
-    {{-- <div class="row">
+    <div class="row">
         @php
             $lastMonthEntreprises = 12;
             $lastMonthClasse = 20;
@@ -31,8 +32,8 @@
         @endphp
 
         <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
+            <div>
+                <div style="outline:none; background: linear-gradient(90deg, #496683 0%, #131d27 100%);padding: 30px">
                     <div class="row">
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
@@ -50,12 +51,12 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Nombre d'entreprises</h6>
+                    <h6 class="font-weight-normal text-light">Nombre d'entreprises</h6>
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+        {{-- <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -78,11 +79,11 @@
                     <h6 class="text-muted font-weight-normal">Nombre de services</h6>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
+            <div>
+                <div style="outline:none; background: linear-gradient(90deg, #496683 0%, #131d27 100%);padding: 30px">
                     <div class="row">
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
@@ -100,14 +101,14 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Nombre de dossiers</h6>
+                    <h6 class="font-weight-normal text-light">Nombre de dossiers</h6>
                 </div>
             </div>
         </div>
 
         <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
+            <div>
+                <div style="outline:none; background: linear-gradient(90deg, #496683 0%, #131d27 100%);padding: 30px">
                     <div class="row">
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
@@ -125,30 +126,30 @@
                             </a>
                         </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Nombre de documents</h6>
+                    <h6 class=" font-weight-normal text-light">Nombre de documents</h6>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
-    {{-- <div class="row mb-4">
+    <div class="row mb-4">
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Activités récentes</h4>
-                    <ul class="list-group">
+            <div>
+                <div style="outline:none; background: linear-gradient(90deg, #496683 0%, #131d27 100%);padding: 30px">
+                    <h4 >Activités récentes</h4>
+                    <ul class="list-group ">
                         @foreach ($recentActivities as $activity)
-                            <li class="list-group-item d-flex justify-content-between text-light align-items-center" style="background-color: #232936">
+                            <li class="list-group-item d-flex justify-content-between text-light align-items-center" style="outline:none; background: linear-gradient(90deg,#496683 0%, #131d27 100%);">
                                 <div>
                                     @if ($activity['type'] === 'document')
-                                        <strong>Nouveau Document:</strong> {{ $activity['name'] }} (Created on {{ $activity['created_at']->format('Y-m-d') }})
+                                        <strong>Nouveau Document:</strong> {{ $activity['name'] }} (Créé le {{ $activity['created_at']->format('Y-m-d') }})
                                     @endif
                                 </div>
                                 <div class="d-flex align-items-center">
                                     @if ($activity['is_new'])
                                         <span class="badge badge-pill badge-success mr-2">Nouveau</span>
                                     @endif
-                                    <a href="{{ asset('storage/' . $activity['file_path']) }}" class="btn btn-primary btn-sm rounded-pill" target="_blank">
+                                    <a href={{ route('documents.show', $activity['id']) }} class="btn btn-outline-light btn-sm rounded-pill">
                                         <i class="bi bi-eye"></i> voir
                                     </a>
                                 </div>
@@ -158,5 +159,5 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection

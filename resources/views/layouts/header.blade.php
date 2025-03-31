@@ -14,7 +14,8 @@
             <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown"
                 aria-expanded="false" href="#">+ Créer Nouveau</a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="createbuttonDropdown">
+                aria-labelledby="createbuttonDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);width: 250px">
                 <h6 class="p-3 mb-0">Projects</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item" href={{ route('entreprise.create') }}>
@@ -69,14 +70,15 @@
                 <i class="mdi mdi-view-grid"></i>
             </a>
         </li>
-        <li class="nav-item dropdown border-left">
+        <li class="nav-item dropdown border-left" >
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
                 data-toggle="dropdown" aria-expanded="false">
                 <img src={{ asset('assets/images/icons/mail.png') }} width="20px" alt="">
                 <span class="count bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="messageDropdown">
+                aria-labelledby="messageDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                 <h6 class="p-3 mb-0">Messages</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
@@ -119,7 +121,8 @@
                 <span class="count bg-danger"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="notificationDropdown">
+                aria-labelledby="notificationDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                 <h6 class="p-3 mb-0">Notifications</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
@@ -166,13 +169,14 @@
             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                 <div class="navbar-profile">
                     <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">MOHAMMED</p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name text-dark">MOHAMMED</p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="profileDropdown">
-                <h6 class="p-3 mb-0">Profile</h6>
+                aria-labelledby="profileDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);width: 200px">
+                <h6 class="p-3 mb-0 text-center">Profile</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">

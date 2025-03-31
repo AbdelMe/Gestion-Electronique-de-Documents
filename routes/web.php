@@ -8,6 +8,8 @@ use App\Http\Controllers\RubriqueController;
 use App\Http\Controllers\RubriqueDocumentController;
 use App\Http\Controllers\TypeDocumentController;
 use App\Http\Controllers\TypeRubriqueController;
+use App\Http\Controllers\VersionController;
+use App\Livewire\EditDocument;
 use App\Models\Classe;
 use App\Models\Document;
 use App\Models\Dossier;
@@ -55,6 +57,7 @@ Route::get('/documents/{document}/edit', [DocumentController::class, 'edit'])->n
 Route::put('/documents/{document}', [DocumentController::class, 'update'])->name('documents.update');
 Route::get('/documents/show/{document}', [DocumentController::class, 'show'])->name('documents.show');
 Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+// Route::get('/documents/{document}/edit', [EditDocument::class, 'render'])->name('render');
 
 Route::get('/documents/SelectedType', [DocumentController::class, 'SelectedType'])->name('documents.SelectedType');
 
@@ -70,5 +73,13 @@ Route::resource('/rubrique_document', RubriqueDocumentController::class);
 Route::get('/login', function (){
     return view('Login&Register.index');
 });
+
+// Route::resource('/documents/{document}', [DocumentController::class , 'download']);
+Route::get('/documents/download/{document}', [DocumentController::class, 'download'])
+    ->name('documents.download');
+
+
+Route::resource('/versions', VersionController::class);
+
 
 

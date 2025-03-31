@@ -18,19 +18,19 @@
 @endsection
 @section('content')
     <div class="container mt-1">
-        <h2 class="mb-4 text-white">Liste des Entreprises</h2>
+        <h2 class="mb-4 text-dark">Liste des Entreprises</h2>
         <a href={{ route('entreprise.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
             Entreprise</a>
         <table class="table text-light">
             <thead style="background: linear-gradient(90deg, #131d27 0%, #496683 100%)">
                 <tr>
                     <th class="text-light">#</th>
-                    <th class="text-light">Raison Sociale</th>
-                    <th class="text-light">Nom Client</th>
-                    <th class="text-light">Adresse</th>
+                    {{-- <th class="text-light">Raison Sociale</th> --}}
+                    <th class="text-light">Departement</th>
+                    {{-- <th class="text-light">Adresse</th>
                     <th class="text-light">Ville</th>
                     <th class="text-light">Fax</th>
-                    <th class="text-light">Email</th>
+                    <th class="text-light">Email</th> --}}
                     <th class="text-light">Actions</th>
                 </tr>
             </thead>
@@ -38,18 +38,18 @@
                 @foreach ($entreprises as $entreprise)
                     <tr style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                         <td>{{ $entreprise->id }}</td>
-                        <td>{{ $entreprise->RaisonSocial }}</td>
+                        {{-- <td>{{ $entreprise->RaisonSocial }}</td> --}}
                         <td>{{ $entreprise->NomClient }}</td>
-                        <td>{{ $entreprise->Adresse }}</td>
+                        {{-- <td>{{ $entreprise->Adresse }}</td>
                         <td>{{ $entreprise->Ville }}</td>
                         <td>{{ $entreprise->Tel }}</td>
-                        <td>{{ $entreprise->Email }}</td>
+                        <td>{{ $entreprise->Email }}</td> --}}
                         <td class="text-center">
                             <div class="d-inline-flex gap-2">
-                                <a href="{{ route('entreprise.show', $entreprise->id) }}"
+                                {{-- <a href="{{ route('entreprise.show', $entreprise->id) }}"
                                     class="btn">
                                     <i class="bi bi-eye-fill"></i>
-                                </a>
+                                </a> --}}
                                 <a href={{ route('entreprise.edit', $entreprise->id) }}
                                     class="btn">
                                     <i class="bi bi-pencil-square"></i>
