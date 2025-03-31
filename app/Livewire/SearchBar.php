@@ -13,12 +13,20 @@ class SearchBar extends Component
     {
         $docs = [];
         
-        if(strlen($this->search_doc) >= 3) {
-            $docs = Document::with(['dossier'])
-                ->where('LibelleDocument', 'LIKE', '%'.$this->search_doc.'%')
+        if(strlen($this->search_doc) >= 2) {
+            $docs = Document::with(['dossier', 'typeDocument'])
+                ->where(function($query) {
+                    $query->where('titre', 'LIKE', '%'.$this->search_doc.'%')
+                          ->orWhereHas('dossier', function($q) {
+                              $q->where('Dossier', 'LIKE', '%'.$this->search_doc.'%');
+                          });
+                })
+                // ->limit(10)
                 ->get();
         }
 
-        return view('livewire.search-bar', compact('docs'));
+        return view('livewire.search-bar', [
+            'docs' => $docs
+        ]);
     }
 }
