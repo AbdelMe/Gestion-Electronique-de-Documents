@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ count($entreprises) }}</h3>
+                                <h3 class="mb-0">{{ count($entreprises ?? []) }}</h3>
                                 <p class="ml-2 mb-0 font-weight-medium text-{{ $entreprisesChange > 0 ? 'success' : ($entreprisesChange < 0 ? 'danger' : 'muted') }}">
                                     {{ $entreprisesChange > 0 ? "+$entreprisesChange Nouveau" : ($entreprisesChange < 0 ? "$entreprisesChange Supprimé" : "Ecurie") }}
                                 </p>
@@ -90,7 +90,7 @@
                     <div class="row">
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ count($dossiers) }}</h3>
+                                <h3 class="mb-0">{{ count($dossiers ?? []) }}</h3>
                                 <p class="ml-2 mb-0 font-weight-medium text-{{ $dossiersChange > 0 ? 'success' : ($dossiersChange < 0 ? 'danger' : 'primary') }}">
                                     {{ $dossiersChange > 0 ? "+$dossiersChange Nouveau" : ($dossiersChange < 0 ? "$dossiersChange Supprimé" : "Ecurie") }}
                                 </p>
@@ -115,7 +115,7 @@
                     <div class="row">
                         <div class="col-9">
                             <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ count($documents) }}</h3>
+                                <h3 class="mb-0">{{ count($documents ?? []) }}</h3>
                                 <p class="ml-2 mb-0 font-weight-medium text-{{ $documentsChange > 0 ? 'success' : ($documentsChange < 0 ? 'danger' : 'muted') }}">
                                     {{ $documentsChange > 0 ? "+$documentsChange Nouveau" : ($documentsChange < 0 ? "$documentsChange Supprimé" : "Ecurie") }}
                                 </p>
