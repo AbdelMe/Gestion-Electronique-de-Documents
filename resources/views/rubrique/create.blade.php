@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="Obligatoire">Obligatoire</label>
@@ -77,7 +77,7 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-success">Créer Rubrique</button>

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('droit_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('entreprise_id');
-            $table->string('Service');
-            $table->foreign('entreprise_id')->references('id')->on('entreprises');
+            $table->foreignId('droit_id')->constrained('droits');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('document_id')->constrained('documents');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('droit_users');
     }
 };

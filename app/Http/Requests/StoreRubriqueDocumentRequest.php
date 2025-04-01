@@ -23,7 +23,7 @@ class StoreRubriqueDocumentRequest extends FormRequest
     {
         return [
             'rubrique_id' => 'required|numeric|exists:rubriques,id',
-            'Valeur' => 'required|string|max:255',
+            'Valeur' => 'required|text',
             'document_id' => 'required|numeric|exists:documents,id',
         ];
     }

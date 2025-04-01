@@ -15,5 +15,21 @@ class Document extends Model
     {
         return $this->belongsTo(Dossier::class);
     }
+    public function Etat()
+    {
+        return $this->belongsTo(Etat::class);
+    }
+    // public function Version()
+    // {
+    //     return $this->hasMany(Version::class);
+    // }
+    public function RubriqueDocument()
+    {
+        return $this->hasMany(RubriqueDocument::class);
+    }
+    public function versions()
+{
+    return $this->hasMany(Version::class);
+}
 }
 

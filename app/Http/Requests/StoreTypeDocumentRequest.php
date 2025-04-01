@@ -23,7 +23,6 @@ class StoreTypeDocumentRequest extends FormRequest
     {
         return [
             'TypeDocument' => 'required|string|max:255',
-            'DureeVie' => 'required|numeric|max:100',
         ];
     }
 }

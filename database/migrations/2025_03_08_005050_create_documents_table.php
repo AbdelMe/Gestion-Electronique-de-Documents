@@ -13,21 +13,24 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('type_document_id');
-            $table->string('LibelleDocument');
-            $table->string('DocumentNumerique')->nullable();
-            $table->string('CheminDocument');
-            $table->string('OCR');
+            $table->string('titre');
             $table->date('Date');
-            $table->string('Cote');
-            $table->date('Index');
+            $table->text('metadata');
+            $table->text('tag');
+            $table->string('CheminDocument')->nullable();
+            $table->unsignedBigInteger('etat_id');
+            $table->unsignedBigInteger('classe_id');
             $table->unsignedBigInteger('dossier_id');
-            $table->integer('Supprimer');
-            $table->integer('EnCoursSuppression');
-            $table->foreign('type_document_id')->references('id')->on('type_documents');
+            $table->unsignedBigInteger('type_document_id');
+            // $table->string('Cote');
+            // $table->date('Index');
+            // $table->integer('Supprimer');
+            // $table->integer('EnCoursSuppression');
+            $table->foreign('etat_id')->references('id')->on('etats');
+            $table->foreign('classe_id')->references('id')->on('classes');
             $table->foreign('dossier_id')->references('id')->on('dossiers');
+            $table->foreign('type_document_id')->references('id')->on('type_documents');
             $table->timestamps();
-
         });
     }
 

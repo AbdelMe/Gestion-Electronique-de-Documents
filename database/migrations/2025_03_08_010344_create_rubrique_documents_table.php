@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rubrique_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rubrique_id');
-            $table->string('Valeur');
+            $table->text('Valeur');
             $table->unsignedBigInteger('document_id');
             $table->foreign('rubrique_id')->references('id')->on('rubriques');
             $table->foreign('document_id')->references('id')->on('documents');

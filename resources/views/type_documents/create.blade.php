@@ -19,7 +19,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group mb-3">
                         <label for="DureeVie">Dureé</label>
                         <input type="number" class="form-control @error('DureeVie') is-invalid @enderror text-white" id="DureeVie" name="DureeVie" value="{{ old('DureeVie', $DureeVie->DureeVie ?? '') }}" placeholder="Entrez le nom du DureeVie">
@@ -27,7 +27,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="form-group text-center">

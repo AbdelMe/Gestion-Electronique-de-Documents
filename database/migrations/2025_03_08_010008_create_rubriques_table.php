@@ -16,8 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('type_rubrique_id');
             $table->unsignedBigInteger('type_document_id');
             $table->string('Rubrique');
-            $table->string('Valeur');
-            $table->integer('Obligatoire');
             $table->foreign('type_rubrique_id')->references('id')->on('type_rubriques');
             $table->foreign('type_document_id')->references('id')->on('type_documents');
             $table->timestamps();

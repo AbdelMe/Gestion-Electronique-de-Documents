@@ -20,38 +20,28 @@
 <div class="container mt-1">
     <h2 class="mb-4 text-white">Type Rubrique Liste</h2>
     <a href={{ route('type_rubrique.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter Type Rubrique</a>
-    <table class="table table-bordered table-striped text-white">
-        <thead class="thead-dark">
+    <table class="table text-white">
+        <thead style="background: linear-gradient(90deg, #131d27 0%, #496683 100%)">
             <tr>
-                <th>#</th>
-                <th>Type Rubrique</th>
-                <th>Taille Rubrique</th>
-                <th>Date</th>
-                <th>Booleane</th>
-                <th>Largeur (Px)</th>
-                <th>Hauteur (Px)</th>
-                <th>Action</th>
+                <th class="text-light">#</th>
+                <th class="text-light">Type Rubrique</th>
+                <th class="text-light">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($type_rubrique as $type)
-                <tr>
+                <tr style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                     <td>{{ $type->id }}</td>
                     <td>{{ $type->TypeRubrique}}</td>
-                    <td>{{ $type->TailleRubrique }}</td>
-                    <td>{{ $type->Date }}</td>
-                    <td>{{ $type->Booleane == 1 ? 'OUI' : 'NON' }}</td>
-                    <td>{{ $type->Largeur == NULL ? 'NULL' : $type->Largeur . ' px' }}</td>
-                    <td>{{ $type->Hauteur == NULL ? 'NULL' : $type->Hauteur . ' px' }}</td>
                     <td class="text-center">
                         <div class="d-inline-flex gap-2">
-                            <a href={{ route('type_rubrique.edit', $type->id) }} class="btn btn-warning btn-sm px-2 py-1 mx-1">
+                            <a href={{ route('type_rubrique.edit', $type->id) }} class="btn">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <form action="{{ route('type_rubrique.destroy', $type->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Type ?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm px-2 py-1 mx-1">
+                                <button type="submit" class="btn">
                                     <i class="bi bi-trash3-fill"></i>
                                 </button>
                             </form>

@@ -14,11 +14,6 @@ return new class extends Migration
         Schema::create('type_rubriques', function (Blueprint $table) {
             $table->id();
             $table->string('TypeRubrique');
-            $table->integer('TailleRubrique')->nullable();
-            $table->integer('Date')->nullable();
-            $table->integer('Booleane');
-            $table->integer('Largeur')->nullable();
-            $table->integer('Hauteur')->nullable();
             $table->timestamps();
         });
     }

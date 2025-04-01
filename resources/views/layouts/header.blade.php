@@ -5,16 +5,17 @@
     <ul class="navbar-nav w-100">
         <li class="nav-item w-100">
             <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                <input type="text" class="form-control" placeholder="Search document">
+                <livewire:search-bar />
             </form>
         </li>
     </ul>
     <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item dropdown d-none d-lg-block">
             <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown"
-                aria-expanded="false" href="#">+ Create New</a>
+                aria-expanded="false" href="#">+ Créer Nouveau</a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="createbuttonDropdown">
+                aria-labelledby="createbuttonDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);width: 250px">
                 <h6 class="p-3 mb-0">Projects</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item" href={{ route('entreprise.create') }}>
@@ -28,14 +29,14 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item" href={{ route('services.create') }}>
+                <a class="dropdown-item preview-item" href={{ route('classe.create') }}>
                     <div class="preview-thumbnail">
                         <div class="preview-icon bg-dark rounded-circle">
                             <i class="mdi mdi-web text-info"></i>
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <p class="preview-subject ellipsis mb-1">Service</p>
+                        <p class="preview-subject ellipsis mb-1">Classes</p>
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
@@ -69,14 +70,15 @@
                 <i class="mdi mdi-view-grid"></i>
             </a>
         </li>
-        <li class="nav-item dropdown border-left">
-            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown"
-                aria-expanded="false">
-                <i class="mdi mdi-email"></i>
+        <li class="nav-item dropdown border-left" >
+            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
+                data-toggle="dropdown" aria-expanded="false">
+                <img src={{ asset('assets/images/icons/mail.png') }} width="20px" alt="">
                 <span class="count bg-success"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="messageDropdown">
+                aria-labelledby="messageDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                 <h6 class="p-3 mb-0">Messages</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
@@ -115,11 +117,12 @@
         <li class="nav-item dropdown border-left">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
                 data-toggle="dropdown">
-                <i class="mdi mdi-bell"></i>
+                <img src={{ asset('assets/images/icons/notification-bell.png') }} width="20px" alt="">
                 <span class="count bg-danger"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="notificationDropdown">
+                aria-labelledby="notificationDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
                 <h6 class="p-3 mb-0">Notifications</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
@@ -165,29 +168,15 @@
         <li class="nav-item dropdown">
             <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                 <div class="navbar-profile">
-                    <img class="img-xs rounded-circle" src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">
-                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
-                    </p>
+                    <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name text-dark">MOHAMMED</p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                 </div>
             </a>            
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                aria-labelledby="profileDropdown">
-                <h6 class="p-3 mb-0">Profile</h6>
-
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item" href="{{ route('profile.edit') }}">
-                    <div class="preview-thumbnail">
-                        <div class="preview-icon bg-dark rounded-circle">
-                            <i class="mdi mdi-settings text-success"></i>
-                        </div>
-                    </div>
-                    <div class="preview-item-content">
-                        <p class="preview-subject mb-1">Profile</p>
-                    </div>
-                </a>
-
+                aria-labelledby="profileDropdown"
+                style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);width: 200px">
+                <h6 class="p-3 mb-0 text-center">Profile</h6>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
@@ -207,11 +196,11 @@
                         </div>
                     </div>
                     <div class="preview-item-content">
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        {{-- <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-link p-0 m-0 text-danger" style="cursor: pointer;">Logout</button>
                         </form>
-                    </div>
+                    </div> --}}
                 </a>
                 
                 <div class="dropdown-divider"></div>

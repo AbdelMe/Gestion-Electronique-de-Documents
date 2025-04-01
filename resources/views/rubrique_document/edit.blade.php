@@ -39,7 +39,7 @@
                             @foreach ($documents as $document)
                                 <option value="{{ $document->id }}"
                                     {{ old('document_id', $rubriqueDocument->document_id) == $document->id ? 'selected' : '' }}>
-                                    {{ $document->LibelleDocument }}
+                                    {{ $document->titre }}
                                 </option>
                             @endforeach
                         </select>
