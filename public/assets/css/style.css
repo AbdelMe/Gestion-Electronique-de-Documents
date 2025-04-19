@@ -20624,12 +20624,22 @@ div.tagsinput {
 
 /* Sidebar */
 .sidebar {
+  overflow: auto;
+  scrollbar-width: none;    
+  -ms-overflow-style: none; 
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;             
+}
+.sidebar {
   min-height: calc(100vh - 70px);
   background: #191c24;
   font-weight: normal;
   padding: 0;
   width: 200px;
   height: 100vh;
+  overflow: auto;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -20641,7 +20651,7 @@ div.tagsinput {
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
     background: white;
-    width: 200px;
+    width: 250px;
     height: 50px; }
     @media (max-width: 991px) {
       .sidebar .sidebar-brand-wrapper {

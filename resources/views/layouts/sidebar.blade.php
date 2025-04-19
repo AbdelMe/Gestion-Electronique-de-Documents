@@ -2,9 +2,9 @@
     <nav class="sidebar sidebar-offcanvas" style="background: linear-gradient(180deg, #496683 0%, #131d27 100%)" id="sidebar">
         <!-- Brand and profile sections remain the same -->
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="index.html"><img src={{ asset('assets/images/Untitled-1.png') }}
+            <a class="sidebar-brand brand-logo" href="#"><img src={{ asset('assets/images/Untitled-1.png') }}
                     alt="logo"  /></a>
-            <a class="sidebar-brand brand-logo-mini" href="index.html"><img src={{ asset('assets/images/Untitled-12png.png') }}
+            <a class="sidebar-brand brand-logo-mini" href="#"><img src={{ asset('assets/images/Untitled-12png.png') }}
                     alt="logo"/></a>
         </div>
         
@@ -13,12 +13,12 @@
                 <div class="profile-desc">
                     <div class="profile-pic">
                         <div class="count-indicator">
-                            {{-- <img class="img-xs rounded-circle " src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt=""> --}}
+                            <img class="img-xs rounded-circle " src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt="">
                             <span class="count bg-success"></span>
                         </div> 
                         <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
-                            <span>Administrator</span>
+                            <h5 class="mb-0 font-weight-normal">{{ Auth::user()->first_name }} </h5>
+                            <span>{{Auth::user()->getRoleNames()->first()}}</span>
                         </div>
                     </div>
                     <a href="#" id="profile-dropdown" data-toggle="dropdown"><i
@@ -77,6 +77,24 @@
                 <a class="nav-link" href="{{ route('dashboard') }}">
                     <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
+                    <span class="menu-title">Users</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
+                    <span class="menu-title">Roles</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
+                    <span class="menu-title">Permitions</span>
                 </a>
             </li>
             
