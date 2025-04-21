@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\TypeUser;
 use App\Http\Requests\StoreTypeUserRequest;
 use App\Http\Requests\UpdateTypeUserRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class TypeUserController extends Controller
 {
@@ -13,7 +16,8 @@ class TypeUserController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view('roles.index',compact('roles'))->with('Added','Role Added successfully!');
     }
 
     /**
@@ -21,15 +25,22 @@ class TypeUserController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('roles.create',compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTypeUserRequest $request)
+    public function store(Request $request)
     {
-        //
+        $role = Role::create(['name' => $request->name]);
+        $user = User::find($request->user_id);
+
+        $user->assignRole($role);
+        $roles = Role::all();
+
+        return view('roles.index',compact('roles'))->with('Added','Role Added successfully!');
     }
 
     /**
@@ -59,8 +70,11 @@ class TypeUserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TypeUser $typeUser)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        $roles = Role::all();
+        return view('roles.index',compact('roles'))->with('deleted','Role deleted successfully!');
+        // dd($role);
     }
 }
