@@ -11,11 +11,15 @@ use App\Http\Controllers\TypeRubriqueController;
 use App\Http\Controllers\VersionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DroitController;
+use App\Http\Controllers\DroitUserController;
+use App\Http\Controllers\TypeUserController;
 use App\Livewire\EditDocument;
 use App\Models\Classe;
 use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\Entreprise;
+use App\Models\TypeUser;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -95,9 +99,11 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::resource('/type_rubrique', TypeRubriqueController::class);
-
+    
     Route::resource('/rubrique_document', RubriqueDocumentController::class);
-
+    
+    Route::resource('/roles', TypeUserController::class);
+    Route::resource('/permitions', DroitController::class);
 
     // Route::get('/login', function () {
 //     return view('Login&Register.index');

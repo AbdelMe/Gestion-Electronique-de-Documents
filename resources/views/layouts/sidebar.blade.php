@@ -86,13 +86,13 @@
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+                <a class="nav-link" href="{{ route('roles.index') }}">
                     <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Roles</span>
                 </a>
             </li>
             <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+                <a class="nav-link" href="{{ route('permitions.index') }}">
                     <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
                     <span class="menu-title">Permitions</span>
                 </a>

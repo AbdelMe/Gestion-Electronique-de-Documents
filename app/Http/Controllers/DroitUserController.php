@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DroitUser;
 use App\Http\Requests\StoreDroitUserRequest;
 use App\Http\Requests\UpdateDroitUserRequest;
+use Spatie\Permission\Models\Permission;
 
 class DroitUserController extends Controller
 {
