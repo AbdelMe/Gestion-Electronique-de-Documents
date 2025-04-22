@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Droit;
 use App\Http\Requests\StoreDroitRequest;
 use App\Http\Requests\UpdateDroitRequest;
+use Spatie\Permission\Models\Permission;
 
 class DroitController extends Controller
 {
@@ -13,7 +14,8 @@ class DroitController extends Controller
      */
     public function index()
     {
-        //
+        $permitions = Permission::all();
+        return view('permitions.index',compact('permitions'));
     }
 
     /**
