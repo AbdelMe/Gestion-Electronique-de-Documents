@@ -138,7 +138,7 @@ class DocumentController extends Controller
             'type_document_id' => 'nullable|exists:type_documents,id',
             'rubriques' => 'nullable|array',
         ]);
-    
+
         // Update basic document fields
         $document->titre = $request->titre;
         $document->Date = now();
@@ -148,21 +148,21 @@ class DocumentController extends Controller
         $document->classe_id = $request->classe_id;
         $document->dossier_id = $request->dossier_id;
         $document->type_document_id = $request->type_document_id;
-    
+
         // Handle file upload if present
         if ($request->hasFile('CheminDocument')) {
             // Delete old file if it exists
             if ($document->CheminDocument) {
                 Storage::disk('public')->delete($document->CheminDocument);
             }
-            
+
             $file = $request->file('CheminDocument');
             $filePath = $file->store('documents', 'public');
             $document->CheminDocument = $filePath;
         }
-    
+
         $document->save();
-    
+
         // Handle rubriques
         if ($request->has('rubriques')) {
             foreach ($request->rubriques as $rubrique_id => $valeur) {
@@ -171,7 +171,7 @@ class DocumentController extends Controller
                     'rubrique_id' => $rubrique_id,
                     'document_id' => $document->id
                 ])->first();
-    
+
                 if (!empty($valeur)) {
                     if ($existingRubrique) {
                         // Update existing rubrique
@@ -190,7 +190,7 @@ class DocumentController extends Controller
                 }
             }
         }
-    
+
         return redirect()->route('documents.index')->with('Updated', 'Document updated successfully!');
     }
 
@@ -257,4 +257,14 @@ class DocumentController extends Controller
 
         return response()->download($path, basename($path), $headers);
     }
+
+    public function versions(Document $document)
+    {
+        $versions = $document->versions()
+            ->orderByDesc('numero')
+            ->paginate(10); // Adjust the number as needed
+    
+        return view('documents.versions', compact('document', 'versions'));
+    }
+    
 }
