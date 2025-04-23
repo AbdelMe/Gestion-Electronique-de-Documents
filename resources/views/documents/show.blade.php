@@ -137,24 +137,25 @@
                                 <label class="col-sm-4 col-form-label fw-bold text-dark">Versions:</label>
                                 <div class="col-sm-8">
                                     @if($document->versions->count() > 0)
-                                        <div class="list-group">
-                                            @foreach($document->versions->sortByDesc('numero') as $version)
+                                        <div class="list-group mb-2">
+                                            @foreach($document->versions->sortByDesc('numero')->take(3) as $version)
                                                 <a href="{{ route('versions.show', [$document->id, $version->id]) }}" 
                                                    class="list-group-item list-group-item-action">
-                                                    <div class="d-flex justify-content-between">
-                                                        <span>Version {{ $version->numero }}</span>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <span class="fw-medium">Version {{ $version->numero }}</span>
                                                         <small class="text-muted">{{ $version->date->format('Y-m-d') }}</small>
                                                     </div>
                                                     @if($version->description)
-                                                        <small class="text-muted d-block">{{ Str::limit($version->description, 50) }}</small>
+                                                        <small class="text-muted d-block mt-1">{{ Str::limit($version->description, 50) }}</small>
                                                     @endif
                                                 </a>
                                             @endforeach
-                                            <a href="{{ route('versions.show', [$document->id, $version->id]) }}"
-                                                class="btn btn-outline-github">
-                                                <i class="fas fa-edit "></i>voir Tout
-                                            </a>
                                         </div>
+                                        <!-- "See All" button that links to a dedicated versions page -->
+                                        <a href="{{ route('documents.versions', $document->id) }}" 
+                                           class="btn btn-sm btn-outline-primary">
+                                           <i class="fas fa-list me-1"></i> View All Versions ({{ $document->versions->count() }})
+                                        </a>
                                     @else
                                         <span class="text-muted">No versions available</span>
                                     @endif
@@ -195,7 +196,7 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                    <tfoot>
+                                    {{-- <tfoot>
                                         <tr class="text-dark">
                                             <td colspan="2">
                                                 <a href="{{ route('documents.edit', $document->id) }}"
@@ -204,7 +205,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> --}}
                                 </table>
                             </div>
                         @else
