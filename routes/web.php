@@ -117,6 +117,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/versions', VersionController::class);
     Route::resource('/classe', ClasseController::class);
 
+    Route::get('/documents/{document}/versions', [DocumentController::class, 'versions'])
+     ->name('documents.versions');
+
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
