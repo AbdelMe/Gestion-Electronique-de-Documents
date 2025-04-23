@@ -64,10 +64,8 @@
             {{-- <li class="nav-item nav-category">
                 <span class="nav-link">Navigation</span>
             </li> --}}
-        
         <ul class="nav pt-0">
             <!-- Profile section remains the same -->
-            
             <li class="nav-item nav-category">
                 <span class="nav-link">Navigation</span>
             </li>
@@ -132,7 +130,7 @@
                 </ul>
             </li>
             
-            <!-- Rubriques menu with sub-items -->
+            <!-- Rubriques menu with typeRubrique & rubriqueDocument -->
             <li class="nav-item menu-items">
                 <a class="nav-link menu-toggle" data-target="#rubriques-menu">
                     <img src="{{ asset('assets/images/icons/align.png') }}" width="24px" style="margin-right: 8px" alt="">
@@ -155,7 +153,7 @@
         </ul>
     </nav>
     <style>
-        /* Submenu styling */
+/* Submenu styling */
 .sub-menu {
     display: none;
     padding-left: 20px;
@@ -184,3 +182,4 @@
 }
     </style>
 </div>
+

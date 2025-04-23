@@ -5,7 +5,7 @@
 @section('content')
     <div class="container rounded bg-black mt-5 mb-5">
         <div class="row">
-            <div class="col-md-3 border-right">
+            <div class="col-md-3">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <div class="profile-image-container">
                         <img class="profile-image" width="150px"
@@ -20,13 +20,13 @@
                             height: 150px;
                             border-radius: 50%;
                             overflow: hidden;
-                            border: 4px solid #ff4500;
+                            /* border: 4px solid #ff4500; */
                             /* Instagram-like gradient border */
                             display: flex;
                             justify-content: center;
                             align-items: center;
                             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                            background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+                            /* background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); */
                         }
 
                         /* Profile Image */
@@ -45,13 +45,13 @@
             </div>
 
 
-            <div class="col-md-9 border-right">
+            <div class="col-md-9">
                 <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="">
+                        <div class="d-flex justify-content-between align-items-center">
                             <h4 class="text-right">Profile Settings</h4>
                         </div>
 

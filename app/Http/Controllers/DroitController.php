@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Droit;
 use App\Http\Requests\StoreDroitRequest;
 use App\Http\Requests\UpdateDroitRequest;
+use App\Models\User;
 use Spatie\Permission\Models\Permission;
 
 class DroitController extends Controller
@@ -23,7 +24,8 @@ class DroitController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('permitions.create',compact('users'));
     }
 
     /**

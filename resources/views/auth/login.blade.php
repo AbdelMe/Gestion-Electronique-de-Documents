@@ -19,7 +19,7 @@
 
         <!-- Right Side with Compact Login Form -->
         <div class="col-md-4 col-10">
-            <div class="p-4 bg-white rounded shadow-sm" style="max-width: 400px;">
+            <div class="p-4  rounded shadow-sm" style="max-width: 400px;">
                 <div class="text-center mb-4">
                     <h3 class="h5 fw-bold text-primary mb-1">Sign In</h3>
                     <p class="small text-muted">Entrez vos coordonnées ci-dessous</p>
@@ -38,7 +38,6 @@
                             @endforeach
                         </div>
                     @endif --}}
-
                     <!-- Email Input -->
                     <div class="mb-3">
                         <label for="email" class="form-label small fw-semibold">{{ __('Email') }}</label>
@@ -51,7 +50,6 @@
                             </div>
                         @enderror
                     </div>
-
                     <!-- Password Input -->
                     <div class="mb-3">
                         <label for="password" class="form-label small fw-semibold">{{ __('Password') }}</label>
