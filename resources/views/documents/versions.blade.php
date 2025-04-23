@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Document Versions - ' . $document->title)
+@section('title', 'Document Versions - ' . $document->titre)
 
 @section('content')
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card shadow-sm">
-                <div class="card-header text-light" style="background: linear-gradient(90deg, #131d27 0%, #496683 100%)">
+            <div class="">
+                <div class=" text-light">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">
-                            <i class="bi bi-clock-history me-2"></i>
-                            Versions pour : {{ $document->title }}
+                        <h5 class="mb-3 text-dark">
+                            <i class="bi bi-clock-history me-2 "></i>
+                            Versions pour : {{ $document->titre }}
                         </h5>
-                        <a href="{{ route('documents.show', $document->id) }}" class="btn btn-sm btn-light">
+                        <a href="{{ route('documents.show', $document->id) }}" class="btn btn-sm btn-light mb-3">
                             <i class="bi bi-arrow-left me-1"></i> Retour au document
                         </a>
                     </div>
                 </div>
 
-                <div class="card-body">
+                <div>
                     @if($versions->count() > 0)
                         <div class="table-responsive">
                             <table class="table text-light">
@@ -35,7 +35,7 @@
                                     @foreach($versions as $version)
                                     <tr style="background: linear-gradient(90deg, #496683 0%, #131d27 100%)">
                                         <td class="fw-bold">Version {{ $version->numero }}</td>
-                                        <td>{{ $version->date->format('M d, Y H:i') }}</td>
+                                        <td>{{ $version->date->format('M d, Y') }}</td>
                                         <td>
                                             @if($version->description)
                                                 {{ $version->description }}
