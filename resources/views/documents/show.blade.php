@@ -3,27 +3,30 @@
 @section('title', 'Document Details')
 
 @section('content')
-    <div class="container">
-        <h2 class="mb-4 text-start text-dark">Document Details</h2>
+    <div class="container mx-auto px-4 py-4">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 dark:text-white">Document Details</h2>
 
-        <div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 border-end">
-                        <div class="document-info">
-                            <h5 class="mb-4 text-primary"><i class="fas fa-file-alt me-2"></i>Document Information</h5>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden dark:border-gray-800 dark:bg-white/[0.03]">
+            <div class="p-6">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Left Column - Document Information -->
+                    <div class="md:w-1/2 md:pr-6 md:border-r md:border-gray-200 dark:md:border-gray-700">
+                        <h5 class="text-lg font-semibold text-blue-600 mb-4 flex items-center ">
+                            <i class="fas fa-file-alt mr-2"></i>Document Information
+                        </h5>
 
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Titre de document:</label>
-                                <div class="col-sm-8">
-                                    <p class="form-control-plaintext">{{ $document->titre ?? 'N/A' }}</p>
+                        <div class="space-y-4">
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Titre de document:</label>
+                                <div class="w-2/3">
+                                    <p class="text-gray-800 dark:text-gray-300">{{ $document->titre ?? 'N/A' }}</p>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Type:</label>
-                                <div class="col-sm-8">
-                                    <p class="form-control-plaintext">{{ $document->TypeDocument->TypeDocument ?? 'N/A' }}
-                                    </p>
+                            
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Type:</label>
+                                <div class="w-2/3">
+                                    <p class="text-gray-800 dark:text-gray-300">{{ $document->TypeDocument->TypeDocument ?? 'N/A' }}</p>
                                 </div>
                             </div>
 
@@ -31,162 +34,158 @@
                                 @php
                                     $extension = strtolower(pathinfo($document->CheminDocument, PATHINFO_EXTENSION));
                                     $fileUrl = asset('storage/' . $document->CheminDocument);
-                                    $localPath = public_path('storage/' . $document->CheminDocument); // Local file path
+                                    $localPath = public_path('storage/' . $document->CheminDocument);
                                 @endphp
 
-                                <div class="mb-3 row">
-                                    <label class="col-sm-4 col-form-label fw-bold text-dark">Document:</label>
-                                    <div class="col-sm-8">
+                                <div class="flex flex-wrap">
+                                    <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Document:</label>
+                                    <div class="w-2/3 space-x-2">
                                         @if ($extension === 'pdf')
                                             <a href="{{ $fileUrl }}" target="_blank"
-                                                class="btn btn-sm btn-outline-primary me-2">
-                                                <i class="fas fa-eye me-1"></i> View PDF
+                                                class="inline-flex items-center px-3 py-1 border border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-800">
+                                                <i class="fas fa-eye mr-1"></i> View PDF
                                             </a>
                                             <a href="{{ route('documents.download', $document->id) }}"
-                                                class="btn btn-sm btn-outline-dark">
-                                                <i class="fas fa-download me-1"></i> Download
+                                                class="inline-flex items-center px-3 py-1 border border-gray-500 text-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-300">
+                                                <i class="fas fa-download mr-1"></i> Download
                                             </a>
 
                                         @elseif(in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
                                             <a href="{{ $fileUrl }}" target="_blank"
-                                                class="btn btn-sm btn-outline-primary me-2">
-                                                <i class="fas fa-image me-1"></i> View Image
+                                                class="inline-flex items-center px-3 py-1 border border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-800">
+                                                <i class="fas fa-image mr-1"></i> View Image
                                             </a>
                                             <a href="{{ route('documents.download', $document->id) }}"
-                                                class="btn btn-sm btn-outline-dark">
-                                                <i class="fas fa-download me-1"></i> Download
+                                                class="inline-flex items-center px-3 py-1 border border-gray-500 text-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-300">
+                                                <i class="fas fa-download mr-1"></i> Download
                                             </a>
 
                                         @elseif(in_array($extension, ['xlsx', 'xls']))
                                             <a href="ms-excel:ofe|u|{{ $fileUrl }}"
-                                                class="btn btn-sm btn-outline-success">
-                                                <i class="fas fa-file-excel me-1"></i> Open in Excel
+                                                class="inline-flex items-center px-3 py-1 border border-green-500 text-green-600 rounded-xl hover:bg-green-50 dark:hover:bg-gray-800">
+                                                <i class="fas fa-file-excel mr-1"></i> Open in Excel
                                             </a>
                                             <a href="{{ route('documents.download', $document->id) }}"
-                                                class="btn btn-sm btn-outline-dark">
-                                                <i class="fas fa-download me-1"></i> Download
+                                                class="inline-flex items-center px-3 py-1 border border-gray-500 text-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-300">
+                                                <i class="fas fa-download mr-1"></i> Download
                                             </a>
 
                                         @elseif(in_array($extension, ['docx', 'doc']))
                                             <a href="ms-word:ofe|u|{{ $fileUrl }}"
-                                                class="btn btn-sm btn-outline-primary">
-                                                <i class="fas fa-file-word me-1"></i> Open in Word
+                                                class="inline-flex items-center px-3 py-1 border border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-800">
+                                                <i class="fas fa-file-word mr-1"></i> Open in Word
                                             </a>
                                             <a href="{{ route('documents.download', $document->id) }}"
-                                                class="btn btn-sm btn-outline-dark">
-                                                <i class="fas fa-download me-1"></i> Download
+                                                class="inline-flex items-center px-3 py-1 border border-gray-500 text-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-300">
+                                                <i class="fas fa-download mr-1"></i> Download
                                             </a>
 
                                         @elseif(in_array($extension, ['pptx', 'ppt']))
                                             <a href="ms-powerpoint:ofe|u|{{ $fileUrl }}"
-                                                class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-file-powerpoint me-1"></i> Open in PowerPoint
+                                                class="inline-flex items-center px-3 py-1 border border-red-500 text-red-600 rounded-xl hover:bg-red-50 dark:hover:bg-gray-800">
+                                                <i class="fas fa-file-powerpoint mr-1"></i> Open in PowerPoint
                                             </a>
                                             <a href="{{ route('documents.download', $document->id) }}"
-                                                class="btn btn-sm btn-outline-dark">
-                                                <i class="fas fa-download me-1"></i> Download
+                                                class="inline-flex items-center px-3 py-1 border border-gray-500 text-gray-600 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-300">
+                                                <i class="fas fa-download mr-1"></i> Download
                                             </a>
                                         @endif
                                     </div>
                                 </div>
                             @endif
 
-
-
-
-
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Date:</label>
-                                <div class="col-sm-8">
-                                    <p class="form-control-plaintext">{{ $document->Date }}</p>
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Date:</label>
+                                <div class="w-2/3">
+                                    <p class="text-gray-800 dark:text-gray-300">{{ $document->Date }}</p>
                                 </div>
                             </div>
 
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Entreprise:</label>
-                                <div class="col-sm-8">
-                                    <p class="form-control-plaintext">
-                                        {{ $document->Dossier->Entreprise->NomClient ?? 'N/A' }}</p>
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Entreprise:</label>
+                                <div class="w-2/3">
+                                    <p class="text-gray-800 dark:text-gray-300">{{ $document->Dossier->Entreprise->NomClient ?? 'N/A' }}</p>
                                 </div>
                             </div>
 
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Dossier:</label>
-                                <div class="col-sm-8">
-                                    <p class="form-control-plaintext">{{ $document->Dossier->Dossier ?? 'N/A' }}</p>
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Dossier:</label>
+                                <div class="w-2/3">
+                                    <p class="text-gray-800 dark:text-gray-300">{{ $document->Dossier->Dossier ?? 'N/A' }}</p>
                                 </div>
                             </div>
 
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Status:</label>
-                                <div class="col-sm-8">
-                                    <span class="badge bg-{{ $document->Etat->color ?? 'secondary' }} text-dark">
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Status:</label>
+                                <div class="w-2/3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-{{ $document->Etat->color ?? 'gray' }}-100 text-{{ $document->Etat->color ?? 'gray' }}-800">
                                         {{ $document->Etat->etat ?? 'N/A' }}
                                     </span>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Créé à:</label>
-                                <div class="col-sm-8">
-                                    <span class="text-dark">
-                                        {{ $document->created_at ?? 'N/A' }}
-                                    </span>
+
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Créé à:</label>
+                                <div class="w-2/3">
+                                    <span class="text-gray-800 dark:text-gray-300">{{ $document->created_at ?? 'N/A' }}</span>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-4 col-form-label fw-bold text-dark">Versions:</label>
-                                <div class="col-sm-8">
+
+                            <div class="flex flex-wrap">
+                                <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Versions:</label>
+                                <div class="w-2/3">
                                     @if($document->versions->count() > 0)
-                                        <div class="list-group mb-2">
+                                        <div class="space-y-2 mb-3">
                                             @foreach($document->versions->sortByDesc('numero')->take(3) as $version)
                                                 <a href="{{ route('versions.show', [$document->id, $version->id]) }}" 
-                                                   class="list-group-item list-group-item-action">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="fw-medium">Version {{ $version->numero }}</span>
-                                                        <small class="text-muted">{{ $version->date->format('Y-m-d') }}</small>
+                                                   class="block p-2 border border-gray-200 dark:border-none rounded-xl hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-900">
+                                                    <div class="flex justify-between items-center">
+                                                        <span class="font-medium text-gray-800 dark:text-gray-300">Version {{ $version->numero }}</span>
+                                                        <small class="text-gray-500 dark:text-gray-300">{{ $version->date->format('Y-m-d') }}</small>
                                                     </div>
                                                     @if($version->description)
-                                                        <small class="text-muted d-block mt-1">{{ Str::limit($version->description, 50) }}</small>
+                                                        <small class="text-gray-500 block mt-1 dark:text-gray-300">{{ Str::limit($version->description, 50) }}</small>
                                                     @endif
                                                 </a>
                                             @endforeach
                                         </div>
-                                        <!-- "See All" button that links to a dedicated versions page -->
                                         <a href="{{ route('documents.versions', $document->id) }}" 
-                                           class="btn btn-sm btn-outline-primary">
-                                           <i class="fas fa-list me-1"></i> View All Versions ({{ $document->versions->count() }})
+                                           class="inline-flex items-center px-3 py-1 border border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-800">
+                                           <i class="fas fa-list mr-1"></i> View All Versions ({{ $document->versions->count() }})
                                         </a>
                                     @else
-                                        <span class="text-muted">No versions available</span>
+                                        <span class="text-gray-500">No versions available</span>
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <h5 class="mb-4 text-primary"><i class="fas fa-tags me-2"></i>Document Rubriques</h5>
+                    <!-- Right Column - Document Rubriques -->
+                    <div class="md:w-1/2">
+                        <h5 class="text-lg font-semibold text-blue-600 mb-4 flex items-center">
+                            <i class="fas fa-tags mr-2"></i>Document Rubriques
+                        </h5>
 
                         @if ($rub_docs->count() > 0)
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead style="background: linear-gradient(90deg, #131d27 0%, #496683 100%)">
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-slate-100">
                                         <tr>
-                                            <th class="text-light">Rubrique</th>
-                                            <th class="text-light">Value</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Rubrique</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Value</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($rub_docs as $rub_doc)
                                             @php
                                                 $rubrique = App\Models\Rubrique::find($rub_doc->rubrique_id);
                                             @endphp
                                             <tr>
-                                                <td class="fw-bold text-dark">{{ $rubrique->Rubrique ?? 'N/A' }}</td>
-                                                <td class="text-dark">
+                                                <td class="px-4 py-2 whitespace-nowrap font-semibold text-gray-800">{{ $rubrique->Rubrique ?? 'N/A' }}</td>
+                                                <td class="px-4 py-2 whitespace-nowrap text-gray-800">
                                                     @if (isset($rub_doc->Valeur) && strlen($rub_doc->Valeur) > 50)
-                                                        <span class="d-inline-block text-truncate" style="max-width: 200px;"
-                                                            data-bs-toggle="tooltip" title="{{ $rub_doc->Valeur }}">
+                                                        <span class="inline-block truncate max-w-xs" title="{{ $rub_doc->Valeur }}">
                                                             {{ substr($rub_doc->Valeur, 0, 50) }}...
                                                         </span>
                                                     @else
@@ -196,32 +195,24 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                    {{-- <tfoot>
-                                        <tr class="text-dark">
-                                            <td colspan="2">
-                                                <a href="{{ route('documents.edit', $document->id) }}"
-                                                    class="btn btn-outline-github ms-2">
-                                                    <i class="fas fa-edit me-2"></i>Print
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tfoot> --}}
                                 </table>
                             </div>
                         @else
-                            <div class="alert alert-info text-dark">
-                                <i class="fas fa-info-circle me-2"></i> Aucune rubrique associée à ce document.
+                            <div class="bg-blue-50 text-blue-800 p-4 rounded-md flex items-start dark:bg-gray-800 dark:text-gray-300">
+                                <i class="fas fa-info-circle mr-2 mt-1"></i> 
+                                <span>Aucune rubrique associée à ce document.</span>
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-center">
-                <a href="{{ route('documents.index') }}" class="btn btn-outline-primary">
-                    <i class="fas fa-arrow-left me-2"></i>Back to List
+            
+            <div class="px-6 py-4 flex justify-center space-x-4">
+                <a href="{{ route('documents.index') }}" class="inline-flex items-center px-4 py-1 border border-blue-500 text-blue-600 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-800">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to List
                 </a>
-                <a href="{{ route('documents.edit', $document->id) }}" class="btn btn-outline-info ms-2">
-                    <i class="fas fa-edit me-2"></i>Edit
+                <a href="{{ route('documents.edit', $document->id) }}" class="inline-flex items-center px-4 py-1 border border-blue-300 text-blue-600 rounded-xl hover:bg-blue-50 dark:hover:bg-gray-800">
+                    <i class="fas fa-edit mr-2"></i>Edit
                 </a>
             </div>
         </div>
@@ -229,14 +220,14 @@
 
     @push('scripts')
         <script>
-            $(document).ready(function() {
-                $('[data-bs-toggle="tooltip"]').tooltip();
-            });
-        </script>
-    @endpush
-    @push('scripts')
-        <script>
             document.addEventListener('DOMContentLoaded', function() {
+                // Initialize tooltips
+                const tooltipElements = document.querySelectorAll('[title]');
+                tooltipElements.forEach(el => {
+                    new bootstrap.Tooltip(el);
+                });
+
+                // Office document handling
                 document.querySelectorAll('.open-office-doc').forEach(button => {
                     button.addEventListener('click', function(event) {
                         event.preventDefault();
@@ -251,14 +242,12 @@
 
                         this.nextElementSibling.style.display = 'block';
 
-                        this.classList.remove('btn-outline-success');
-                        this.classList.add('btn-success');
-                        this.innerHTML =
-                            `<i class="fas fa-check me-1"></i> File downloaded - Open it now`;
+                        this.classList.remove('border-green-500', 'text-green-600', 'hover:bg-green-50');
+                        this.classList.add('bg-green-500', 'text-white');
+                        this.innerHTML = `<i class="fas fa-check mr-1"></i> File downloaded - Open it now`;
                     });
                 });
             });
         </script>
     @endpush
-
 @endsection
