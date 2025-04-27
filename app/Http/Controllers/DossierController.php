@@ -19,7 +19,7 @@ class DossierController extends Controller
     // DossierController.php
     public function index()
     {
-        $dossiers = Dossier::with('entreprise')->paginate(8); 
+        $dossiers = Dossier::with('entreprise')->paginate(12); 
         return view('dossiers.index', compact('dossiers'));
     }
 
