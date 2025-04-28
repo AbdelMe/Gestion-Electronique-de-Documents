@@ -2,69 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Droit;
-use App\Http\Requests\StoreDroitRequest;
-use App\Http\Requests\UpdateDroitRequest;
-use App\Models\User;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
 class DroitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $permitions = Permission::all();
-        return view('permitions.index',compact('permitions'));
+        $permitions = Permission::paginate(5);
+        return view('permitions.index', compact('permitions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $users = User::all();
-        return view('permitions.create',compact('users'));
+        return view('permitions.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreDroitRequest $request)
+    public function store(Request $request)
+    {
+        Permission::create([
+            'name' => $request->name,
+        ]);
+        return redirect()->route('permitions.index')->with('Added', 'Permission added successfully!');;
+    }
+
+    public function show(Permission $permission)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Droit $droit)
+    public function edit(Permission $permition)
     {
-        //
+        return view('permitions.edit', compact('permition'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Droit $droit)
+    public function update(Request $request, Permission $permition)
     {
-        //
+        $permition->update($request->all());
+        return redirect()->route('permitions.index')->with('updated', 'Permission updated successfully!');;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateDroitRequest $request, Droit $droit)
+    public function destroy(Permission $permition)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Droit $droit)
-    {
-        //
+        $permition->delete();
+        return redirect()->route('permitions.index')->with('deleted', 'Permission deleted successfully!');;
     }
 }
