@@ -32,7 +32,7 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                         <div class="p-6">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">Nombre Entreprises</p>
+                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">Entreprises</p>
                                     <div class="flex items-end gap-2">
                                         <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($entreprises ?? []) }}</h3>
                                         <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $entreprisesChange > 0 ? 'bg-green-100 text-green-800' : ($entreprisesChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
