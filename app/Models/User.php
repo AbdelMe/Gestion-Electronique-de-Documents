@@ -13,7 +13,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
-        'type_utilisateur_id',
+        'entreprise_id',
+        'profile_image',
         'first_name',
         'last_name',
         'email',
@@ -22,7 +23,6 @@ class User extends Authenticatable
         'city',
         'postal_code',
         'password',
-        'image'
     ];
 
     protected $hidden = [
@@ -44,6 +44,10 @@ class User extends Authenticatable
     public function typeUtilisateur()
     {
         return $this->belongsTo(TypeUtilisateur::class);
+    }
+    public function entreprise()
+    {
+        return $this->belongsTo(Entreprise::class);
     }
 }
 
