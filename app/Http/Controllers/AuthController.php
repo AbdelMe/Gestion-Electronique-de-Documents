@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -10,13 +11,11 @@ use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
-    // Show Register Form
     public function showRegistrationForm()
     {
         return view('auth.register');
     }
 
-    // Handle Registration
     public function register(Request $request)
     {
         $request->validate([
@@ -41,13 +40,11 @@ class AuthController extends Controller
     }
 
 
-    // Show Login Form
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    // Handle Login
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -65,13 +62,47 @@ class AuthController extends Controller
         ]);
     }
 
-
-
-    // Handle Logout
     public function logout()
     {
         Auth::logout();
         return redirect()->route('login');
     }
-}
 
+
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+
+    public function AddUser()
+    {
+        $entreprises = Entreprise::all();
+        return view('users.AddUser', compact('entreprises'));
+    }
+    public function StoreUser(Request $request)
+    {
+        // dd($request->entreprise_id);
+        // dd($request->file('profile_image'));
+        $validated = $request->validate([
+            'entreprise_id'  => 'nullable|exists:entreprises,id',
+            'profile_image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'first_name'     => 'nullable|string|max:255',
+            'last_name'      => 'nullable|string|max:255',
+            'email'          => 'required|email|unique:users,email',
+            'password'       => 'required|string|min:6',
+            'phone'          => 'nullable|string|max:20',
+            'address'        => 'nullable|string',
+            'city'           => 'nullable|string|max:255',
+            'postal_code'    => 'nullable|string|max:20',
+        ]);
+        if ($request->hasFile('profile_image')) {
+            $path = $request->file('profile_image')->store('profile_images', 'public');
+            $validated['profile_image'] = $path;
+        }
+        $validated['password'] = Hash::make($validated['password']);
+        // $validated['entreprise_id'] = 1;
+        User::create($validated);
+        return redirect()->route('users.index')->with('Added', 'Utilisateur ajouté avec succès.');
+    }
+}
