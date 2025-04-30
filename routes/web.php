@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DroitController;
 use App\Http\Controllers\DroitUserController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TypeUserController;
 use App\Livewire\EditDocument;
 use App\Models\Classe;
@@ -20,6 +21,7 @@ use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\Entreprise;
 use App\Models\TypeUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -103,6 +105,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/rubrique_document', RubriqueDocumentController::class);
     
     Route::resource('/roles', TypeUserController::class);
+    Route::get('/assign-role', [TypeUserController::class , 'assignRole'])->name('roles.assignRole');
+    Route::get('/assignRoleStore', [TypeUserController::class , 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
 
     // Route::get('/login', function () {
@@ -127,8 +131,13 @@ Route::middleware(['auth'])->group(function () {
     
     
     Route::get('/users', [AuthController::class, 'index'])->name('users.index');
+    Route::get('/AddUser', [AuthController::class, 'AddUser'])->name('users.AddUser');
+    Route::post('/StoreUser', [AuthController::class, 'StoreUser'])->name('users.StoreUser');
+    Route::get('/user_permissions', [DroitUserController::class, 'index'])->name('user_permissions.index');
 
 
 
 
 });
+Route::view('/forgot-password' , 'auth.forgot-password')->name('password.request');
+
