@@ -20,6 +20,10 @@ class SearchUser extends Component
             $users = User::role($this->withRol)->get();
             // dd($users);
         }
+        if(!empty($this->withoutRol)){
+            $users = User::withoutRole($this->withoutRol)->get();
+        }
+
         $entreprises = Entreprise::all();
         $roles = Role::all();
         $entreprises = Entreprise::all();
