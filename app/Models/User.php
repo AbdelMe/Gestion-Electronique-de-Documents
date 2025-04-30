@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Notifications\CustomResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements CanResetPassword
 {
     use HasFactory, Notifiable, HasRoles;
 
@@ -49,5 +51,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Entreprise::class);
     }
+
+    public function sendPasswordResetNotification($token)
+{
+    $this->notify(new CustomResetPassword($token));
+}
 }
 
