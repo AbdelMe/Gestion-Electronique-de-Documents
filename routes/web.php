@@ -140,4 +140,4 @@ Route::middleware(['auth'])->group(function () {
 
 });
 Route::view('/forgot-password' , 'auth.forgot-password')->name('password.request');
-
+Route::post('/forgot-password' , [ResetPasswordController::class , 'passwordEmail'])->name('password.email');
