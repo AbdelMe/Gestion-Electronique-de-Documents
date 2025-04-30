@@ -24,6 +24,11 @@ class SearchUser extends Component
             $users = User::withoutRole($this->withoutRol)->get();
         }
     
+        if (!empty($this->selected_entreprise)) {
+            $users = User::with('entreprise')
+                ->where('entreprise_id', $this->selected_entreprise)
+                ->get();
+        }
         if (!empty($this->searchUser)) {
             $users = User::where('first_name', 'like', '%' . $this->searchUser . '%')
             ->orWhere('last_name', 'like', '%' . $this->searchUser . '%')
