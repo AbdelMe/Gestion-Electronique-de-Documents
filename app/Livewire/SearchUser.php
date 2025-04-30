@@ -9,9 +9,20 @@ use Spatie\Permission\Models\Role;
 
 class SearchUser extends Component
 {
-
+    public $selected_entreprise = "";
+    public $withRol = "";
+    public $withoutRol = "";
+    public $searchUser = "";
     public function render()
     {
-        return view('livewire.search-user');
+        $users = [];
+        if(!empty($this->withRol)){
+            $users = User::role($this->withRol)->get();
+            // dd($users);
+        }
+        $entreprises = Entreprise::all();
+        $roles = Role::all();
+        $entreprises = Entreprise::all();
+        return view('livewire.search-user',compact('roles','entreprises','users'));
     }
 }
