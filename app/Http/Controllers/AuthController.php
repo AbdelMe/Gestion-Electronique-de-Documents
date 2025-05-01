@@ -52,7 +52,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials) && Auth::user()->blocked != 1) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
@@ -104,5 +104,20 @@ class AuthController extends Controller
         // $validated['entreprise_id'] = 1;
         User::create($validated);
         return redirect()->route('users.index')->with('Added', 'Utilisateur ajouté avec succès.');
+    }
+
+    public function updateUser(User $user){
+        // dd($user);
+        $entreprises = Entreprise::all();
+        return view('users.updateUser',compact('user','entreprises'));
+    }
+    public function deleteUser(User $user){
+        $user->delete();
+        return to_route('users.index');
+    }
+    public function blockUser(User $user){
+        $user->blocked = 1 ;
+        $user->update();
+        // dd($user->blocked);
     }
 }
