@@ -35,7 +35,7 @@ class TypeUserController extends Controller
      */
     public function store(Request $request)
     {
-        $role = Role::create(['name' => $request->name]);
+        $role = Role::firstOrCreate(['name' => $request->name]);
         // $user = User::find($request->user_id);
 
         // $user->assignRole($role);
