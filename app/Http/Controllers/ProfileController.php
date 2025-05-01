@@ -19,30 +19,26 @@ class ProfileController extends Controller
     // Update profile information
     public function update(Request $request)
     {
+        // dd($request);
         $user = Auth::user();
 
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
+            'profile_image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
             'postal_code' => 'nullable|string|max:20',
-            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Check if a file was uploaded
         if ($request->hasFile('profile_image')) {
-            // Store the image in the 'public' disk, saving it with a unique name
             $path = $request->file('profile_image')->store('profile_images', 'public');
-
-            // Update the user profile image field
-            $user->profile_image = $path;
+            $validated['profile_image'] = $path;
         }
-
-        // Update other user information
         $user->update($validated);
+        // dd($user);
 
         return redirect()->route('dashboard')->with('updated', 'Profile updated successfully!');
     }
