@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('entreprise_id');
+            $table->unsignedBigInteger('entreprise_id')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('profile_image')->nullable();
             $table->rememberToken();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('city')->nullable();
             $table->string('postal_code')->nullable();
+            $table->boolean('blocked')->default(0);
             $table->foreign('entreprise_id')
                 ->references('id')
                 ->on('entreprises');
