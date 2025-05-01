@@ -85,7 +85,18 @@ class TypeUserController extends Controller
         $roles = Role::all();
         return view('assignRole',compact('roles'));
     }
-    public function assignRoleStore(){
-
+    public function assignRoleStore(Request $request)
+    {
+        $request->validate([
+            'role_id' => 'required|exists:roles,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+    
+        $role = Role::findOrFail($request->role_id);
+        $user = User::findOrFail($request->user_id);
+        $user->assignRole($role);
+        session()->flash('success', 'Role assigned successfully!');
+        return redirect()->route('roles.index');
     }
+    
 }
