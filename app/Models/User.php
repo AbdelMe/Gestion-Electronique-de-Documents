@@ -24,6 +24,7 @@ class User extends Authenticatable implements CanResetPassword
         'address',
         'city',
         'postal_code',
+        'blocked',
         'password',
     ];
 
