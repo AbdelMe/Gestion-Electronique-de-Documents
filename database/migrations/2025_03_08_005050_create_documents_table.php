@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('classe_id');
             $table->unsignedBigInteger('dossier_id');
             $table->unsignedBigInteger('type_document_id');
+            $table->unsignedBigInteger('size')->nullable();
             // $table->string('Cote');
             // $table->date('Index');
             // $table->integer('Supprimer');
