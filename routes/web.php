@@ -15,12 +15,14 @@ use App\Http\Controllers\DroitController;
 use App\Http\Controllers\DroitUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TypeUserController;
+use App\Http\Middleware\UpdateLastSeen;
 use App\Livewire\EditDocument;
 use App\Models\Classe;
 use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\Entreprise;
 use App\Models\TypeUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,12 +43,23 @@ Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function () {
-        $entreprises = Entreprise::all();
+        $users = User::all();
         $classe = Classe::all();
         $dossiers = Dossier::all();
         $documents = Document::all();
 
-        //     Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
+        $documentData = $documents->map(function($document) {
+            return [
+                'titre' => $document->titre,
+                'size_gb' => number_format($document->size / 1073741824, 2),
+                'size_mb' => number_format($document->size / 1048576, 2),
+            ];
+        });
+        
+        $totalSizeGb = number_format($documents->sum('size') / 1073741824, 2);
+        $totalSizeMb = number_format($documents->sum('size') / 1048576, 2);
+
+        //Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
         // Route::resource('/dossiers', DossierController::class);
         // Route::resource('/documents', DocumentController::class);
 
@@ -76,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
         usort($recentActivities, function ($a, $b) {
             return $b['created_at'] <=> $a['created_at'];
         });
-        return view('dashboard', compact('entreprises', 'dossiers', 'documents', 'recentActivities'));
+        return view('dashboard', compact('users', 'dossiers', 'documents', 'recentActivities', 'documentData' , 'totalSizeMb' , 'totalSizeGb'));
     })->name('dashboard');
 
 
@@ -106,7 +119,6 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('/roles', TypeUserController::class);
     Route::get('/assign-role', [TypeUserController::class , 'assignRole'])->name('roles.assignRole');
-    Route::get('/assignRoleStore', [TypeUserController::class , 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
 
     // Route::get('/login', function () {
@@ -133,13 +145,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users', [AuthController::class, 'index'])->name('users.index');
     Route::get('/AddUser', [AuthController::class, 'AddUser'])->name('users.AddUser');
     Route::post('/StoreUser', [AuthController::class, 'StoreUser'])->name('users.StoreUser');
-    Route::get('/user_permissions', [DroitUserController::class, 'index'])->name('user_permissions.index');
+   
 
 
 
-
+    //Reset Password
+    Route::view('/forgot-password' , 'auth.forgot-password')->name('password.request');
+    Route::post('/forgot-password' , [ResetPasswordController::class , 'passwordEmail'])->name('password.email');
+    Route::get('/reset-password/{token}',[ResetPasswordController::class , 'passwordReset'])->name('password.reset');
+    Route::post('reset-password',[ResetPasswordController::class , 'passwordUpdate'])->name('password.update');
 });
-Route::view('/forgot-password' , 'auth.forgot-password')->name('password.request');
-Route::post('/forgot-password' , [ResetPasswordController::class , 'passwordEmail'])->name('password.email');
-Route::get('/reset-password/{token}',[ResetPasswordController::class , 'passwordReset'])->name('password.reset');
-Route::post('reset-password',[ResetPasswordController::class , 'passwordUpdate'])->name('password.update');
