@@ -29,3 +29,6 @@
 {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 {{-- <script defer src="//unpkg.com/alpinejs"></script> --}}
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
