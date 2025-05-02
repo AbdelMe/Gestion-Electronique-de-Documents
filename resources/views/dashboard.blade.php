@@ -238,6 +238,103 @@ $documentsChange = count($documents) - $lastMonthDocuments;
             </div>
         </div>
         
-
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const ctx = document.getElementById('documentSizeChart').getContext('2d');
+                const documentTitles = @json($documentData->pluck('titre'));
+                const documentSizesMB = @json($documentData->pluck('size_mb'));
+                
+                const backgroundColors = documentTitles.map((_, i) => 
+                    `hsl(${(i * 360 / documentTitles.length)}, 70%, 70%)`
+                );
+                const borderColors = documentTitles.map((_, i) => 
+                    `hsl(${(i * 360 / documentTitles.length)}, 70%, 50%)`
+                );
+                
+                window.documentSizeChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: documentTitles,
+                        datasets: [{
+                            label: 'Document Size (MB)',
+                            data: documentSizesMB,
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.3,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: '#6B7280',
+                                    font: {
+                                        size: 12
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw + ' MB';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#6B7280'
+                                },
+                                grid: {
+                                    color: 'rgba(229, 231, 235, 0.5)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#6B7280',
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // Dark mode support
+                const observer = new MutationObserver(() => {
+                    const isDark = document.documentElement.classList.contains('dark');
+                    const textColor = isDark ? '#E5E7EB' : '#374151';
+                    const gridColor = isDark ? 'rgba(55, 65, 81, 0.5)' : 'rgba(229, 231, 235, 0.5)';
+                    
+                    window.documentSizeChart.options.scales.x.ticks.color = textColor;
+                    window.documentSizeChart.options.scales.y.ticks.color = textColor;
+                    window.documentSizeChart.options.scales.y.grid.color = gridColor;
+                    window.documentSizeChart.options.plugins.legend.labels.color = textColor;
+                    window.documentSizeChart.update();
+                });
+                
+                observer.observe(document.documentElement, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+            });
+            
+            function changeChartType(type) {
+                window.documentSizeChart.config.type = type;
+                window.documentSizeChart.update();
+            }
+        </script>
     </div>
 @endsection
