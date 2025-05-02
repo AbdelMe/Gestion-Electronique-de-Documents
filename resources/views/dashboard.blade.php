@@ -7,12 +7,12 @@
 
 @section('content')
 @php
-$lastMonthEntreprises = 12;
+$lastMonthUsers = 12;
 $lastMonthClasse = 20;
 $lastMonthDossiers = 8;
 $lastMonthDocuments = 15;
 
-$entreprisesChange = count($entreprises) - $lastMonthEntreprises;
+$usersChanges = count($users) - $lastMonthUsers;
 // $classeChange = count($classe) - $lastMonthClasse;
 $dossiersChange = count($dossiers) - $lastMonthDossiers;
 $documentsChange = count($documents) - $lastMonthDocuments;
@@ -32,11 +32,11 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                         <div class="p-6">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">Entreprises</p>
+                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">Users</p>
                                     <div class="flex items-end gap-2">
-                                        <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($entreprises ?? []) }}</h3>
-                                        <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $entreprisesChange > 0 ? 'bg-green-100 text-green-800' : ($entreprisesChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
-                                            {{ $entreprisesChange > 0 ? "↑ +$entreprisesChange" : ($entreprisesChange < 0 ? "↓ $entreprisesChange" : "→ Stable") }}
+                                        <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($users ?? []) }}</h3>
+                                        <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $usersChanges > 0 ? 'bg-green-100 text-green-800' : ($usersChanges < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
+                                            {{ $usersChanges > 0 ? "↑ +$usersChanges" : ($usersChanges < 0 ? "↓ $usersChanges" : "→ Stable") }}
                                         </span>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                             </div>
                             <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center dark:border-gray-800">
                                 <p class="text-sm text-gray-500 dark:text-white">Depuis le mois dernier</p>
-                                <a href="{{ route('entreprise.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 flex items-center gap-1">
+                                <a href="{{ route('users.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 flex items-center gap-1">
                                     Voir toutes <i class="bi bi-chevron-right"></i>
                                 </a>
                             </div>
@@ -118,13 +118,12 @@ $documentsChange = count($documents) - $lastMonthDocuments;
         
                 @php
                 $buttons = [
-                    ['route' => 'entreprise.create', 'color' => 'gray', 'icon' => 'bi-building', 'label' => 'Créer Entreprise'],
-                    ['route' => 'classe.create', 'color' => 'blue', 'icon' => 'bi-collection', 'label' => 'Créer Classe'],
+                    ['route' => 'users.AddUser', 'color' => 'gray', 'icon' => 'bi-person', 'label' => 'Créer User'],
+                    // ['route' => 'classe.create', 'color' => 'blue', 'icon' => 'bi-collection', 'label' => 'Créer Classe'],
                     ['route' => 'dossiers.create', 'color' => 'indigo', 'icon' => 'bi-folder', 'label' => 'Créer Dossier'],
                     ['route' => 'documents.create', 'color' => 'emerald', 'icon' => 'bi-file-earmark', 'label' => 'Créer Document'],
                 ];
                 @endphp
-        
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
                     @foreach ($buttons as $btn)
                         <a href="{{ route($btn['route']) }}"
@@ -144,7 +143,6 @@ $documentsChange = count($documents) - $lastMonthDocuments;
 
 
 
-        <!-- Recent Activities Section -->
         <div class="mb-8">
             <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
                 <div class="p-6">
@@ -196,5 +194,50 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                 </div>
             </div>
         </div>
+        <div class="mb-8">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
+                <div class="p-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2 dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                        </svg>
+                        Document Size Analysis
+                    </h4>
+                    
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 px-4 py-3 rounded-lg flex-1 min-w-[200px]">
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Total Size</p>
+                            <p class="text-xl font-semibold text-gray-800 dark:text-white">{{ $totalSizeGb }} GB</p>
+                        </div>
+                        <div class="bg-green-50 dark:bg-green-900/30 px-4 py-3 rounded-lg flex-1 min-w-[200px]">
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Average Size</p>
+                            <p class="text-xl font-semibold text-gray-800 dark:text-white">{{ number_format($documentData->avg('size_mb'), 2) }} MB</p>
+                        </div>
+                        {{-- <div class="bg-purple-50 dark:bg-purple-900/30 px-4 py-3 rounded-lg flex-1 min-w-[200px]">
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Largest Document</p>
+                            <p class="text-xl font-semibold text-gray-800 dark:text-white">{{ $largestDocumentSize }} MB</p>
+                        </div> --}}
+                    </div>
+                    
+                    <div class="h-80 dark:bg-gray-800/50 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
+                        <canvas id="documentSizeChart" class="w-full h-full"></canvas>
+                    </div>
+                    
+                    <div class="flex justify-center mt-4 space-x-2">
+                        <button onclick="changeChartType('line')" class="px-3 py-1 text-sm font-medium rounded-lg bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                            Line Chart
+                        </button>
+                        <button onclick="changeChartType('bar')" class="px-3 py-1 text-sm font-medium rounded-lg bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
+                            Bar Chart
+                        </button>
+                        <button onclick="changeChartType('pie')" class="px-3 py-1 text-sm font-medium rounded-lg bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">
+                            Pie Chart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
     </div>
 @endsection
