@@ -41,7 +41,8 @@ class SearchUser extends Component
         if (!empty($this->searchUser)) {
             $query->where(function ($q) {
                 $q->where('first_name', 'like', '%' . $this->searchUser . '%')
-                  ->orWhere('last_name', 'like', '%' . $this->searchUser . '%');
+                  ->orWhere('last_name', 'like', '%' . $this->searchUser . '%')
+                  ->orWhere('email', 'like', '%' . $this->searchUser . '%');
             });
         }
 
