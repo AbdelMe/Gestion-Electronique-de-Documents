@@ -56,6 +56,17 @@ class DocumentController extends Controller
         ]);
 
         $document = new Document();
+
+
+        if ($request->hasFile('CheminDocument')) {
+            $file = $request->file('CheminDocument');
+            $filePath = $file->store('documents', 'public');
+            $document->CheminDocument = $filePath;
+            $size = $file->getSize();
+        }
+
+        
+
         $document->titre = $request->titre;
         $document->Date = now();
         $document->metadata = $request->metadata;
@@ -64,12 +75,7 @@ class DocumentController extends Controller
         $document->classe_id = $request->classe_id;
         $document->dossier_id = $request->dossier_id;
         $document->type_document_id = $request->type_document_id;
-
-        if ($request->hasFile('CheminDocument')) {
-            $file = $request->file('CheminDocument');
-            $filePath = $file->store('documents', 'public');
-            $document->CheminDocument = $filePath;
-        }
+        $document->size = $size;
 
         $document->save();
 
@@ -245,11 +251,9 @@ class DocumentController extends Controller
             abort(404, 'File not found.');
         }
 
-        // Get file MIME type and extension
         $mimeType = mime_content_type($path);
         $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
-        // Force download for all file types (including PDFs and images)
         $headers = [
             'Content-Type' => $mimeType,
             'Content-Disposition' => 'attachment; filename="' . basename($path) . '"'
@@ -262,7 +266,7 @@ class DocumentController extends Controller
     {
         $versions = $document->versions()
             ->orderByDesc('numero')
-            ->paginate(10); // Adjust the number as needed
+            ->paginate(10);
     
         return view('documents.versions', compact('document', 'versions'));
     }
