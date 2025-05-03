@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@section('title','roles')
+
+@section('title', 'Roles')
+
 @section('alert')
     @if (session('updated'))
         <x-toast-success-alert message="{{ session('updated') }}" />
@@ -14,40 +16,56 @@
         <x-toast-warning-alert message="{{ session('warning') }}" />
     @endif
 @endsection
+
 @section('content')
-    <div class="container mt-1">
-        <h2 class="mb-4 text-dark">Liste des Roles</h2>
-        <a href={{ route('roles.create') }} class="btn btn-success mb-3"><i class="bi bi-plus-lg"></i> Ajouter
-            Role</a>
-        <table class="table text-light">
-            <thead style="background: linear-gradient(90deg, #131d27 0%, #496683 100%)">
-                <tr>
-                    <th class="text-light">#</th>
-                    <th class="text-light">Roles</th>
-                    <th class="text-light">Actions</th>
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Liste des Rôles</h2>
+        <div class="flex space-x-2">
+            {{-- Ajouter Rôle --}}
+            <a href="{{ route('roles.create') }}"
+                class="inline-flex items-center px-4 py-2 bg-teal-400 hover:bg-teal-500 text-white text-sm font-medium rounded-md shadow-md">
+                <i class="bi bi-plus-lg mr-2"></i> Ajouter Rôle
+            </a>
+    
+            {{-- Assigner Rôle --}}
+            <a href="{{ route('roles.assignRole') }}" {{-- make sure this route exists --}}
+                class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-md shadow-md">
+                <i class="bi bi-person-plus mr-2"></i> Assigner Rôle
+            </a>
+        </div>
+    </div>
+    
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow-md dark:border-gray-800 dark:bg-white/[0.03]">
+        <table class="min-w-full text-sm text-gray-800">
+            <thead>
+                <tr class="border-b dark:border-gray-800 dark:text-white">
+                    <th class="px-6 py-4 text-left font-semibold">#</th>
+                    <th class="px-6 py-4 text-left font-semibold">Nom du Rôle</th>
+                    <th class="px-6 py-4 text-center font-semibold">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="divide-y divide-gray-100">
                 @foreach ($roles as $role)
-                    <tr style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);">
-                        <td>{{ $role->id }}</td>
-                        <td>{{ $role->name }}</td>
-                        <td class="text-center">
-                            <div class="d-inline-flex gap-2">
-                                {{-- <a href="{{ route('entreprise.show', $entreprise->id) }}"
-                                    class="btn">
-                                    <i class="bi bi-eye-fill"></i>
-                                </a> --}}
-                                {{-- <a href={{ route('entreprise.edit', $entreprise->id) }}
-                                    class="btn">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a> --}}
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 border-b dark:border-gray-800 dark:text-white">
+                        <td class="px-6 py-4 border-b dark:border-gray-800">{{ $role->id }}</td>
+                        <td class="px-6 py-4 border-b dark:border-gray-800">{{ $role->name }}</td>
+                        <td class="px-6 py-4 border-b dark:border-gray-800 text-center">
+                            <div class="flex justify-center gap-2">
+                                {{-- Edit --}}
+                                <a href="{{ route('roles.edit', $role->id) }}"
+                                    class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200">
+                                    <i class="bi bi-pencil-square mr-1"></i> Modifier
+                                </a>
+                                {{-- Delete --}}
                                 <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
-                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Entreprise ?');">
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle ?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn">
-                                        <i class="bi bi-trash3-fill"></i>
+                                    <button type="submit"
+                                        class="inline-flex items-center px-2 py-1 bg-red-100 text-red-600 rounded-full text-xs hover:bg-red-200">
+                                        <i class="bi bi-trash3-fill mr-1"></i> Supprimer
                                     </button>
                                 </form>
                             </div>
@@ -56,6 +74,10 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- <p>{{ $roles->links() }}</p> --}}
     </div>
+
+    {{-- <div class="mt-4">
+        {{ $roles->links() }}
+    </div> --}}
+</div>
 @endsection
