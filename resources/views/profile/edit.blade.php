@@ -3,151 +3,119 @@
 @section('title', 'Edit Profile')
 
 @section('content')
-    <div class="container rounded bg-black mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <div class="profile-image-container">
-                        <img class="profile-image" width="150px"
-                            src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}">
-
+    <div class="container mx-auto px-6 py-8">
+        <div class="flex flex-wrap rounded-xl bg-white dark:bg-transparent">
+            <div
+                class="w-full md:w-1/3 p-4 flex flex-col items-center text-center border-0 md:border-r md:border-gray-200 dark:md:border-gray-700">
+                <div class="relative">
+                    <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg">
+                        <img class="w-full h-full object-cover"
+                            src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}"
+                            alt="Profile Image">
                     </div>
-                    <style>
-                        /* Instagram Profile Image Styling */
-                        .profile-image-container {
-                            position: relative;
-                            width: 150px;
-                            height: 150px;
-                            border-radius: 50%;
-                            overflow: hidden;
-                            /* border: 4px solid #ff4500; */
-                            /* Instagram-like gradient border */
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                            /* background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); */
-                        }
-
-                        /* Profile Image */
-                        .profile-image {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                            border-radius: 50%;
-                            border: 2px solid #fff;
-                        }
-                    </style>
-
-                    <span class="font-weight-bold mt-3">{{ Auth::user()->first_name }}</span>
-                    <span class="text-muted">{{ Auth::user()->email }}</span>
+                    {{-- <div class="absolute inset-0 bg-gradient-to-r from-teal-400 to-blue-500 opacity-50 rounded-full"></div> --}}
                 </div>
+                <div class="mt-4 text-lg font-semibold dark:text-gray-300">{{ Auth::user()->first_name }}</div>
+                <div class="text-sm text-gray-500 dark:text-gray-300">{{ Auth::user()->email }}</div>
             </div>
 
-
-            <div class="col-md-9">
+            <div class="w-full md:w-2/3 p-6">
                 <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
-                    <div class="">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="text-right">Profile Settings</h4>
-                        </div>
+                    <div class="mb-6 flex justify-between items-center">
+                        <h4 class="text-2xl font-semibold text-gray-800 dark:text-gray-300">Profile Settings</h4>
+                    </div>
 
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">First Name</label>
-                                <input type="text" class="form-control @error('first_name') is-invalid @enderror"
-                                    name="first_name" value="{{ old('first_name', Auth::user()->first_name) }}">
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">First Name</label>
+                                <input type="text" name="first_name"
+                                    value="{{ old('first_name', Auth::user()->first_name) }}"
+                                    class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
                                 @error('first_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label class="labels">Last Name</label>
-                                <input type="text" class="form-control @error('last_name') is-invalid @enderror"
-                                    name="last_name" value="{{ old('last_name', Auth::user()->last_name) }}">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last Name</label>
+                                <input type="text" name="last_name"
+                                    value="{{ old('last_name', Auth::user()->last_name) }}"
+                                    class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
                                 @error('last_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="labels">Email</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email', Auth::user()->email) }}">
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 mt-3">
-                                <label class="labels">Phone Number</label>
-                                <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                    value="{{ old('phone', Auth::user()->phone) }}">
-                                @error('phone')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 mt-3">
-                                <label class="labels">Address</label>
-                                <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                    name="address" value="{{ old('address', Auth::user()->address) }}">
-                                @error('address')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                            <input type="email" name="email" value="{{ old('email', Auth::user()->email) }}"
+                                class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
+                            @error('email')
+                                <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
+                            @enderror
                         </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <label class="labels">City</label>
-                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city"
-                                    value="{{ old('city', Auth::user()->city) }}">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
+                            <input type="text" name="phone" value="{{ old('phone', Auth::user()->phone) }}"
+                                class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
+                            @error('phone')
+                                <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+                            <input type="text" name="address" value="{{ old('address', Auth::user()->address) }}"
+                                class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
+                            @error('address')
+                                <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
+                                <input type="text" name="city" value="{{ old('city', Auth::user()->city) }}"
+                                    class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
                                 @error('city')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
-                                <label class="labels">Postal Code</label>
-                                <input type="text" class="form-control @error('postal_code') is-invalid @enderror"
-                                    name="postal_code" value="{{ old('postal_code', Auth::user()->postal_code) }}">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Postal
+                                    Code</label>
+                                <input type="text" name="postal_code"
+                                    value="{{ old('postal_code', Auth::user()->postal_code) }}"
+                                    class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
                                 @error('postal_code')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="labels">Profile Image</label>
-                                <input type="file" class="form-control @error('profile_image') is-invalid @enderror"
-                                    name="profile_image" value="{{ old('profile_image', Auth::user()->profile_image) }}">
-                                @error('profile_image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Profile Image</label>
+                            <input type="file" name="profile_image"
+                                class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
+                            @error('profile_image')
+                                <div class="text-sm text-red-500 mt-1">{{ $message }}</div>
+                            @enderror
                         </div>
+                    </div>
 
-                        <div class="mt-5 text-center">
-                            <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
-                        </div>
+                    <div class="mt-6 text-center">
+                        <button type="submit"
+                            class="px-6 py-2 bg-teal-600 text-white font-semibold rounded-xl hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 ">
+                            Save Profile
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 @endsection
-
-@push('styles')
-    <style>
-        body {
-            background-color: #f8f9fa;
-            /* Set background color for profile page */
-        }
-    </style>
-@endpush
