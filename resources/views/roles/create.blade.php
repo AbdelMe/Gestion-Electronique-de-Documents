@@ -1,31 +1,41 @@
 @extends('layouts.app')
+
 @section('title', 'Ajouter une Permission')
 
 @section('content')
-<div class="container mt-3">
-    <h2 class="mb-4 text-dark fw-bold">Ajouter une Permission</h2>
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold text-gray-700 mb-6 dark:text-gray-300">Ajouter une Role</h2>
 
-    <form action="{{ route('permitions.store') }}" method="POST" class="bg-white p-4 rounded shadow-sm">
+    <form action="{{ route('roles.store') }}" method="POST" class="space-y-6">
         @csrf
 
-        <div class="mb-3">
-            <label for="name" class="form-label fw-medium">Nom de la Permission</label>
-            <input type="text" class="form-control border-2" id="name" name="name" placeholder="Ex: Gérer les utilisateurs" required>
+        <div class="max-w-md">
+            <label for="name" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Nom de Role</label>
+            <input type="text" id="name" name="name" required
+                placeholder="Ex: Gérer les utilisateurs"
+                class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
         </div>
 
-        <div class="mb-4 col-md-6 p-0">
-            <label for="user_id" class="form-label fw-medium">Utilisateur</label>
-            <select name="user_id" id="user_id" class="form-control border-2" required>
-                <option value="" selected disabled>-- Sélectionnez un utilisateur --</option>
+        {{-- <div class="max-w-md">
+            <label for="user_id" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Utilisateur</label>
+            <select id="user_id" name="user_id" required
+            class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
+            <option value="" selected disabled>-- Sélectionnez un utilisateur --</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-success fw-medium px-4 py-2">Enregistrer</button>
-            <a href="{{ route('permitions.index') }}" class="btn btn-secondary fw-medium px-4 py-2">Annuler</a>
+        <div class="flex items-center gap-4 max-w-md">
+            <button type="submit"
+                class="inline-flex items-center justify-center px-6 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-xl transition">
+                Enregistrer
+            </button>
+            <a href="{{ route('roles.index') }}"
+                class="inline-flex items-center justify-center px-6 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 text-sm font-medium rounded-xl transition">
+                Annuler
+            </a>
         </div>
     </form>
 </div>
