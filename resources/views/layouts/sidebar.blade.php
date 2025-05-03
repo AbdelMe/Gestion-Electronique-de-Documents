@@ -1,185 +1,292 @@
-<div>
-    <nav class="sidebar sidebar-offcanvas" style="background: linear-gradient(180deg, #496683 0%, #131d27 100%)" id="sidebar">
-        <!-- Brand and profile sections remain the same -->
-        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <a class="sidebar-brand brand-logo" href="#"><img src={{ asset('assets/images/Untitled-1.png') }}
-                    alt="logo"  /></a>
-            <a class="sidebar-brand brand-logo-mini" href="#"><img src={{ asset('assets/images/Untitled-12png.png') }}
-                    alt="logo"/></a>
+<div
+    class="h-screen bg-white border-r border-gray-200 w-72 fixed shadow-sm flex flex-col dark:bg-gray-900 dark:border-gray-800 ">
+    <div class="p-4 dark:border-gray-800">
+        <div class="flex items-center space-x-3">
+            <div class="relative">
+                <img class="w-10 h-10 rounded-full"
+                    src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('assets\images\icons\user (1).png') }}"
+                    alt="Profile">
+                <span
+                    class="absolute bottom-0 right-0 block w-2 h-2 bg-green-400 rounded-full ring-2 ring-white dark:ring-gray-900"></span>
+            </div>
+            <div>
+                <h5 class="font-medium text-gray-900 dark:text-white">{{ Auth::user()->first_name }}</h5>
+                <span
+                    class="text-sm text-gray-500 dark:text-gray-400">{{ Auth::user()->getRoleNames()->first() ? Auth::user()->getRoleNames()->first() : 'user' }}</span>
+            </div>
         </div>
-        
-        <ul class="nav">
-            <li class="nav-item profile">
-                <div class="profile-desc">
-                    <div class="profile-pic">
-                        <div class="count-indicator">
-                            <img class="img-xs rounded-circle " src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}" alt="">
-                            <span class="count bg-success"></span>
-                        </div> 
-                        <div class="profile-name">
-                            <h5 class="mb-0 font-weight-normal">{{ Auth::user()->first_name }} </h5>
-                            <span>{{Auth::user()->getRoleNames()->first()}}</span>
-                        </div>
-                    </div>
-                    <a href="#" id="profile-dropdown" data-toggle="dropdown"><i
-                            class="mdi mdi-dots-vertical"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list"
-                        style="background: linear-gradient(90deg, #496683 0%, #131d27 100%);"
-                        aria-labelledby="profile-dropdown">
-                        <a href="#" class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="mdi mdi-settings text-primary"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject ellipsis mb-1 text-small">Account settings</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="mdi mdi-onepassword  text-info"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject ellipsis mb-1 text-small">Change Password</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <div class="preview-icon bg-dark rounded-circle">
-                                    <i class="mdi mdi-calendar-today text-success"></i>
-                                </div>
-                            </div>
-                            <div class="preview-item-content">
-                                <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+    </div>
+    <nav class="p-2 flex-1 overflow-y-auto removeScroll">
+        <div class="mb-2 px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400">
+            Navigation
+        </div>
+
+        <ul class="space-y-1">
+            {{-- @if (auth()->user()->hasPermissionTo('create_document'))        --}}
+            <li>
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                        </path>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
             </li>
-            {{-- <li class="nav-item nav-category">
-                <span class="nav-link">Navigation</span>
+            {{-- @endif --}}
+            <li>
+                <a href="{{ route('users.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
+                    <span>Users</span>
+                </a>
+            </li>
+            {{-- <li>
+                <a href="{{ route('user_permissions.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    <span>Roles & Permissions</span>
+                </a>
             </li> --}}
-        <ul class="nav pt-0">
-            <!-- Profile section remains the same -->
-            <li class="nav-item nav-category">
-                <span class="nav-link">Navigation</span>
+            <li>
+                <details class="group">
+                    <summary
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 cursor-pointer transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                        <span class="flex-1">Permissions</span>
+                        <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 transform group-open:rotate-180 transition-transform duration-200"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </summary>
+                    <ul class="pl-8 mt-1 space-y-1">
+                        <li>
+                            <a href="{{ route('user_permissions.index') }}"
+                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                <span>Role Permissions</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('users.showUserPermissions') }}"
+                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                <span>User Permissions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </details>
             </li>
-            
-            <!-- Regular menu items -->
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('dashboard') }}">
-                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Dashboard</span>
+            <li>
+                <a href="{{ route('dossiers.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                    </svg>
+                    <span>Dossiers</span>
                 </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('dashboard') }}">
-                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Users</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('roles.index') }}">
-                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Roles</span>
-                </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('permitions.index') }}">
-                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Permitions</span>
-                </a>
-            </li>
-            
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('entreprise.index') }}">
-                    <img src="{{ asset('assets/images/icons/office.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Entreprise</span>
-                </a>
-            </li>
-            
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('classe.index') }}">
-                    <img src="{{ asset('assets/images/icons/menu.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Classes</span>
-                </a>
-            </li>
-            
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('dossiers.index') }}">
-                    <img src="{{ asset('assets/images/icons/folder.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Dossier</span>
-                </a>
-            </li>
-            
-            <!-- Documents menu with sub-items -->
-            <li class="nav-item menu-items">
-                <a class="nav-link menu-toggle" data-target="#documents-menu">
-                    <img src="{{ asset('assets/images/icons/file.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Documents</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <ul class="nav sub-menu" id="documents-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('documents.index') }}">Documents</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('type_documents.index') }}">Type Document</a></li>
-                </ul>
-            </li>
-            
-            <!-- Rubriques menu with typeRubrique & rubriqueDocument -->
-            <li class="nav-item menu-items">
-                <a class="nav-link menu-toggle" data-target="#rubriques-menu">
-                    <img src="{{ asset('assets/images/icons/align.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Rubriques</span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <ul class="nav sub-menu" id="rubriques-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('rubrique.index') }}">Rubriques</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('type_rubrique.index') }}">Type Rubrique</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('rubrique_document.index') }}">Rubrique Document</a></li>
-                </ul>
             </li>
 
-            {{-- <li class="nav-item menu-items">
-                <a class="nav-link" href="{{ route('versions.index') }}">
-                    <img src="{{ asset('assets/images/icons/dash.png') }}" width="24px" style="margin-right: 8px" alt="">
-                    <span class="menu-title">Version</span>
+            <li>
+                <a href="{{ route('entreprise.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4">
+                        </path>
+                    </svg>
+                    <span>Entreprises</span>
                 </a>
-            </li> --}}
+            </li>
+            <li>
+                <a href="{{ route('roles.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                        </path>
+                    </svg>
+                    <span>Roles</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('permitions.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                        </path>
+                    </svg>
+                    <span>All Permission</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                        </path>
+                    </svg>
+                    <span>Demande</span>
+                </a>
+            </li>
+            <li>
+                <details class="group">
+                    <summary
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 cursor-pointer transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        <span class="flex-1">Documents</span>
+                        <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 transform group-open:rotate-180 transition-transform duration-200"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </summary>
+                    <ul class="pl-8 mt-1 space-y-1">
+                        <li>
+                            <a href="{{ route('documents.index') }}"
+                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                <span>All Documents</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('type_documents.index') }}"
+                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                <span>Document Types</span>
+                            </a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <details class="group">
+                    <summary
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 cursor-pointer transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <span class="flex-1">Rubriques</span>
+                        <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 transform group-open:rotate-180 transition-transform duration-200"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </summary>
+                    <ul class="pl-8 mt-1 space-y-1">
+                        <li>
+                            <a href="{{ route('rubrique.index') }}"
+                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                <span>All Rubriques</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('type_rubrique.index') }}"
+                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                <span>Type Rubrique</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('rubrique_document.index') }}"
+                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                <span>Rubrique Document</span>
+                            </a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+            <li>
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                        </path>
+                    </svg>
+                    <span>Logs</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('classe.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                        </path>
+                    </svg>
+                    <span>Classes</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('classe.index') }}"
+                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
+                    <span>Etat</span>
+                </a>
+            </li>
+
+            <div
+                class="mt-8 mb-2 px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400">
+                Support
+            </div>
+            <ul class="space-y-1">
+                <li>
+                    <a href="#"
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
+                        </svg>
+                        <span>Chat Support</span>
+                    </a>
+                </li>
+            </ul>
         </ul>
     </nav>
-    <style>
-/* Submenu styling */
-.sub-menu {
-    display: none;
-    padding-left: 20px;
-    list-style: none;
-}
-
-.sub-menu.show {
-    display: block;
-}
-
-/* Menu arrow rotation */
-.menu-arrow {
-    float: right;
-    transition: transform 0.2s ease;
-    transform: rotate(-90deg);
-}
-
-/* Active state styling */
-.nav-item.active > .nav-link {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-left: 3px solid #fff;
-}
-
-.nav-link.active {
-    font-weight: bold;
-}
-    </style>
 </div>
+<style>
+    .removeScroll {
+        overflow: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
 
+    .removeScroll::-webkit-scrollbar {
+        display: none;
+    }
+</style>
