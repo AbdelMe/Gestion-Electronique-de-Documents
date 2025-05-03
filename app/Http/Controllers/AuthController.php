@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
@@ -119,5 +120,93 @@ class AuthController extends Controller
         $user->blocked = 1 ;
         $user->update();
         // dd($user->blocked);
+    }
+
+    public function saveUpdatedUser(Request $request , User $user)
+    {
+        // dd($request);
+        // $user = Auth::user();
+
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'profile_image'  => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'postal_code' => 'nullable|string|max:20',
+            'entreprise_id' => 'nullable|exists:entreprises,id',
+            'blocked' => 'nullable|integer',
+        ]);
+
+        if ($request->hasFile('profile_image')) {
+            $path = $request->file('profile_image')->store('profile_images', 'public');
+            $validated['profile_image'] = $path;
+        }
+        $user->update($validated);
+        // dd($user);
+
+        return redirect()->route('users.index')->with('updated', 'Profile updated successfully!');
+    }
+
+
+
+
+
+    public function showUserPermissions(){
+        $users = User::all();
+
+        return view('users.showUserPermissions',compact('users'));
+    }
+
+    public function assignPermitionsToUser(){
+        return view('users.assignPermitionsToUser', [
+            'users' => User::all(),
+            'permissions' => Permission::all(),
+        ]);
+    }
+
+    public function storeAssignPermitionsToUser(Request $request){
+        $user = User::findOrFail($request->user_id);
+        foreach ($request->permissions as $key => $permission) {
+            $perm = Permission::where('id', $permission)->get();
+            $user->givePermissionTo($perm);
+        }
+        return to_route('users.showUserPermissions')->with('success', 'Permissions Stored.');
+    }
+
+    public function editUserPermissions(User $user)
+    {
+        $permissions = Permission::all()->groupBy('guard_name');
+        return view('users.editUserPermissions', compact('user', 'permissions'));
+    }
+
+    public function deleteUserPermition(User $user, Permission $permission)
+    {
+        // dd($user);
+        
+        $user->revokePermissionTo($permission);
+        return back()->with('success', 'Permissions Revoked.');
+    }
+
+    public function revokeAllUserPermissions(User $user){
+        // dd($user);
+        $user->syncPermissions([]);
+        return redirect()->back()
+            ->with('success', 'All permissions revoked successfully');
+    }
+
+    public function updateUserPermissions(Request $request , User $user){
+        $request->validate([
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id',
+        ]);
+
+        $permissions = Permission::whereIn('id', $request->permissions ?? [])->get();
+
+        $user->syncPermissions($permissions);
+
+        return to_route('users.showUserPermissions')->with('success', 'Permissions updated.');
     }
 }
