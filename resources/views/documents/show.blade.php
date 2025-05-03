@@ -9,7 +9,6 @@
         <div class="bg-white rounded-lg shadow-md overflow-hidden dark:border-gray-800 dark:bg-white/[0.03]">
             <div class="p-6">
                 <div class="flex flex-col md:flex-row gap-6">
-                    <!-- Left Column - Document Information -->
                     <div class="md:w-1/2 md:pr-6 md:border-r md:border-gray-200 dark:md:border-gray-700">
                         <h5 class="text-lg font-semibold text-blue-600 mb-4 flex items-center ">
                             <i class="fas fa-file-alt mr-2"></i>Document Information
@@ -161,7 +160,6 @@
                         </div>
                     </div>
 
-                    <!-- Right Column - Document Rubriques -->
                     <div class="md:w-1/2">
                         <h5 class="text-lg font-semibold text-blue-600 mb-4 flex items-center">
                             <i class="fas fa-tags mr-2"></i>Document Rubriques
@@ -169,21 +167,21 @@
 
                         @if ($rub_docs->count() > 0)
                             <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-slate-100">
+                                <table class="min-w-full divide-y divide-gray-200 ">
+                                    <thead class="bg-slate-100 dark:bg-gray-800">
                                         <tr>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Rubrique</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">Value</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-800 uppercase tracking-wider dark:text-gray-300">Rubrique</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-800 uppercase tracking-wider dark:text-gray-300">Value</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800">
                                         @foreach ($rub_docs as $rub_doc)
                                             @php
                                                 $rubrique = App\Models\Rubrique::find($rub_doc->rubrique_id);
                                             @endphp
                                             <tr>
-                                                <td class="px-4 py-2 whitespace-nowrap font-semibold text-gray-800">{{ $rubrique->Rubrique ?? 'N/A' }}</td>
-                                                <td class="px-4 py-2 whitespace-nowrap text-gray-800">
+                                                <td class="px-4 py-2 whitespace-nowrap font-semibold text-gray-800 dark:text-gray-300">{{ $rubrique->Rubrique ?? 'N/A' }}</td>
+                                                <td class="px-4 py-2 whitespace-nowrap text-gray-800 dark:text-gray-300">
                                                     @if (isset($rub_doc->Valeur) && strlen($rub_doc->Valeur) > 50)
                                                         <span class="inline-block truncate max-w-xs" title="{{ $rub_doc->Valeur }}">
                                                             {{ substr($rub_doc->Valeur, 0, 50) }}...
@@ -198,7 +196,7 @@
                                 </table>
                             </div>
                         @else
-                            <div class="bg-blue-50 text-blue-800 p-4 rounded-md flex items-start dark:bg-gray-800 dark:text-gray-300">
+                            <div class="bg-blue-50 text-blue-800 p-4 rounded-xl flex items-start dark:bg-gray-800 dark:text-gray-300">
                                 <i class="fas fa-info-circle mr-2 mt-1"></i> 
                                 <span>Aucune rubrique associée à ce document.</span>
                             </div>
@@ -221,13 +219,11 @@
     @push('scripts')
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Initialize tooltips
                 const tooltipElements = document.querySelectorAll('[title]');
                 tooltipElements.forEach(el => {
                     new bootstrap.Tooltip(el);
                 });
 
-                // Office document handling
                 document.querySelectorAll('.open-office-doc').forEach(button => {
                     button.addEventListener('click', function(event) {
                         event.preventDefault();

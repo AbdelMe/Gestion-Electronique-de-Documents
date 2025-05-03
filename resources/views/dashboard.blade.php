@@ -25,14 +25,12 @@ $documentsChange = count($documents) - $lastMonthDocuments;
             </div>
         </div>
 
-                <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-                    <!-- Entreprises Card -->
                     <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 dark:border-gray-800 dark:bg-white/[0.03]">
                         <div class="p-6">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">Users</p>
+                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">All Users</p>
                                     <div class="flex items-end gap-2">
                                         <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($users ?? []) }}</h3>
                                         <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $usersChanges > 0 ? 'bg-green-100 text-green-800' : ($usersChanges < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
@@ -53,12 +51,11 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                         </div>
                     </div>
         
-                    <!-- Dossiers Card -->
                     <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 dark:border-gray-800 dark:bg-white/[0.03]">
                         <div class="p-6">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">Dossiers</p>
+                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">All Dossiers</p>
                                     <div class="flex items-end gap-2">
                                         <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($dossiers ?? []) }}</h3>
                                         <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $dossiersChange > 0 ? 'bg-green-100 text-green-800' : ($dossiersChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
@@ -79,12 +76,11 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                         </div>
                     </div>
         
-                    <!-- Documents Card -->
                     <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 dark:border-gray-800 dark:bg-white/[0.03]">
                         <div class="p-6">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">Documents</p>
+                                    <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">All Documents</p>
                                     <div class="flex items-end gap-2">
                                         <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($documents ?? []) }}</h3>
                                         <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $documentsChange > 0 ? 'bg-green-100 text-green-800' : ($documentsChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
@@ -106,7 +102,6 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                     </div>
                 </div>
         
-        <!-- Quick Actions Section -->
         <div class="mb-10">
             <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
                 <h4 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2 dark:text-white">
@@ -140,60 +135,6 @@ $documentsChange = count($documents) - $lastMonthDocuments;
             </div>
         </div>
         
-
-
-
-        <div class="mb-8">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
-                <div class="p-6">
-                    <h4 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2 dark:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
-                        </svg>
-                        Activités récentes
-                    </h4>
-                    
-                    <div class="space-y-3">
-                        @foreach ($recentActivities as $activity)
-                            <div class="p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-200 flex justify-between items-center">
-                                <div class="flex items-start gap-3">
-                                    <div class="mt-1 p-2 rounded-xl {{ $activity['is_new'] ? ' text-blue-600' : ' text-gray-600' }}">
-                                        @if ($activity['type'] === 'document')
-                                            <i class="bi bi-file-earmark text-lg"></i>
-                                        @endif
-                                    </div>
-                                    <div>
-                                        <p class="font-medium text-gray-800 dark:text-gray-300">
-                                            @if ($activity['type'] === 'document')
-                                                Nouveau Document
-                                            @endif
-                                        </p>
-                                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ $activity['name'] }}</p>
-                                        <p class="text-xs text-gray-400 dark:text-gray-300 mt-1">Créé le {{ $activity['created_at']->format('d/m/Y à H:i') }}</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    @if ($activity['is_new'])
-                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Nouveau</span>
-                                    @endif
-                                    <a href="{{ route('documents.show', $activity['id']) }}" class="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition duration-200 flex items-center gap-1">
-                                        <i class="bi bi-eye"></i> Voir
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    
-                    @if(count($recentActivities) > 3)
-                        <div class="mt-4 text-center">
-                            <a href="{{ route('documents.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 inline-flex items-center">
-                                Voir toutes les activités <i class="bi bi-chevron-down ml-1"></i>
-                            </a>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
         <div class="mb-8">
             <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
                 <div class="p-6">
@@ -336,5 +277,59 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                 window.documentSizeChart.update();
             }
         </script>
+
+
+        <div class="mb-8">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
+                <div class="p-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2 dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                        </svg>
+                        Activités récentes
+                    </h4>
+                    
+                    <div class="space-y-3">
+                        @foreach ($recentActivities as $activity)
+                            <div class="p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-200 flex justify-between items-center">
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 p-2 rounded-xl {{ $activity['is_new'] ? ' text-blue-600' : ' text-gray-600' }}">
+                                        @if ($activity['type'] === 'document')
+                                            <i class="bi bi-file-earmark text-lg"></i>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800 dark:text-gray-300">
+                                            @if ($activity['type'] === 'document')
+                                                Nouveau Document
+                                            @endif
+                                        </p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-300">{{ $activity['name'] }}</p>
+                                        <p class="text-xs text-gray-400 dark:text-gray-300 mt-1">Créé le {{ $activity['created_at']->format('d/m/Y à H:i') }}</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    @if ($activity['is_new'])
+                                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Nouveau</span>
+                                    @endif
+                                    <a href="{{ route('documents.show', $activity['id']) }}" class="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition duration-200 flex items-center gap-1">
+                                        <i class="bi bi-eye"></i> Voir
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    
+                    @if(count($recentActivities) > 3)
+                        <div class="mt-4 text-center">
+                            <a href="{{ route('documents.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 inline-flex items-center">
+                                Voir toutes les activités <i class="bi bi-chevron-down ml-1"></i>
+                            </a>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+
     </div>
 @endsection
