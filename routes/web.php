@@ -119,6 +119,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('/roles', TypeUserController::class);
     Route::get('/assign-role', [TypeUserController::class , 'assignRole'])->name('roles.assignRole');
+    Route::post('/assignRoleStore', [TypeUserController::class , 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
 
     // Route::get('/login', function () {
@@ -145,7 +146,27 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users', [AuthController::class, 'index'])->name('users.index');
     Route::get('/AddUser', [AuthController::class, 'AddUser'])->name('users.AddUser');
     Route::post('/StoreUser', [AuthController::class, 'StoreUser'])->name('users.StoreUser');
-   
+    Route::put('/blockUser/{user}', [AuthController::class, 'blockUser'])->name('users.blockUser');
+    Route::get('/RolePermissions', [DroitUserController::class, 'index'])->name('user_permissions.index');
+    Route::get('/assignPermitionsToRole', [DroitUserController::class, 'assignPermitionsToRole'])->name('user_permissions.assignPermitionsToRole');
+    Route::post('/storeAssignPermitionsToRole', [DroitUserController::class, 'storeAssignPermitionsToRole'])->name('user_permissions.storeAssignPermitionsToRole');
+    Route::get('/editRolePermissions/{role}/edit', [DroitUserController::class, 'editRolePermissions'])->name('user_permissions.editRolePermissions');
+    Route::put('/updateRolePermissions/{role}/permissions', [DroitUserController::class, 'updateRolePermissions'])->name('user_permissions.updateRolePermissions');
+    Route::delete('/deletePermition/{role}/deletePermition/{permission}', [DroitUserController::class, 'deletePermition'])->name('user_permissions.deletePermition');
+    Route::delete('/revokeAllPermissions/{role}', [DroitUserController::class, 'revokeAllPermissions'])->name('user_permissions.revokeAllPermissions');
+    Route::get('/updateUser/{user}', [AuthController::class, 'updateUser'])->name('users.updateUser');
+    Route::delete('/deleteUser/{user}', [AuthController::class, 'deleteUser'])->name('users.deleteUser');
+
+
+    //user Managements & Permissions
+    Route::get('/showUserPermissions', [AuthController::class, 'showUserPermissions'])->name('users.showUserPermissions');
+    Route::get('/assignPermitionsToUser', [AuthController::class, 'assignPermitionsToUser'])->name('users.assignPermitionsToUser');
+    Route::post('/storeAssignPermitionsToUser', [AuthController::class, 'storeAssignPermitionsToUser'])->name('users.storeAssignPermitionsToUser');
+    Route::get('/editUserPermissions/{user}/edit', [AuthController::class, 'editUserPermissions'])->name('users.editUserPermissions');
+    Route::delete('/revokeAllUserPermissions/{user}', [AuthController::class, 'revokeAllUserPermissions'])->name('users.revokeAllUserPermissions');
+    Route::delete('/deleteUserPermition/{user}/deletePermition/{permission}', [AuthController::class, 'deleteUserPermition'])->name('users.deleteUserPermition');
+    Route::put('/updateUserPermissions/{user}/permissions', [AuthController::class, 'updateUserPermissions'])->name('users.updateUserPermissions');
+    Route::put('/saveUpdatedUser/{user}', [AuthController::class, 'saveUpdatedUser'])->name('users.saveUpdatedUser');
 
 
 
