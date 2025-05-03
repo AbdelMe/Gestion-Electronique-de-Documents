@@ -54,8 +54,8 @@ class User extends Authenticatable implements CanResetPassword
     }
 
     public function sendPasswordResetNotification($token)
-{
-    $this->notify(new CustomResetPassword($token));
-}
+    {
+        $this->notify(new CustomResetPassword($token));
+    }
 }
 
