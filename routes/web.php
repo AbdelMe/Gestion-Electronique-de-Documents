@@ -48,29 +48,16 @@ Route::middleware(['auth'])->group(function () {
         $dossiers = Dossier::all();
         $documents = Document::all();
 
-        $documentData = $documents->map(function($document) {
+        $documentData = $documents->map(function ($document) {
             return [
                 'titre' => $document->titre,
                 'size_gb' => number_format($document->size / 1073741824, 2),
                 'size_mb' => number_format($document->size / 1048576, 2),
             ];
         });
-        
+
         $totalSizeGb = number_format($documents->sum('size') / 1073741824, 2);
         $totalSizeMb = number_format($documents->sum('size') / 1048576, 2);
-
-        //Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
-        // Route::resource('/dossiers', DossierController::class);
-        // Route::resource('/documents', DocumentController::class);
-
-        // Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
-        // Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
-        // Route::post('/documents', [DocumentController::class, 'store'])->name('documents.store');
-        // Route::get('/documents/{document}/edit', [DocumentController::class, 'edit'])->name('documents.edit');
-        // Route::put('/documents/{document}', [DocumentController::class, 'update'])->name('documents.update');
-        // Route::get('/documents/show/{document}', [DocumentController::class, 'show'])->name('documents.show');
-        // Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
-        // Route::get('/documents/{document}/edit', [EditDocument::class, 'render'])->name('render');
 
         $recentDocuments = Document::orderBy('created_at', 'desc')->take(5)->get();
         $recentActivities = [];
@@ -89,15 +76,13 @@ Route::middleware(['auth'])->group(function () {
         usort($recentActivities, function ($a, $b) {
             return $b['created_at'] <=> $a['created_at'];
         });
-        return view('dashboard', compact('users', 'dossiers', 'documents', 'recentActivities', 'documentData' , 'totalSizeMb' , 'totalSizeGb'));
+        return view('dashboard', compact('users', 'dossiers', 'documents', 'recentActivities', 'documentData', 'totalSizeMb', 'totalSizeGb'));
     })->name('dashboard');
 
 
 
     Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
     Route::resource('/dossiers', DossierController::class);
-    // Route::resource('/services', ServiceController::class);
-// Route::resource('/documents', DocumentController::class);
 
     Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
     Route::get('/documents/create', [DocumentController::class, 'create'])->name('documents.create');
@@ -114,17 +99,17 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::resource('/type_rubrique', TypeRubriqueController::class);
-    
+
     Route::resource('/rubrique_document', RubriqueDocumentController::class);
-    
+
     Route::resource('/roles', TypeUserController::class);
-    Route::get('/assign-role', [TypeUserController::class , 'assignRole'])->name('roles.assignRole');
-    Route::post('/assignRoleStore', [TypeUserController::class , 'assignRoleStore'])->name('roles.assignRoleStore');
+    Route::get('/assign-role', [TypeUserController::class, 'assignRole'])->name('roles.assignRole');
+    Route::post('/assignRoleStore', [TypeUserController::class, 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
 
     // Route::get('/login', function () {
-//     return view('Login&Register.index');
-// });
+    //     return view('Login&Register.index');
+    // });
 
     // Route::resource('/documents/{document}', [DocumentController::class , 'download']);
     Route::get('/documents/download/{document}', [DocumentController::class, 'download'])
@@ -135,14 +120,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/classe', ClasseController::class);
 
     Route::get('/documents/{document}/versions', [DocumentController::class, 'versions'])
-     ->name('documents.versions');
+        ->name('documents.versions');
 
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
-    
-    
+
+
     Route::get('/users', [AuthController::class, 'index'])->name('users.index');
     Route::get('/AddUser', [AuthController::class, 'AddUser'])->name('users.AddUser');
     Route::post('/StoreUser', [AuthController::class, 'StoreUser'])->name('users.StoreUser');
@@ -171,8 +156,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     //Reset Password
-    Route::view('/forgot-password' , 'auth.forgot-password')->name('password.request');
-    Route::post('/forgot-password' , [ResetPasswordController::class , 'passwordEmail'])->name('password.email');
-    Route::get('/reset-password/{token}',[ResetPasswordController::class , 'passwordReset'])->name('password.reset');
-    Route::post('reset-password',[ResetPasswordController::class , 'passwordUpdate'])->name('password.update');
+    Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+    Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
+    Route::post('reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 });
