@@ -312,7 +312,7 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                                     @if ($activity['is_new'])
                                         <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Nouveau</span>
                                     @endif
-                                    <a href="{{ route('documents.show', $activity['id']) }}" class="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition duration-200 flex items-center gap-1">
+                                    <a href="{{ route('documents.show', $activity['id']) }}" class="bg-gray-300 text-blue-800 text-xs px-2 py-1 rounded-full">
                                         <i class="bi bi-eye"></i> Voir
                                     </a>
                                 </div>
@@ -323,7 +323,7 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                     @if(count($recentActivities) > 3)
                         <div class="mt-4 text-center">
                             <a href="{{ route('documents.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 inline-flex items-center">
-                                Voir toutes les activités <i class="bi bi-chevron-down ml-1"></i>
+                                Voir toutes les Documents <i class="bi bi-chevron-down ml-1"></i>
                             </a>
                         </div>
                     @endif
