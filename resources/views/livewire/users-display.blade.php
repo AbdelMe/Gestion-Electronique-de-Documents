@@ -1,6 +1,5 @@
-<div class="min-h-screen py-6 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+<div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto">
-        <!-- Header Section -->
         <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Users Management</h2>
@@ -16,11 +15,7 @@
                 Add New User
             </a>
         </div>
-
-        <!-- Search and Filter Section -->
         @livewire('SearchUser')
-
-        <!-- Users Table -->
 
     </div>
 </div>
