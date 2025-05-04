@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DroitController;
 use App\Http\Controllers\DroitUserController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TypeUserController;
 use App\Http\Middleware\UpdateLastSeen;
@@ -25,6 +26,7 @@ use App\Models\TypeUser;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 // Public routes
 Route::get('/', function () {
@@ -160,4 +162,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail'])->name('password.email');
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
     Route::post('reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
+
+
+    Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 });
