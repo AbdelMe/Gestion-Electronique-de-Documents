@@ -78,25 +78,20 @@
                                 d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                         </svg>
                     </button>
-
+                
                     <div x-show="langDropdownOpen" x-cloak
                         class="shadow-theme-lg dark:bg-gray-dark absolute right-0 mt-2 flex w-48 flex-col rounded-2xl border border-gray-200 bg-white p-2 dark:border-white/[0.03] dark:bg-gray-900">
-                        <a href="#"
+                        <a href="{{ route('language.switch', 'en') }}"
                             class="flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/5">
                             <img src="https://flagcdn.com/w20/gb.png" alt="English" class="w-5 h-3 mr-2">
                             English
                         </a>
-                        <a href="#"
+                        <a href="{{ route('language.switch', 'fr') }}"
                             class="flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/5">
                             <img src="https://flagcdn.com/w20/fr.png" alt="French" class="w-5 h-3 mr-2">
                             Français
                         </a>
-                        <a href="#"
-                            class="flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/5">
-                            <img src="https://flagcdn.com/w20/es.png" alt="Spanish" class="w-5 h-3 mr-2">
-                            Español
-                        </a>
-                        <a href="#"
+                        <a href="{{ route('language.switch', 'ar') }}"
                             class="flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/5">
                             <img src="https://flagcdn.com/w20/ma.png" alt="Arabic" class="w-5 h-3 mr-2">
                             العربية (المغرب)
