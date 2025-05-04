@@ -78,11 +78,28 @@ return [
     |
     */
 
+    // 'locale' => env('APP_LOCALE', 'en'),
+
+    // 'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+
+    // 'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
     'locale' => env('APP_LOCALE', 'en'),
-
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
-
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    'available_locales' => [
+        'en' => [
+            'name' => 'English',
+            'flag' => 'gb' // ISO 3166-1 alpha-2 country code
+        ],
+        'fr' => [
+            'name' => 'Français',
+            'flag' => 'fr'
+        ],
+        'ar' => [
+            'name' => 'العربية',
+            'flag' => 'ma' // Using Morocco's flag for Arabic (you can change this)
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
