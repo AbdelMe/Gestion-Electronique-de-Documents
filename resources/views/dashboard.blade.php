@@ -305,7 +305,7 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                                             @endif
                                         </p>
                                         <p class="text-sm text-gray-500 dark:text-gray-300">{{ $activity['name'] }}</p>
-                                        <p class="text-xs text-gray-400 dark:text-gray-300 mt-1">@lang('dashboard.created_on') {{ $activity['created_at']->format('d/m/Y à H:i') }}</p>
+                                        <p class="text-xs text-gray-400 dark:text-gray-300 mt-1">@lang('dashboard.created_on') {{ $activity['created_at']->format('d/m/Y - H:i') }}</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
