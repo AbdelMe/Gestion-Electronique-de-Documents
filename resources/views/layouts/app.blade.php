@@ -47,7 +47,7 @@
 
             <main class="flex-1 p-4 md:p-6 overflow-auto relative">
                 @yield('alert')
-                <div class="mt-2 md:mt-4 pb-8">
+                <div class="mt-2 md:mt-4">
                     @yield('content')
                 </div>
             
