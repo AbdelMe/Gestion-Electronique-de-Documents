@@ -17,7 +17,7 @@ $usersChanges = count($users) - $lastMonthUsers;
 $dossiersChange = count($dossiers) - $lastMonthDossiers;
 $documentsChange = count($documents) - $lastMonthDocuments;
 @endphp
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 pb-0">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white">@lang('dashboard.title')</h1>
             <div class="text-sm text-gray-500">
@@ -329,6 +329,10 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                     @endif
                 </div>
             </div>
+        </div>
+
+        <div>
+            <x-footer/>
         </div>
 
     </div>
