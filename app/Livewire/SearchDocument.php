@@ -56,7 +56,7 @@ class SearchDocument extends Component
 
 
         return view('livewire.search-document', [
-            'documents' => $this->documents,
+            'documents' => $this->docs,
             'docs' => $this->docs
         ]);
     }
