@@ -6,11 +6,13 @@ use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Dossier;
+use App\Models\Log;
 use App\Models\RubriqueDocument;
 use App\Models\TypeDocument;
 use App\Models\Version;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Storage;
@@ -245,6 +247,7 @@ class DocumentController extends Controller
 
     public function download(Document $document)
     {
+        // dd($document);
         $path = storage_path('app/public/' . $document->CheminDocument);
 
         if (!file_exists($path)) {
@@ -258,6 +261,12 @@ class DocumentController extends Controller
             'Content-Type' => $mimeType,
             'Content-Disposition' => 'attachment; filename="' . basename($path) . '"'
         ];
+        Log::create([
+            "document_id" => $document->id,
+            "user_id" => Auth::user()->id,
+            "date" => now(),
+            "action" => "Download The Document",
+        ]);
 
         return response()->download($path, basename($path), $headers);
     }
