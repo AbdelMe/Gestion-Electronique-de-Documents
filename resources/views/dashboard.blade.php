@@ -21,7 +21,7 @@ $documentsChange = count($documents) - $lastMonthDocuments;
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white">@lang('dashboard.title')</h1>
             <div class="text-sm text-gray-500">
-                {{ now()->format('l, F j, Y') }}
+                {{ \Carbon\Carbon::now()->locale(app()->getLocale())->isoFormat('dddd, MMMM D, YYYY') }}
             </div>
         </div>
 
