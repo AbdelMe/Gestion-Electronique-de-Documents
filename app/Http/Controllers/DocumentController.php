@@ -67,7 +67,7 @@ class DocumentController extends Controller
             $size = $file->getSize();
         }
 
-        
+
 
         $document->titre = $request->titre;
         $document->Date = now();
@@ -276,8 +276,8 @@ class DocumentController extends Controller
         $versions = $document->versions()
             ->orderByDesc('numero')
             ->paginate(10);
-    
+
         return view('documents.versions', compact('document', 'versions'));
     }
-    
+
 }
