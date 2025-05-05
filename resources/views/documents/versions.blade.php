@@ -18,14 +18,14 @@
 @endsection
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div x-data="versionViewer()" class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
             <i class="bi bi-clock-history me-2 text-gray-400"></i> Versions pour : {{ $document->titre }}
         </h2>
         <a href="{{ route('documents.show', $document->id) }}" 
            class="inline-flex items-center px-4 py-2 bg-teal-400 hover:bg-teal-500 text-white text-sm font-medium rounded-md shadow-md">
-            <i class="bi bi-arrow-left mr-2 text-gray-400"></i> Retour au document
+            <i class="bi bi-arrow-left mr-2 text-white"></i> Retour au document
         </a>
     </div>
 
@@ -53,12 +53,11 @@
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-2">
-                                {{-- View --}}
-                                <a href="{{ route('versions.show', [$document->id, $version->id]) }}" 
+                                <a href="#"
+                                   @click.prevent="fetchVersion({{ $version->id }})"
                                    class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200">
                                     <i class="bi bi-eye-fill mr-1 text-gray-400"></i> Voir
                                 </a>
-                                {{-- Edit --}}
                                 @if(auth()->user()->can('update', $document))
                                     <a href="{{ route('versions.edit', [$document->id, $version->id]) }}" 
                                        class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200">
@@ -85,5 +84,42 @@
             </a>
         </div>
     @endcan
+
+    <div x-show="showModal" x-cloak
+         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white dark:bg-gray-800 w-full max-w-lg p-6 rounded shadow-lg">
+            <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Détails de la version</h2>
+            <div class="space-y-2 text-gray-700 dark:text-gray-300">
+                <p><strong>Version #:</strong> <span x-text="version.numero"></span></p>
+                <p><strong>Date:</strong> <span x-text="version.date"></span></p>
+                <p><strong>Description:</strong> <span x-text="version.description || 'Aucune description'"></span></p>
+            </div>
+            <div class="mt-4 text-right">
+                <button @click="showModal = false"
+                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1 rounded-xl">Fermer</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    function versionViewer() {
+        return {
+            showModal: false,
+            version: {},
+            fetchVersion(id) {
+                fetch(`/api/version/${id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        this.version = data;
+                        this.showModal = true;
+                    })
+                    .catch(error => {
+                        alert("Erreur lors du chargement de la version.");
+                        console.error(error);
+                    });
+            }
+        }
+    }
+</script>
 @endsection
