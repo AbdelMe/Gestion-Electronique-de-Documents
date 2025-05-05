@@ -126,7 +126,6 @@
                                     {{ $roleName }}
                                 </span>
                             </td>
-                            <td>
                                 <td>
                                     @php
                                         $firstRole = $user->roles->first();
@@ -147,7 +146,6 @@
                                         <span class="text-xs text-gray-500 dark:text-gray-400 italic">No role assigned</span>
                                     @endif
                                 </td>
-                            </td>
                         </tr>
                     @empty
                         <tr>
