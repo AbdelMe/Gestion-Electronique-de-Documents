@@ -115,7 +115,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/roles', TypeUserController::class);
     Route::get('/assign-role', [TypeUserController::class, 'assignRole'])->name('roles.assignRole');
-    Route::get('/revokeRole', [TypeUserController::class, 'revokeRole'])->name('roles.revokeRole');
+    Route::get('/revokeRole', [TypeUserController::class, 'revokeRoleIndex'])->name('roles.revokeRole');
+    Route::delete('/roles/revoke/{user}/{role}', [TypeUserController::class, 'revokeRoleDelete'])->name('roles.revokeRoleDelete');
     Route::post('/assignRoleStore', [TypeUserController::class, 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
 
