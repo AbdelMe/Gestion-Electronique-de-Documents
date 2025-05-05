@@ -14,6 +14,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DroitController;
 use App\Http\Controllers\DroitUserController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TypeUserController;
 use App\Http\Middleware\UpdateLastSeen;
@@ -50,6 +51,10 @@ Route::middleware(['auth'])->group(function () {
         $dossiers = Dossier::all();
         $documents = Document::all();
 
+
+
+
+
         $documentData = $documents->map(function ($document) {
             return [
                 'titre' => $document->titre,
@@ -65,14 +70,17 @@ Route::middleware(['auth'])->group(function () {
         $recentActivities = [];
 
         foreach ($recentDocuments as $document) {
-            $recentActivities[] = [
-                'id' => $document->id,
-                'type' => 'document',
-                'name' => $document->LibelleDocument,
-                'file_path' => $document->CheminDocument,
-                'created_at' => $document->created_at,
-                'is_new' => $document->created_at->isToday(),
-            ];
+            // if ($document->Dossier->entreprise->id == Auth::user()->entreprise_id){
+
+                $recentActivities[] = [
+                    'id' => $document->id,
+                    'type' => 'document',
+                    'name' => $document->LibelleDocument,
+                    'file_path' => $document->CheminDocument,
+                    'created_at' => $document->created_at,
+                    'is_new' => $document->created_at->isToday(),
+                ];
+            // }
         }
 
         usort($recentActivities, function ($a, $b) {
@@ -96,6 +104,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/documents/SelectedType', [DocumentController::class, 'SelectedType'])->name('documents.SelectedType');
 
+
     Route::resource('/type_documents', TypeDocumentController::class);
     Route::resource('/rubrique', RubriqueController::class);
 
@@ -106,6 +115,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/roles', TypeUserController::class);
     Route::get('/assign-role', [TypeUserController::class, 'assignRole'])->name('roles.assignRole');
+    Route::get('/revokeRole', [TypeUserController::class, 'revokeRole'])->name('roles.revokeRole');
     Route::post('/assignRoleStore', [TypeUserController::class, 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
 
@@ -129,11 +139,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 
-
-    Route::get('/users', [AuthController::class, 'index'])->name('users.index');
-    Route::get('/AddUser', [AuthController::class, 'AddUser'])->name('users.AddUser');
-    Route::post('/StoreUser', [AuthController::class, 'StoreUser'])->name('users.StoreUser');
-    Route::put('/blockUser/{user}', [AuthController::class, 'blockUser'])->name('users.blockUser');
+    //Roles & Permissions
     Route::get('/RolePermissions', [DroitUserController::class, 'index'])->name('user_permissions.index');
     Route::get('/assignPermitionsToRole', [DroitUserController::class, 'assignPermitionsToRole'])->name('user_permissions.assignPermitionsToRole');
     Route::post('/storeAssignPermitionsToRole', [DroitUserController::class, 'storeAssignPermitionsToRole'])->name('user_permissions.storeAssignPermitionsToRole');
@@ -141,11 +147,16 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/updateRolePermissions/{role}/permissions', [DroitUserController::class, 'updateRolePermissions'])->name('user_permissions.updateRolePermissions');
     Route::delete('/deletePermition/{role}/deletePermition/{permission}', [DroitUserController::class, 'deletePermition'])->name('user_permissions.deletePermition');
     Route::delete('/revokeAllPermissions/{role}', [DroitUserController::class, 'revokeAllPermissions'])->name('user_permissions.revokeAllPermissions');
-    Route::get('/updateUser/{user}', [AuthController::class, 'updateUser'])->name('users.updateUser');
-    Route::delete('/deleteUser/{user}', [AuthController::class, 'deleteUser'])->name('users.deleteUser');
 
 
     //user Managements & Permissions
+    Route::get('/users', [AuthController::class, 'index'])->name('users.index');
+    Route::get('/AddUser', [AuthController::class, 'AddUser'])->name('users.AddUser');
+    Route::post('/StoreUser', [AuthController::class, 'StoreUser'])->name('users.StoreUser');
+    Route::put('/blockUser/{user}', [AuthController::class, 'blockUser'])->name('users.blockUser');
+    Route::get('/updateUser/{user}', [AuthController::class, 'updateUser'])->name('users.updateUser');
+    Route::delete('/deleteUser/{user}', [AuthController::class, 'deleteUser'])->name('users.deleteUser');
+
     Route::get('/showUserPermissions', [AuthController::class, 'showUserPermissions'])->name('users.showUserPermissions');
     Route::get('/assignPermitionsToUser', [AuthController::class, 'assignPermitionsToUser'])->name('users.assignPermitionsToUser');
     Route::post('/storeAssignPermitionsToUser', [AuthController::class, 'storeAssignPermitionsToUser'])->name('users.storeAssignPermitionsToUser');
@@ -163,6 +174,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
     Route::post('reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 
-
+    //Languages Switcher
     Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
+
+    //Send The clicked version to display it in a modal
+    Route::get('/api/version/{id}', function ($id) {
+        $version = \App\Models\Version::findOrFail($id);
+        return response()->json([
+            'numero' => $version->numero,
+            'date' => $version->date->format('d/m/Y'),
+            'description' => $version->description,
+        ]);
+    });
+
+    //Logs
+    Route::get('/showUsersLog', [LogController::class , 'showUsersLog'])->name('logs.showUsersLog');
+    
 });
