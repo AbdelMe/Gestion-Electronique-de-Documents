@@ -49,7 +49,7 @@ class DocumentController extends Controller
             // 'Date' => now(),
             'metadata' => 'nullable|string',
             'tag' => 'nullable|string',
-            'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls,|max:2048',
+            'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls,ppt,pptx|max:2048',
             'etat_id' => 'nullable|exists:etats,id',
             'classe_id' => 'nullable|exists:classes,id',
             'dossier_id' => 'nullable|exists:dossiers,id',
