@@ -21,7 +21,7 @@
         <div class="max-w-md">
             <label for="role" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Rôle</label>
             <select id="role" name="role_id" required
-                class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700">
+                class="w-full border-2 border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:focus:ring-indigo-500">
                 <option value="" selected disabled>-- Sélectionnez un rôle --</option>
                 @foreach ($roles as $role)
                     <option value="{{ $role->id }}">{{ $role->name }}</option>
