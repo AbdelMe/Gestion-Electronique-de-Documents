@@ -98,11 +98,15 @@ class TypeUserController extends Controller
         session()->flash('success', 'Role assigned successfully!');
         return redirect()->route('roles.index');
     }
-
-    public function revokeRole(){
+    public function revokeRoleIndex(){
         $roles = Role::all();
         return view('roles.revokeRole',compact('roles'));
  
+    }
+    public function revokeRoleDelete(User $user, Role $role)
+    {
+        $user->removeRole($role->name); // or use $role->id with custom logic
+        return back()->with('success', 'Role revoked successfully.');
     }
     
 }
