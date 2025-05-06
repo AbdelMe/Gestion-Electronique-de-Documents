@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Http\Requests\StoreDocumentRequest;
 use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Dossier;
+use App\Models\Etat;
 use App\Models\Log;
 use App\Models\RubriqueDocument;
 use App\Models\TypeDocument;
@@ -59,7 +60,7 @@ class DocumentController extends Controller
 
         $document = new Document();
 
-
+        // $size = 0;
         if ($request->hasFile('CheminDocument')) {
             $file = $request->file('CheminDocument');
             $filePath = $file->store('documents', 'public');
@@ -133,13 +134,83 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    // public function update(Request $request, Document $document)
+    // {
+    //     $request->validate([
+    //         'titre' => 'required|string|max:255',
+    //         'metadata' => 'nullable|string',
+    //         'tag' => 'nullable|string',
+    //         'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls|max:2048',
+    //         'etat_id' => 'nullable|exists:etats,id',
+    //         'classe_id' => 'nullable|exists:classes,id',
+    //         'dossier_id' => 'nullable|exists:dossiers,id',
+    //         'type_document_id' => 'nullable|exists:type_documents,id',
+    //         'rubriques' => 'nullable|array',
+    //     ]);
+
+    //     // Update basic document fields
+    //     $document->titre = $request->titre;
+    //     $document->Date = now();
+    //     $document->metadata = $request->metadata;
+    //     $document->tag = $request->tag;
+    //     $document->etat_id = $request->etat_id;
+    //     $document->classe_id = $request->classe_id;
+    //     $document->dossier_id = $request->dossier_id;
+    //     $document->type_document_id = $request->type_document_id;
+
+    //     // Handle file upload if present
+    //     if ($request->hasFile('CheminDocument')) {
+    //         // Delete old file if it exists
+    //         if ($document->CheminDocument) {
+    //             Storage::disk('public')->delete($document->CheminDocument);
+    //         }
+
+    //         $file = $request->file('CheminDocument');
+    //         $filePath = $file->store('documents', 'public');
+    //         $document->CheminDocument = $filePath;
+    //     }
+
+    //     $document->save();
+
+    //     // Handle rubriques
+    //     if ($request->has('rubriques')) {
+    //         foreach ($request->rubriques as $rubrique_id => $valeur) {
+    //             // Check if rubrique exists for this document
+    //             $existingRubrique = RubriqueDocument::where([
+    //                 'rubrique_id' => $rubrique_id,
+    //                 'document_id' => $document->id
+    //             ])->first();
+
+    //             if (!empty($valeur)) {
+    //                 if ($existingRubrique) {
+    //                     // Update existing rubrique
+    //                     $existingRubrique->update(['Valeur' => $valeur]);
+    //                 } else {
+    //                     // Create new rubrique
+    //                     RubriqueDocument::create([
+    //                         'rubrique_id' => $rubrique_id,
+    //                         'Valeur' => $valeur,
+    //                         'document_id' => $document->id,
+    //                     ]);
+    //                 }
+    //             } elseif ($existingRubrique) {
+    //                 // Delete rubrique if value is empty and it exists
+    //                 $existingRubrique->delete();
+    //             }
+    //         }
+    //     }
+
+    //     return redirect()->route('documents.index')->with('Updated', 'Document updated successfully!');
+    // }
+
+
     public function update(Request $request, Document $document)
     {
         $request->validate([
             'titre' => 'required|string|max:255',
             'metadata' => 'nullable|string',
             'tag' => 'nullable|string',
-            'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls|max:2048',
+            'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls,ppt,pptx|max:2048',
             'etat_id' => 'nullable|exists:etats,id',
             'classe_id' => 'nullable|exists:classes,id',
             'dossier_id' => 'nullable|exists:dossiers,id',
@@ -147,59 +218,60 @@ class DocumentController extends Controller
             'rubriques' => 'nullable|array',
         ]);
 
-        // Update basic document fields
+        $size = $document->size;
+
+        if ($request->hasFile('CheminDocument')) {
+            $file = $request->file('CheminDocument');
+            $filePath = $file->store('documents', 'public');
+            if ($document->CheminDocument) {
+                \Storage::disk('public')->delete($document->CheminDocument);
+            }
+            $document->CheminDocument = $filePath;
+            $size = $file->getSize();
+        }
+
+        // Update document fields
         $document->titre = $request->titre;
-        $document->Date = now();
         $document->metadata = $request->metadata;
         $document->tag = $request->tag;
         $document->etat_id = $request->etat_id;
         $document->classe_id = $request->classe_id;
         $document->dossier_id = $request->dossier_id;
         $document->type_document_id = $request->type_document_id;
-
-        // Handle file upload if present
-        if ($request->hasFile('CheminDocument')) {
-            // Delete old file if it exists
-            if ($document->CheminDocument) {
-                Storage::disk('public')->delete($document->CheminDocument);
-            }
-
-            $file = $request->file('CheminDocument');
-            $filePath = $file->store('documents', 'public');
-            $document->CheminDocument = $filePath;
-        }
+        $document->size = $size;
 
         $document->save();
 
-        // Handle rubriques
-        if ($request->has('rubriques')) {
-            foreach ($request->rubriques as $rubrique_id => $valeur) {
-                // Check if rubrique exists for this document
-                $existingRubrique = RubriqueDocument::where([
-                    'rubrique_id' => $rubrique_id,
-                    'document_id' => $document->id
-                ])->first();
+        $latestVersion = $document->versions()->latest('numero')->first();
+        $newVersionNumber = $latestVersion ? $latestVersion->numero + 1 : 1;
+        $document->versions()->create([
+            'numero' => $newVersionNumber,
+            'date' => now(),
+            'description' => 'Mise à jour du document',
+        ]);
 
+        if ($request->has('rubriques')) {
+            RubriqueDocument::where('document_id', $document->id)->delete();
+
+            foreach ($request->rubriques as $rubrique_id => $valeur) {
                 if (!empty($valeur)) {
-                    if ($existingRubrique) {
-                        // Update existing rubrique
-                        $existingRubrique->update(['Valeur' => $valeur]);
-                    } else {
-                        // Create new rubrique
-                        RubriqueDocument::create([
-                            'rubrique_id' => $rubrique_id,
-                            'Valeur' => $valeur,
-                            'document_id' => $document->id,
-                        ]);
-                    }
-                } elseif ($existingRubrique) {
-                    // Delete rubrique if value is empty and it exists
-                    $existingRubrique->delete();
+                    RubriqueDocument::create([
+                        'rubrique_id' => $rubrique_id,
+                        'Valeur' => $valeur,
+                        'document_id' => $document->id,
+                    ]);
                 }
             }
         }
 
-        return redirect()->route('documents.index')->with('Updated', 'Document updated successfully!');
+        \App\Models\Log::create([
+            'document_id' => $document->id,
+            'user_id' => Auth::user()->id,
+            'date' => now(),
+            'action' => 'update Document',
+        ]);
+
+        return redirect()->route('documents.index')->with('Updated', 'Document mis à jour avec succès !');
     }
 
     /**
@@ -279,5 +351,4 @@ class DocumentController extends Controller
 
         return view('documents.versions', compact('document', 'versions'));
     }
-
 }
