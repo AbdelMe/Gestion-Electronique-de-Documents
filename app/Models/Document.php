@@ -19,6 +19,10 @@ class Document extends Model
     {
         return $this->belongsTo(Etat::class);
     }
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class);
+    }
     // public function Version()
     // {
     //     return $this->hasMany(Version::class);
