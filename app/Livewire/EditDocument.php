@@ -23,11 +23,14 @@ class EditDocument extends Component
         $document = $this->document;
         $typeDocuments = $this->typeDocuments;
         $dossiers = $this->dossiers;
+        $etats = Etat::all();
+        $classes = Classe::all();
+
 
         $rebrique = Rubrique::with('typeRubrique')
         ->where('type_document_id', $this->selected_type_doc)
         ->get();
 
-        return view('livewire.edit-document', compact('rebrique','document','typeDocuments','dossiers'));
+        return view('livewire.edit-document', compact('rebrique','document','typeDocuments','dossiers','etats','classes'));
     }
 }
