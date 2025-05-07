@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DroitController;
 use App\Http\Controllers\DroitUserController;
+use App\Http\Controllers\EtatController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\ResetPasswordController;
@@ -23,6 +24,7 @@ use App\Models\Classe;
 use App\Models\Document;
 use App\Models\Dossier;
 use App\Models\Entreprise;
+use App\Models\Etat;
 use App\Models\TypeUser;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -103,6 +105,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('documents.destroy');
 
     Route::get('/documents/SelectedType', [DocumentController::class, 'SelectedType'])->name('documents.SelectedType');
+    Route::put('/document/{id}/update-etat', [DocumentController::class, 'updateEtat'])->name('document.updateEtat');
 
 
     Route::resource('/type_documents', TypeDocumentController::class);
@@ -119,9 +122,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/roles/revoke/{user}/{role}', [TypeUserController::class, 'revokeRoleDelete'])->name('roles.revokeRoleDelete');
     Route::post('/assignRoleStore', [TypeUserController::class, 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
+    Route::delete('/bulk-revoke', [TypeUserController::class, 'bulkRevoke'])->name('roles.bulkRevoke');
 
-    // Route::get('/login', function () {
-    //     return view('Login&Register.index');
+
+    // Route::get('/loginn', function () {
+    //     return view('Login.index');
     // });
 
     // Route::resource('/documents/{document}', [DocumentController::class , 'download']);
@@ -187,6 +192,8 @@ Route::middleware(['auth'])->group(function () {
             'description' => $version->description,
         ]);
     });
+
+    Route::get('/DocumentEtat', [EtatController::class , 'index'])->name('etats.index');
 
     //Logs
     Route::get('/showUsersLog', [LogController::class , 'showUsersLog'])->name('logs.showUsersLog');
