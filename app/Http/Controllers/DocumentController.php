@@ -351,4 +351,23 @@ class DocumentController extends Controller
 
         return view('documents.versions', compact('document', 'versions'));
     }
+
+    public function updateEtat(Request $request, $documentId)
+    {
+        $request->validate([
+            'etat_id' => 'required|exists:etats,id',
+        ]);
+
+        $document = Document::find($documentId);
+
+        if ($document) {
+            $document->etat_id = $request->etat_id;
+            $document->save();
+
+            return redirect()->route('etats.index')->with('status', 'État mis à jour avec succès.');
+        }
+            // else {
+        //     return redirect()->route('etats.index')->with('error', 'Document introuvable.');
+        // }
+    }
 }
