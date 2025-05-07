@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Etat;
 use App\Http\Requests\StoreEtatRequest;
 use App\Http\Requests\UpdateEtatRequest;
+use App\Models\Document;
+use App\Models\Entreprise;
 
 class EtatController extends Controller
 {
@@ -13,7 +15,10 @@ class EtatController extends Controller
      */
     public function index()
     {
-        //
+        $documents = Document::paginate(5);
+        $entreprise = Entreprise::all();
+        $etats = Etat::all();
+        return view('etats.index', compact('documents','entreprise','etats'));
     }
 
     /**
@@ -25,6 +30,7 @@ class EtatController extends Controller
     }
 
     /**
+     * 
      * Store a newly created resource in storage.
      */
     public function store(StoreEtatRequest $request)
