@@ -83,7 +83,7 @@ class TypeUserController extends Controller
     {
         // dd('ff');
         $roles = Role::all();
-        return view('assignRole',compact('roles'));
+        return view('assignRole', compact('roles'));
     }
     public function assignRoleStore(Request $request)
     {
@@ -91,22 +91,39 @@ class TypeUserController extends Controller
             'role_id' => 'required|exists:roles,id',
             'user_id' => 'required|exists:users,id',
         ]);
-    
+
         $role = Role::findOrFail($request->role_id);
         $user = User::findOrFail($request->user_id);
         $user->assignRole($role);
         session()->flash('success', 'Role assigned successfully!');
         return redirect()->route('roles.index');
     }
-    public function revokeRoleIndex(){
+    public function revokeRoleIndex()
+    {
         $roles = Role::all();
-        return view('roles.revokeRole',compact('roles'));
- 
+        return view('roles.revokeRole', compact('roles'));
     }
     public function revokeRoleDelete(User $user, Role $role)
     {
         $user->removeRole($role->name); // or use $role->id with custom logic
         return back()->with('success', 'Role revoked successfully.');
     }
-    
+
+    public function bulkRevoke(Request $request)
+    {
+        $request->validate([
+            'user_ids' => 'required|array',
+        ]);
+
+        $users = User::whereIn('id', $request->user_ids)->get();
+
+        foreach ($users as $user) {
+            $role = $user->roles()->first();
+            if ($role) {
+                $user->removeRole($role->name);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Roles revoked from selected users.');
+    }
 }
