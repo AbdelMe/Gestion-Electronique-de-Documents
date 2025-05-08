@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classe;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,13 @@ class ClasseSeeder extends Seeder
         $classes = [
             'public',
             'confidential',
-            'Iiternal'
+            'liternal'
         ];
+
+        foreach($classes as $class){
+            Classe::firstOrCreate([
+                'classe' => $class,
+            ]);
+        }
     }
 }
