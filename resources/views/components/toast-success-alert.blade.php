@@ -22,7 +22,8 @@
             padding: 0 0.5rem !important;
             margin: 0 !important;
             font-size: 0.875rem !important;
-            
+            position: relative;
+            top: 5px;          
         }
         
         .compact-toast .swal2-close {
@@ -58,7 +59,6 @@
                     toast.addEventListener('mouseleave', Swal.resumeTimer);
                 },
                 willClose: () => {
-                    // Ensure proper cleanup
                     const toast = document.querySelector('.swal2-container');
                     if (toast) {
                         toast.style.transition = 'opacity 0.1s';

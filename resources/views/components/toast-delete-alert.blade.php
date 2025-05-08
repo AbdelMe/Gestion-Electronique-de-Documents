@@ -21,6 +21,8 @@
             text-align: center !important;
             display: block !important;
             width: 100% !important;
+            position: relative;
+            top: 5px; 
         }
         
         .colored-toast .swal2-close {

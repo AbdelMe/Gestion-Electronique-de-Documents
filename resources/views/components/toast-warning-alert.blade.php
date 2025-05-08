@@ -23,6 +23,8 @@
             display: block !important;
             width: 100% !important;
             font-weight: 500 !important;
+            position: relative;
+            top: 5px;    
         }
         
         .colored-toast .swal2-close {
