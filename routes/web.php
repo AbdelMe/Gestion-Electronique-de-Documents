@@ -16,6 +16,7 @@ use App\Http\Controllers\DroitUserController;
 use App\Http\Controllers\EtatController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TypeUserController;
 use App\Http\Middleware\UpdateLastSeen;
@@ -197,5 +198,16 @@ Route::middleware(['auth'])->group(function () {
 
     //Logs
     Route::get('/showUsersLog', [LogController::class , 'showUsersLog'])->name('logs.showUsersLog');
+   
     
+    Route::get('/About', function(){
+        return view('about.about');
+    })->name('about.about');
+
+
+    //notification
+    Route::put('/markAsRead/{id}', [NotificationController::class , 'markAsRead'])->name('notifications.markAsRead');
+    Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+    // Route::get('/notifications/load-more', [NotificationController::class, 'loadMore'])->name('notifications.loadMore');
+
 });
