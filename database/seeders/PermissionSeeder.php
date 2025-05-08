@@ -15,19 +15,19 @@ class PermissionSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         $permissions = [
-            'show_document',
-            'create_document',
-            'edit_document',
-            'download_document',
-            'print_document',
-            'delete_document',
-            'approve_document',
-            'reject_document',
-            'request_document_revision',
-            'archive_document',
-            'restore_document',
-            'share_document',
-            'transfer_document_ownership',
+            'show document',
+            'create document',
+            'edit document',
+            'download document',
+            'print document',
+            'delete document',
+            'approve document',
+            'reject document',
+            'request document_revision',
+            'archive document',
+            'restore document',
+            'share document',
+            // 'transfer document ownership',
         ];
     
         foreach ($permissions as $permission) {
