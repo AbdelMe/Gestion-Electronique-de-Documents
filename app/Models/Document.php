@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Document extends Model
 {
+
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+
     protected $guarded = ['id'];
     public function TypeDocument()
     {
@@ -32,8 +37,11 @@ class Document extends Model
         return $this->hasMany(RubriqueDocument::class);
     }
     public function versions()
-{
-    return $this->hasMany(Version::class);
+    {
+        return $this->hasMany(Version::class);
+    }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
-}
-
