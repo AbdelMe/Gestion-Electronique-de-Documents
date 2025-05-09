@@ -19,7 +19,7 @@
 @section('content')
 <div class="flex justify-between items-center mb-4">
     <h2 class="text-2xl font-semibold text-gray-800 dark:text-white px-4">Liste des Documents</h2>
-    <a href="{{ route('documents.create') }}" class="inline-flex items-center px-4 py-2 bg-teal-400 hover:bg-teal-500 text-white text-sm font-medium rounded-md shadow-md">
+    <a href="{{ route('documents.create') }}" class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
         <i class="bi bi-plus-lg me-1"></i> Ajouter Document
     </a>
 </div>
