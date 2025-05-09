@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entreprise;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -32,10 +33,15 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $role = Role::where('name',  'admin')->first();
-        $user->assignRole($role);
+        // $role = Role::where('name',  'admin')->first();
+        // $user->assignRole($role);
 
         Auth::login($user);
+        Notification::create([
+            'user_id' => $user->id,
+            'type' => 'message',
+            'message' => "Thank you for registering with ARCHIVI! 🎉 Your account has been successfully created, and you’re now ready to start organizing, managing, and accessing your files with ease.",
+        ]);
 
         return redirect()->route('documents.index');
     }
@@ -55,7 +61,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials) && Auth::user()->blocked != 1) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('success','You are logged in successfully');
         }
 
         return back()->withErrors([
@@ -171,7 +177,13 @@ class AuthController extends Controller
         $user = User::findOrFail($request->user_id);
         foreach ($request->permissions as $key => $permission) {
             $perm = Permission::where('id', $permission)->get();
+            // dd($perm[$key]->name);
             $user->givePermissionTo($perm);
+            Notification::create([
+                'user_id' => $user->id,
+                'type' => 'message',
+                'message' => "congratulation you get the permission for " . $perm[$key]->name,
+            ]);
         }
         return to_route('users.showUserPermissions')->with('success', 'Permissions Stored.');
     }
