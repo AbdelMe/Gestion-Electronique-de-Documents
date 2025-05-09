@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('Valeur');
             $table->unsignedBigInteger('document_id');
             $table->foreign('rubrique_id')->references('id')->on('rubriques');
-            $table->foreign('document_id')->references('id')->on('documents');
+            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
             $table->timestamps();
         });
     }

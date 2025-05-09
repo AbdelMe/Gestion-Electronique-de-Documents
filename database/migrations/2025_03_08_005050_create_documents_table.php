@@ -23,15 +23,14 @@ return new class extends Migration
             $table->unsignedBigInteger('dossier_id');
             $table->unsignedBigInteger('type_document_id');
             $table->unsignedBigInteger('size')->nullable();
-            // $table->string('Cote');
-            // $table->date('Index');
-            // $table->integer('Supprimer');
-            // $table->integer('EnCoursSuppression');
-            $table->foreign('etat_id')->references('id')->on('etats');
-            $table->foreign('classe_id')->references('id')->on('classes');
-            $table->foreign('dossier_id')->references('id')->on('dossiers');
-            $table->foreign('type_document_id')->references('id')->on('type_documents');
+            
+            $table->foreign('etat_id')->references('id')->on('etats')->onDelete('cascade');
+            $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
+            $table->foreign('dossier_id')->references('id')->on('dossiers')->onDelete('cascade');
+            $table->foreign('type_document_id')->references('id')->on('type_documents')->onDelete('cascade');
+            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
