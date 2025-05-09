@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class DossierController extends Controller
 {
-   
+
 
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class DossierController extends Controller
     // DossierController.php
     public function index()
     {
-        $dossiers = Dossier::with('entreprise')->paginate(12); 
+        $dossiers = Dossier::with('entreprise')->paginate(12);
         return view('dossiers.index', compact('dossiers'));
     }
 
@@ -53,10 +53,13 @@ class DossierController extends Controller
      */
     public function show(Dossier $dossier)
     {
-        $documents = DB::table('documents')->where('dossier_id',$dossier->id)->get();
-        // dd($documents);
-        return view('dossiers.show', compact('dossier','documents'));
+        $documents = DB::table('documents')
+            ->where('dossier_id', $dossier->id)
+            ->whereNull('deleted_at')
+            ->get();
+        return view('dossiers.show', compact('dossier', 'documents'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -83,12 +86,11 @@ class DossierController extends Controller
      */
     public function destroy(Dossier $dossier)
     {
-        try{
+        try {
             $dossier->delete();
             return redirect()->route('dossiers.index')->with('deleted', 'Dossier deleted successfully.');
-    
-            }catch(QueryException){
-                return to_route('dossiers.index')->with('warning',"Impossible de supprimer ce Dossier car il est lié à autres données.");
-            }
+        } catch (QueryException) {
+            return to_route('dossiers.index')->with('warning', "Impossible de supprimer ce Dossier car il est lié à autres données.");
+        }
     }
 }
