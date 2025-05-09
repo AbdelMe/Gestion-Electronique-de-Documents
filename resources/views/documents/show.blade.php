@@ -44,18 +44,20 @@
                                         @if ($extension === 'pdf')
                                             {{-- PDF --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
-                                                <a href="{{ $fileUrl }}" target="_blank"
-                                                    class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-                                                    </svg>
-                                                    View PDF
-                                                </a>
+                                                @if (auth()->user()->can('show_document'))
+                                                    <a href="{{ $fileUrl }}" target="_blank"
+                                                        class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+                                                        </svg>
+                                                        View PDF
+                                                    </a>
+                                                @endif
 
                                                 @php
                                                     App\Models\Log::create([
@@ -90,13 +92,13 @@
                                                 </a>
 
                                             </div>
-
                                             {{-- @php
-                                                auth()->user()->revokePermissionTo('create_document');
+                                                auth()->user()->revokePermissionTo('show_document');
                                             @endphp --}}
                                         @elseif(in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
                                             {{-- IMAGE --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
+                                                @if(auth()->user()->can('show_document'))
                                                 <a href="{{ $fileUrl }}" target="_self"
                                                     class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
@@ -109,6 +111,7 @@
                                                     </svg>
                                                     View Image
                                                 </a>
+                                                @endif
 
                                                 @php
                                                     App\Models\Log::create([
@@ -143,9 +146,13 @@
                                                 </a>
 
                                             </div>
+                                            {{-- @php
+                                                auth()->user()->revokePermissionTo('show_document');
+                                            @endphp --}}
                                         @elseif(in_array($extension, ['xlsx', 'xls']))
                                             {{-- Excel --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
+                                                @if(auth()->user()->can('show_document'))
                                                 <a href="ms-excel:ofe|u|{{ $fileUrl }}"
                                                     class="inline-flex items-center px-3 py-1.5 border border-green-500 text-green-600 rounded-xl bg-green-50 hover:bg-green-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-green-400 transition">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
@@ -158,6 +165,7 @@
                                                     </svg>
                                                     Open in Excel
                                                 </a>
+                                                @endif
 
                                                 @php
                                                     App\Models\Log::create([
@@ -192,9 +200,13 @@
                                                 </a>
 
                                             </div>
+                                            {{-- @php
+                                                auth()->user()->revokePermissionTo('show_document');
+                                            @endphp --}}
                                         @elseif(in_array($extension, ['docx', 'doc']))
                                             {{-- Word --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
+                                                @if(auth()->user()->can('show_document'))
                                                 <a href="ms-word:ofe|u|{{ $fileUrl }}"
                                                     class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
@@ -207,6 +219,7 @@
                                                     </svg>
                                                     Open in Word
                                                 </a>
+                                                @endif
 
                                                 @php
                                                     App\Models\Log::create([
@@ -241,10 +254,13 @@
                                                 </a>
 
                                             </div>
+                                            {{-- @php
+                                                auth()->user()->revokePermissionTo('show_document');
+                                            @endphp --}}
                                         @elseif(in_array($extension, ['pptx', 'ppt']))
                                             <!-- PowerPoint -->
                                             <div class="flex flex-wrap gap-2 mt-4">
-
+                                                @if(auth()->user()->can('show_document'))
                                                 <a href="ms-powerpoint:ofe|u|{{ $fileUrl }}"
                                                     class="inline-flex items-center px-3 py-1.5 border border-red-500 text-red-600 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-red-400 transition">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
@@ -257,6 +273,7 @@
                                                     </svg>
                                                     Open in PowerPoint
                                                 </a>
+                                                @endif
 
                                                 @php
                                                     App\Models\Log::create([
@@ -267,7 +284,6 @@
                                                     ]);
                                                 @endphp
 
-                                                <!-- Download button -->
                                                 <a href="{{ route('documents.download', $document->id) }}"
                                                     class="inline-flex items-center px-3 py-1.5 border border-gray-500 text-gray-700 rounded-xl bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 transition">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
@@ -279,7 +295,6 @@
                                                     Download
                                                 </a>
 
-                                                <!-- Print -->
                                                 <a href="{{ $fileUrl }}"
                                                     onclick="event.preventDefault(); printPDF('{{ $fileUrl }}');"
                                                     class="inline-flex items-center px-3 py-1.5 border border-gray-500 text-gray-700 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 transition">
@@ -292,6 +307,9 @@
                                                     Print
                                                 </a>
                                             </div>
+                                            {{-- @php
+                                                auth()->user()->revokePermissionTo('show_document');
+                                            @endphp --}}
                                         @endif
                                     </div>
                                 </div>
@@ -438,9 +456,10 @@
                                             @endphp
                                             <tr>
                                                 <td
-                                                    class="px-4 py-2 whitespace-nowrap font-semibold text-gray-800 dark:text-gray-300">
+                                                    class="px-4 py-2 whitespace-nowrap font-semibold border-none text-gray-800 dark:text-gray-300">
                                                     {{ $rubrique->Rubrique ?? 'N/A' }}</td>
-                                                <td class="px-4 py-2 whitespace-nowrap text-gray-800 dark:text-gray-300">
+                                                <td
+                                                    class="px-4 py-2 whitespace-nowrap text-gray-800 border-none dark:text-gray-300">
                                                     @if (isset($rub_doc->Valeur) && strlen($rub_doc->Valeur) > 50)
                                                         <span class="inline-block truncate max-w-xs"
                                                             title="{{ $rub_doc->Valeur }}">
