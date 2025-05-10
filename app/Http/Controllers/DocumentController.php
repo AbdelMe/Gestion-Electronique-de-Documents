@@ -8,8 +8,10 @@ use App\Http\Requests\UpdateDocumentRequest;
 use App\Models\Dossier;
 use App\Models\Etat;
 use App\Models\Log;
+use App\Models\Notification;
 use App\Models\RubriqueDocument;
 use App\Models\TypeDocument;
+use App\Models\User;
 use App\Models\Version;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -98,6 +100,14 @@ class DocumentController extends Controller
                     ]);
                 }
             }
+        }
+        $admins = User::role('admin')->get();
+        foreach ($admins as $admin) {
+            Notification::create([
+                'user_id' => $admin->id,
+                'type' => 'update',
+                'message' => Auth::user()->first_name . " " . Auth::user()->last_name . " Create Document named: " . $document->titre,
+            ]);
         }
         // else{
 
@@ -270,6 +280,14 @@ class DocumentController extends Controller
             'date' => now(),
             'action' => 'update Document',
         ]);
+        $admins = User::role('admin')->get();
+        foreach ($admins as $admin) {
+            Notification::create([
+                'user_id' => $admin->id,
+                'type' => 'update',
+                'message' => Auth::user()->first_name . " " . Auth::user()->last_name . " Update Document named: " . $document->titre,
+            ]);
+        }
 
         return redirect()->route('documents.index')->with('Updated', 'Document mis à jour avec succès !');
     }
@@ -285,6 +303,14 @@ class DocumentController extends Controller
                 Storage::disk('public')->delete($document->DocumentNumerique);
             }
             $document->delete();
+            $admins = User::role('admin')->get();
+            foreach ($admins as $admin) {
+                Notification::create([
+                    'user_id' => $admin->id,
+                    'type' => 'destroy',
+                    'message' => Auth::user()->first_name . " " . Auth::user()->last_name . " Delete Document: " . $document->titre,
+                ]);
+            }
             return redirect()->route('documents.index')->with('deleted', 'Document deleted successfully!');
         } catch (QueryException) {
             return to_route('documents.index')->with('warning', "Impossible de supprimer ce Document car il est lié à autres données.");
@@ -333,9 +359,23 @@ class DocumentController extends Controller
             'Content-Type' => $mimeType,
             'Content-Disposition' => 'attachment; filename="' . basename($path) . '"'
         ];
+        // Notification::create([
+        //     'user_id' => Auth::user()->id,
+        //     'type' => 'message',
+        //     'message' => Auth::user()->first_name . " " . Auth::user()->last_name . " download a document",
+        // ]);
+        // Notify ALL admins that a document was downloaded
+        $admins = User::role('admin')->get();
+        foreach ($admins as $admin) {
+            Notification::create([
+                'user_id' => $admin->id,
+                'type' => 'download',
+                'message' => Auth::user()->first_name . " " . Auth::user()->last_name . " downloaded: " . $document->titre,
+            ]);
+        }
         Log::create([
             "document_id" => $document->id,
-            "user_id" => Auth::user()->id,
+            "user_id" => Auth::id(),
             "date" => now(),
             "action" => "Download The Document",
         ]);
@@ -366,7 +406,7 @@ class DocumentController extends Controller
 
             return redirect()->route('etats.index')->with('status', 'État mis à jour avec succès.');
         }
-            // else {
+        // else {
         //     return redirect()->route('etats.index')->with('error', 'Document introuvable.');
         // }
     }
