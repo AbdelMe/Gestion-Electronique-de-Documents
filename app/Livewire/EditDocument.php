@@ -18,6 +18,8 @@ class EditDocument extends Component
     public $dossiers;
     public string $selected_type_doc = "" ;
 
+    
+
     public function render()
     {
         $document = $this->document;

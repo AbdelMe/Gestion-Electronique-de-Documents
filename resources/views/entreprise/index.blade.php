@@ -22,7 +22,7 @@
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Liste des Entreprises</h2>
         <a href="{{ route('entreprise.create') }}"
-            class="inline-flex items-center px-4 py-2 bg-teal-400 hover:bg-teal-500 text-white text-sm font-medium rounded-md shadow-md">
+        class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
             <i class="bi bi-plus-lg mr-2"></i> Ajouter Entreprise
         </a>
     </div>
@@ -48,7 +48,6 @@
                                     class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200">
                                     <i class="bi bi-pencil-square mr-1"></i> Modifier
                                 </a>
-                                {{-- Delete --}}
                                 <form action="{{ route('entreprise.destroy', $entreprise->id) }}" method="POST"
                                     onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">
                                     @csrf
