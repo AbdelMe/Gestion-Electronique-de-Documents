@@ -20,7 +20,6 @@
 @section('content')
     <div class="min-h-screen py-6 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <!-- Header Section -->
             <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
                 <div>
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-300">Liste des dossiers</h2>
@@ -34,12 +33,10 @@
                 </a>
             </div>
 
-            <!-- Cards Grid -->
             @if (count($dossiers) > 0 )
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($dossiers as $dossier)
                     <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden hover:bg-gray-50 dark:bg-gray-800">
-                        <!-- Card Content -->
                         <div class="p-4">
                             <div class="flex items-start">
                                 <div class="p-2 rounded-md">
@@ -108,7 +105,6 @@
                 </div>
             </div> --}}
 
-            <!-- Pagination -->
             <div class="mt-6">
                 {{ $dossiers->links() }}
             </div>
@@ -117,9 +113,7 @@
 @endsection
 
 @push('styles')
-    <!-- Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Custom pagination styles -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> --}}
     <style>
         .pagination {
             display: flex;
