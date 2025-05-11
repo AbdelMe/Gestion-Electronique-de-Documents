@@ -7,7 +7,7 @@
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">Users Permissions</h1>
             <a href="{{ route('users.assignPermitionsToUser') }}"
-                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+            class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                 Assign permission to user
             </a>
         </div>
