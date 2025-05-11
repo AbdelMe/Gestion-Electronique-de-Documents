@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Entreprise;
 use App\Http\Requests\StoreEntrepriseRequest;
 use App\Http\Requests\UpdateEntrepriseRequest;
+use App\Models\Notification;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\Return_;
 
 class EntrepriseController extends Controller
@@ -37,6 +39,11 @@ class EntrepriseController extends Controller
         $validated = $request->validated();
 
         Entreprise::create($validated);
+        Notification::create([
+            'user_id' => Auth::user()->id,
+            'type' => 'message',
+            'message' => Auth::user()->first_name . " Create an Company",
+        ]);
 
         return redirect()->route('entreprise.index')->with('Added', 'Entreprise added successfully!');
     }
