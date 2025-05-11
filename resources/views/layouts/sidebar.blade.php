@@ -1,6 +1,6 @@
+@php $isRtl = app()->getLocale() === 'ar'; @endphp
 <div
-    class="h-screen bg-white border-r border-gray-200 w-72 fixed shadow-sm flex flex-col dark:bg-gray-900 dark:border-gray-800 ">
-    @php $isRtl = app()->getLocale() === 'ar'; @endphp
+    class="h-screen bg-white border-r border-gray-200 w-72 fixed shadow-sm flex flex-col dark:bg-gray-900 dark:border-gray-800 {{ $isRtl ? 'border-l border-gray-200' : '' }}">
     <div class="p-4 dark:border-gray-800">
         <div class="flex items-center space-x-3">
             <div class="relative">
