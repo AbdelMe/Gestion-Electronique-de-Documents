@@ -17,7 +17,7 @@
                 Manage which permissions are assigned to this role
             </p>
         </div>
-        <a href="{{ route('roles.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition">
+        <a href="{{ route('roles.index') }}" class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
             Back to Roles
         </a>
     </div>
@@ -69,7 +69,7 @@
             </div>
 
             <div class="px-6 py-4 bg-gray-50 dark:bg-transparent text-right">
-                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <button type="submit" class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                     Update Role Permissions
                 </button>
             </div>
