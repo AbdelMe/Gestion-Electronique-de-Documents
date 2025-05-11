@@ -19,7 +19,7 @@
                 </p>
             </div>
             <a href="{{ route('users.showUserPermissions') }}"
-                class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition">
+            class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                 Back to Users
             </a>
         </div>
@@ -35,7 +35,7 @@
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Role
                             Name</label>
                         <input type="text" name="name" id="name" value="{{ old('name', $user->first_name) }}"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            class="w-full px-3 py-2 border border-indigo-700 shadow-sm focus:outline-none dark:bg-transparent dark:border-indigo-700 dark:text-white rounded-xl"
                             required disabled>
                     </div>
 
@@ -48,7 +48,7 @@
                             @endphp
 
                             @foreach ($permissions as $group => $groupPermissions)
-                                <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-4">
+                                <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-4">
                                     <div class="flex items-center justify-between mb-3">
                                         <span
                                             class="text-sm font-medium text-gray-800 dark:text-gray-200 capitalize">{{ $group }}
@@ -94,7 +94,7 @@
 
                 <div class="px-6 py-4 bg-gray-50 dark:bg-transparent text-right">
                     <button type="submit"
-                        class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                         Update User Permissions
                     </button>
                 </div>
