@@ -75,14 +75,14 @@ Route::middleware(['auth'])->group(function () {
         foreach ($recentDocuments as $document) {
             // if ($document->Dossier->entreprise->id == Auth::user()->entreprise_id){
 
-                $recentActivities[] = [
-                    'id' => $document->id,
-                    'type' => 'document',
-                    'name' => $document->LibelleDocument,
-                    'file_path' => $document->CheminDocument,
-                    'created_at' => $document->created_at,
-                    'is_new' => $document->created_at->isToday(),
-                ];
+            $recentActivities[] = [
+                'id' => $document->id,
+                'type' => 'document',
+                'name' => $document->LibelleDocument,
+                'file_path' => $document->CheminDocument,
+                'created_at' => $document->created_at,
+                'is_new' => $document->created_at->isToday(),
+            ];
             // }
         }
 
@@ -194,20 +194,32 @@ Route::middleware(['auth'])->group(function () {
         ]);
     });
 
-    Route::get('/DocumentEtat', [EtatController::class , 'index'])->name('etats.index');
+    Route::get('/DocumentEtat', [EtatController::class, 'index'])->name('etats.index');
 
     //Logs
-    Route::get('/showUsersLog', [LogController::class , 'showUsersLog'])->name('logs.showUsersLog');
-   
-    
-    Route::get('/About', function(){
+    Route::get('/showUsersLog', [LogController::class, 'showUsersLog'])->name('logs.showUsersLog');
+
+
+    Route::get('/About', function () {
         return view('about.about');
     })->name('about.about');
 
 
     //notification
-    Route::put('/markAsRead/{id}', [NotificationController::class , 'markAsRead'])->name('notifications.markAsRead');
+    Route::put('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
     // Route::get('/notifications/load-more', [NotificationController::class, 'loadMore'])->name('notifications.loadMore');
 
+    Route::get('/notifications/load', function () {
+        $notifications = \App\Models\Notification::where('user_id', auth()->id())
+            ->latest()
+            ->paginate(5);
+
+        $notifications->getCollection()->transform(function ($notification) {
+            $notification->created_at_diff = $notification->created_at->diffForHumans();
+            return $notification;
+        });
+
+        return response()->json($notifications);
+    });
 });
