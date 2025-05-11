@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard', compact('users', 'dossiers', 'documents', 'recentActivities', 'documentData', 'totalSizeMb', 'totalSizeGb'));
     })->name('dashboard');
 
-
+    
 
     Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
     Route::resource('/dossiers', DossierController::class);
