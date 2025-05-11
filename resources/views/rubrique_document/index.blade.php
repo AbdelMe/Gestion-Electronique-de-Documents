@@ -45,7 +45,8 @@
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 border-b dark:border-gray-800 dark:text-white">
                         <td class="px-6 py-4">{{ $r_d->id }}</td>
                         <td class="px-6 py-4">{{ $r_d->Rubrique->Rubrique }}</td>
-                        <td class="px-6 py-4">{{ $r_d->Document->titre }}</td>
+                        
+                            <td class="px-6 py-4">@if ($r_d->Document) {{ $r_d->Document->titre }}  @else <span class="text-red-500">Document deleted</span>  @endif</td>
                         {{-- <td class="px-6 py-4">{{ $r_d->Valeur }}</td> --}}
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-2">
