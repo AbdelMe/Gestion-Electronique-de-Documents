@@ -13,7 +13,6 @@
             @csrf
 
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <!-- Left column: Role selection -->
                 <div class="lg:col-span-1">
                     <h2 class="text-lg font-medium text-gray-800 dark:text-white mb-4">Select Role</h2>
                     <label for="role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Role</label>
@@ -29,7 +28,6 @@
                     </select>
                 </div>
 
-                <!-- Right column: Permissions -->
                 <div class="lg:col-span-3">
                     <h2 class="text-lg font-medium text-gray-800 dark:text-white mb-4">Permissions</h2>
 
@@ -66,7 +64,7 @@
 
             <div class="mt-6 text-right">
                 <button type="submit" 
-                    class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                     Save Permissions
                 </button>
             </div>
