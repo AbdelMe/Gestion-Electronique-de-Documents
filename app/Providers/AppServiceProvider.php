@@ -23,16 +23,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Paginator::useBootstrapFive();
-        View::composer('layouts.header', function ($view) {
-            if (auth()->check()) {
-                $notifications = Notification::where('user_id', auth()->id())
-                    ->latest()
-                    ->take(10)
-                    ->get();
-                $view->with('notifications', $notifications);
-            }
+        // View::composer('layouts.header', function ($view) {
+        //     if (auth()->check()) {
+        //         $notifications = Notification::where('user_id', auth()->id())
+        //             ->latest()
+        //             ->take(10)
+        //             ->get();
+        //         $view->with('notifications', $notifications);
+        //     }
 
-        });
+        // });
         // View::composer('layouts.header', function ($view) {
         //     if (auth()->check()) {
         //         $user = auth()->user();
