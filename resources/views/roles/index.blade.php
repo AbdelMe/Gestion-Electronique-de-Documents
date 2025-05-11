@@ -22,15 +22,13 @@
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Liste des Rôles</h2>
         <div class="flex space-x-2">
-            {{-- Ajouter Rôle --}}
             <a href="{{ route('roles.revokeRole') }}"
-                class="inline-flex items-center px-4 py-1 bg-teal-400 hover:bg-teal-500 text-white text-sm font-medium rounded-md shadow-md">
+            class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                 <i class="bi bi-plus-lg mr-2"></i> Revoke Rôle
             </a>
     
-            {{-- Assigner Rôle --}}
-            <a href="{{ route('roles.assignRole') }}" {{-- make sure this route exists --}}
-                class="inline-flex items-center px-4 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-md shadow-md">
+            <a href="{{ route('roles.assignRole') }}"
+            class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                 <i class="bi bi-person-plus mr-2"></i> Assigner Rôle
             </a>
         </div>
