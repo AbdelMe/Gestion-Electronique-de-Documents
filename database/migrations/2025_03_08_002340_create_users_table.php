@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('postal_code')->nullable();
             $table->boolean('blocked')->default(0);
+            $table->boolean('actif')->default(1);
             $table->foreign('entreprise_id')
                 ->references('id')
                 ->on('entreprises');
