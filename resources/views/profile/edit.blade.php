@@ -10,7 +10,7 @@
                 <div class="relative">
                     <div class="w-32 h-32 rounded-full overflow-hidden shadow-lg">
                         <img class="w-full h-full object-cover"
-                            src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://via.placeholder.com/150' }}"
+                    src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('assets\images\icons\user (1).png') }}"
                             alt="Profile Image">
                     </div>
                     {{-- <div class="absolute inset-0 bg-gradient-to-r from-teal-400 to-blue-500 opacity-50 rounded-full"></div> --}}
