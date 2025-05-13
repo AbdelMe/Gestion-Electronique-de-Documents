@@ -124,6 +124,7 @@ class AuthController extends Controller
     }
     public function blockUser(User $user){
         $user->blocked = 1 ;
+        $user->actif = 0 ;
         $user->update();
         // dd($user->blocked);
     }
@@ -150,6 +151,7 @@ class AuthController extends Controller
             $path = $request->file('profile_image')->store('profile_images', 'public');
             $validated['profile_image'] = $path;
         }
+        $user->actif = 1;
         $user->update($validated);
         // dd($user);
 
