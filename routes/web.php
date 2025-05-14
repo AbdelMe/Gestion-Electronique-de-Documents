@@ -93,7 +93,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
 
 
-    
+
     Route::resource('/entreprise', EntrepriseController::class)->names('entreprise');
     Route::resource('/dossiers', DossierController::class);
 
@@ -222,4 +222,8 @@ Route::middleware(['auth'])->group(function () {
 
         return response()->json($notifications);
     });
+
+    Route::get('/Documentation',function(){
+        return view('documentation');
+    })->name('documentation');
 });
