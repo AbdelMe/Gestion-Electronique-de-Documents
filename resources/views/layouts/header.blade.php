@@ -150,9 +150,9 @@
                             @php $isRtl = app()->getLocale() === 'ar'; @endphp
                             <div x-show="dropdownOpen" x-cloak @click.outside="dropdownOpen = false"
                                 @class([
-                                    'absolute mt-[5px] flex h-[480px] w-[350px] flex-col rounded-2xl border p-3 sm:w-[361px]',
-                                    'right-0' => !$isRtl,
-                                    'left-0' => $isRtl,
+                                    'fixed z-[9999] mt-[5px] flex h-[480px] w-[350px] flex-col rounded-2xl border p-3 sm:w-[361px]',
+                                    'right-4 top-16' => !$isRtl,
+                                    'left-4 top-16' => $isRtl,
                                     'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-800 shadow-theme-lg ',
                                 ])
                                 x-transition:enter="transition transform ease-out duration-300"
@@ -163,24 +163,32 @@
                                 x-transition:leave-end="{{ $isRtl ? '-translate-x-20 opacity-0' : 'translate-x-20 opacity-0' }}">
 
 
-                                <div class="mb-3 flex items-center justify-between border-b border-gray-100 pb-3 dark:border-gray-800">
-                                    <h5 class="text-lg font-semibold text-gray-800 dark:text-white/90">Notification</h5>
-                                    
+                                <div
+                                    class="mb-3 flex items-center justify-between border-b border-gray-100 pb-3 dark:border-gray-800">
+                                    <h5 class="text-lg font-semibold text-gray-800 dark:text-white/90">Notification
+                                    </h5>
+
                                     {{-- <button type="submit" class="inline-flex items-center px-4 text-red-700 border hover:text-white border-red-600 py-1 hover:bg-red-700 dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                                         Delete All
                                     </button> --}}
-                                    
+
                                     <button @click="dropdownOpen = false" class="text-gray-500 dark:text-gray-400">
-                                        <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.21967 7.28131C5.92678 6.98841 5.92678 6.51354 6.21967 6.22065C6.51256 5.92775 6.98744 5.92775 7.28033 6.22065L11.999 10.9393L16.7176 6.22078C17.0105 5.92789 17.4854 5.92788 17.7782 6.22078C18.0711 6.51367 18.0711 6.98855 17.7782 7.28144L13.0597 12L17.7782 16.7186C18.0711 17.0115 18.0711 17.4863 17.7782 17.7792C17.4854 18.0721 17.0105 18.0721 16.7176 17.7792L11.999 13.0607L7.28033 17.7794C6.98744 18.0722 6.51256 18.0722 6.21967 17.7794C5.92678 17.4865 5.92678 17.0116 6.21967 16.7187L10.9384 12L6.21967 7.28131Z" fill="" />
+                                        <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M6.21967 7.28131C5.92678 6.98841 5.92678 6.51354 6.21967 6.22065C6.51256 5.92775 6.98744 5.92775 7.28033 6.22065L11.999 10.9393L16.7176 6.22078C17.0105 5.92789 17.4854 5.92788 17.7782 6.22078C18.0711 6.51367 18.0711 6.98855 17.7782 7.28144L13.0597 12L17.7782 16.7186C18.0711 17.0115 18.0711 17.4863 17.7782 17.7792C17.4854 18.0721 17.0105 18.0721 16.7176 17.7792L11.999 13.0607L7.28033 17.7794C6.98744 18.0722 6.51256 18.0722 6.21967 17.7794C5.92678 17.4865 5.92678 17.0116 6.21967 16.7187L10.9384 12L6.21967 7.28131Z"
+                                                fill="" />
                                         </svg>
                                     </button>
                                 </div>
 
-                                <ul id="notification-container" class="Hide-scroll custom-scrollbar flex h-auto flex-col overflow-y-auto" style="max-height: 400px;" x-cloak>
+                                <ul id="notification-container"
+                                    class="Hide-scroll custom-scrollbar flex h-auto flex-col overflow-y-auto"
+                                    style="max-height: 400px;" x-cloak>
                                 </ul>
 
-                                <div id="loading" style="display:none;" class="text-center text-sm text-gray-400">Loading...</div>
+                                <div id="loading" style="display:none;" class="text-center text-sm text-gray-400">
+                                    Loading...</div>
 
                                 <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -204,11 +212,11 @@
                                                     li.innerHTML = `
                                                         <a class="flex gap-3 rounded-lg border-b border-gray-100 p-3 px-4.5 py-3 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-white/5" href="#">
                                                             ${notification.from_user && notification.from_user.profile_photo_path ? `
-                                                                <span class="relative z-1 block h-10 w-full max-w-10 rounded-full">
-                                                                    <img src="/storage/${notification.from_user.profile_photo_path}" alt="User" class="overflow-hidden rounded-full" />
-                                                                    <span class="bg-success-500 absolute right-0 bottom-0 z-10 h-2.5 w-full max-w-2.5 rounded-full border-[1.5px] border-white dark:border-gray-900"></span>
-                                                                </span>
-                                                            ` : ''}
+                                                                                                <span class="relative z-1 block h-10 w-full max-w-10 rounded-full">
+                                                                                                    <img src="/storage/${notification.from_user.profile_photo_path}" alt="User" class="overflow-hidden rounded-full" />
+                                                                                                    <span class="bg-success-500 absolute right-0 bottom-0 z-10 h-2.5 w-full max-w-2.5 rounded-full border-[1.5px] border-white dark:border-gray-900"></span>
+                                                                                                </span>
+                                                                                            ` : ''}
                                                             <span class="block">
                                                                 <span class="text-theme-sm mb-1.5 block text-gray-500 dark:text-gray-400">
                                                                     ${notification.message}
@@ -264,6 +272,7 @@
                                 scrollbar-width: none;
                                 -ms-overflow-style: none;
                             }
+
                             .Hide-scroll::-webkit-scrollbar {
                                 display: none;
                             }
