@@ -124,6 +124,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/assignRoleStore', [TypeUserController::class, 'assignRoleStore'])->name('roles.assignRoleStore');
     Route::resource('/permitions', DroitController::class);
     Route::delete('/bulk-revoke', [TypeUserController::class, 'bulkRevoke'])->name('roles.bulkRevoke');
+    Route::post('/bulk-assign', [TypeUserController::class, 'bulkAssign'])->name('roles.bulkAssign');
 
 
     // Route::get('/loginn', function () {
@@ -226,4 +227,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Documentation',function(){
         return view('documentation');
     })->name('documentation');
+
+    Route::get('/Contact', function(){
+        return view('contact');
+    })->name('contact');
+
 });
