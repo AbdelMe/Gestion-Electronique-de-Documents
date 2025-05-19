@@ -14,7 +14,7 @@ class EtatSeeder extends Seeder
     public function run(): void
     {
         $etats = [
-            "Draft" => "yellow",
+            "Panding" => "yellow",
             // "Pending Review",
             // "Under Review",
             "Approved" => "green",

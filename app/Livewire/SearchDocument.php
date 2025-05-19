@@ -3,23 +3,32 @@
 namespace App\Livewire;
 
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class SearchDocument extends Component
 {
+    use WithPagination;
     public string $search_docs = "";
     public string $filter_by = "";
-    public $documents;
-    public $docs = [];
+    // public $documents;
+    // public $docs = [];
 
-    public function mount()
-    {
-        $this->documents = Document::with(['Dossier', 'TypeDocument'])->get();
-    }
+    // public function mount()
+    // {
+    //     $this->documents = Document::with(['Dossier', 'TypeDocument'])->get();
+    // }
 
     public function render()
     {
         $query = Document::query()->with(['Dossier', 'TypeDocument']);
+                $userEntrepriseId = Auth::user()->entreprise_id;
+
+        $query = Document::with(['dossier', 'typeDocument', 'RubriqueDocument'])
+            ->whereHas('dossier', function ($q) use ($userEntrepriseId) {
+                $q->where('entreprise_id', $userEntrepriseId);
+            });
 
         // Search functionality
         if (strlen($this->search_docs) >= 2) {
@@ -52,12 +61,12 @@ class SearchDocument extends Component
                 break;
         }
 
-        $this->docs = $query->get();
+        $documents = $query->paginate(3);
 
 
         return view('livewire.search-document', [
-            'documents' => $this->docs,
-            'docs' => $this->docs
+            'documents' => $documents,
+            // 'docs' => $this->docs
         ]);
     }
 }

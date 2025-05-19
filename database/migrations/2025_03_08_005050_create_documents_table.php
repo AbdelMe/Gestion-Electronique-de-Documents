@@ -18,10 +18,10 @@ return new class extends Migration
             $table->text('metadata');
             $table->text('tag');
             $table->string('CheminDocument')->nullable();
-            $table->unsignedBigInteger('etat_id');
-            $table->unsignedBigInteger('classe_id');
+            $table->unsignedBigInteger('etat_id')->default(1);
+            $table->unsignedBigInteger('classe_id')->default(1);
             $table->unsignedBigInteger('dossier_id');
-            $table->unsignedBigInteger('type_document_id');
+            $table->unsignedBigInteger('type_document_id')->nullable();
             $table->unsignedBigInteger('size')->nullable();
             
             $table->foreign('etat_id')->references('id')->on('etats')->onDelete('cascade');
