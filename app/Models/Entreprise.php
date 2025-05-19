@@ -25,4 +25,14 @@ class Entreprise extends Model
 
     protected $guarded = ['id'];
 
+    public function dossiers(): HasMany
+    {
+        return $this->hasMany(Dossier::class);
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
 }

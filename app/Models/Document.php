@@ -11,7 +11,7 @@ class Document extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    protected $guarded = ['id'];
+    protected $fill = ['id'];
     public function TypeDocument()
     {
         return $this->belongsTo(TypeDocument::class);
