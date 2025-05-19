@@ -10,20 +10,13 @@ use Livewire\WithPagination;
 class SearchDocument extends Component
 {
     use WithPagination;
+
     public string $search_docs = "";
     public string $filter_by = "";
-    // public $documents;
-    // public $docs = [];
-
-    // public function mount()
-    // {
-    //     $this->documents = Document::with(['Dossier', 'TypeDocument'])->get();
-    // }
 
     public function render()
     {
-        $query = Document::query()->with(['Dossier', 'TypeDocument']);
-                $userEntrepriseId = Auth::user()->entreprise_id;
+        $userEntrepriseId = Auth::user()->entreprise_id;
 
         $query = Document::with(['dossier', 'typeDocument', 'RubriqueDocument'])
             ->whereHas('dossier', function ($q) use ($userEntrepriseId) {
@@ -32,16 +25,34 @@ class SearchDocument extends Component
 
         // Search functionality
         if (strlen($this->search_docs) >= 2) {
-            $searchTerm = '%'.$this->search_docs.'%';
-            
-            $query->where(function($q) use ($searchTerm) {
+            $searchTerm = '%' . $this->search_docs . '%';
+
+            $query->where(function ($q) use ($searchTerm) {
                 $q->where('titre', 'LIKE', $searchTerm)
-                  ->orWhereHas('Dossier', function($q) use ($searchTerm) {
-                      $q->where('Dossier', 'LIKE', $searchTerm);
-                  })
-                  ->orWhereHas('TypeDocument', function($q) use ($searchTerm) {
-                      $q->where('TypeDocument', 'LIKE', $searchTerm);
-                  });
+                    ->orWhereHas('dossier', function ($q) use ($searchTerm) {
+                        $q->where('Dossier', 'LIKE', $searchTerm)
+                            ->orWhereHas('entreprise', function ($q) use ($searchTerm) {
+                                $q->where('NomClient', 'LIKE', $searchTerm);
+                            });
+                    })
+                    ->orWhereHas('Etat', function ($q) use ($searchTerm) {
+                        $q->where('etat', 'LIKE', $searchTerm);
+                    })
+                    ->orWhereHas('classe', function ($q) use ($searchTerm) {
+                        $q->where('classe', 'LIKE', $searchTerm);
+                    })
+                    ->orWhereHas('typeDocument', function ($q) use ($searchTerm) {
+                        $q->where('TypeDocument', 'LIKE', $searchTerm);
+                    })
+                    ->orWhereHas('RubriqueDocument', function ($q) use ($searchTerm) {
+                        $q->where('valeur', 'LIKE', $searchTerm)
+                            ->orWhereHas('Rubrique', function ($q) use ($searchTerm) {
+                                $q->where('Rubrique', 'LIKE', $searchTerm);
+                            });
+                    })
+                    ->orWhere('metadata', 'LIKE', $searchTerm)
+                    ->orWhere('tag', 'LIKE', $searchTerm)
+                    ->orWhere('CheminDocument', 'LIKE', $searchTerm);
             });
         }
 
@@ -61,12 +72,10 @@ class SearchDocument extends Component
                 break;
         }
 
-        $documents = $query->paginate(3);
-
+        $documents = $query->paginate(12);
 
         return view('livewire.search-document', [
             'documents' => $documents,
-            // 'docs' => $this->docs
         ]);
     }
 }
