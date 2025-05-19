@@ -62,7 +62,7 @@ class DocumentController extends Controller
 
         $document = new Document();
 
-        // $size = 0;
+        $size = 0;
         if ($request->hasFile('CheminDocument')) {
             $file = $request->file('CheminDocument');
             $filePath = $file->store('documents', 'public');
