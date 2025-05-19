@@ -89,7 +89,7 @@ return [
     'available_locales' => [
         'en' => [
             'name' => 'English',
-            'flag' => 'gb' // ISO 3166-1 alpha-2 country code
+            'flag' => 'gb'
         ],
         'fr' => [
             'name' => 'Français',
@@ -97,7 +97,7 @@ return [
         ],
         'ar' => [
             'name' => 'العربية',
-            'flag' => 'ma' // Using Morocco's flag for Arabic (you can change this)
+            'flag' => 'ma'
         ],
     ],
 

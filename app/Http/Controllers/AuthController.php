@@ -43,7 +43,7 @@ class AuthController extends Controller
             'message' => "Thank you for registering with ARCHIVI! 🎉 Your account has been successfully created, and you’re now ready to start organizing, managing, and accessing your files with ease.",
         ]);
 
-        return redirect()->route('documents.index');
+        return redirect()->route('login');
     }
 
 

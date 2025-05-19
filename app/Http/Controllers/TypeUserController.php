@@ -87,6 +87,7 @@ class TypeUserController extends Controller
     }
     public function assignRoleStore(Request $request)
     {
+        // dd($request);
         $request->validate([
             'role_id' => 'required|exists:roles,id',
             'user_id' => 'required|exists:users,id',
@@ -126,4 +127,25 @@ class TypeUserController extends Controller
 
         return redirect()->back()->with('success', 'Roles revoked from selected users.');
     }
+
+public function bulkAssign(Request $request)
+{
+    $request->validate([
+        'user_ids' => 'required|array',
+        'user_ids.*' => 'exists:users,id',
+        'role_id' => 'required|exists:roles,id',
+    ]);
+
+    $role = Role::findOrFail($request->role_id);
+
+    foreach ($request->user_ids as $userId) {
+        $user = User::find($userId);
+        if ($user) {
+            $user->assignRole($role->name); // ✅ Adds without removing others
+        }
+    }
+
+    return back()->with('success', 'Role assigned to selected users successfully.');
+}
+
 }
