@@ -53,8 +53,8 @@ class DocumentController extends Controller
             'metadata' => 'nullable|string',
             'tag' => 'nullable|string',
             'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls,ppt,pptx|max:2048',
-            'etat_id' => 'nullable|exists:etats,id',
-            'classe_id' => 'nullable|exists:classes,id',
+            // 'etat_id' => 'nullable|exists:etats,id',
+            // 'classe_id' => 'nullable|exists:classes,id',
             'dossier_id' => 'nullable|exists:dossiers,id',
             'type_document_id' => 'nullable|exists:type_documents,id',
             'rubriques' => 'nullable|array',
@@ -76,8 +76,8 @@ class DocumentController extends Controller
         $document->Date = now();
         $document->metadata = $request->metadata;
         $document->tag = $request->tag;
-        $document->etat_id = $request->etat_id;
-        $document->classe_id = $request->classe_id;
+        // $document->etat_id = $request->etat_id ?? 1;
+        // $document->classe_id = $request->classe_id ?? 1;
         $document->dossier_id = $request->dossier_id;
         $document->type_document_id = $request->type_document_id;
         $document->size = $size;
