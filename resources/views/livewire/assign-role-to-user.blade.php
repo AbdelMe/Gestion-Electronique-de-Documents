@@ -17,39 +17,36 @@
             </form>
 
             <div class="flex items-center space-x-3">
-                {{-- <select name="role" wire:model.live="withRol"
-                    class="block w-full md:w-auto pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="">Search By Role</option>
-                    @foreach ($roles as $role)
-                        <option value="{{ $role->name }}">
-                            {{ $role->name }}
-                        </option>
-                    @endforeach
-                </select> --}}
-
                 <select name="entreprise" wire:model.live="selected_entreprise"
                     class="block w-full md:w-auto pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="">Search By Enterprises</option>
+                    <option value="">Filter By Enterprise</option>
                     @foreach ($entreprises as $entreprise)
-                        <option value="{{ $entreprise->id }}">
-                            {{ $entreprise->NomClient }}
-                        </option>
+                        <option value="{{ $entreprise->id }}">{{ $entreprise->NomClient }}</option>
                     @endforeach
                 </select>
             </div>
         </div>
     </div>
-    <form id="bulkRevokeForm" action="{{ route('roles.bulkRevoke') }}" method="POST"
-        onsubmit="return confirm('Are you sure you want to revoke this role from the selected users?');">
+
+    <form id="bulkAssignForm" action="{{ route('roles.bulkAssign') }}" method="POST"
+        onsubmit="return confirm('Are you sure you want to assign this role to the selected users?');">
         @csrf
-        @method('DELETE')
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+            <div class="flex items-center p-4">
+                <select name="role_id" required
+                    class="block w-full md:w-auto pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="">Select Role to Assign</option>
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 <div class="flex items-center space-x-2">
                                     <input type="checkbox" id="selectAll"
                                         class="user-checkbox appearance-none h-5 w-5 border-2 border-gray-700 rounded-md checked:bg-indigo-600 checked:border-indigo-600 focus:ring-0 transition duration-150 ease-in-out cursor-pointer">
@@ -57,20 +54,17 @@
                                 </div>
                             </th>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Name
                             </th>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Email
                             </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                Role
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                Action
+                            <th scope="col Bateman"
+                                class="px-6 py-3 text-xs text-center
+                                font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Current Role
                             </th>
                         </tr>
                     </thead>
@@ -85,81 +79,49 @@
                                             class="ml-2 text-sm font-medium text-gray-900 dark:text-white">#USR-{{ $user->id }}</span>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
                                             <img class="h-10 w-10 rounded-full"
+                                                {{-- src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('assets/images/icons/user.png') }}" --}}
                                                 src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : asset('assets\images\icons\user (1).png') }}"
-                                                alt="{{ $user->name }}">
+                                                alt="{{ $user->first_name }}">
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900 dark:text-white">
-                                                {{ $user->first_name }}</div>
-                                            <div class="text-sm text-gray-500 dark:text-gray-400">@php
-                                                $slug = Str::slug(trim($user->last_name), '');
-                                            @endphp
+                                                {{ $user->first_name }}
+                                            </div>
+                                            <div class="text-sm text-gray-500 dark:text-gray-400">
+                                                @php
+                                                    $slug = Str::slug(trim($user->last_name), '');
+                                                @endphp
                                                 {{ '@' . $slug }}
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                                <td
+                                    class="px-6:^M text-center
+                                    py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                     {{ $user->email }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @php
-                                        $roleName = $user->roles->pluck('name')->first() ?? 'N/A';
-                                        $firstRole = $user->roles->first();
-                                    @endphp
-                                    {{-- <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
-                                        {{ $roleName }}
-                                    </span> --}}
-                                    <form action="{{ route('roles.assignRoleStore') }}" method="POST"
-                                        class="space-y-6">
-                                        @csrf
-                                        <select name="role"
-                                            class="block w-full md:w-auto pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                            <option value="">Search By Role</option>
-                                            @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">
-                                                    {{ $role->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <button type="submit"
-                                            class="inline-flex items-center px-2 py-1 bg-red-100 text-green-600 rounded-full text-xs hover:bg-green-200">
-                                            <i class="bi bi-trash3-fill mr-1"></i> Assign
-                                        </button>
-                                    </form>
-
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <div class="flex flex-wrap gap-2">
+                                        @forelse ($user->roles as $role)
+                                            <span
+                                                class="px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200">
+                                                {{ $role->name }}
+                                            </span>
+                                        @empty
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">N/A</span>
+                                        @endforelse
+                                    </div>
                                 </td>
-                                {{-- <td>
-                                    @php
-                                        $firstRole = $user->roles->first();
-                                    @endphp
 
-                                    @if ($firstRole)
-                                        <form
-                                            action="{{ route('roles.revokeRoleDelete', ['user' => $user->id, 'role' => $firstRole->id]) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle de l'utilisateur ?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="inline-flex items-center px-2 py-1 bg-red-100 text-green-600 rounded-full text-xs hover:bg-green-200">
-                                                <i class="bi bi-trash3-fill mr-1"></i> Assign
-                                            </button>
-                                        </form>
-                                    @else
-                                        <span class="text-xs text-gray-500 dark:text-gray-400 italic">No role
-                                            assigned</span>
-                                    @endif
-                                </td> --}}
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-300">
+                                <td colspan="4" class="px-6 py-4 text-center text-gray-500 dark:text-gray-300">
                                     No users found.
                                 </td>
                             </tr>
@@ -173,8 +135,8 @@
         </div>
         <div class="mt-4">
             <button type="submit"
-                class="inline-flex items-center px-4 text-green-700 border hover:text-white border-green-600 py-2 hover:bg-green-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
-                Assign Role To Selected
+                class="inline-flex items-center px-4 text-green-700 border hover:text-white border-green-600 py-2 hover:bg-green-700 dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
+                Assign Role to Selected
             </button>
         </div>
     </form>
@@ -184,6 +146,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const selectAllCheckbox = document.getElementById('selectAll');
         const userCheckboxes = document.querySelectorAll('.user-checkbox');
+        const bulkAssignForm = document.getElementById('bulkAssignForm');
 
         selectAllCheckbox.addEventListener('change', function() {
             userCheckboxes.forEach(checkbox => {
@@ -198,5 +161,16 @@
             });
         });
 
+        bulkAssignForm.addEventListener('submit', function(e) {
+            const checkedBoxes = document.querySelectorAll('.user-checkbox:checked');
+            const roleSelect = bulkAssignForm.querySelector('select[name="role_id"]');
+            if (checkedBoxes.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one user.');
+            } else if (!roleSelect.value) {
+                e.preventDefault();
+                alert('Please select a role to assign.');
+            }
+        });
     });
 </script>

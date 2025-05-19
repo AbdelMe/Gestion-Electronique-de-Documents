@@ -166,14 +166,12 @@
         const selectAllCheckbox = document.getElementById('selectAll');
         const userCheckboxes = document.querySelectorAll('.user-checkbox');
 
-        // Select all users when "Select All" is checked
         selectAllCheckbox.addEventListener('change', function() {
             userCheckboxes.forEach(checkbox => {
                 checkbox.checked = selectAllCheckbox.checked;
             });
         });
 
-        // Update "Select All" checkbox when individual checkboxes are changed
         userCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const allChecked = Array.from(userCheckboxes).every(cb => cb.checked);
@@ -181,15 +179,14 @@
             });
         });
 
-        // If you want to add a bulk action form, you can use this:
-        /*
-        document.getElementById('bulkActionForm').addEventListener('submit', function(e) {
-            const checkedBoxes = document.querySelectorAll('.user-checkbox:checked');
-            if (checkedBoxes.length === 0) {
-                e.preventDefault();
-                alert('Please select at least one user');
-            }
-        });
-        */
+        
+        // document.getElementById('bulkActionForm').addEventListener('submit', function(e) {
+        //     const checkedBoxes = document.querySelectorAll('.user-checkbox:checked');
+        //     if (checkedBoxes.length === 0) {
+        //         e.preventDefault();
+        //         alert('Please select at least one user');
+        //     }
+        // });
+        
     });
 </script>

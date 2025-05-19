@@ -82,7 +82,7 @@
 
                     <div x-show="langDropdownOpen" x-cloak
                         :class="sidebarToggle ? 'lg:bg-transparent dark:lg:bg-transparent bg-gray-100 dark:bg-transparent' : ''"
-                        class="shadow-theme-lg dark:bg-gray-dark fixed z-[9999] right-72 mt-2 flex w-48 flex-col rounded-2xl border border-gray-200 bg-white p-2 dark:border-white/[0.03] dark:bg-gray-900">
+                        class="shadow-theme-lg dark:bg-gray-dark fixed z-[9999] mt-2 flex w-48 flex-col rounded-2xl border border-gray-200 bg-white p-2 dark:border-white/[0.03] dark:bg-gray-900 {{ $isRtl ? 'left-80 ' : '' }}">
                         <a href="{{ route('language.switch', 'en') }}"
                             class="flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/5">
                             <img src="https://flagcdn.com/w20/gb.png" alt="English" class="w-5 h-3 mr-2">

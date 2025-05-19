@@ -40,7 +40,7 @@
         <h2 class="text-xl font-semibold text-teal-600 mb-2">Questions Fréquemment Posées (FAQ)</h2>
         <div class="space-y-4 text-gray-700 dark:text-gray-300">
             <div>
-                <strong>Q: Puis-je modifier un document après l’avoir ajouté ?</strong>
+                <strong>Q: Puis-je modifier un document après l'avoir ajouté ?</strong>
                 <p>R: Oui, cliquez sur "Modifier" dans la liste des documents.</p>
             </div>
             <div>
@@ -49,7 +49,7 @@
             </div>
             <div>
                 <strong>Q: Y a-t-il une limite de taille pour les fichiers ?</strong>
-                <p>R: Oui, la taille maximale est définie par l’administrateur système.</p>
+                <p>R: Oui, la taille maximale est définie par l'administrateur système.</p>
             </div>
         </div>
     </section>

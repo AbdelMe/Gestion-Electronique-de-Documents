@@ -8,7 +8,6 @@
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark');
             }
-
             const locale = '{{ app()->getLocale() }}';
             document.documentElement.setAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
         })();

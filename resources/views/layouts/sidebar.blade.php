@@ -30,7 +30,7 @@
         {{-- @if (auth()->user()->hasRole('admin')) --}}
         <ul class="space-y-1">
             {{-- @if (auth()->user()->hasPermissionTo('create_document'))        --}}
-            @if (auth()->user()->hasRole('admin'))
+            @if (auth()->user()->getRoleNames()->contains('admin'))
                 <li>
                     <a href="{{ route('dashboard') }}"
                         class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
@@ -265,7 +265,7 @@
             </div>
             <ul class="space-y-1">
                 <li>
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('contact') }}"
                         class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
                         <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
@@ -295,7 +295,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('about.about') }}"
+                    <a href="{{ route('documentation') }}"
                         class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
                         <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">

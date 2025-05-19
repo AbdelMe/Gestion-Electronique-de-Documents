@@ -15,9 +15,10 @@
     @endif
 @endsection
 @section('content')
-    <h2 class="text-2xl font-bold text-gray-700 mb-6 dark:text-gray-300">Assigner un rôle à un utilisateur selon l'entreprise</h2>
-    
-    <form action="{{ route('roles.assignRoleStore') }}" method="POST" class="space-y-6">
+    <h2 class="text-2xl font-bold text-gray-700 mb-6 dark:text-gray-300">Assigner un rôle à un utilisateur selon l'entreprise
+    </h2>
+
+    {{-- <form action="{{ route('roles.assignRoleStore') }}" method="POST" class="space-y-6">
         @csrf
         <div class="max-w-md">
             <label for="role" class="block text-gray-700 font-medium mb-2 dark:text-gray-300">Rôle</label>
@@ -32,9 +33,10 @@
         @livewire('get-users-according-to-the-company')
         <div>
             <button type="submit"
-            class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
+                class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
                 Assigner le rôle
             </button>
         </div>
-    </form>
+    </form> --}}
+    @livewire('assign-role-to-user')
 @endsection
