@@ -30,11 +30,11 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        @php
+        {{-- @php
             $displayDocuments = strlen($search_docs) >= 2 || $filter_by ? $docs : $documents;
-        @endphp
-        @forelse($displayDocuments as $document)
-            @if ($document->Dossier->entreprise->id == Auth::user()->entreprise_id && $document->Etat->etat == 'Approved') {{-- !Auth::user()->hasRole('admin') --}}
+        @endphp --}}
+        @forelse($documents as $document)
+            {{-- @if ($document->Dossier->entreprise->id == Auth::user()->entreprise_id && $document->Etat->etat == 'Approved') !Auth::user()->hasRole('admin') --}}
                 <div
                     class="bg-white px-4 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-auto dark:border-gray-800 dark:bg-gray-800">
                     <div
@@ -122,7 +122,7 @@
                         </a>
                     </div>
                 </div>
-            @endif
+            {{-- @endif --}}
         @empty
             <div class="col-span-full py-8 text-center">
                 <div
@@ -137,8 +137,7 @@
 
 
 
-    <!-- Pagination would go here -->
-    {{-- <div class="mt-6">
-        {{ $displayDocuments->links() }}
-    </div> --}}
+    <div class="mt-6">
+        {{ $documents->links() }}
+    </div>
 </div>

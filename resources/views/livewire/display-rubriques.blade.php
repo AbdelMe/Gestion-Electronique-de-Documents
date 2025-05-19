@@ -162,7 +162,7 @@
                     @enderror
                 </div>
 
-                <div>
+                {{-- <div>
                     <label for="etat_id" class="block text-black dark:text-gray-300 font-medium mb-2">Etat</label>
                     <select id="etat_id" name="etat_id"
                         class="w-full border-2 border-gray-500 rounded md px-4 py-2 bg-white dark:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-indigo-700 dark:focus:border-indigo-700 @error('etat_id') border-red-500 @enderror">
@@ -176,9 +176,9 @@
                     @error('etat_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
-                </div>
+                </div> --}}
 
-                <div>
+                {{-- <div>
                     <label for="classe_id" class="block text-black dark:text-gray-300 font-medium mb-2">Classe</label>
                     <select id="classe_id" name="classe_id"
                         class="w-full border-2 border-gray-500 rounded-md px-4 py-2 bg-white dark:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-indigo-700 dark:focus:border-indigo-700 @error('classe_id') border-red-500 @enderror">
@@ -193,7 +193,7 @@
                     @error('classe_id')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
-                </div>
+                </div> --}}
             @endif
         </div>
 

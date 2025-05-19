@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="container mx-auto px-4">
-    <div class="max-w-2xl bg-white dark:bg-transparent rounded-lg p-4">
+    <div class="max-w-2xl dark:bg-transparent rounded-lg p-4">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Contactez-nous</h2>
 
         <form action="" method="POST">
