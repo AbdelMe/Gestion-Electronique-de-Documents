@@ -23,12 +23,12 @@ return new class extends Migration
             $table->unsignedBigInteger('dossier_id');
             $table->unsignedBigInteger('type_document_id')->nullable();
             $table->unsignedBigInteger('size')->nullable();
-            
+            $table->string('rejection_reason')->default('')->nullable();
             $table->foreign('etat_id')->references('id')->on('etats')->onDelete('cascade');
             $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
             $table->foreign('dossier_id')->references('id')->on('dossiers')->onDelete('cascade');
             $table->foreign('type_document_id')->references('id')->on('type_documents')->onDelete('cascade');
-            
+
             $table->timestamps();
             $table->softDeletes();
         });
