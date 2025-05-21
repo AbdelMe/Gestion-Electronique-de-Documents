@@ -61,7 +61,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials) && Auth::user()->blocked != 1) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success','You are logged in successfully');
+            return redirect()->route('dashboard')->with('success', 'You are logged in successfully');
         }
 
         return back()->withErrors([
@@ -113,23 +113,26 @@ class AuthController extends Controller
         return redirect()->route('users.index')->with('Added', 'Utilisateur ajouté avec succès.');
     }
 
-    public function updateUser(User $user){
+    public function updateUser(User $user)
+    {
         // dd($user);
         $entreprises = Entreprise::all();
-        return view('users.updateUser',compact('user','entreprises'));
+        return view('users.updateUser', compact('user', 'entreprises'));
     }
-    public function deleteUser(User $user){
+    public function deleteUser(User $user)
+    {
         $user->delete();
         return to_route('users.index');
     }
-    public function blockUser(User $user){
-        $user->blocked = 1 ;
-        $user->actif = 0 ;
+    public function blockUser(User $user)
+    {
+        $user->blocked = 1;
+        $user->actif = 0;
         $user->update();
         // dd($user->blocked);
     }
 
-    public function saveUpdatedUser(Request $request , User $user)
+    public function saveUpdatedUser(Request $request, User $user)
     {
         // dd($request);
         // $user = Auth::user();
@@ -162,33 +165,41 @@ class AuthController extends Controller
 
 
 
-    public function showUserPermissions(){
+    public function showUserPermissions()
+    {
         $users = User::all();
 
-        return view('users.showUserPermissions',compact('users'));
+        return view('users.showUserPermissions', compact('users'));
     }
 
-    public function assignPermitionsToUser(){
+    public function assignPermitionsToUser()
+    {
         return view('users.assignPermitionsToUser', [
             'users' => User::all(),
             'permissions' => Permission::all(),
         ]);
     }
 
-    public function storeAssignPermitionsToUser(Request $request){
+    public function storeAssignPermitionsToUser(Request $request)
+    {
         $user = User::findOrFail($request->user_id);
-        foreach ($request->permissions as $key => $permission) {
-            $perm = Permission::where('id', $permission)->get();
-            // dd($perm[$key]->name);
-            $user->givePermissionTo($perm);
-            Notification::create([
-                'user_id' => $user->id,
-                'type' => 'message',
-                'message' => "congratulation you get the permission for " . $perm[$key]->name,
-            ]);
+
+        foreach ($request->permissions as $permissionId) {
+            $perm = Permission::find($permissionId);
+
+            if ($perm) {
+                $user->givePermissionTo($perm);
+                Notification::create([
+                    'user_id' => $user->id,
+                    'type' => 'message',
+                    'message' => "Congratulations! You received the permission: " . $perm->name,
+                ]);
+            }
         }
+
         return to_route('users.showUserPermissions')->with('success', 'Permissions Stored.');
     }
+
 
     public function editUserPermissions(User $user)
     {
@@ -199,19 +210,21 @@ class AuthController extends Controller
     public function deleteUserPermition(User $user, Permission $permission)
     {
         // dd($user);
-        
+
         $user->revokePermissionTo($permission);
         return back()->with('success', 'Permissions Revoked.');
     }
 
-    public function revokeAllUserPermissions(User $user){
+    public function revokeAllUserPermissions(User $user)
+    {
         // dd($user);
         $user->syncPermissions([]);
         return redirect()->back()
             ->with('success', 'All permissions revoked successfully');
     }
 
-    public function updateUserPermissions(Request $request , User $user){
+    public function updateUserPermissions(Request $request, User $user)
+    {
         $request->validate([
             'permissions' => 'array',
             'permissions.*' => 'exists:permissions,id',
