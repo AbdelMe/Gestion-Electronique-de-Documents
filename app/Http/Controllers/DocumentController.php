@@ -55,7 +55,7 @@ class DocumentController extends Controller
             'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls,ppt,pptx|max:2048',
             // 'etat_id' => 'nullable|exists:etats,id',
             // 'classe_id' => 'nullable|exists:classes,id',
-            'dossier_id' => 'nullable|exists:dossiers,id',
+            'dossier_id' => 'required|exists:dossiers,id',
             'type_document_id' => 'nullable|exists:type_documents,id',
             'rubriques' => 'nullable|array',
         ]);
@@ -87,7 +87,7 @@ class DocumentController extends Controller
         $document->versions()->create([
             'numero' => 1,
             'date' => now(),
-            'description' => 'Version initiale',
+            'description' => 'Version initiale du document, created by ' . Auth::user()->first_name . " " . Auth::user()->last_name . " belonging to " . $document->dossier->entreprise->NomClient,
         ]);
 
         if ($request->has('rubriques')) { //!$request->hasFile('CheminDocument') &&
@@ -221,8 +221,8 @@ class DocumentController extends Controller
             'metadata' => 'nullable|string',
             'tag' => 'nullable|string',
             'CheminDocument' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,xlsx,csv,xls,ppt,pptx|max:2048',
-            'etat_id' => 'nullable|exists:etats,id',
-            'classe_id' => 'nullable|exists:classes,id',
+            // 'etat_id' => 'nullable|exists:etats,id',
+            // 'classe_id' => 'nullable|exists:classes,id',
             'dossier_id' => 'nullable|exists:dossiers,id',
             'type_document_id' => 'nullable|exists:type_documents,id',
             'rubriques' => 'nullable|array',
@@ -244,8 +244,8 @@ class DocumentController extends Controller
         $document->titre = $request->titre;
         $document->metadata = $request->metadata;
         $document->tag = $request->tag;
-        $document->etat_id = $request->etat_id;
-        $document->classe_id = $request->classe_id;
+        // $document->etat_id = $request->etat_id;
+        // $document->classe_id = $request->classe_id;
         $document->dossier_id = $request->dossier_id;
         $document->type_document_id = $request->type_document_id;
         $document->size = $size;
@@ -257,7 +257,7 @@ class DocumentController extends Controller
         $document->versions()->create([
             'numero' => $newVersionNumber,
             'date' => now(),
-            'description' => 'Mise à jour du document',
+            'description' => 'Mise à jour du document by ' . Auth::user()->first_name . " " . Auth::user()->last_name . " belonging to " . $document->dossier->entreprise->NomClient,
         ]);
 
         if ($request->has('rubriques')) {
@@ -289,7 +289,7 @@ class DocumentController extends Controller
             ]);
         }
 
-        return redirect()->route('documents.index')->with('Updated', 'Document mis à jour avec succès !');
+        return redirect()->route('documents.index')->with('updated', 'Document mis à jour avec succès !');
     }
 
     /**
@@ -311,9 +311,9 @@ class DocumentController extends Controller
                     'message' => Auth::user()->first_name . " " . Auth::user()->last_name . " Delete Document: " . $document->titre,
                 ]);
             }
-            return redirect()->route('documents.index')->with('deleted', 'Document deleted successfully!');
+            return back()->with('deleted', 'Document deleted successfully!');
         } catch (QueryException) {
-            return to_route('documents.index')->with('warning', "Impossible de supprimer ce Document car il est lié à autres données.");
+            return back()->with('warning', "Impossible de supprimer ce Document car il est lié à autres données.");
         }
     }
 
@@ -402,9 +402,33 @@ class DocumentController extends Controller
 
         if ($document) {
             $document->etat_id = $request->etat_id;
+            if ($request->input('etat_id') == 3) {
+                $document->rejection_reason = $request->input('rejection_reason');
+            }
+            else {
+                $document->rejection_reason = '';
+            }
             $document->save();
 
-            return redirect()->route('etats.index')->with('status', 'État mis à jour avec succès.');
+            return back()->with('status', 'État mis à jour avec succès.');
+        }
+        // else {
+        //     return redirect()->route('etats.index')->with('error', 'Document introuvable.');
+        // }
+    }
+    public function updateClasse(Request $request, $documentId)
+    {
+        $request->validate([
+            'classe_id' => 'required|exists:classes,id',
+        ]);
+
+        $document = Document::find($documentId);
+
+        if ($document) {
+            $document->classe_id = $request->classe_id;
+            $document->save();
+
+            return redirect()->route('classe.index')->with('Added', 'Classe mis à jour avec succès.');
         }
         // else {
         //     return redirect()->route('etats.index')->with('error', 'Document introuvable.');
