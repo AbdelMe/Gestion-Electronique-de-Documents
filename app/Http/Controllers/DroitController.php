@@ -9,7 +9,7 @@ class DroitController extends Controller
 {
     public function index()
     {
-        $permitions = Permission::paginate(5);
+        $permitions = Permission::paginate(8);
         return view('permitions.index', compact('permitions'));
     }
 
