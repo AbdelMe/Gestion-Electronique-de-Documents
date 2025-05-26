@@ -19,7 +19,7 @@ class EtatSeeder extends Seeder
             // "Under Review",
             "Approved" => "green",
             "Rejected" => "red",
-            "Final" => "gray",
+            // "Final" => "gray",
             // "Published" => "",
             // "Archived" => "",
             // "Canceled" => ""
