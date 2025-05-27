@@ -10,7 +10,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input type="text" id="name" name="name" required wire:model.live="searchUser"
+                    <input type="text" id="name" name="name"  wire:model.live="searchUser"
                         placeholder="Search users by name or email"
                         class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:text-white">
                 </div>
@@ -33,7 +33,7 @@
         @csrf
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
             <div class="flex items-center p-4">
-                <select name="role_id" required
+                <select name="role_id"
                     class="block w-full md:w-auto pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <option value="">Select Role to Assign</option>
                     @foreach ($roles as $role)
