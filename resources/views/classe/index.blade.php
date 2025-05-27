@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-<div class="container mx-auto px-4 py-8 pt-2">
+{{-- <div class="container mx-auto px-4 py-8 pt-2">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Liste des Classes</h2>
         <a href="{{ route('classe.create') }}"
@@ -43,12 +43,10 @@
                         <td class="px-6 py-4 border-b dark:border-gray-800">{{ $classe->classe }}</td>
                         <td class="px-6 py-4 text-center border-b dark:border-gray-800">
                             <div class="flex justify-center gap-2">
-                                {{-- Edit --}}
                                 <a href="{{ route('classe.edit', $classe->id) }}"
                                     class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200">
                                     <i class="bi bi-pencil-square mr-1"></i> Modifier
                                 </a>
-                                {{-- Delete --}}
                                 <form action="{{ route('classe.destroy', $classe->id) }}" method="POST"
                                     onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?');">
                                     @csrf
@@ -69,5 +67,6 @@
     <div class="mt-4">
         {{ $classes->links() }}
     </div>
-</div>
+</div> --}}
+<livewire:classe-document-search />
 @endsection
