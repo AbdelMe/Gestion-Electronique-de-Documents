@@ -44,7 +44,7 @@
                                         @if ($extension === 'pdf')
                                             {{-- PDF --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
-                                                @if (auth()->user()->can('show_document'))
+                                                @if (auth()->user()->can('show document'))
                                                     <a href="{{ $fileUrl }}" target="_blank"
                                                         class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
@@ -98,19 +98,19 @@
                                         @elseif(in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
                                             {{-- IMAGE --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
-                                                @if(auth()->user()->can('show_document'))
-                                                <a href="{{ $fileUrl }}" target="_self"
-                                                    class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M15 11l-3 4L9 13l-4 5h14l-4-6z" />
-                                                    </svg>
-                                                    View Image
-                                                </a>
+                                                @if (auth()->user()->can('show_document'))
+                                                    <a href="{{ $fileUrl }}" target="_self"
+                                                        class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M15 11l-3 4L9 13l-4 5h14l-4-6z" />
+                                                        </svg>
+                                                        View Image
+                                                    </a>
                                                 @endif
 
                                                 @php
@@ -152,19 +152,19 @@
                                         @elseif(in_array($extension, ['xlsx', 'xls']))
                                             {{-- Excel --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
-                                                @if(auth()->user()->can('show_document'))
-                                                <a href="ms-excel:ofe|u|{{ $fileUrl }}"
-                                                    class="inline-flex items-center px-3 py-1.5 border border-green-500 text-green-600 rounded-xl bg-green-50 hover:bg-green-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-green-400 transition">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-                                                    </svg>
-                                                    Open in Excel
-                                                </a>
+                                                @if (auth()->user()->can('show_document'))
+                                                    <a href="ms-excel:ofe|u|{{ $fileUrl }}"
+                                                        class="inline-flex items-center px-3 py-1.5 border border-green-500 text-green-600 rounded-xl bg-green-50 hover:bg-green-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-green-400 transition">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+                                                        </svg>
+                                                        Open in Excel
+                                                    </a>
                                                 @endif
 
                                                 @php
@@ -206,19 +206,19 @@
                                         @elseif(in_array($extension, ['docx', 'doc']))
                                             {{-- Word --}}
                                             <div class="flex flex-wrap gap-2 mt-4">
-                                                @if(auth()->user()->can('show_document'))
-                                                <a href="ms-word:ofe|u|{{ $fileUrl }}"
-                                                    class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-                                                    </svg>
-                                                    Open in Word
-                                                </a>
+                                                @if (auth()->user()->can('show_document'))
+                                                    <a href="ms-word:ofe|u|{{ $fileUrl }}"
+                                                        class="inline-flex items-center px-3 py-1.5 border border-blue-500 text-blue-600 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-400 transition">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+                                                        </svg>
+                                                        Open in Word
+                                                    </a>
                                                 @endif
 
                                                 @php
@@ -260,19 +260,19 @@
                                         @elseif(in_array($extension, ['pptx', 'ppt']))
                                             <!-- PowerPoint -->
                                             <div class="flex flex-wrap gap-2 mt-4">
-                                                @if(auth()->user()->can('show_document'))
-                                                <a href="ms-powerpoint:ofe|u|{{ $fileUrl }}"
-                                                    class="inline-flex items-center px-3 py-1.5 border border-red-500 text-red-600 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-red-400 transition">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-                                                    </svg>
-                                                    Open in PowerPoint
-                                                </a>
+                                                @if (auth()->user()->can('show_document'))
+                                                    <a href="ms-powerpoint:ofe|u|{{ $fileUrl }}"
+                                                        class="inline-flex items-center px-3 py-1.5 border border-red-500 text-red-600 rounded-xl bg-red-50 hover:bg-red-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-red-400 transition">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+                                                        </svg>
+                                                        Open in PowerPoint
+                                                    </a>
                                                 @endif
 
                                                 @php
@@ -345,8 +345,15 @@
                                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-{{ $document->Etat->color ?? 'gray' }}-100 text-{{ $document->Etat->color ?? 'gray' }}-800">
                                         {{ $document->Etat->etat ?? 'N/A' }}
                                     </span>
+
+                                    @if ($document->Etat && $document->Etat->etat === 'Rejected' && $document->rejection_reason)
+                                        <div class="mt-2 text-sm text-red-600 dark:text-red-400">
+                                            <strong>Reason for rejection:</strong> {{ $document->rejection_reason }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
+
 
                             <div class="flex flex-wrap">
                                 <label class="w-1/3 font-semibold text-gray-800 dark:text-gray-300">Créé à:</label>
