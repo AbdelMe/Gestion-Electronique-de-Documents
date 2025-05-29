@@ -107,6 +107,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/documents/SelectedType', [DocumentController::class, 'SelectedType'])->name('documents.SelectedType');
     Route::put('/document/{id}/update-etat', [DocumentController::class, 'updateEtat'])->name('document.updateEtat');
+    Route::put('/document/{id}/update-classe', [DocumentController::class, 'updateClasse'])->name('document.updateClasse');
 
 
     Route::resource('/type_documents', TypeDocumentController::class);
