@@ -34,7 +34,8 @@
             $displayDocuments = strlen($search_docs) >= 2 || $filter_by ? $docs : $documents;
         @endphp --}}
         @forelse($documents as $document)
-            {{-- @if ($document->Dossier->entreprise->id == Auth::user()->entreprise_id && $document->Etat->etat == 'Approved') !Auth::user()->hasRole('admin') --}}
+            @if ($document->Etat->etat == 'Approved')
+                {{-- !Auth::user()->hasRole('admin')  $document->Dossier->entreprise->id == Auth::user()->entreprise_id &&  --}}
                 <div
                     class="bg-white px-4 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-auto dark:border-gray-800 dark:bg-gray-800">
                     <div
@@ -122,7 +123,7 @@
                         </a>
                     </div>
                 </div>
-            {{-- @endif --}}
+            @endif
         @empty
             <div class="col-span-full py-8 text-center">
                 <div
