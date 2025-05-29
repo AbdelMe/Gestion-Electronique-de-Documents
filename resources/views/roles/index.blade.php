@@ -24,7 +24,7 @@
         <div class="flex space-x-2">
             <a href="{{ route('roles.revokeRole') }}"
             class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
-                <i class="bi bi-plus-lg mr-2"></i> Revoke Rôle
+                <i class="bi bi-dash-lg mr-2"></i> Revoke Rôle
             </a>
     
             <a href="{{ route('roles.assignRole') }}"
@@ -35,43 +35,38 @@
     </div>
     
 
-    <div class="overflow-x-auto bg-white rounded-lg shadow-md dark:border-gray-800 dark:bg-white/[0.03]">
-        <table class="min-w-full text-sm text-gray-800">
-            <thead>
-                <tr class="border-b dark:border-gray-800 dark:text-white">
-                    <th class="px-6 py-4 text-left font-semibold">#</th>
-                    <th class="px-6 py-4 text-left font-semibold">Nom du Rôle</th>
-                    <th class="px-6 py-4 text-center font-semibold">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                @foreach ($roles as $role)
-                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 border-b dark:border-gray-800 dark:text-white">
-                        <td class="px-6 py-4 border-b dark:border-gray-800">{{ $role->id }}</td>
-                        <td class="px-6 py-4 border-b dark:border-gray-800">{{ $role->name }}</td>
-                        <td class="px-6 py-4 border-b dark:border-gray-800 text-center">
-                            <div class="flex justify-center gap-2">
-                                {{-- Edit --}}
-                                <a href="{{ route('roles.edit', $role->id) }}"
-                                    class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200">
-                                    <i class="bi bi-pencil-square mr-1"></i> Modifier
-                                </a>
-                                {{-- Delete --}}
-                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
-                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle ?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="inline-flex items-center px-2 py-1 bg-red-100 text-red-600 rounded-full text-xs hover:bg-red-200">
-                                        <i class="bi bi-trash3-fill mr-1"></i> Supprimer
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="overflow-x-auto bg-transparent rounded-lg dark:border-gray-800">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    @foreach ($roles as $role)
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                {{ $role->name }}
+            </h3>
+
+            <p class="text-sm text-gray-500 dark:text-gray-300 mb-4">
+                Rôle ID: {{ $role->id }}
+            </p>
+
+            {{-- <div class="flex justify-between items-center">
+                <a href="{{ route('roles.edit', $role->id) }}"
+                    class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200">
+                    <i class="bi bi-pencil-square mr-1"></i> Modifier
+                </a>
+
+                <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle ?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="inline-flex items-center px-3 py-1 bg-red-100 text-red-600 rounded-full text-xs hover:bg-red-200">
+                        <i class="bi bi-trash3-fill mr-1"></i> Supprimer
+                    </button>
+                </form>
+            </div> --}}
+        </div>
+    @endforeach
+</div>
+
     </div>
 
     {{-- <div class="mt-4">
