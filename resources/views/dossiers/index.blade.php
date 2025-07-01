@@ -25,15 +25,17 @@
                     <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-300">Liste des dossiers</h2>
                     <p class="text-gray-500 text-sm mt-1 dark:text-gray-300">Gérez tous vos dossiers en un seul endroit</p>
                 </div>
-                <a href="{{ route('dossiers.create') }}"
-                    class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Ajouter Dossier
-                </a>
+                @if (auth()->user()->getRoleNames()->contains('archivist') || auth()->user()->getRoleNames()->contains('super admin') || auth()->user()->is_archivist == 1)
+                    <a href="{{ route('dossiers.create') }}"
+                        class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Ajouter Dossier
+                    </a>
+                @endif
             </div>
 
             @if (count($dossiers) > 0)
