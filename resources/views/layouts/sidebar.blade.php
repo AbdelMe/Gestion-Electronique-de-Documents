@@ -43,53 +43,54 @@
                         <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.dashboard') }}</span>
                     </a>
                 </li>
-            @endif
+
             {{-- @endif --}}
-            <li>
-                <a href="{{ route('users.index') }}"
-                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
-                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                        </path>
-                    </svg>
-                    <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.users') }}</span>
-                </a>
-            </li>
-            <li>
-                <details class="group">
-                    <summary
-                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 cursor-pointer transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                <li>
+                    <a href="{{ route('users.index') }}"
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
                         <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
                             </path>
                         </svg>
-                        <span class="flex-1 {{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.permissions') }}</span>
-                        <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 transform group-open:rotate-180 transition-transform duration-200"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </summary>
-                    <ul class="pl-8 mt-1 space-y-1">
-                        <li>
-                            <a href="{{ route('user_permissions.index') }}"
-                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
-                                <span  class="{{ $isRtl ? 'px-10' : '' }}">{{ __('sidebar.role_permissions') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('users.showUserPermissions') }}"
-                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
-                                <span  class="{{ $isRtl ? 'px-10' : '' }}">{{ __('sidebar.user_permissions') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </details>
-            </li>
+                        <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.users') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <details class="group">
+                        <summary
+                            class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 cursor-pointer transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                            <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                            <span class="flex-1 {{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.permissions') }}</span>
+                            <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 transform group-open:rotate-180 transition-transform duration-200"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </summary>
+                        <ul class="pl-8 mt-1 space-y-1">
+                            <li>
+                                <a href="{{ route('user_permissions.index') }}"
+                                    class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                    <span  class="{{ $isRtl ? 'px-10' : '' }}">{{ __('sidebar.role_permissions') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.showUserPermissions') }}"
+                                    class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                    <span  class="{{ $isRtl ? 'px-10' : '' }}">{{ __('sidebar.user_permissions') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            @endif
             <li>
                 <a href="{{ route('dossiers.index') }}"
                     class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
@@ -102,42 +103,44 @@
                 </a>
             </li>
 
-            <li>
-                <a href="{{ route('entreprise.index') }}"
-                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
-                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4">
-                        </path>
-                    </svg>
-                    <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.entreprises') }}</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('roles.index') }}"
-                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
-                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                        </path>
-                    </svg>
-                    <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.roles') }}</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('permitions.index') }}"
-                    class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
-                    <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                        </path>
-                    </svg>
-                    <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.all_permissions') }}</span>
-                </a>
-            </li>
+            @if (auth()->user()->getRoleNames()->contains('admin') || auth()->user()->getRoleNames()->contains('super admin'))
+                <li>
+                    <a href="{{ route('entreprise.index') }}"
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4">
+                            </path>
+                        </svg>
+                        <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.entreprises') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('roles.index') }}"
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                        <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.roles') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('permitions.index') }}"
+                        class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
+                        <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg>
+                        <span class="{{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.all_permissions') }}</span>
+                    </a>
+                </li>
+            @endif
             <li>
                 <a href="{{ route('dashboard') }}"
                     class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
@@ -174,15 +177,18 @@
                                 <span class="{{ $isRtl ? 'px-10' : '' }}">@lang('sidebar.all_documents')</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('type_documents.index') }}"
-                                class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
-                                <span class="{{ $isRtl ? 'px-10' : '' }}">@lang('sidebar.document_types')</span>
-                            </a>
-                        </li>
+                        @if (auth()->user()->getRoleNames()->contains('admin') || auth()->user()->getRoleNames()->contains('super admin'))
+                            <li>
+                                <a href="{{ route('type_documents.index') }}"
+                                    class="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white">
+                                    <span class="{{ $isRtl ? 'px-10' : '' }}">@lang('sidebar.document_types')</span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </details>
             </li>
+            @if (auth()->user()->getRoleNames()->contains('admin') || auth()->user()->getRoleNames()->contains('super admin'))
             <li>
                 <details class="group">
                     <summary
@@ -258,6 +264,7 @@
                     <span class="{{ $isRtl ? 'px-2' : '' }}">@lang('sidebar.etat')</span>
                 </a>
             </li>
+            @endif
 
             <div
                 class="mt-8 mb-2 px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400 {{ $isRtl ? 'px-6' : '' }}">
