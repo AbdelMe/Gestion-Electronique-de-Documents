@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDossierRequest;
 use App\Http\Requests\UpdateDossierRequest;
 use App\Models\Entreprise;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DossierController extends Controller
@@ -19,7 +20,9 @@ class DossierController extends Controller
     // DossierController.php
     public function index()
     {
-        $dossiers = Dossier::with('entreprise')->paginate(12);
+        $dossiers = Dossier::with('entreprise')
+        ->where('entreprise_id',Auth::user()->entreprise_id)
+        ->paginate(12);
         return view('dossiers.index', compact('dossiers'));
     }
 
