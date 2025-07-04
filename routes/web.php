@@ -206,6 +206,10 @@ Route::middleware(['auth'])->group(function () {
         return view('about.about');
     })->name('about.about');
 
+    Route::get('/request', function () {
+        return view('requests.createRequest');
+    })->name('requests.createRequest');
+
 
     //notification
     Route::put('/markAsRead/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
@@ -225,12 +229,11 @@ Route::middleware(['auth'])->group(function () {
         return response()->json($notifications);
     });
 
-    Route::get('/Documentation',function(){
+    Route::get('/Documentation', function () {
         return view('documentation');
     })->name('documentation');
 
-    Route::get('/Contact', function(){
+    Route::get('/Contact', function () {
         return view('contact');
     })->name('contact');
-
 });
