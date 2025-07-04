@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class SearchBar extends Component
@@ -11,8 +12,11 @@ class SearchBar extends Component
     public function render()
     {
         $docs = [];
+        $query = Document::with(['dossier', 'typeDocument', 'RubriqueDocument'])->whereHas('dossier', function ($q) {
+                $q->where('entreprise_id', Auth::user()->entreprise_id);
+        });
         if (strlen($this->search_doc) >= 2) {
-            $docs = Document::with(['dossier', 'typeDocument', 'RubriqueDocument'])
+            $docs = $query
                 ->where(function ($query) {
                     $query->where('titre', 'LIKE', '%' . $this->search_doc . '%')
                         ->orWhereHas('dossier', function ($q) {
