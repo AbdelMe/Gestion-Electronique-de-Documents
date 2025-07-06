@@ -16,6 +16,7 @@ use App\Http\Controllers\DroitUserController;
 use App\Http\Controllers\EtatController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TypeUserController;
@@ -236,4 +237,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Contact', function () {
         return view('contact');
     })->name('contact');
+
+
+    //Messages
+    Route::get('/messages/{userId}', [MessageController::class, 'conversation'])->name('messages.conversation');
+    Route::post('/messages/send', [MessageController::class, 'send'])->name('messages.send');
 });
