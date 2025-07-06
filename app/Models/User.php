@@ -39,6 +39,11 @@ class User extends Authenticatable implements CanResetPassword
             'email_verified_at' => 'datetime',
         ];
     }
+    public function unreadMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id')->where('is_read', false);
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::needsRehash($value) ? Hash::make($value) : $value;
