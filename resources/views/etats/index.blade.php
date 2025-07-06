@@ -17,6 +17,6 @@
     @endif
 @endsection
 
-@section('content')
+    @section('content')
     <livewire:etat-document-search />
 @endsection

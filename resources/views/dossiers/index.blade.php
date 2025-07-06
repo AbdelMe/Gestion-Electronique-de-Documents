@@ -41,7 +41,7 @@
             @if (count($dossiers) > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     @foreach ($dossiers as $dossier)
-                        @if (Auth::user()->entreprise_id == $dossier->entreprise->id)
+                        @if (Auth::user()->entreprise_id == $dossier->entreprise->id || auth()->user()->getRoleNames()->contains('super admin') || auth()->user()->getRoleNames()->contains('super admin'))
                             <div
                                 class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden hover:bg-gray-50 dark:bg-gray-800">
                                 <div class="p-4">
