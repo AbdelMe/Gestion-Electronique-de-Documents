@@ -18,6 +18,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TypeUserController;
 use App\Http\Middleware\UpdateLastSeen;
@@ -238,6 +239,10 @@ Route::middleware(['auth'])->group(function () {
         return view('contact');
     })->name('contact');
 
+    //Request
+    Route::post('/requests', [RequestController::class, 'store'])->name('requests.store');
+    Route::get('/getAllRequest', [RequestController::class, 'index'])->name('requests.index');
+    
 
     //Messages
     Route::get('/messages/{userId}', [MessageController::class, 'conversation'])->name('messages.conversation');
