@@ -145,8 +145,13 @@
                     </a>
                 </li>
             @endif
+            @php
+                $user = auth()->user();
+                $route =
+                    $user->is_admin || $user->is_archivist ? route('requests.index') : route('requests.createRequest');
+            @endphp
             <li>
-                <a href="{{ route('requests.createRequest') }}"
+                <a href="{{ $route }}"
                     class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
                     <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -198,11 +203,11 @@
                         <summary
                             class="flex items-center px-3 py-2 text-sm font-medium rounded-lg hover:bg-gray-100 text-gray-700 hover:text-gray-900 cursor-pointer transition-colors duration-200 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white">
                             <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                </path>
+                                    d="M3 7l9-4 9 4-9 4-9-4zM3 12l9 4 9-4M3 17l9 4 9-4" />
                             </svg>
+
                             <span class="flex-1 {{ $isRtl ? 'px-2' : '' }}">{{ __('sidebar.rubriques') }}</span>
                             <svg class="w-4 h-4 text-gray-400 dark:text-gray-500 transform group-open:rotate-180 transition-transform duration-200"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -344,9 +349,9 @@
                         <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                            </path>
+                                d="M7 8h10M7 12h10M7 16h6M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z" />
                         </svg>
+
                         <span class="{{ $isRtl ? 'px-2' : '' }}">@lang('sidebar.documentation')</span>
                     </a>
                 </li>
