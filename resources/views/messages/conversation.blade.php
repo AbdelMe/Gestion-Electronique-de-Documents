@@ -23,6 +23,8 @@
                                 <span class="text-xs text-green-600 dark:text-green-400 font-semibold">Admin</span>
                             @elseif ($user->is_archivist)
                                 <span class="text-xs text-blue-600 dark:text-blue-400 font-semibold">Archivist</span>
+                            @elseif ($user->hasRole('owner'))
+                                <span class="text-xs text-yellow-600 dark:text-yellow-400 font-semibold">owner</span>
                             @endif
                         </div>
 
@@ -66,9 +68,9 @@
                         @csrf
                         <input type="hidden" name="receiver_id" value="{{ $otherUser->id }}">
                         <input type="text" name="content" placeholder="Tapez votre message..." required
-                            class="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                            class="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-700 dark:bg-gray-700 dark:text-white">
                         <button type="submit"
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition">
                             Envoyer
                         </button>
                     </form>
@@ -77,4 +79,6 @@
 
         </div>
     </div>
+    
 @endsection
+
