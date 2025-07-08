@@ -11,50 +11,106 @@ class MessageController extends Controller
 {
     public function conversation($userId)
     {
-        $currentUserId = auth()->id();
+        $currentUser = auth()->user();
+        $currentUserId = $currentUser->id;
 
-        // Mark messages as read
         Message::where('sender_id', $userId)
             ->where('receiver_id', $currentUserId)
             ->where('is_read', false)
             ->update(['is_read' => true]);
 
-        // Get conversation messages
         $messages = Message::where(function ($query) use ($currentUserId, $userId) {
             $query->where('sender_id', $currentUserId)->where('receiver_id', $userId);
         })->orWhere(function ($query) use ($currentUserId, $userId) {
             $query->where('sender_id', $userId)->where('receiver_id', $currentUserId);
         })->orderBy('created_at')->get();
 
-        // Load all users and count unread messages
-        // $users = User::where('id', '!=', $currentUserId)
-        //     ->withCount(['unreadMessages as unread_count' => function ($query) use ($currentUserId) {
-        //         $query->where('receiver_id', $currentUserId)->where('is_read', false);
-        //     }])
-        //     ->get();
-
-        $currentUser = auth()->user();
         $usersQuery = User::query()
-            ->where('id', '!=', $currentUser->id)
-            ->withCount(['unreadMessages as unread_count' => function ($query) use ($currentUser) {
-                $query->where('receiver_id', $currentUser->id)
+            ->where('id', '!=', $currentUserId)
+            ->withCount(['unreadMessages as unread_count' => function ($query) use ($currentUserId) {
+                $query->where('receiver_id', $currentUserId)
                     ->where('is_read', false);
             }]);
 
-        // Apply role filtering only if the current user is not admin or archivist
-        if (!($currentUser->is_admin || $currentUser->is_archivist)) {
-            $usersQuery->where(function ($query) {
-                $query->where('is_admin', 1)
-                    ->orWhere('is_archivist', 1);
+        // Admin: show all users
+        if ($currentUser->is_admin) {
+            // no filter needed
+        } elseif ($currentUser->hasRole('owner') || $currentUser->hasRole('archivist')) {
+            $usersQuery->where('entreprise_id', $currentUser->entreprise_id);
+        } else {
+            $usersQuery->where(function ($query) use ($currentUser) {
+                $query->where(function ($q) use ($currentUser) {
+                    $q->where('is_admin', 1)
+                        ->where('entreprise_id', $currentUser->entreprise_id);
+                })
+                    ->orWhere(function ($q) use ($currentUser) {
+                        $q->whereHas('roles', function ($q2) {
+                            $q2->where('name', 'owner');
+                        })->where('entreprise_id', $currentUser->entreprise_id);
+                    })
+                    ->orWhere(function ($q) use ($currentUser) {
+                        $q->where('is_archivist', 1)
+                            ->where('entreprise_id', $currentUser->entreprise_id);
+                    });
             });
         }
 
         $users = $usersQuery->get();
-
         $otherUser = User::findOrFail($userId);
 
         return view('messages.conversation', compact('users', 'messages', 'otherUser'));
     }
+    // public function conversation($userId)
+    // {
+    //     $currentUserId = auth()->id();
+
+    //     Message::where('sender_id', $userId)
+    //         ->where('receiver_id', $currentUserId)
+    //         ->where('is_read', false)
+    //         ->update(['is_read' => true]);
+
+    //     $messages = Message::where(function ($query) use ($currentUserId, $userId) {
+    //         $query->where('sender_id', $currentUserId)->where('receiver_id', $userId);
+    //     })->orWhere(function ($query) use ($currentUserId, $userId) {
+    //         $query->where('sender_id', $userId)->where('receiver_id', $currentUserId);
+    //     })->orderBy('created_at')->get();
+
+    //     // Load all users and count unread messages
+    //     // $users = User::where('id', '!=', $currentUserId)
+    //     //     ->withCount(['unreadMessages as unread_count' => function ($query) use ($currentUserId) {
+    //     //         $query->where('receiver_id', $currentUserId)->where('is_read', false);
+    //     //     }])
+    //     //     ->get();
+
+    //     $currentUser = auth()->user();
+    //     $usersQuery = User::query()
+    //         ->where('id', '!=', $currentUser->id)
+    //         ->withCount(['unreadMessages as unread_count' => function ($query) use ($currentUser) {
+    //             $query->where('receiver_id', $currentUser->id)
+    //                 ->where('is_read', false);
+    //         }]);
+
+    //     if (!($currentUser->is_admin || $currentUser->is_archivist)) {
+    //         $usersQuery->where(function ($query) use ($currentUser) {
+    //             $query->where('is_admin', 1)
+    //                 ->orWhereHas('roles', function ($q) use ($currentUser) {
+    //                     $q->where('name', 'owner')
+    //                         ->where('entreprise_id', $currentUser->entreprise_id);
+    //                 })
+    //                 ->orWhere(function ($q) use ($currentUser) {
+    //                     $q->where('is_archivist', 1)
+    //                         ->where('entreprise_id', $currentUser->entreprise_id);
+    //                 });
+    //         });
+    //     }
+
+
+    //     $users = $usersQuery->get();
+
+    //     $otherUser = User::findOrFail($userId);
+
+    //     return view('messages.conversation', compact('users', 'messages', 'otherUser'));
+    // }
 
 
     public function send(Request $request)
