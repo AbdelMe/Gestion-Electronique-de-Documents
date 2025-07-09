@@ -61,36 +61,68 @@
                                 {{ $document->dossier->Dossier ?? 'N/A' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                 {{ $document->dossier->entreprise->NomClient ?? 'N/A' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center space-x-3">
-                                    <select x-ref="etatSelect{{ $document->id }}"
-                                        class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md transition-colors duration-200">
-                                        @foreach ($etats as $etat)
-                                            <option value="{{ $etat->id }}"
-                                                {{ $document->etat_id == $etat->id ? 'selected' : '' }}
-                                                class="text-gray-900 dark:text-gray-100">
-                                                {{ $etat->etat }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+<td class="px-6 py-4 whitespace-nowrap">
+        <div class="flex items-center space-x-3">
+            <select x-ref="etatSelect{{ $document->id }}"
+                class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md transition-colors duration-200">
+                @foreach ($etats as $etat)
+                    <option value="{{ $etat->id }}"
+                        {{ $document->etat_id == $etat->id ? 'selected' : '' }}
+                        class="text-gray-900 dark:text-gray-100">
+                        {{ $etat->etat }}
+                    </option>
+                @endforeach
+            </select>
 
-                                    <button type="button"
-                                        @click="
-                                            showModal = true;
-                                            selectedDocumentId = {{ $document->id }};
-                                            selectedEtatId = $refs.etatSelect{{ $document->id }}.value;
-                                            rejectionReason = '';
-                                        "
-                                        class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700 dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
-                                        <svg class="-ml-0.5 mr-1 h-4 w-4" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M5 13l4 4L19 7" />
-                                        </svg>
-                                        Valider
-                                    </button>
-                                </div>
-                            </td>
+            <button type="button"
+                @click="
+                    selectedDocumentId = {{ $document->id }};
+                    selectedEtatId = $refs.etatSelect{{ $document->id }}.value;
+                    // Check if the selected state is 'Rejected' (you might need to adjust this based on your actual state values)
+                    if (selectedEtatId == {{ $rejectedEtatId ?? 3 }}) { // Assuming 3 is the ID for 'Rejected'
+                        showModal = true;
+                        rejectionReason = '';
+                    } else {
+                        // Submit the form directly for other states
+                        $dispatch('submit-etat', {
+                            documentId: selectedDocumentId,
+                            etatId: selectedEtatId,
+                            rejectionReason: ''
+                        });
+                    }
+                "
+                class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700 dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
+                <svg class="-ml-0.5 mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Valider
+            </button>
+        </div>
+    </td>
+
+    <!-- Add this script to handle the form submission -->
+    <script>
+        document.addEventListener('submit-etat', (event) => {
+            const { documentId, etatId, rejectionReason } = event.detail;
+            
+            fetch(`/document/${documentId}/update-etat`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    document_id: documentId,
+                    etat_id: etatId,
+                    rejection_reason: rejectionReason
+                })
+            }).then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-2">
                                     <a href="{{ route('documents.edit', $document->id) }}"
@@ -101,16 +133,16 @@
                                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                     </a>
-<a href="{{ route('documents.show', $document->id) }}"
-    class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 transition-colors duration-200"
-    title="Afficher">
-    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-    </svg>
-</a>
+                                    <a href="{{ route('documents.show', $document->id) }}"
+                                        class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 transition-colors duration-200"
+                                        title="Afficher">
+                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
 
                                     <form action="{{ route('documents.destroy', $document->id) }}" method="POST"
                                         onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce document ?');">
@@ -136,7 +168,8 @@
                                 <div class="flex flex-col items-center justify-center py-8">
                                     <p class="mt-2 text-lg font-medium text-gray-600 dark:text-gray-300">Aucun document
                                         trouvé</p>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Commencez par ajouter un nouveau
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Commencez par ajouter un
+                                        nouveau
                                         document</p>
                                 </div>
                             </td>
