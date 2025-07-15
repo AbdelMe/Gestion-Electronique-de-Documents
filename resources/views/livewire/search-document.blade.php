@@ -34,7 +34,7 @@
             $displayDocuments = strlen($search_docs) >= 2 || $filter_by ? $docs : $documents;
         @endphp --}}
         @forelse($documents as $document)
-            @if ($document->Etat->etat == 'Approved' && Auth::user()->hasRole('super admin'))
+            @if ($document->Etat->etat == 'Approved' && (Auth::user()->hasRole('super admin') || $document->Dossier->entreprise->id == Auth::user()->entreprise_id))
                 {{-- !Auth::user()->hasRole('admin')  $document->Dossier->entreprise->id == Auth::user()->entreprise_id &&  --}}
                 <div
                     class="bg-white px-4 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-auto dark:border-gray-800 dark:bg-gray-800">
