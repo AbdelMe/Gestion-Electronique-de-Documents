@@ -133,7 +133,7 @@
             }
         });
     </script>
-
+    @stack('script')
     @include('layouts.scripts')
     @livewireScripts
 </body>
