@@ -81,9 +81,15 @@
                             </td>
                             <td class="text-nowrap px-4 py-2 text-gray-800 dark:text-gray-200">
                                 <a href="{{ route('dossiers.show', $doc->dossier->id) }}"
-                                    class="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline">
-                                    <img src="{{ asset('assets/images/icons/folder.png') }}" width="24"
-                                        alt="Folder">
+                                    class="flex items-center text-blue-600 dark:text-blue-400 hover:underline">
+                                    <div class="p-2 rounded-md">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                            </path>
+                                        </svg>
+                                    </div>
                                     {{ $doc->dossier->Dossier ?? '' }}
                                 </a>
                             </td>
