@@ -3,8 +3,22 @@
 @section('title', 'Document Details')
 
 @section('content')
-    <div class="container mx-auto px-4 py-4">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6 dark:text-white">Document Details</h2>
+    <div class="container mx-auto px-4 pb-4">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Document Details</h2>
+            @if (auth()->user()->can('create document'))
+                <a href="{{ route('documents.create') }}"
+                    class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    Ajouter Document
+                </a>
+            @endif
+        </div>
+
 
         <div class="bg-white rounded-lg shadow-md overflow-hidden dark:border-gray-800 dark:bg-white/[0.03]">
             <div class="p-6">
