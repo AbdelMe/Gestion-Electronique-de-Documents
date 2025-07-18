@@ -24,7 +24,7 @@ class UpdateDossierRequest extends FormRequest
         return [
             'Dossier' => 'required|string|max:255',
             'Annee' => 'required|numeric|min:2000|max:2100',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'entreprise_id' => 'required|exists:entreprises,id',
         ];
     }
