@@ -26,9 +26,10 @@
             <i class="bi bi-plus-lg mr-2"></i> Ajouter Rubrique
         </a>
     </div>
+    <x-export-buttons table-id="getData" />
 
     <div class="overflow-x-auto bg-white rounded-lg shadow-md dark:border-gray-800 dark:bg-white/[0.03]">
-        <table class="min-w-full text-sm text-gray-800">
+        <table id="getData" class="min-w-full text-sm text-gray-800">
             <thead>
                 <tr class="border-b dark:border-gray-800 dark:text-white">
                     <th class="px-6 py-4 text-left font-semibold">#</th>
@@ -75,3 +76,5 @@
     </div> --}}
 </div>
 @endsection
+<x-export-scripts />
+
