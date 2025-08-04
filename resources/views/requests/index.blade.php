@@ -22,10 +22,8 @@
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Liste des Demandes</h2>
         </div>
-<button onclick="exportTableToExcel('getData')"
-    class="inline-flex items-center px-4 py-2 text-sm font-medium text-green-700 border border-green-600 hover:bg-green-700 hover:text-white rounded-lg transition-colors">
-    <i class="bi bi-file-earmark-excel mr-2"></i> Export Excel
-</button>
+        <x-export-buttons table-id="getData" />
+
 
         @if ($requests->isEmpty())
             <p class="text-gray-600 dark:text-gray-300">Aucune demande trouvée.</p>
@@ -74,18 +72,4 @@
         @endif
     </div>
 @endsection
-@push('script')
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script>
-        function exportTableToExcel(tableId, filename = 'export.xlsx') {
-            const table = document.getElementById(tableId);
-            if (!table) {
-                alert("Table not found!");
-                return;
-            }
-
-            const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet 1" });
-            XLSX.writeFile(workbook, filename);
-        }
-    </script>
-@endpush
+<x-export-scripts />
