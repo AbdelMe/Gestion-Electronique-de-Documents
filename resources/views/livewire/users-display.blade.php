@@ -15,8 +15,6 @@
                 Add New User
             </a>
         </div>
-
         @livewire('SearchUser')
-
     </div>
 </div>
