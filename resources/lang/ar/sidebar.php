@@ -27,4 +27,10 @@ return [
     'terms' => 'الشروط والخصوصية',
     'about' => 'حول',
     'documentation' => 'التوثيق',
+
+
+    'users&security'=>'المستخدمون & الأمان',
+    'documents&rubriques'=>'الوثائق & الروابط',
+    'dossier&departements'=>'الملفات & الأقسام',
+    'document_management' => 'إدارة الوثائق',
 ];
