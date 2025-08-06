@@ -27,4 +27,9 @@ return [
     'terms' => 'Terms & Privacy',
     'about' => 'About',
     'documentation' => 'Documentation',
+
+    'users&security'=>'Users & Security',
+    'documents&rubriques'=>'Documents & Rubriques',
+    'dossier&departements'=>'Dossiers & Departements',
+    'document_management' => 'Document Management',
 ];
