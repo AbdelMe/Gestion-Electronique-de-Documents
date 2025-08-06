@@ -70,9 +70,9 @@
             </header>
 
             <!-- Content -->
-            <main class="flex-1 p-4 md:p-6 overflow-auto relative w-full">
+            <main class="flex-1overflow-auto relative w-full">
                 @yield('alert')
-                <div class="mt-2 md:mt-4">
+                <div>
                     @yield('content')
                 </div>
             </main>
