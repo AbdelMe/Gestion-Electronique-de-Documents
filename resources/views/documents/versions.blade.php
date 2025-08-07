@@ -24,11 +24,10 @@
             <i class="bi bi-clock-history me-2 text-gray-400"></i> Versions pour : {{ $document->titre }}
         </h2>
         <a href="{{ route('documents.show', $document->id) }}" 
-           class="inline-flex items-center px-4 py-2 bg-teal-400 hover:bg-teal-500 text-white text-sm font-medium rounded-md shadow-md">
+           class="inline-flex items-center px-4 text-indigo-700 border hover:text-white border-indigo-600 py-2 hover:bg-indigo-700  dark:text-white text-sm font-medium rounded-xl shadow-sm transition-colors duration-200">
             <i class="bi bi-arrow-left mr-2 text-white"></i> Retour au document
         </a>
     </div>
-
     <div class="overflow-x-auto bg-white rounded-lg shadow-md dark:border-gray-800 dark:bg-white/[0.03]">
         <table class="min-w-full text-sm text-gray-800 dark:text-white">
             <thead>
@@ -75,7 +74,6 @@
     <div class="mt-4">
         {{ $versions->links() }}
     </div>
-
     @can('create', App\Models\Version::class)
         <div class="mt-6 text-right">
             <a href="{{ route('versions.create', $document->id) }}" 
@@ -84,7 +82,6 @@
             </a>
         </div>
     @endcan
-
     <div x-show="showModal" x-cloak
          class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
         <div class="bg-white dark:bg-gray-800 w-full max-w-lg p-6 rounded shadow-lg">
