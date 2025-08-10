@@ -50,49 +50,62 @@ Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        $users = User::all();
-        $classe = Classe::all();
-        $dossiers = Dossier::all();
-        $documents = Document::all();
+Route::get('/dashboard', function () {
+    $users = User::all();
+    $classe = Classe::all();
+    $dossiers = Dossier::all();
+    $documents = Document::all();
 
+    // Map documents to get extension from CheminDocument and sizes
+    $documentData = $documents->map(function ($document) {
+        // Extract file extension from CheminDocument, lowercase, fallback to 'unknown'
+        $extension = strtolower(pathinfo($document->CheminDocument, PATHINFO_EXTENSION));
+        $extension = $extension ?: 'unknown';
 
+        return [
+            'titre' => $document->titre,
+            'type' => $extension,
+            'size_bytes' => $document->size,
+            'size_mb' => $document->size / 1048576,
+            'size_gb' => $document->size / 1073741824,
+        ];
+    });
 
+    // Group by extracted extension and sum sizes in MB
+    $storageByType = $documentData
+        ->groupBy('type')
+        ->map(fn ($group) => round($group->sum('size_mb'), 2));
 
+    $documentTypes = $storageByType->keys();
+    $storageSizes = $storageByType->values();
 
-        $documentData = $documents->map(function ($document) {
-            return [
-                'titre' => $document->titre,
-                'size_gb' => number_format($document->size / 1073741824, 2),
-                'size_mb' => number_format($document->size / 1048576, 2),
-            ];
-        });
+    $totalSizeGb = number_format($documents->sum('size') / 1073741824, 2);
+    $totalSizeMb = number_format($documents->sum('size') / 1048576, 2);
 
-        $totalSizeGb = number_format($documents->sum('size') / 1073741824, 2);
-        $totalSizeMb = number_format($documents->sum('size') / 1048576, 2);
+    $recentDocuments = Document::orderBy('created_at', 'desc')->take(5)->get();
+    $recentActivities = [];
 
-        $recentDocuments = Document::orderBy('created_at', 'desc')->take(5)->get();
-        $recentActivities = [];
+    foreach ($recentDocuments as $document) {
+        $recentActivities[] = [
+            'id' => $document->id,
+            'type' => 'document',
+            'name' => $document->LibelleDocument,
+            'file_path' => $document->CheminDocument,
+            'created_at' => $document->created_at,
+            'is_new' => $document->created_at->isToday(),
+        ];
+    }
 
-        foreach ($recentDocuments as $document) {
-            // if ($document->Dossier->entreprise->id == Auth::user()->entreprise_id){
+    usort($recentActivities, function ($a, $b) {
+        return $b['created_at'] <=> $a['created_at'];
+    });
 
-            $recentActivities[] = [
-                'id' => $document->id,
-                'type' => 'document',
-                'name' => $document->LibelleDocument,
-                'file_path' => $document->CheminDocument,
-                'created_at' => $document->created_at,
-                'is_new' => $document->created_at->isToday(),
-            ];
-            // }
-        }
+    return view('dashboard', compact(
+        'users', 'dossiers', 'documents', 'recentActivities', 'documentData',
+        'totalSizeMb', 'totalSizeGb', 'documentTypes', 'storageSizes'
+    ));
+})->name('dashboard');
 
-        usort($recentActivities, function ($a, $b) {
-            return $b['created_at'] <=> $a['created_at'];
-        });
-        return view('dashboard', compact('users', 'dossiers', 'documents', 'recentActivities', 'documentData', 'totalSizeMb', 'totalSizeGb'));
-    })->name('dashboard');
 
 
 
