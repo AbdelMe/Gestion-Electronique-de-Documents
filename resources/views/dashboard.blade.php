@@ -33,9 +33,9 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                                     <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">@lang('dashboard.all_users')</p>
                                     <div class="flex items-end gap-2">
                                         <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($users ?? []) }}</h3>
-                                        <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $usersChanges > 0 ? 'bg-green-100 text-green-800' : ($usersChanges < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
+                                        {{-- <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $usersChanges > 0 ? 'bg-green-100 text-green-800' : ($usersChanges < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
                                             {{ $usersChanges > 0 ? "↑ +$usersChanges" : ($usersChanges < 0 ? "↓ $usersChanges" : "→ Stable") }}
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                                 <div class="p-3 rounded-lg text-blue-600">
@@ -58,9 +58,9 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                                     <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">@lang('dashboard.all_dossiers')</p>
                                     <div class="flex items-end gap-2">
                                         <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($dossiers ?? []) }}</h3>
-                                        <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $dossiersChange > 0 ? 'bg-green-100 text-green-800' : ($dossiersChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
+                                        {{-- <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $dossiersChange > 0 ? 'bg-green-100 text-green-800' : ($dossiersChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
                                             {{ $dossiersChange > 0 ? "↑ +$dossiersChange" : ($dossiersChange < 0 ? "↓ $dossiersChange" : "→ Stable") }}
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                                 <div class="p-3 rounded-lg text-indigo-600">
@@ -83,9 +83,9 @@ $documentsChange = count($documents) - $lastMonthDocuments;
                                     <p class="text-sm font-medium text-gray-500 mb-1 dark:text-white">@lang('dashboard.all_documents')</p>
                                     <div class="flex items-end gap-2">
                                         <h3 class="text-3xl font-bold text-gray-800 dark:text-white">{{ count($documents ?? []) }}</h3>
-                                        <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $documentsChange > 0 ? 'bg-green-100 text-green-800' : ($documentsChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
+                                        {{-- <span class="text-sm font-medium px-2 py-0.5 rounded-full {{ $documentsChange > 0 ? 'bg-green-100 text-green-800' : ($documentsChange < 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800') }}">
                                             {{ $documentsChange > 0 ? "↑ +$documentsChange" : ($documentsChange < 0 ? "↓ $documentsChange" : "→ Stable") }}
-                                        </span>
+                                        </span> --}}
                                     </div>
                                 </div>
                                 <div class="p-3 rounded-lg text-emerald-600">
