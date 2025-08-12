@@ -144,10 +144,11 @@
                                                 d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                         </svg>
                                     </a>
-                                    <form action="{{ route('users.deleteUser', $user->id) }}" method="POST"
-                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce user ?');">
+                                    <x-confirm-button message="Êtes-vous sûr de vouloir supprimer ce user ?"
+                                        action="{{ route('users.deleteUser', $user->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
+
                                         <button type="submit"
                                             class="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50 transition-colors dark:hover:bg-gray-700">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
@@ -157,22 +158,35 @@
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </button>
-                                    </form>
-                                    <form action="{{ route('users.blockUser', $user->id) }}" method="POST"
-                                        onsubmit="return confirm('Êtes-vous sûr de vouloir Block ce user ?');">
+                                    </x-confirm-button>
+                                    <x-confirm-button message='Êtes-vous sûr de vouloir Block ce user ?'
+                                        action="{{ route('users.blockUser', $user->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit"
                                             class="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50 transition-colors dark:hover:bg-gray-700">
-                                            <svg class="w-4 h-4" fill="none"
-                                                stroke="currentColor" viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M18.364 5.636l-12.728 12.728M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0">
                                                 </path>
                                             </svg>
                                         </button>
-                                    </form>
+                                    </x-confirm-button>
+                                    {{-- <form action="{{ route('users.blockUser', $user->id) }}" method="POST"
+                                        onsubmit="return confirm('Êtes-vous sûr de vouloir Block ce user ?');">
+                                        @csrf
+                                        @method('PUT')
+                                        <button type="submit"
+                                            class="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50 transition-colors dark:hover:bg-gray-700">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M18.364 5.636l-12.728 12.728M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </form> --}}
 
                                     {{-- <a href=""
                                         class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">
