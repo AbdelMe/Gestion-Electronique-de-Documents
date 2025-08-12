@@ -34,7 +34,9 @@
             $displayDocuments = strlen($search_docs) >= 2 || $filter_by ? $docs : $documents;
         @endphp --}}
         @forelse($documents as $document)
-            @if ($document->Etat->etat == 'Approved' && (Auth::user()->hasRole('super admin') || $document->Dossier->entreprise->id == Auth::user()->entreprise_id))
+            @if (
+                $document->Etat->etat == 'Approved' &&
+                    (Auth::user()->hasRole('super admin') || $document->Dossier->entreprise->id == Auth::user()->entreprise_id))
                 {{-- !Auth::user()->hasRole('admin')  $document->Dossier->entreprise->id == Auth::user()->entreprise_id &&  --}}
                 <div
                     class="bg-white px-4 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 h-auto dark:border-gray-800 dark:bg-gray-800">
@@ -66,7 +68,23 @@
                                         clip-rule="evenodd" />
                                 </svg>
                             </a>
-                            <form action="{{ route('documents.destroy', $document->id) }}" method="POST"
+                            <x-confirm-button message='Êtes-vous sûr de vouloir supprimer ce Document ?'
+                                action="{{ route('documents.destroy', $document->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50 transition-colors dark:hover:bg-gray-700"
+                                    title="Supprimer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </x-confirm-button>
+
+                            {{-- <form action="{{ route('documents.destroy', $document->id) }}" method="POST"
                                 onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce Document ?');">
                                 @csrf
                                 @method('DELETE')
@@ -80,7 +98,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
 
