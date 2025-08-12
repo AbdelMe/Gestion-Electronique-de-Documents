@@ -70,7 +70,7 @@
             </header>
 
             <!-- Content -->
-            <main class="flex-1 overflow-auto relative w-full">
+            <main class="flex-1overflow-auto relative w-full">
                 @yield('alert')
                 <div>
                     @yield('content')
